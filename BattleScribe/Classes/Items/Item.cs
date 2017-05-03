@@ -14,7 +14,6 @@ namespace BattleScribe.Classes.Items
         protected bool proficient;
         protected bool attuneable;
         protected double weight;
-        public string Skarin;
 
         public Item()
         {
