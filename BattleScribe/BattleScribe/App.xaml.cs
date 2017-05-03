@@ -13,5 +13,6 @@ namespace BattleScribe
     /// </summary>
     public partial class App : Application
     {
+
     }
 }
