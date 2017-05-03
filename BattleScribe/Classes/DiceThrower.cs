@@ -18,6 +18,8 @@ namespace BattleScribe.Classes
                result += r.Next(0, sides);
            }
 
+           result += mod;
+
            return result;
        }
     }
