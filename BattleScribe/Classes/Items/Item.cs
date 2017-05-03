@@ -14,6 +14,7 @@ namespace BattleScribe.Classes.Items
         protected bool proficient;
         protected bool attuneable;
         protected double weight;
+        protected double estimateValue;
 
         public Item()
         {
@@ -88,6 +89,16 @@ namespace BattleScribe.Classes.Items
         public void SetWeight(double weight)
         {
             this.weight = weight;
+        }
+
+        public double GetValue()
+        {
+            return estimateValue;
+        }
+
+        public void SetValue(double estimateValue)
+        {
+            this.estimateValue = estimateValue;
         }
     }
 }

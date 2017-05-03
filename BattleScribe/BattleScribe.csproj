@@ -70,6 +70,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+
     <Compile Include="Classes\DbHandler.cs" />
     <Compile Include="Classes\DiceThrower.cs" />
     <Compile Include="Classes\Items\Armour.cs" />
