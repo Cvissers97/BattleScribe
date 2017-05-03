@@ -2,10 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Classes="clr-namespace:BattleScribe.Classes" x:Class="BattleScribe.Forms.MainScreen"
-        Title="MainScreen" Height="300" Width="300">
+        Title="MainScreen" Height="300" Width="700">
     <Grid>
-
-        
-
+        <ScrollViewer x:Name="trollViewer" HorizontalAlignment="Left" Height="126" Margin="10,28,0,0" VerticalAlignment="Top" Width="672">
+            <StackPanel x:Name="slackPanel" HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="662"/>
+        </ScrollViewer>
     </Grid>
 </Window>

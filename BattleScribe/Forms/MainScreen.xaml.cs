@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BattleScribe.Classes.Items;
+using BattleScribe.Controls;
 
 namespace BattleScribe.Forms
 {
@@ -24,6 +25,22 @@ namespace BattleScribe.Forms
         public MainScreen()
         {
             InitializeComponent();
+
+            List<Weapon> weps = new List<Weapon>();
+            weps.Add(new Weapon("Coolwep", "Coolwep", 1, 6, "Coolwep", true, true, 100, "Coolwep", 1, "Coolwep", "Coolwep"));
+
+            trollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            WeaponLegend legend = new WeaponLegend();
+            slackPanel.Children.Add(legend);
+
+            foreach (Weapon w in weps)
+            {
+                WeaponControl wepCont = new WeaponControl();
+                wepCont.wepNameBox.Text = w.GetName();
+                wepCont.wepToHitBox.Text = "+ 7";
+                wepCont.wepDmgBox.Text = w.GetDiceAmount() + "d" + w.GetDiceSides() + " " + w.GetBaseDamageType() + " + " + w.GetBonusDamage() + " " + w.GetBonusDamageType();
+                slackPanel.Children.Add(wepCont);
+            }
         }
     }
 }
