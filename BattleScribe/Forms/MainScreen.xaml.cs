@@ -1,4 +1,5 @@
 ﻿using System;
+using BattleScribe.Classes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BattleScribe.Classes.Items;
 
 namespace BattleScribe.Forms
 {
