@@ -37,6 +37,14 @@ namespace BattleScribe.Classes
             }
         }
 
+        //public List<CharacterRace> GetRaces()
+        //{
+        //    // Add code to gather all races by id. Fill the feature list, too.
+        //    string sql = "SELECT * tbl_races";
+        //    List<CharacterRace> temp = new List<CharacterRace>();
+        //    return temp;
+        //}
+
         public void GetSpells()
         {
             string sql = "SELECT * FROM spells WHERE spell_id = @id";
