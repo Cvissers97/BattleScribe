@@ -26,22 +26,19 @@ namespace BattleScribe.Forms
         {
             InitializeComponent();
 
+
             BattleScribe.Classes.DbHandler db = new Classes.DbHandler();
-            db.GetSpells();
 
-            List<Weapon> weps = new List<Weapon>();
-            weps.Add(new Weapon("Coolwep", "Coolwep", 1, 6, "Coolwep", true, true, 100, "Coolwep", 1, "Coolwep", "Coolwep"));
-
-            trollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
             WeaponLegend legend = new WeaponLegend();
             slackPanel.Children.Add(legend);
 
-            foreach (Weapon w in weps)
+            List<Spell> s = db.GetSpells();
+
+            foreach (Spell sp in s)
             {
                 WeaponControl wepCont = new WeaponControl();
-                wepCont.wepNameBox.Text = w.GetName();
-                wepCont.wepToHitBox.Text = "+ 7";
-                wepCont.wepDmgBox.Text = w.GetDiceAmount() + "d" + w.GetDiceSides() + " " + w.GetBaseDamageType() + " + " + w.GetBonusDamage() + " " + w.GetBonusDamageType();
+                wepCont.wepNameBox.Text = sp.GetName();
+                wepCont.wepToHitBox.Text = sp.GetDesc();
                 slackPanel.Children.Add(wepCont);
             }
         }

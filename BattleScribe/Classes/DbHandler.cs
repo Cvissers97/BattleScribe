@@ -45,16 +45,18 @@ namespace BattleScribe.Classes
         //    return temp;
         //}
 
-        public void GetSpells()
+        public List<Spell> GetSpells()
         {
-            string sql = "SELECT * FROM spells WHERE spell_id = @id";
+            List<Spell> SpellList = new List<Spell>();
+
+
+            string sql = "SELECT * FROM spells";
 
 
             try
             {
                 using (con)
                 {
-                    com.Parameters.AddWithValue(@"id", "1");
                     com.Connection = con;
                     com.CommandText = sql;
                     con.Open();
@@ -64,17 +66,22 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        System.Windows.MessageBox.Show(dReader.GetString(1));
+                        Spell s = new Spell();
+                        s.SetName(dReader.GetString(1));
+                        s.SetDesc(dReader.GetString(8));
+                        SpellList.Add(s);
                     }
                     
                     con.Close();
                     com.Parameters.Clear();
                 }
+                return SpellList;
             }
             catch(Exception e)
             {
                 System.Windows.MessageBox.Show(e.Message.ToString());
                 con.Close();
+                return null;
             }
         }
     }
