@@ -39,6 +39,7 @@ namespace BattleScribe.Forms
             lbPoints.Content = "Total Points: " + totalPoints;
         }
         
+        //Add all stats to a list
         public List<byte> StatList()
         {
             List<byte> temp = new List<byte>();
@@ -52,6 +53,7 @@ namespace BattleScribe.Forms
             return temp;
         }
 
+        //Calc the points you have left with the pointbuy system
         public int CalcPoints()
         {
             totalPoints = 27;
@@ -101,6 +103,7 @@ namespace BattleScribe.Forms
             UpdateScreen();
         }
 
+        //Handels screen transistions
         private void UpdateScreen()
         {
             btnFinish.Visibility = Visibility.Hidden;
@@ -301,6 +304,7 @@ namespace BattleScribe.Forms
             }
         }
 
+        //Init general stuff
         private void Init()
         {
             race = db.GetRaces();
@@ -318,14 +322,15 @@ namespace BattleScribe.Forms
             InitScores();
         }
 
+        //Inits the abillity scores of the character
         private void InitScores()
         {
-            lbSTR.Content = "STR" + " " + (character.GetStr() + raceStr) + " (" + character.CalcMod("STR") + ")";
-            lbDEX.Content = "DEX" + " " + (character.GetDex() + raceDex) + " (" + character.CalcMod("DEX") + ")";
-            lbCON.Content = "CON" + " " + (character.GetCon() + raceCon) + " (" + character.CalcMod("CON") + ")";
-            lbINT.Content = "INT" + " " + (character.GetInt() + raceInt) + " (" + character.CalcMod("INT") + ")";
-            lbWIS.Content = "WIS" + " " + (character.GetWis() + raceWis) + " (" + character.CalcMod("WIS") + ")";
-            lbCHA.Content = "CHA" + " " + (character.GetCha() + raceCha) + " (" + character.CalcMod("CHA") + ")";
+            lbSTR.Content = "STR" + " " + (character.GetStr() + raceStr) + " (" + character.CalcMod("STR", (double)raceStr) + ")";
+            lbDEX.Content = "DEX" + " " + (character.GetDex() + raceDex) + " (" + character.CalcMod("DEX", (double)raceDex) + ")";
+            lbCON.Content = "CON" + " " + (character.GetCon() + raceCon) + " (" + character.CalcMod("CON", (double)raceCon) + ")";
+            lbINT.Content = "INT" + " " + (character.GetInt() + raceInt) + " (" + character.CalcMod("INT", (double)raceInt) + ")";
+            lbWIS.Content = "WIS" + " " + (character.GetWis() + raceWis) + " (" + character.CalcMod("WIS", (double)raceWis) + ")";
+            lbCHA.Content = "CHA" + " " + (character.GetCha() + raceCha) + " (" + character.CalcMod("CHA", (double)raceCha) + ")";
         }
 
         private void BtnPlusSTR_Click(object sender, RoutedEventArgs e)
@@ -335,7 +340,7 @@ namespace BattleScribe.Forms
                 character.SetStr((byte)(character.GetStr() + 1));
                 if (CalcPoints() >= 0)
                 {
-                    lbSTR.Content = "STR" + " " + (character.GetStr() + raceStr) + " (" + character.CalcMod("STR") + ")";
+                    lbSTR.Content = "STR" + " " + (character.GetStr() + raceStr) + " (" + character.CalcMod("STR", (double)raceStr) + ")";
                     lbPoints.Content = "Total points: " + CalcPoints();
                 }
                 else 
@@ -348,7 +353,7 @@ namespace BattleScribe.Forms
             if ((character.GetStr() - 1) != 7)
             {
                 character.SetStr((byte)(character.GetStr() - 1));
-                lbSTR.Content = "STR" + " " + (character.GetStr() + raceStr) + " (" + character.CalcMod("STR") + ")";
+                lbSTR.Content = "STR" + " " + (character.GetStr() + raceStr) + " (" + character.CalcMod("STR", (double)raceStr) + ")";
                 lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
@@ -358,7 +363,7 @@ namespace BattleScribe.Forms
             if ((character.GetDex() - 1) != 7)
             {
                 character.SetDex((byte)(character.GetDex() - 1));
-                lbDEX.Content = "DEX" + " " + (character.GetDex() + raceDex) + " (" + character.CalcMod("DEX") + ")";
+                lbDEX.Content = "DEX" + " " + (character.GetDex() + raceDex) + " (" + character.CalcMod("DEX", (double)raceDex) + ")";
                 lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
@@ -370,7 +375,7 @@ namespace BattleScribe.Forms
                 character.SetDex((byte)(character.GetDex() + 1));
                 if (CalcPoints() >= 0)
                 {
-                    lbDEX.Content = "DEX" + " " + (character.GetDex() + raceDex) + " (" + character.CalcMod("DEX") + ")";
+                    lbDEX.Content = "DEX" + " " + (character.GetDex() + raceDex) + " (" + character.CalcMod("DEX", (double)raceDex) + ")";
                     lbPoints.Content = "Total points: " + CalcPoints();
                 }
                 else
@@ -383,7 +388,7 @@ namespace BattleScribe.Forms
             if ((character.GetCon() - 1) != 7)
             {
                 character.SetCon((byte)(character.GetCon() - 1));
-                lbCON.Content = "CON" + " " + (character.GetCon() + raceCon) + " (" + character.CalcMod("CON") + ")";
+                lbCON.Content = "CON" + " " + (character.GetCon() + raceCon) + " (" + character.CalcMod("CON", (double)raceCon) + ")";
                 lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
@@ -395,7 +400,7 @@ namespace BattleScribe.Forms
                 character.SetCon((byte)(character.GetCon() + 1));
                 if (CalcPoints() >= 0)
                 {
-                    lbCON.Content = "CON" + " " + (character.GetCon() + raceCon) + " (" + character.CalcMod("CON") + ")";
+                    lbCON.Content = "CON" + " " + (character.GetCon() + raceCon) + " (" + character.CalcMod("CON", raceCon) + ")";
                     lbPoints.Content = "Total points: " + CalcPoints();
                 }
                 else
@@ -410,7 +415,7 @@ namespace BattleScribe.Forms
                 character.SetInt((byte)(character.GetInt() + 1));
                 if (CalcPoints() >= 0)
                 {
-                    lbINT.Content = "INT" + " " + (character.GetInt() + raceInt) + " (" + character.CalcMod("INT") + ")";
+                    lbINT.Content = "INT" + " " + (character.GetInt() + raceInt) + " (" + character.CalcMod("INT", (double)raceInt) + ")";
                     lbPoints.Content = "Total points: " + CalcPoints();
                 }
                 else
@@ -423,7 +428,7 @@ namespace BattleScribe.Forms
             if ((character.GetInt() - 1) != 7)
             {
                 character.SetInt((byte)(character.GetInt() - 1));
-                lbINT.Content = "INT" + " " + (character.GetInt() + raceInt) + " (" + character.CalcMod("INT") + ")";
+                lbINT.Content = "INT" + " " + (character.GetInt() + raceInt) + " (" + character.CalcMod("INT", (double)raceInt) + ")";
                 lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
@@ -433,7 +438,7 @@ namespace BattleScribe.Forms
             if ((character.GetWis() - 1) != 7)
             {
                 character.SetWis((byte)(character.GetWis() - 1));
-                lbWIS.Content = "WIS" + " " + (character.GetWis() + raceWis) + " (" + character.CalcMod("WIS") + ")";
+                lbWIS.Content = "WIS" + " " + (character.GetWis() + raceWis) + " (" + character.CalcMod("WIS", (double)raceWis) + ")";
                 lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
@@ -445,7 +450,7 @@ namespace BattleScribe.Forms
                 character.SetWis((byte)(character.GetWis() + 1));
                 if (CalcPoints() >= 0)
                 {
-                    lbWIS.Content = "WIS" + " " + (character.GetWis() + raceWis) + " (" + character.CalcMod("WIS") + ")";
+                    lbWIS.Content = "WIS" + " " + (character.GetWis() + raceWis) + " (" + character.CalcMod("WIS", (double)raceWis) + ")";
                     lbPoints.Content = "Total points: " + CalcPoints();
                 }
                 else
@@ -458,7 +463,7 @@ namespace BattleScribe.Forms
             if ((character.GetCha() - 1) != 7)
             {
                 character.SetCha((byte)(character.GetCha() - 1));
-                lbCHA.Content = "CHA" + " " + (character.GetCha() + raceCha) + " (" + character.CalcMod("CHA") + ")";
+                lbCHA.Content = "CHA" + " " + (character.GetCha() + raceCha) + " (" + character.CalcMod("CHA", (double)raceCha) + ")";
                 lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
@@ -470,7 +475,7 @@ namespace BattleScribe.Forms
                 character.SetCha((byte)(character.GetCha() + 1));
                 if (CalcPoints() >= 0)
                 {
-                    lbCHA.Content = "CHA" + " " + (character.GetCha() + raceCha) + " (" + character.CalcMod("CHA") + ")";
+                    lbCHA.Content = "CHA" + " " + (character.GetCha() + raceCha) + " (" + character.CalcMod("CHA", (double)raceCha) + ")";
                     lbPoints.Content = "Total points: " + CalcPoints();
                 }
                 else
@@ -478,8 +483,16 @@ namespace BattleScribe.Forms
             }
         }
 
+        //Racecb selection change to calc race bonus and features
         private void CbRaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            raceStr = 0;
+            raceDex = 0;
+            raceCon = 0;
+            raceInt = 0;
+            raceWis = 0;
+            raceCha = 0;
+            //InitScores();
             switch (cbRaces.SelectedItem.ToString())
             {
                 case "Human":
@@ -489,10 +502,61 @@ namespace BattleScribe.Forms
                     raceInt = 1;
                     raceWis = 1;
                     raceCha = 1;
-                    InitScores();
                     break;
-
+                case "Hill Dwarf":
+                    raceCon = 2;
+                    raceWis = 1;
+                    break;
+                case "Mountain Dwarf":
+                    raceCon = 2;
+                    raceStr = 2;
+                    break;
+                case "High Elf":
+                    raceInt = 1;
+                    raceDex = 2;
+                    break;
+                case "Wood Elf":
+                    raceWis = 1;
+                    raceDex = 2;
+                    break;
+                case "Drow Elf":
+                    raceCha = 1;
+                    raceDex = 2;
+                    break;
+                case "Halfling Lightfoot":
+                    raceCha = 1;
+                    raceDex = 2;
+                    break;
+                case "Halfling Stout":
+                    raceCon = 1;
+                    raceDex = 2;
+                    break;
+                case "Dragonborn":
+                    raceStr = 2;
+                    raceCon = 1;
+                    break;
+                case "Forest Gnome":
+                    raceDex = 1;
+                    raceInt = 2;
+                    break;
+                case "Deep Gnome":
+                    raceInt = 2;
+                    raceCon = 1;
+                    break;
+                case "Half Elf" :
+                    raceCha = 2;
+                    //1 increase in two of choose
+                    break;
+                case "Half Orc":
+                    raceStr = 2;
+                    raceCon = 1;
+                    break;
+                case "Thiefling":
+                    raceInt = 1;
+                    raceCha = 2;
+                    break;
             }
+            InitScores();
         }
     }
 }

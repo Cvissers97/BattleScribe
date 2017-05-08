@@ -37,7 +37,7 @@ namespace BattleScribe.Classes
             cha = 8;
         }
 
-        public string CalcMod(string stat)
+        public string CalcMod(string stat, double raceMod)
         {
             double temp;
             switch (stat)
@@ -66,7 +66,7 @@ namespace BattleScribe.Classes
                         
             }
 
-            temp = Math.Floor(((temp - 10) / 2));
+            temp = Math.Floor((((temp + raceMod) - 10) / 2));
 
             if (temp >= 0)
             {
