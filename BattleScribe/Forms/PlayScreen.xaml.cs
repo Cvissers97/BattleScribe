@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace BattleScribe.Forms
 {
     /// <summary>
-    /// Interaction logic for CreationWizardTemp2.xaml
+    /// Interaction logic for PlayScreen.xaml
     /// </summary>
-    public partial class CreationWizardTemp2 : Window
+    public partial class PlayScreen : Window
     {
-        public CreationWizardTemp2()
+        public PlayScreen()
         {
             InitializeComponent();
         }
