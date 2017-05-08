@@ -88,14 +88,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\CreationWizardTemp1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Forms\CreationWizardTemp2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Forms\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,12 +104,6 @@
   <ItemGroup>
     <Compile Include="Forms\CharacterCreationWizard.xaml.cs">
       <DependentUpon>CharacterCreationWizard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\CreationWizardTemp1.xaml.cs">
-      <DependentUpon>CreationWizardTemp1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\CreationWizardTemp2.xaml.cs">
-      <DependentUpon>CreationWizardTemp2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
