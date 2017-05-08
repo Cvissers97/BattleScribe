@@ -26,11 +26,13 @@ namespace BattleScribe.Forms
         DbHandler db = new DbHandler();
         Character character = new Character();
         int totalPoints;
+        List<CharacterRace> race;
+        byte raceStr, raceDex, raceCon, raceInt, raceWis, raceCha = 0;
 
         public CharacterCreationWizard()
         {
             InitializeComponent();
-            FillAll();
+            Init();
             screen = 1;
             UpdateScreen();
             totalPoints = 27;
@@ -84,8 +86,7 @@ namespace BattleScribe.Forms
                         break;
                 }
             }
-
-            return totalPoints;
+           return totalPoints;
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
@@ -300,9 +301,9 @@ namespace BattleScribe.Forms
             }
         }
 
-        private void FillAll()
+        private void Init()
         {
-            List<CharacterRace> race = db.GetRaces();
+            race = db.GetRaces();
             List<CharacterClass> charClass = db.GetClasses();
 
             foreach (CharacterRace r in race)
@@ -314,22 +315,31 @@ namespace BattleScribe.Forms
             {
                 cbClasses.Items.Add(c.GetName());
             }
+            InitScores();
+        }
 
-            lbSTR.Content = "STR" + " " + character.GetStr() + " (" + character.CalcMod("STR") + ")";
-            lbDEX.Content = "DEX" + " " + character.GetDex() + " (" + character.CalcMod("DEX") + ")";
-            lbCON.Content = "CON" + " " + character.GetCon() + " (" + character.CalcMod("CON") + ")";
-            lbINT.Content = "INT" + " " + character.GetInt() + " (" + character.CalcMod("INT") + ")";
-            lbWIS.Content = "WIS" + " " + character.GetWis() + " (" + character.CalcMod("WIS") + ")";
-            lbCHA.Content = "CHA" + " " + character.GetCha() + " (" + character.CalcMod("CHA") + ")";
+        private void InitScores()
+        {
+            lbSTR.Content = "STR" + " " + (character.GetStr() + raceStr) + " (" + character.CalcMod("STR") + ")";
+            lbDEX.Content = "DEX" + " " + (character.GetDex() + raceDex) + " (" + character.CalcMod("DEX") + ")";
+            lbCON.Content = "CON" + " " + (character.GetCon() + raceCon) + " (" + character.CalcMod("CON") + ")";
+            lbINT.Content = "INT" + " " + (character.GetInt() + raceInt) + " (" + character.CalcMod("INT") + ")";
+            lbWIS.Content = "WIS" + " " + (character.GetWis() + raceWis) + " (" + character.CalcMod("WIS") + ")";
+            lbCHA.Content = "CHA" + " " + (character.GetCha() + raceCha) + " (" + character.CalcMod("CHA") + ")";
         }
 
         private void BtnPlusSTR_Click(object sender, RoutedEventArgs e)
         {
-            if ((character.GetStr() + 1 != 16))
+            if ((character.GetStr() + 1) < 16)
             {
                 character.SetStr((byte)(character.GetStr() + 1));
-                lbSTR.Content = "STR" + " " + character.GetStr() + " (" + character.CalcMod("STR") + ")";
-                lbPoints.Content = "Total points: " + CalcPoints();
+                if (CalcPoints() >= 0)
+                {
+                    lbSTR.Content = "STR" + " " + (character.GetStr() + raceStr) + " (" + character.CalcMod("STR") + ")";
+                    lbPoints.Content = "Total points: " + CalcPoints();
+                }
+                else 
+                character.SetStr((byte)(character.GetStr() - 1));
             }
         }
 
@@ -338,108 +348,150 @@ namespace BattleScribe.Forms
             if ((character.GetStr() - 1) != 7)
             {
                 character.SetStr((byte)(character.GetStr() - 1));
-                lbSTR.Content = "STR" + " " + character.GetStr() + " (" + character.CalcMod("STR") + ")";
+                lbSTR.Content = "STR" + " " + (character.GetStr() + raceStr) + " (" + character.CalcMod("STR") + ")";
                 lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
 
         private void BtnMinDEX_Click(object sender, RoutedEventArgs e)
         {
-            if ((character.GetDex() - 1 != 7))
+            if ((character.GetDex() - 1) != 7)
             {
                 character.SetDex((byte)(character.GetDex() - 1));
-                lbDEX.Content = "DEX" + " " + character.GetDex() + " (" + character.CalcMod("DEX") + ")";
+                lbDEX.Content = "DEX" + " " + (character.GetDex() + raceDex) + " (" + character.CalcMod("DEX") + ")";
                 lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
 
         private void BtnPlusDEX_Click(object sender, RoutedEventArgs e)
         {
-            if ((character.GetDex() + 1 != 16))
+            if ((character.GetDex() + 1) < 16)
             {
                 character.SetDex((byte)(character.GetDex() + 1));
-                lbDEX.Content = "DEX" + " " + character.GetDex() + " (" + character.CalcMod("DEX") + ")";
-                lbPoints.Content = "Total points: " + CalcPoints();
+                if (CalcPoints() >= 0)
+                {
+                    lbDEX.Content = "DEX" + " " + (character.GetDex() + raceDex) + " (" + character.CalcMod("DEX") + ")";
+                    lbPoints.Content = "Total points: " + CalcPoints();
+                }
+                else
+                    character.SetDex((byte)(character.GetDex() - 1));
             }
         }
 
         private void BtnMinCON_Click(object sender, RoutedEventArgs e)
         {
-            if ((character.GetCon() - 1 != 7))
+            if ((character.GetCon() - 1) != 7)
             {
                 character.SetCon((byte)(character.GetCon() - 1));
-                lbCON.Content = "CON" + " " + character.GetCon() + " (" + character.CalcMod("CON") + ")";
+                lbCON.Content = "CON" + " " + (character.GetCon() + raceCon) + " (" + character.CalcMod("CON") + ")";
                 lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
 
         private void BtnPlusCON_Click(object sender, RoutedEventArgs e)
         {
-            if ((character.GetCon() + 1 != 16))
+            if ((character.GetCon() + 1) < 16)
             {
                 character.SetCon((byte)(character.GetCon() + 1));
-                lbCON.Content = "CON" + " " + character.GetCon() + " (" + character.CalcMod("CON") + ")";
-                lbPoints.Content = "Total points: " + CalcPoints();
+                if (CalcPoints() >= 0)
+                {
+                    lbCON.Content = "CON" + " " + (character.GetCon() + raceCon) + " (" + character.CalcMod("CON") + ")";
+                    lbPoints.Content = "Total points: " + CalcPoints();
+                }
+                else
+                    character.SetCon((byte)(character.GetCon() - 1));
             }
         }
 
         private void BtnPlusINT_Click(object sender, RoutedEventArgs e)
         {
-            if ((character.GetInt() + 1 != 16))
+            if ((character.GetInt() + 1) < 16)
             {
                 character.SetInt((byte)(character.GetInt() + 1));
-                lbINT.Content = "INT" + " " + character.GetInt() + " (" + character.CalcMod("INT") + ")";
-                lbPoints.Content = "Total points: " + CalcPoints();
+                if (CalcPoints() >= 0)
+                {
+                    lbINT.Content = "INT" + " " + (character.GetInt() + raceInt) + " (" + character.CalcMod("INT") + ")";
+                    lbPoints.Content = "Total points: " + CalcPoints();
+                }
+                else
+                    character.SetInt((byte)(character.GetInt() - 1));
             }
         }
 
         private void BtnMinINT_Click(object sender, RoutedEventArgs e)
         {
-            if ((character.GetInt() - 1 != 7))
+            if ((character.GetInt() - 1) != 7)
             {
                 character.SetInt((byte)(character.GetInt() - 1));
-                lbINT.Content = "INT" + " " + character.GetInt() + " (" + character.CalcMod("INT") + ")";
+                lbINT.Content = "INT" + " " + (character.GetInt() + raceInt) + " (" + character.CalcMod("INT") + ")";
                 lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
 
         private void BtnMinWIS_Click(object sender, RoutedEventArgs e)
         {
-            if ((character.GetWis() - 1 != 7))
+            if ((character.GetWis() - 1) != 7)
             {
                 character.SetWis((byte)(character.GetWis() - 1));
-                lbWIS.Content = "WIS" + " " + character.GetWis() + " (" + character.CalcMod("WIS") + ")";
+                lbWIS.Content = "WIS" + " " + (character.GetWis() + raceWis) + " (" + character.CalcMod("WIS") + ")";
                 lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
 
         private void BtnPlusWIS_Click(object sender, RoutedEventArgs e)
         {
-            if ((character.GetWis() + 1 != 16))
+            if ((character.GetWis() + 1) < 16)
             {
                 character.SetWis((byte)(character.GetWis() + 1));
-                lbWIS.Content = "WIS" + " " + character.GetWis() + " (" + character.CalcMod("WIS") + ")";
-                lbPoints.Content = "Total points: " + CalcPoints();
+                if (CalcPoints() >= 0)
+                {
+                    lbWIS.Content = "WIS" + " " + (character.GetWis() + raceWis) + " (" + character.CalcMod("WIS") + ")";
+                    lbPoints.Content = "Total points: " + CalcPoints();
+                }
+                else
+                    character.SetWis((byte)(character.GetWis() - 1));
             }
         }
 
         private void BtnMinCHA_Click(object sender, RoutedEventArgs e)
         {
-            if ((character.GetCha() - 1 != 7))
+            if ((character.GetCha() - 1) != 7)
             {
                 character.SetCha((byte)(character.GetCha() - 1));
-                lbCHA.Content = "CHA" + " " + character.GetCha() + " (" + character.CalcMod("CHA") + ")";
+                lbCHA.Content = "CHA" + " " + (character.GetCha() + raceCha) + " (" + character.CalcMod("CHA") + ")";
                 lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
 
         private void BtnPlusCHA_Click(object sender, RoutedEventArgs e)
         {
-            if ((character.GetCha() + 1 != 16))
+            if ((character.GetCha() + 1) < 16)
             {
                 character.SetCha((byte)(character.GetCha() + 1));
-                lbCHA.Content = "CHA" + " " + character.GetCha() + " (" + character.CalcMod("CHA") + ")";
-                lbPoints.Content = "Total points: " + CalcPoints();
+                if (CalcPoints() >= 0)
+                {
+                    lbCHA.Content = "CHA" + " " + (character.GetCha() + raceCha) + " (" + character.CalcMod("CHA") + ")";
+                    lbPoints.Content = "Total points: " + CalcPoints();
+                }
+                else
+                    character.SetCha((byte)(character.GetCha() - 1));
+            }
+        }
+
+        private void CbRaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (cbRaces.SelectedItem.ToString())
+            {
+                case "Human":
+                    raceStr = 1;
+                    raceDex = 1;
+                    raceCon = 1;
+                    raceInt = 1;
+                    raceWis = 1;
+                    raceCha = 1;
+                    InitScores();
+                    break;
+
             }
         }
     }

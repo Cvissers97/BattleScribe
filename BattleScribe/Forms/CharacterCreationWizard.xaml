@@ -75,7 +75,7 @@
         <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="490,642,0,0" VerticalAlignment="Top" Width="82" Height="32" Click="btnBack_Click"/>
         <Label Name="lbRace" Content="Race" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbClass" Content="Class" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="cbRaces" HorizontalAlignment="Left" Margin="59,22,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+        <ComboBox Name="cbRaces" HorizontalAlignment="Left" Margin="59,22,0,0" VerticalAlignment="Top" Width="120" Height="26" SelectionChanged="CbRaces_SelectionChanged"/>
         <ComboBox Name="cbClasses" HorizontalAlignment="Left" Margin="59,53,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
         <Label Name="lbSTR" Content="STR 15 (+2)" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
         <Label Name="lbDEX" Content="DEX 15 (+2)" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
