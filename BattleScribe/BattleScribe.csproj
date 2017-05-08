@@ -96,6 +96,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\PlayScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -110,6 +114,9 @@
     </Compile>
     <Compile Include="Forms\MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PlayScreen.xaml.cs">
+      <DependentUpon>PlayScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -139,9 +146,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Forms\Pop-ups\" />
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Icons\Buttons\Inspiration_Button.png" />
     <Resource Include="Resources\Test\placeholder.jpg" />
     <Resource Include="Resources\Parchment.jpg" />
     <Resource Include="Resources\Icons\Death Saves\0_death.png" />
@@ -153,8 +162,8 @@
     <Content Include="BattleScribe.sdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Icons\Buttons\Health_Button.png" />
-    <Content Include="Resources\Icons\Buttons\Initiative_Button.png" />
+    <Resource Include="Resources\Icons\Buttons\Health_Button.png" />
+    <Resource Include="Resources\Icons\Buttons\Initiative_Button.png" />
     <Resource Include="Resources\Icons\Statistics\Passive_Perception.png" />
     <Resource Include="Resources\Icons\Statistics\Speed.png" />
   </ItemGroup>
