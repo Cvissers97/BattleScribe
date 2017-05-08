@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BattleScribe.Classes;
 
 namespace BattleScribe.Forms
 {
@@ -22,12 +23,69 @@ namespace BattleScribe.Forms
         // Screen count total of 3, starting at 1
         // 1 = Personal, 2 = Statistics, 3 = Magic
         byte screen;
+        DbHandler db = new DbHandler();
+        Character character = new Character();
+        int totalPoints;
 
         public CharacterCreationWizard()
         {
             InitializeComponent();
+            FillAll();
             screen = 1;
             UpdateScreen();
+            totalPoints = 27;
+            lbPoints.Content = "Total Points: " + totalPoints;
+        }
+        
+        public List<byte> StatList()
+        {
+            List<byte> temp = new List<byte>();
+            temp.Add(character.GetStr());
+            temp.Add(character.GetDex());
+            temp.Add(character.GetCon());
+            temp.Add(character.GetInt());
+            temp.Add(character.GetWis());
+            temp.Add(character.GetCha());
+
+            return temp;
+        }
+
+        public int CalcPoints()
+        {
+            totalPoints = 27;
+            List<byte> AllStat = StatList();
+
+            foreach (byte b in AllStat)
+            {
+                switch (b)
+                {
+                    case 9:
+                        totalPoints -= 1;
+                        break;
+                    case 10:
+                        totalPoints -= 2;
+                        break;
+                    case 11:
+                        totalPoints -= 3;
+                        break;
+                    case 12:
+                        totalPoints -= 4;
+                        break;
+                    case 13:
+                        totalPoints -= 5;
+                        break;
+                    case 14:
+                        totalPoints -= 7;
+                        break;
+                    case 15:
+                        totalPoints -= 9;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return totalPoints;
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
@@ -44,7 +102,6 @@ namespace BattleScribe.Forms
 
         private void UpdateScreen()
         {
-            MessageBox.Show(screen.ToString());
             btnFinish.Visibility = Visibility.Hidden;
             btnNext.Visibility = Visibility.Visible;
 
@@ -240,6 +297,149 @@ namespace BattleScribe.Forms
             btnPrepare.Visibility = Visibility.Visible;
             btnUnprepare.Visibility = Visibility.Visible;
                     break;
+            }
+        }
+
+        private void FillAll()
+        {
+            List<CharacterRace> race = db.GetRaces();
+            List<CharacterClass> charClass = db.GetClasses();
+
+            foreach (CharacterRace r in race)
+            {
+                cbRaces.Items.Add(r.GetName());
+            }
+
+            foreach (CharacterClass c in charClass)
+            {
+                cbClasses.Items.Add(c.GetName());
+            }
+
+            lbSTR.Content = "STR" + " " + character.GetStr() + " (" + character.CalcMod("STR") + ")";
+            lbDEX.Content = "DEX" + " " + character.GetDex() + " (" + character.CalcMod("DEX") + ")";
+            lbCON.Content = "CON" + " " + character.GetCon() + " (" + character.CalcMod("CON") + ")";
+            lbINT.Content = "INT" + " " + character.GetInt() + " (" + character.CalcMod("INT") + ")";
+            lbWIS.Content = "WIS" + " " + character.GetWis() + " (" + character.CalcMod("WIS") + ")";
+            lbCHA.Content = "CHA" + " " + character.GetCha() + " (" + character.CalcMod("CHA") + ")";
+        }
+
+        private void BtnPlusSTR_Click(object sender, RoutedEventArgs e)
+        {
+            if ((character.GetStr() + 1 != 16))
+            {
+                character.SetStr((byte)(character.GetStr() + 1));
+                lbSTR.Content = "STR" + " " + character.GetStr() + " (" + character.CalcMod("STR") + ")";
+                lbPoints.Content = "Total points: " + CalcPoints();
+            }
+        }
+
+        private void BtnMinSTR_Click(object sender, RoutedEventArgs e)
+        {
+            if ((character.GetStr() - 1) != 7)
+            {
+                character.SetStr((byte)(character.GetStr() - 1));
+                lbSTR.Content = "STR" + " " + character.GetStr() + " (" + character.CalcMod("STR") + ")";
+                lbPoints.Content = "Total points: " + CalcPoints();
+            }
+        }
+
+        private void BtnMinDEX_Click(object sender, RoutedEventArgs e)
+        {
+            if ((character.GetDex() - 1 != 7))
+            {
+                character.SetDex((byte)(character.GetDex() - 1));
+                lbDEX.Content = "DEX" + " " + character.GetDex() + " (" + character.CalcMod("DEX") + ")";
+                lbPoints.Content = "Total points: " + CalcPoints();
+            }
+        }
+
+        private void BtnPlusDEX_Click(object sender, RoutedEventArgs e)
+        {
+            if ((character.GetDex() + 1 != 16))
+            {
+                character.SetDex((byte)(character.GetDex() + 1));
+                lbDEX.Content = "DEX" + " " + character.GetDex() + " (" + character.CalcMod("DEX") + ")";
+                lbPoints.Content = "Total points: " + CalcPoints();
+            }
+        }
+
+        private void BtnMinCON_Click(object sender, RoutedEventArgs e)
+        {
+            if ((character.GetCon() - 1 != 7))
+            {
+                character.SetCon((byte)(character.GetCon() - 1));
+                lbCON.Content = "CON" + " " + character.GetCon() + " (" + character.CalcMod("CON") + ")";
+                lbPoints.Content = "Total points: " + CalcPoints();
+            }
+        }
+
+        private void BtnPlusCON_Click(object sender, RoutedEventArgs e)
+        {
+            if ((character.GetCon() + 1 != 16))
+            {
+                character.SetCon((byte)(character.GetCon() + 1));
+                lbCON.Content = "CON" + " " + character.GetCon() + " (" + character.CalcMod("CON") + ")";
+                lbPoints.Content = "Total points: " + CalcPoints();
+            }
+        }
+
+        private void BtnPlusINT_Click(object sender, RoutedEventArgs e)
+        {
+            if ((character.GetInt() + 1 != 16))
+            {
+                character.SetInt((byte)(character.GetInt() + 1));
+                lbINT.Content = "INT" + " " + character.GetInt() + " (" + character.CalcMod("INT") + ")";
+                lbPoints.Content = "Total points: " + CalcPoints();
+            }
+        }
+
+        private void BtnMinINT_Click(object sender, RoutedEventArgs e)
+        {
+            if ((character.GetInt() - 1 != 7))
+            {
+                character.SetInt((byte)(character.GetInt() - 1));
+                lbINT.Content = "INT" + " " + character.GetInt() + " (" + character.CalcMod("INT") + ")";
+                lbPoints.Content = "Total points: " + CalcPoints();
+            }
+        }
+
+        private void BtnMinWIS_Click(object sender, RoutedEventArgs e)
+        {
+            if ((character.GetWis() - 1 != 7))
+            {
+                character.SetWis((byte)(character.GetWis() - 1));
+                lbWIS.Content = "WIS" + " " + character.GetWis() + " (" + character.CalcMod("WIS") + ")";
+                lbPoints.Content = "Total points: " + CalcPoints();
+            }
+        }
+
+        private void BtnPlusWIS_Click(object sender, RoutedEventArgs e)
+        {
+            if ((character.GetWis() + 1 != 16))
+            {
+                character.SetWis((byte)(character.GetWis() + 1));
+                lbWIS.Content = "WIS" + " " + character.GetWis() + " (" + character.CalcMod("WIS") + ")";
+                lbPoints.Content = "Total points: " + CalcPoints();
+            }
+        }
+
+        private void BtnMinCHA_Click(object sender, RoutedEventArgs e)
+        {
+            if ((character.GetCha() - 1 != 7))
+            {
+                character.SetCha((byte)(character.GetCha() - 1));
+                lbCHA.Content = "CHA" + " " + character.GetCha() + " (" + character.CalcMod("CHA") + ")";
+                lbPoints.Content = "Total points: " + CalcPoints();
+            }
+        }
+
+        private void BtnPlusCHA_Click(object sender, RoutedEventArgs e)
+        {
+            if ((character.GetCha() + 1 != 16))
+            {
+                character.SetCha((byte)(character.GetCha() + 1));
+                lbCHA.Content = "CHA" + " " + character.GetCha() + " (" + character.CalcMod("CHA") + ")";
+                lbPoints.Content = "Total points: " + CalcPoints();
             }
         }
     }

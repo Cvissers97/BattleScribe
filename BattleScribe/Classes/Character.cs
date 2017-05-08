@@ -1,0 +1,228 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BattleScribe.Classes
+{
+    public class Character
+    {
+        private string name;
+        private string title;
+        private string age;
+        private string size;
+        private string alignment;
+        private bool isFemale;
+        private bool isMale;
+        private string bonds;
+        private string ideals;
+        private string appearance;
+        private string flaws;
+        private string backstory;
+        private byte str;
+        private byte dex;
+        private byte con;
+        private byte _int;
+        private byte wis;
+        private byte cha;
+
+        public Character()
+        {
+            str = 8;
+            dex = 8;
+            con = 8;
+            _int = 8;
+            wis = 8;
+            cha = 8;
+        }
+
+        public string CalcMod(string stat)
+        {
+            double temp;
+            switch (stat)
+            {
+                case "STR":
+                    temp = str;
+                    break;
+                case "DEX":
+                    temp = dex;
+                    break;
+                case "CON":
+                    temp = con;
+                    break;
+                case "INT":
+                    temp = _int;
+                    break;
+                case "WIS":
+                    temp = wis;
+                    break;
+                case "CHA":
+                    temp = cha;
+                        break;
+                default:
+                    temp = 200;
+                    break;
+                        
+            }
+
+            temp = Math.Floor(((temp - 10) / 2));
+
+            if (temp >= 0)
+            {
+                return "+" + temp.ToString();
+            }
+            else if (temp < 0)
+            {
+                return temp.ToString();
+            }
+
+            return null;
+        }
+
+        public Character(string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
+            , string bonds, string ideals, string appearance, string flaws, string backstory, byte str, byte dex,
+            byte con, byte _int, byte wis, byte cha)
+        {
+            this.name = name;
+            this.title = title;
+            this.age = age;
+            this.size = size;
+            this.alignment = alignment;
+            this.isFemale = isFemale;
+            this.isMale = isMale;
+            this.bonds = bonds;
+            this.ideals = ideals;
+            this.appearance = appearance;
+            this.flaws = flaws;
+            this.backstory = backstory;
+            this.str = str;
+            this.dex = dex;
+            this.con = con;
+            this._int = _int;
+            this.wis = wis;
+            this.cha = cha;
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
+
+        public string GetTitle()
+        {
+            return title;
+        }
+
+        public string GetAge()
+        {
+            return age;
+        }
+
+        public string GetSize()
+        {
+            return size;
+        }
+
+        public string GetAlignment()
+        {
+            return alignment;
+        }
+
+        public bool GetIsFemale()
+        {
+            return isFemale;
+        }
+
+        public bool GetIsMale()
+        {
+            return isMale;
+        }
+
+        public string GetBonds()
+        {
+            return bonds;
+        }
+
+        public string GetIdeals()
+        {
+            return ideals;
+        }
+
+        public string GetAppearance()
+        {
+            return appearance;
+        }
+
+        public string GetFlaws()
+        {
+            return flaws;
+        }
+
+        public string GetBackstory()
+        {
+            return backstory;
+        }
+
+        public byte GetStr()
+        {
+            return str;
+        }
+
+        public byte GetDex()
+        {
+            return dex;
+        }
+
+        public byte GetCon()
+        {
+            return con;
+        }
+
+        public byte GetInt()
+        {
+            return _int;
+        }
+
+        public byte GetWis()
+        {
+            return wis;
+        }
+
+        public byte GetCha()
+        {
+            return cha;
+        }
+
+        public void SetStr(byte str)
+        {
+            this.str = str;
+        }
+
+        public void SetDex(byte dex)
+        {
+            this.dex = dex;
+        }
+
+        public void SetCon(byte con)
+        {
+            this.con = con;
+        }
+
+        public void SetInt(byte _int)
+        {
+            this._int = _int;
+        }
+
+        public void SetWis(byte wis)
+        {
+            this.wis = wis;
+        }
+
+        public void SetCha(byte cha)
+        {
+            this.cha = cha;
+        }
+
+    }
+}

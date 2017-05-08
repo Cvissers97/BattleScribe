@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace BattleScribe.Classes
 {
-    class CharacterRace
+    public class CharacterRace
     {
         private string name;
-        private List<Feature> features;
+        public List<Feature> features;
 
         public CharacterRace()
         {
             
         }
 
-        public CharacterRace(string name, List<Feature> features)
+        public CharacterRace(string name)
         {
             this.name = name;
-            this.features = features;
+            //this.features = features;
         }
 
         public string GetName()

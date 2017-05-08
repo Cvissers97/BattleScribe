@@ -12,6 +12,7 @@ namespace BattleScribe.Classes
        {
            int result = 0;
            Random r = new Random();
+           
 
            for (int i = 0; i <= amount; i++)
            {

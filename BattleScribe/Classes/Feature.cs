@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BattleScribe.Classes
 {
-    class Feature
+    public class Feature
     {
-        private string name;
-        private string description;
-        private bool hasAcquired;
+        public string name;
+        public string description;
+        public bool hasAcquired;
 
         public Feature()
         {

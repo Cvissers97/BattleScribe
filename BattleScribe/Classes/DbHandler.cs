@@ -16,10 +16,6 @@ namespace BattleScribe.Classes
 
         public DbHandler()
         {
-            conString = Properties.Settings.Default.conString;
-            con = new SqlCeConnection();
-            con.ConnectionString = conString;
-
             com = new SqlCeCommand();
             com.CommandType = System.Data.CommandType.Text;
         }
@@ -29,7 +25,7 @@ namespace BattleScribe.Classes
             try
             {
                 con.Open();
-                System.Windows.MessageBox.Show("Con opend");
+                System.Windows.MessageBox.Show("Con open");
             }
             catch (Exception e)
             {
@@ -37,16 +33,49 @@ namespace BattleScribe.Classes
             }
         }
 
-        //public List<CharacterRace> GetRaces()
-        //{
-        //    // Add code to gather all races by id. Fill the feature list, too.
-        //    string sql = "SELECT * tbl_races";
-        //    List<CharacterRace> temp = new List<CharacterRace>();
-        //    return temp;
-        //}
+        //Methode to get a list of all races and its features
+        public List<CharacterRace> GetRaces()
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            // Add code to gather all races by id. Fill the feature list, too.
+            string sql = "SELECT * FROM Race";
+            List<CharacterRace> temp = new List<CharacterRace>();
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        CharacterRace r = new CharacterRace(dReader.GetString(1));
+                        temp.Add(r);
+                    }
+                    con.Close();
+                    com.Parameters.Clear();
+                }
+                return temp;
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+                return null;
+            }
+        }
 
         public List<Spell> GetSpells()
         {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
             List<Spell> SpellList = new List<Spell>();
 
 
@@ -78,6 +107,42 @@ namespace BattleScribe.Classes
                 return SpellList;
             }
             catch(Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+                return null;
+            }
+        }
+
+        public List<CharacterClass> GetClasses()
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT * FROM Class";
+            List<CharacterClass> temp = new List<CharacterClass>();
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        CharacterClass c = new CharacterClass(dReader.GetString(1));
+                        temp.Add(c);
+                    }
+                    con.Close();
+                    com.Parameters.Clear();
+                }
+                return temp;
+            }
+            catch (Exception e)
             {
                 System.Windows.MessageBox.Show(e.Message.ToString());
                 con.Close();
