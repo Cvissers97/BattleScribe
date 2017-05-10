@@ -76,7 +76,7 @@
         <Label Name="lbRace" Content="Race" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbClass" Content="Class" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="cbRaces" HorizontalAlignment="Left" Margin="59,22,0,0" VerticalAlignment="Top" Width="120" Height="26" SelectionChanged="CbRaces_SelectionChanged"/>
-        <ComboBox Name="cbClasses" HorizontalAlignment="Left" Margin="59,53,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+        <ComboBox Name="cbClasses" HorizontalAlignment="Left" Margin="59,53,0,0" VerticalAlignment="Top" Width="120" Height="26" SelectionChanged="CbClass_SelectionChanged"/>
         <Label Name="lbSTR" Content="STR 15 (+2)" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
         <Label Name="lbDEX" Content="DEX 15 (+2)" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
         <Label Name="lbCON" Content="CON 15 (+2)" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
@@ -129,7 +129,7 @@
 
         <Label Name="lbCantrip"  Content="Cantrips" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <WrapPanel Name="panelCantrips" HorizontalAlignment="Left" Height="71" Margin="10,41,0,0" VerticalAlignment="Top" Width="654"/>
-        <Label Name="lbKnownSpells" Content="Known spells" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
+        <Label Name="lbKnownSpells" Content="Available spells" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
         <WrapPanel Name="panelKnownSpells" HorizontalAlignment="Left" Height="395" Margin="10,161,0,0" VerticalAlignment="Top" Width="255"/>
         <WrapPanel Name="panelPrepSpells" HorizontalAlignment="Left" Height="400" Margin="409,156,0,0" VerticalAlignment="Top" Width="255"/>
         <Label Name="lbPrepSpells" Content="Preparable spells left: 02" HorizontalAlignment="Left" Margin="513,130,0,0" VerticalAlignment="Top"/>

@@ -114,6 +114,84 @@ namespace BattleScribe.Classes
             }
         }
 
+        public List<Spell> GetSpellsByClass(string char_Class, int spellLvl)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            List<Spell> sList = new List<Spell>();
+            string sql;
+            int class_id = 0;
+
+            sql = "SELECT id FROM Class WHERE name = @name";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"name", char_Class);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+
+                    while (dReader.Read())
+                    {
+                        class_id = dReader.GetInt32(0);   
+                    }
+
+                    //con.Close();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+
+            sql = "SELECT s.* FROM Class_Spells cSpells INNER JOIN Spells s ON cSpells.spell_id = s.spell_id WHERE cSpells.class_id = @id AND s.spell_level = @lvl";
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"id", class_id);
+                    com.Parameters.AddWithValue(@"lvl", spellLvl);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+
+                    while (dReader.Read())
+                    {
+                        Spell s = new Spell();
+                        s.SetName(dReader.GetString(1));
+                        s.SetDesc(dReader.GetString(8));
+                        sList.Add(s);
+                    }
+
+                    con.Close();
+                    com.Parameters.Clear();
+                }
+                return sList;
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+                return null;
+            }
+        }
+
         public List<CharacterClass> GetClasses()
         {
             conString = Properties.Settings.Default.conString;

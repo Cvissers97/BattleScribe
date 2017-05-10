@@ -23,20 +23,28 @@ namespace BattleScribe.Forms
         // Screen count total of 3, starting at 1
         // 1 = Personal, 2 = Statistics, 3 = Magic
         byte screen;
-        DbHandler db = new DbHandler();
-        Character character = new Character();
-        int totalPoints;
+        DbHandler db;
+        Character character;
+        int totalPoints, prepareableSpells, cantripsKnown, spellsKnown;
         List<CharacterRace> race;
-        byte raceStr, raceDex, raceCon, raceInt, raceWis, raceCha = 0;
+        byte raceStr, raceDex, raceCon, raceInt, raceWis, raceCha;
+        List<string> allLangs, allSkills;
+        List<Spell> spellList, cantripList;
+        List<CheckBox> cbSpellList, cbLangList, cbSkillList, cbCantripList;
+        
 
         public CharacterCreationWizard()
         {
+            db = new DbHandler();
+            character = new Character();
             InitializeComponent();
             Init();
             screen = 1;
             UpdateScreen();
-            totalPoints = 27;
+            totalPoints = 27; // max amount of points according to D&D rules
             lbPoints.Content = "Total Points: " + totalPoints;
+            cbSpellList = new List<CheckBox>();
+            prepareableSpells = 0;
         }
         
         //Add all stats to a list
@@ -93,14 +101,52 @@ namespace BattleScribe.Forms
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            screen++;
-            UpdateScreen();
+            if (screen < 3)
+            {
+                screen++;
+                if (screen == 3)
+                {
+                    if (cbClasses.SelectedItem != null)
+                    {
+                        panelKnownSpells.Children.Clear();
+                        panelCantrips.Children.Clear();
+
+                        spellList = db.GetSpellsByClass(cbClasses.SelectedItem.ToString(), 1);
+
+                        cantripList = db.GetSpellsByClass(cbClasses.SelectedItem.ToString(), 0);
+                        cbSpellList = new List<CheckBox>();
+                        cbCantripList = new List<CheckBox>();
+
+                        foreach (Spell s in spellList)
+                        {
+                            CheckBox c = new CheckBox();
+                            c.Content = s.GetName();
+                            c.Margin = new Thickness(5, 0, 5, 0);
+                            panelKnownSpells.Children.Add(c);
+                            cbSpellList.Add(c);
+                        }
+
+                        foreach (Spell s in cantripList)
+                        {
+                            CheckBox c = new CheckBox();
+                            c.Content = s.GetName();
+                            c.Margin = new Thickness(5, 0, 5, 0);
+                            panelCantrips.Children.Add(c);
+                            cbCantripList.Add(c);
+                        }
+                    }
+                }
+                UpdateScreen();
+            }
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            screen--;
-            UpdateScreen();
+            if (screen > 0)
+            {
+                screen--;
+                UpdateScreen();
+            }
         }
 
         //Handels screen transistions
@@ -309,15 +355,43 @@ namespace BattleScribe.Forms
         {
             race = db.GetRaces();
             List<CharacterClass> charClass = db.GetClasses();
+            allLangs = character.LangList();
+            allSkills = character.SkillsList();
+            cbSkillList = new List<CheckBox>();
+            cbLangList = new List<CheckBox>();
 
+            //fill dropdown with races
             foreach (CharacterRace r in race)
             {
                 cbRaces.Items.Add(r.GetName());
             }
 
+            //fill dropdown with classes
             foreach (CharacterClass c in charClass)
             {
                 cbClasses.Items.Add(c.GetName());
+            }
+
+            //adding all langs to the lang panel. TODO grey out logic depending on race you pick
+            foreach (string s in allLangs)
+            {
+                CheckBox c = new CheckBox();
+                c.Content = s;
+                c.Padding = new Thickness(5, 0, 5, 0);
+                //c.IsEnabled = false;
+                panelLanguages.Children.Add(c);
+                cbLangList.Add(c);
+            }
+
+            //add all skills to the skill panel TODO: amount logic per class and grey out per class
+            foreach (string s in allSkills)
+            {
+                CheckBox c = new CheckBox();
+                c.Content = s;
+                c.Padding = new Thickness(5, 0, 5, 0);
+                //c.IsEnabled = false;
+                panelSkills.Children.Add(c);
+                cbSkillList.Add(c);
             }
             InitScores();
         }
@@ -331,6 +405,8 @@ namespace BattleScribe.Forms
             lbINT.Content = "INT" + " " + (character.GetInt() + raceInt) + " (" + character.CalcMod("INT", (double)raceInt) + ")";
             lbWIS.Content = "WIS" + " " + (character.GetWis() + raceWis) + " (" + character.CalcMod("WIS", (double)raceWis) + ")";
             lbCHA.Content = "CHA" + " " + (character.GetCha() + raceCha) + " (" + character.CalcMod("CHA", (double)raceCha) + ")";
+
+
         }
 
         private void BtnPlusSTR_Click(object sender, RoutedEventArgs e)
@@ -483,16 +559,50 @@ namespace BattleScribe.Forms
             }
         }
 
-        //Racecb selection change to calc race bonus and features
+        private void CalcPrepAbleSpells()
+        {
+            prepareableSpells = 1; //set default
+            switch (cbClasses.SelectedItem.ToString())
+            {
+                case "Ranger":
+                    prepareableSpells += Convert.ToInt32(character.CalcMod("WIS", 0));
+                    break;
+                case "Cleric":
+                    break;
+                case "Bard":
+                    break;
+                case "Sorcerer":
+                    break;
+                case "Wizard":
+                    break;
+                case "Druid":
+                    break;
+                case "Warlock":
+                    break;
+                default:
+                    prepareableSpells = 0;
+                    cantripsKnown = 0;
+                    spellsKnown = 0;
+                    break;
+            }
+        }
+
+        private void CbClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        //Racecb selection change to calc race bonus, features and langs
         private void CbRaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //panelLanguages.Children.Clear();
             raceStr = 0;
             raceDex = 0;
             raceCon = 0;
             raceInt = 0;
             raceWis = 0;
             raceCha = 0;
-            //InitScores();
+
             switch (cbRaces.SelectedItem.ToString())
             {
                 case "Human":
