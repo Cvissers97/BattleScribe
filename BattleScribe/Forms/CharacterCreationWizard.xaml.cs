@@ -108,6 +108,7 @@ namespace BattleScribe.Forms
                 {
                     if (cbClasses.SelectedItem != null)
                     {
+                        CalcPrepAbleSpells();
                         panelKnownSpells.Children.Clear();
                         panelCantrips.Children.Clear();
 
