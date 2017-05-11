@@ -58,6 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\Feats\FeatControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Weapon\WeaponControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -76,10 +80,14 @@
     <Compile Include="Classes\DiceThrower.cs" />
     <Compile Include="Classes\Feature.cs" />
     <Compile Include="Classes\Items\Armour.cs" />
+    <Compile Include="Classes\Feat.cs" />
     <Compile Include="Classes\Items\Item.cs" />
     <Compile Include="Classes\Items\Weapon.cs" />
     <Compile Include="Classes\CharacterRace.cs" />
     <Compile Include="Classes\Spell.cs" />
+    <Compile Include="Controls\Feats\FeatControl.xaml.cs">
+      <DependentUpon>FeatControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Weapon\WeaponControl.xaml.cs">
       <DependentUpon>WeaponControl.xaml</DependentUpon>
     </Compile>
@@ -87,6 +95,10 @@
       <DependentUpon>WeaponLegend.xaml</DependentUpon>
     </Compile>
     <Page Include="Forms\CharacterCreationWizard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\DetailScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,6 +114,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\Pop-ups\AddEXP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\AddFeat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\AddHealth.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\AddSpell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Items\AddArmour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Items\AddItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Items\AddWeapon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,6 +151,9 @@
     <Compile Include="Forms\CharacterCreationWizard.xaml.cs">
       <DependentUpon>CharacterCreationWizard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DetailScreen.xaml.cs">
+      <DependentUpon>DetailScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
@@ -119,6 +162,27 @@
     </Compile>
     <Compile Include="Forms\PlayScreen.xaml.cs">
       <DependentUpon>PlayScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\AddEXP.xaml.cs">
+      <DependentUpon>AddEXP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\AddFeat.xaml.cs">
+      <DependentUpon>AddFeat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\AddHealth.xaml.cs">
+      <DependentUpon>AddHealth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\AddSpell.xaml.cs">
+      <DependentUpon>AddSpell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\AddArmour.xaml.cs">
+      <DependentUpon>AddArmour.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\AddItem.xaml.cs">
+      <DependentUpon>AddItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\AddWeapon.xaml.cs">
+      <DependentUpon>AddWeapon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -148,7 +212,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Forms\Pop-ups\" />
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <ItemGroup>
