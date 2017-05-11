@@ -1,0 +1,203 @@
+﻿<Window x:Class="BattleScribe.Forms.DetailScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DetailScreen" Height="716" Width="700" ResizeMode="NoResize">
+    <Grid>
+
+        <TabControl HorizontalAlignment="Left" Height="623" VerticalAlignment="Top" Width="694">
+            <TabItem Header="Personal">
+                <Grid Background="#f9f9f9">
+
+                    <Label x:Name="lbName" Content="Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbAge" Content="Age" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbSize" Content="Size" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbGender" Content="Gender" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="chMale" Content="♂" HorizontalAlignment="Left" Margin="64,131,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="chFemale" Content="♀" HorizontalAlignment="Left" Margin="97,131,0,0" VerticalAlignment="Top"/>
+                    <Image x:Name="imgChar" HorizontalAlignment="Left" Height="100" Margin="10,151,0,0" VerticalAlignment="Top" Width="114" Source="/BattleScribe;component/Resources/Test/placeholder.jpg"/>
+                    <Button x:Name="btnUpload" Content="Upload" HorizontalAlignment="Left" Margin="79,256,0,0" VerticalAlignment="Top" Width="45" Height="20"/>
+                    <Label x:Name="lbAppearance" Content="Appearance" HorizontalAlignment="Left" Margin="129,125,0,0" VerticalAlignment="Top"/>
+                    <RichTextBox x:Name="rtbAppearance" HorizontalAlignment="Left" Height="100" Margin="129,151,0,0" VerticalAlignment="Top" Width="195">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="Describe your character here."/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <TextBox x:Name="tbName" HorizontalAlignment="Left" Height="23" Margin="57,14,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="183"/>
+                    <TextBox x:Name="tbAge" HorizontalAlignment="Left" Height="23" Margin="57,45,0,0" TextWrapping="Wrap" Text="Age" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="tbSize" HorizontalAlignment="Left" Height="23" Margin="57,76,0,0" TextWrapping="Wrap" Text="Size" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="lbAgeExtra" Content="years old" HorizontalAlignment="Left" Margin="182,41,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbSizeExtra" Content="ft" HorizontalAlignment="Left" Margin="182,72,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbTitle" Content="Title" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbAlignment" Content="Alignment" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="tbTitle" HorizontalAlignment="Left" Height="23" Margin="79,307,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="tbAlignment" HorizontalAlignment="Left" Height="23" Margin="80,338,0,0" TextWrapping="Wrap" Text="Alignment" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="lbPersonality" Content="Personality" HorizontalAlignment="Left" Margin="343,10,0,0" VerticalAlignment="Top"/>
+                    <RichTextBox x:Name="rtbPersonality" HorizontalAlignment="Left" Height="70" Margin="343,41,0,0" VerticalAlignment="Top" Width="332">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="Personality"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label x:Name="lbFlaws" Content="Flaws" HorizontalAlignment="Left" Margin="343,335,0,0" VerticalAlignment="Top"/>
+                    <RichTextBox x:Name="rtbFlaws" HorizontalAlignment="Left" Height="70" Margin="343,366,0,0" VerticalAlignment="Top" Width="332">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="Flaws"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label x:Name="lbIdeals" Content="Ideals" HorizontalAlignment="Left" Margin="343,118,0,0" VerticalAlignment="Top"/>
+                    <RichTextBox x:Name="rtbIdeals" HorizontalAlignment="Left" Height="70" Margin="343,149,0,0" VerticalAlignment="Top" Width="332">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="Ideals"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label x:Name="lbBonds" Content="Bonds" HorizontalAlignment="Left" Margin="343,227,0,0" VerticalAlignment="Top"/>
+                    <RichTextBox x:Name="rtbBonds" HorizontalAlignment="Left" Height="70" Margin="343,258,0,0" VerticalAlignment="Top" Width="332">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="Bonds"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label x:Name="lbBackstory" Content="Backstory" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top"/>
+                    <RichTextBox x:Name="rtbBackstory" HorizontalAlignment="Left" Height="134" Margin="10,451,0,0" VerticalAlignment="Top" Width="665">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="Backstory"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Stats and Features">
+                <Grid Background="#f9f9f9">
+
+
+
+                    <Label x:Name="lbSTR" Content="STR 15 (+2)" HorizontalAlignment="Left" Margin="10,137,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbDEX" Content="DEX 15 (+2)" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbCON" Content="CON 15 (+2)" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbINT" Content="INT 08 (-1)" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbWIS" Content="WIS 08 (-1)" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbCHA" Content="CHA 08 (-1)" HorizontalAlignment="Left" Margin="10,237,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="btnPlusSTR" Content="+" HorizontalAlignment="Left" Margin="114,144,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinSTR" Content="-" HorizontalAlignment="Left" Margin="134,144,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnPlusDEX" Content="+" HorizontalAlignment="Left" Margin="114,165,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinDEX" Content="-" HorizontalAlignment="Left" Margin="134,165,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnPlusCON"  Content="+" HorizontalAlignment="Left" Margin="114,185,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinCON" Content="-" HorizontalAlignment="Left" Margin="134,185,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnPlusINT"  Content="+" HorizontalAlignment="Left" Margin="114,205,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinINT" Content="-" HorizontalAlignment="Left" Margin="134,205,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnPlusWIS"  Content="+" HorizontalAlignment="Left" Margin="114,226,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinWIS" Content="-" HorizontalAlignment="Left" Margin="134,226,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnPlusCHA"  Content="+" HorizontalAlignment="Left" Margin="114,245,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinCHA" Content="-" HorizontalAlignment="Left" Margin="134,245,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Label Content="Level" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+                    <Label Content="EXP" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Max HP" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Temporary HP" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Current HP" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="tbLevel" HorizontalAlignment="Left" Height="23" Margin="114,8,0,0" TextWrapping="Wrap" Text="Level" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbEXP" HorizontalAlignment="Left" Height="23" Margin="114,34,0,0" TextWrapping="Wrap" Text="EXP" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbMaxHP" HorizontalAlignment="Left" Height="23" Margin="114,60,0,0" TextWrapping="Wrap" Text="Max HP" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbTempHP" HorizontalAlignment="Left" Height="23" Margin="114,86,0,0" TextWrapping="Wrap" Text="Temp HP" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbCurHP" HorizontalAlignment="Left" Height="23" Margin="114,113,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="btnPlusHP" Content="+" HorizontalAlignment="Left" Margin="239,62,0,0" VerticalAlignment="Top" Width="21" Height="21" HorizontalContentAlignment="Center" FontSize="10" Click="btnPlusHP_Click"/>
+                    <Label Content="Feats" HorizontalAlignment="Left" Margin="386,8,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Features" HorizontalAlignment="Left" Margin="386,185,0,0" VerticalAlignment="Top"/>
+                    <ScrollViewer Name="scrollFeats" HorizontalAlignment="Left" Height="139" Margin="386,39,0,0" VerticalAlignment="Top" Width="281">
+                        <StackPanel Name="stackFeats" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </ScrollViewer>
+                    <ScrollViewer Name="scrollFeatures" HorizontalAlignment="Left" Height="315" Margin="386,215,0,0" VerticalAlignment="Top" Width="281"/>
+                    <Button Name="btnAddFeat" Content="Add Feat" HorizontalAlignment="Left" Margin="304,39,0,0" VerticalAlignment="Top" Width="75" Click="btnAddFeat_Click"/>
+                    <Button Name="btnRemoveFeat" Content="Remove" HorizontalAlignment="Left" Margin="304,64,0,0" VerticalAlignment="Top" Width="75" Click="btnRemoveFeat_Click"/>
+                    <Button Name="btnAddFeature" Content="Add Feature" HorizontalAlignment="Left" Margin="304,216,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Name="btnRemoveFeature" Content="Remove" HorizontalAlignment="Left" Margin="304,241,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Label Content="Bonus" HorizontalAlignment="Left" Margin="10,296,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Armor Class + 0" HorizontalAlignment="Left" Margin="10,337,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Movement + 0" HorizontalAlignment="Left" Margin="10,368,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Initiative + 0" HorizontalAlignment="Left" Margin="10,399,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="btnPlusArmor"  Content="+" HorizontalAlignment="Left" Margin="114,344,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinArmor" Content="-" HorizontalAlignment="Left" Margin="134,344,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnPlusMove"  Content="+" HorizontalAlignment="Left" Margin="114,375,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinMove" Content="-" HorizontalAlignment="Left" Margin="134,375,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnPlusInit"  Content="+" HorizontalAlignment="Left" Margin="114,408,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinInit" Content="-" HorizontalAlignment="Left" Margin="134,408,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Inventory">
+                <Grid Background="#f9f9f9">
+
+                    <Button Name="btnEquip" Content="Equip / Unequip" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
+                    <Button Name="btnAddItem" Content="Add Item" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
+                    <Button Name="btnModifyItem" Content="Modify Item" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
+                    <Button Name="btnDropItem" Content="Drop Item" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
+                    <Button Name="btnAddMoney" Content="Add Money" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
+                    <Button Name="btnLoseMoney" Content="Lose Money" HorizontalAlignment="Left" Margin="10,225,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
+                    <Label Content="Inventory" HorizontalAlignment="Left" Margin="146,25,0,0" VerticalAlignment="Top"/>
+                    <ScrollViewer Name="scrollInventory" HorizontalAlignment="Left" Height="278" Margin="146,56,0,0" VerticalAlignment="Top" Width="509"/>
+                    <Label Content="Equipped" HorizontalAlignment="Left" Margin="147,375,0,0" VerticalAlignment="Top"/>
+                    <ScrollViewer HorizontalAlignment="Left" Height="120" Margin="146,406,0,0" VerticalAlignment="Top" Width="509"/>
+                    <Label Name="lbCarryCapacity" Content="Carry capacity 53 / 120 lbs" HorizontalAlignment="Left" Margin="506,339,0,0" VerticalAlignment="Top"/>
+                    <Label Name="lbAttunements" Content="Total Attunements 1 / 3" HorizontalAlignment="Left" Margin="520,531,0,0" VerticalAlignment="Top" VerticalContentAlignment="Stretch"/>
+                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="120" Margin="10,406,0,0" Stroke="Black" VerticalAlignment="Top" Width="117"/>
+                    <Label Content="Money" HorizontalAlignment="Left" Margin="13,375,0,0" VerticalAlignment="Top"/>
+                    <Label Name="lbTotalGold" Content="Gold: 325,22" HorizontalAlignment="Left" Margin="13,531,0,0" VerticalAlignment="Top" Width="114"/>
+                    <Label Name="lbPlatinum" Content="Platinum: 11" HorizontalAlignment="Left" Margin="13,409,0,0" VerticalAlignment="Top" Width="114"/>
+                    <Label Name="lbGold" Content="Gold: 32" HorizontalAlignment="Left" Margin="13,439,0,0" VerticalAlignment="Top" Width="114"/>
+                    <Label Name="lbSilver" Content="Silver: 120" HorizontalAlignment="Left" Margin="13,469,0,0" VerticalAlignment="Top" Width="114"/>
+                    <Label Name="lbCopper" Content="Copper: 322" HorizontalAlignment="Left" Margin="13,496,0,0" VerticalAlignment="Top" Width="114"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Magic">
+                <Grid Background="#f9f9f9">
+                    <Label Content="Spells" HorizontalAlignment="Left" Margin="178,10,0,0" VerticalAlignment="Top"/>
+                    <ScrollViewer HorizontalAlignment="Left" Height="523" Margin="178,41,0,0" VerticalAlignment="Top" Width="484"/>
+                    <Button Content="Add Spell" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
+                    <Button Content="Prepare / Unprepare" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
+                    <Button Content="Remove Spell" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
+                    <Label Content="Known Spells" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Preparable Spells" HorizontalAlignment="Left" Margin="10,183,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="tbKnown" HorizontalAlignment="Left" Height="23" Margin="123,156,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="50"/>
+                    <TextBox Name="tbPrep" HorizontalAlignment="Left" Height="23" Margin="123,187,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="50"/>
+                    <Label Content="1st" HorizontalAlignment="Left" Margin="10,226,0,0" VerticalAlignment="Top"/>
+                    <Label Content="2nd" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top"/>
+                    <Label Content="3rd" HorizontalAlignment="Left" Margin="12,278,0,0" VerticalAlignment="Top"/>
+                    <Label Content="4th" HorizontalAlignment="Left" Margin="13,304,0,0" VerticalAlignment="Top"/>
+                    <Label Content="5th" HorizontalAlignment="Left" Margin="13,330,0,0" VerticalAlignment="Top"/>
+                    <Label Content="6th" HorizontalAlignment="Left" Margin="13,355,0,0" VerticalAlignment="Top"/>
+                    <Label Content="7th" HorizontalAlignment="Left" Margin="13,381,0,0" VerticalAlignment="Top"/>
+                    <Label Content="8th" HorizontalAlignment="Left" Margin="13,407,0,0" VerticalAlignment="Top"/>
+                    <Label Content="9th" HorizontalAlignment="Left" Margin="13,433,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="tbSlot1" HorizontalAlignment="Left" Height="22" Margin="58,230,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
+                    <TextBox Name="tbSlot2" HorizontalAlignment="Left" Height="22" Margin="58,254,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
+                    <TextBox Name="tbSlot3" HorizontalAlignment="Left" Height="22" Margin="58,279,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
+                    <TextBox Name="tbSlot4" HorizontalAlignment="Left" Height="22" Margin="58,304,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
+                    <TextBox Name="tbSlot5" HorizontalAlignment="Left" Height="22" Margin="58,330,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
+                    <TextBox Name="tbSlot6" HorizontalAlignment="Left" Height="22" Margin="58,356,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
+                    <TextBox Name="tbSlot7" HorizontalAlignment="Left" Height="22" Margin="58,381,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
+                    <TextBox Name="tbSlot8" HorizontalAlignment="Left" Height="22" Margin="58,407,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
+                    <TextBox Name="tbSlot9" HorizontalAlignment="Left" Height="22" Margin="58,433,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Left" Margin="593,632,0,0" VerticalAlignment="Top" Width="86" Height="39"/>
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="502,632,0,0" VerticalAlignment="Top" Width="86" Height="39"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="411,632,0,0" VerticalAlignment="Top" Width="86" Height="39"/>
+
+
+
+    </Grid>
+</Window>

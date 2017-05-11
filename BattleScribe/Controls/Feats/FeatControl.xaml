@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="BattleScribe.Controls.Feats.FeatControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="27" d:DesignWidth="281" Background="#FFC9B280">
+    <Grid>
+        <Label Name="lbFeatName" Content="Feat Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="281" PreviewMouseLeftButtonUp="lbFeatName_PreviewMouseLeftButtonUp"/>
+    </Grid>
+</UserControl>
