@@ -76,7 +76,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            List<Spell> SpellList = new List<Spell>();
+            List<Spell> spellList = new List<Spell>();
 
 
             string sql = "SELECT * FROM spells";
@@ -95,16 +95,16 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        Spell s = new Spell();
-                        s.SetName(dReader.GetString(1));
-                        s.SetDesc(dReader.GetString(8));
-                        SpellList.Add(s);
+                        Spell s = new Spell(dReader.GetString(1), (byte)dReader.GetInt32(2),
+                             dReader.GetString(3), dReader.GetString(4), dReader.GetString(5),
+                             dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
+                        spellList.Add(s);
                     }
                     
                     con.Close();
                     com.Parameters.Clear();
                 }
-                return SpellList;
+                return spellList;
             }
             catch(Exception e)
             {
@@ -173,9 +173,9 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        Spell s = new Spell();
-                        s.SetName(dReader.GetString(1));
-                        s.SetDesc(dReader.GetString(8));
+                        Spell s = new Spell(dReader.GetString(1), (byte)dReader.GetInt64(2),
+                            dReader.GetString(3), dReader.GetString(4), dReader.GetString(5),
+                            dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
                         sList.Add(s);
                     }
 

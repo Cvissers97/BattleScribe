@@ -118,7 +118,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\Pop-ups\AddFeat.xaml">
+    <Page Include="Forms\Pop-ups\Feats\AddFeat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,7 +126,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\Pop-ups\AddSpell.xaml">
+    <Page Include="Forms\Pop-ups\Feats\ViewFeat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Spells\AddSpell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\CustomAttack.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,6 +147,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Pop-ups\Items\AddWeapon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Items\ModifyArmour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Items\ModifyItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Items\ModifyWeapon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Items\ViewArmour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Items\ViewItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Items\ViewWeapon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,14 +198,20 @@
     <Compile Include="Forms\Pop-ups\AddEXP.xaml.cs">
       <DependentUpon>AddEXP.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Pop-ups\AddFeat.xaml.cs">
+    <Compile Include="Forms\Pop-ups\Feats\AddFeat.xaml.cs">
       <DependentUpon>AddFeat.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pop-ups\AddHealth.xaml.cs">
       <DependentUpon>AddHealth.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Pop-ups\AddSpell.xaml.cs">
+    <Compile Include="Forms\Pop-ups\Feats\ViewFeat.xaml.cs">
+      <DependentUpon>ViewFeat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Spells\AddSpell.xaml.cs">
       <DependentUpon>AddSpell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\CustomAttack.xaml.cs">
+      <DependentUpon>CustomAttack.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pop-ups\Items\AddArmour.xaml.cs">
       <DependentUpon>AddArmour.xaml</DependentUpon>
@@ -183,6 +221,24 @@
     </Compile>
     <Compile Include="Forms\Pop-ups\Items\AddWeapon.xaml.cs">
       <DependentUpon>AddWeapon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\ModifyArmour.xaml.cs">
+      <DependentUpon>ModifyArmour.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\ModifyItem.xaml.cs">
+      <DependentUpon>ModifyItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\ModifyWeapon.xaml.cs">
+      <DependentUpon>ModifyWeapon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\ViewArmour.xaml.cs">
+      <DependentUpon>ViewArmour.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\ViewItem.xaml.cs">
+      <DependentUpon>ViewItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\ViewWeapon.xaml.cs">
+      <DependentUpon>ViewWeapon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

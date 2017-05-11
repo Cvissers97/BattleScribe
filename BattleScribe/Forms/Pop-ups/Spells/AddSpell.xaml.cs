@@ -24,6 +24,11 @@ namespace BattleScribe.Forms.Pop_ups
         public AddSpell()
         {
             InitializeComponent();
+
+            db = new DbHandler();
+            spells = new List<Spell>();
+
+            GetSpells();
         }
 
         public AddSpell(Character c)
@@ -52,7 +57,16 @@ namespace BattleScribe.Forms.Pop_ups
             if (cbSpell.SelectedItem != null)
             {
                 Spell temp = (Spell)cbSpell.SelectedItem;
-                
+
+                tbCast.Text = temp.GetCastTime();
+                tbComponents.Text = temp.GetComponents();
+                tbDuration.Text = temp.GetDuration();
+                tbHigher.Text = temp.GetHigher();
+                tbLevel.Text = temp.GetLevel().ToString();
+                tbRange.Text = temp.GetRange();
+
+                rtbDesc.Document.Blocks.Clear();
+                rtbDesc.Document.Blocks.Add(new Paragraph(new Run(temp.GetDesc())));
             }
         }
     }
