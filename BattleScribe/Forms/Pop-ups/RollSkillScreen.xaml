@@ -1,0 +1,15 @@
+﻿<Window x:Class="BattleScribe.Forms.Pop_ups.RollSkillScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="RollSkillScreen" Height="300" Width="282">
+    <Grid>
+        <RadioButton Name="rbAdvantage" Content="Advantage" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="rbDisadvantage" Content="Disadvantage" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="188,11,0,0" TextWrapping="Wrap" Text="Bonus" VerticalAlignment="Top" Width="71"/>
+        <Label Content="Bonus" HorizontalAlignment="Left" Margin="140,8,0,0" VerticalAlignment="Top"/>
+        <ScrollViewer Name="scrollSkills" HorizontalAlignment="Left" Height="187" Margin="10,62,0,0" VerticalAlignment="Top" Width="249">
+            <StackPanel Name="stackSkills" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </ScrollViewer>
+
+    </Grid>
+</Window>

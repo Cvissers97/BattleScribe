@@ -130,6 +130,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\Pop-ups\Features\AddFeature.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Features\ViewFeature.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Items\Money\AddMoney.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Items\Money\SpendMoney.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\PrepareSpells.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\RollSkillScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\Pop-ups\Spells\AddSpell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -206,6 +230,24 @@
     </Compile>
     <Compile Include="Forms\Pop-ups\Feats\ViewFeat.xaml.cs">
       <DependentUpon>ViewFeat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Features\AddFeature.xaml.cs">
+      <DependentUpon>AddFeature.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Features\ViewFeature.xaml.cs">
+      <DependentUpon>ViewFeature.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\Money\AddMoney.xaml.cs">
+      <DependentUpon>AddMoney.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\Money\SpendMoney.xaml.cs">
+      <DependentUpon>SpendMoney.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\PrepareSpells.xaml.cs">
+      <DependentUpon>PrepareSpells.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\RollSkillScreen.xaml.cs">
+      <DependentUpon>RollSkillScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pop-ups\Spells\AddSpell.xaml.cs">
       <DependentUpon>AddSpell.xaml</DependentUpon>
