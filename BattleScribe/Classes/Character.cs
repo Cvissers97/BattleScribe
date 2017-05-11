@@ -27,6 +27,7 @@ namespace BattleScribe.Classes
         private byte wis;
         private byte cha;
 
+
         public Character()
         {
             str = 8;
@@ -37,48 +38,7 @@ namespace BattleScribe.Classes
             cha = 8;
         }
 
-        public string CalcMod(string stat)
-        {
-            double temp;
-            switch (stat)
-            {
-                case "STR":
-                    temp = str;
-                    break;
-                case "DEX":
-                    temp = dex;
-                    break;
-                case "CON":
-                    temp = con;
-                    break;
-                case "INT":
-                    temp = _int;
-                    break;
-                case "WIS":
-                    temp = wis;
-                    break;
-                case "CHA":
-                    temp = cha;
-                        break;
-                default:
-                    temp = 200;
-                    break;
-                        
-            }
-
-            temp = Math.Floor(((temp - 10) / 2));
-
-            if (temp >= 0)
-            {
-                return "+" + temp.ToString();
-            }
-            else if (temp < 0)
-            {
-                return temp.ToString();
-            }
-
-            return null;
-        }
+        
 
         public Character(string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
             , string bonds, string ideals, string appearance, string flaws, string backstory, byte str, byte dex,
@@ -102,6 +62,102 @@ namespace BattleScribe.Classes
             this._int = _int;
             this.wis = wis;
             this.cha = cha;
+        }
+
+        //Calc the modifier for skills
+        public string CalcMod(string stat, double raceMod)
+        {
+            double temp;
+            switch (stat)
+            {
+                case "STR":
+                    temp = str;
+                    break;
+                case "DEX":
+                    temp = dex;
+                    break;
+                case "CON":
+                    temp = con;
+                    break;
+                case "INT":
+                    temp = _int;
+                    break;
+                case "WIS":
+                    temp = wis;
+                    break;
+                case "CHA":
+                    temp = cha;
+                    break;
+                default:
+                    temp = 200;
+                    break;
+
+            }
+
+            temp = Math.Floor((((temp + raceMod) - 10) / 2));
+
+            if (temp >= 0)
+            {
+                return "+" + temp.ToString();
+            }
+            else if (temp < 0)
+            {
+                return temp.ToString();
+            }
+
+            return null;
+        }
+        
+
+        //create a list of all skills in the game
+        public List<string> SkillsList()
+        {
+            List<string> temp = new List<string>();
+
+            temp.Add("Acrobatics");
+            temp.Add("AnimalHandeling");
+            temp.Add("Arcana");
+            temp.Add("Athletics");
+            temp.Add("Deception");
+            temp.Add("History");
+            temp.Add("Insight");
+            temp.Add("Intimidation");
+            temp.Add("Investigation");
+            temp.Add("Medicine");
+            temp.Add("Nature");
+            temp.Add("Perception");
+            temp.Add("Performance");
+            temp.Add("Religion");
+            temp.Add("SleightofHand");
+            temp.Add("Stealth");
+            temp.Add("Survival");
+
+            return temp;
+        }
+
+        //Creates a list of all langs in the game
+        public List<string> LangList()
+        {
+            List<string> temp = new List<string>();
+
+            temp.Add("Common");
+            temp.Add("Dwarvish");
+            temp.Add("Elvish");
+            temp.Add("Giant");
+            temp.Add("Gnomish");
+            temp.Add("Goblin");
+            temp.Add("Halfling");
+            temp.Add("Orc");
+            temp.Add("Abyssal");
+            temp.Add("Celestial");
+            temp.Add("Draconic");
+            temp.Add("DeepSpeech");
+            temp.Add("Infernal");
+            temp.Add("Primordial");
+            temp.Add("Sylvan");
+            temp.Add("Undercommon");
+
+            return temp;
         }
 
         public string GetName()
