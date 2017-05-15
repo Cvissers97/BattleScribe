@@ -331,7 +331,7 @@ namespace BattleScribe.Classes
             string sql;
             int class_id = 0;
 
-           // sql = "";
+            sql = "";
 
             try
             {
