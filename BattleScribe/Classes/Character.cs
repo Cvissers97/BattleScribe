@@ -13,6 +13,7 @@ namespace BattleScribe.Classes
         private string age;
         private string size;
         private string alignment;
+        private string race;
         private bool isFemale;
         private bool isMale;
         private string bonds;
@@ -277,6 +278,16 @@ namespace BattleScribe.Classes
         public void SetCha(byte cha)
         {
             this.cha = cha;
+        }
+
+        public string GetRace()
+        {
+            return this.race;
+        }
+
+        public void SetRace(string race)
+        {
+            this.race = race;
         }
 
     }

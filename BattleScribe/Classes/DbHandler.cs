@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlServerCe;
+using System.Windows;
 
 namespace BattleScribe.Classes
 {
@@ -31,6 +32,85 @@ namespace BattleScribe.Classes
             {
                 System.Windows.MessageBox.Show(e.Message.ToString());
             }
+        }
+
+        public List<Feature> GetFeaturesByRace(string race)
+        {
+            List<Feature> features = new List<Feature>();
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT ID FROM RACE WHERE NAME = @Name";
+            int race_id = 0;
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"name", race);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        race_id = dReader.GetInt32(0);
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            sql = "SELECT * FROM RACE_FEATURES WHERE RACE_ID = @ID";
+            con = new SqlCeConnection();
+            conString = Properties.Settings.Default.conString;
+            con.ConnectionString = conString;
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"ID", race_id);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        Feature feature = new Feature(dReader.GetInt32(0),
+                            dReader.GetString(2), dReader.GetString(3));
+
+                        features.Add(feature);
+                    }
+
+                    con.Close();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            return features;
+        }
+
+        public List<Feature> GetFeaturesByClass(string race)
+        {
+            List<Feature> features = new List<Feature>();
+
+            return features;
         }
 
         //Methode to get a list of all races and its features
@@ -76,7 +156,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            List<Spell> SpellList = new List<Spell>();
+            List<Spell> spellList = new List<Spell>();
 
 
             string sql = "SELECT * FROM spells";
@@ -95,16 +175,16 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        Spell s = new Spell();
-                        s.SetName(dReader.GetString(1));
-                        s.SetDesc(dReader.GetString(8));
-                        SpellList.Add(s);
+                        Spell s = new Spell(dReader.GetString(1), (byte)dReader.GetInt32(2),
+                             dReader.GetString(3), dReader.GetString(4), dReader.GetString(5),
+                             dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
+                        spellList.Add(s);
                     }
                     
                     con.Close();
                     com.Parameters.Clear();
                 }
-                return SpellList;
+                return spellList;
             }
             catch(Exception e)
             {
@@ -173,9 +253,9 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        Spell s = new Spell();
-                        s.SetName(dReader.GetString(1));
-                        s.SetDesc(dReader.GetString(8));
+                        Spell s = new Spell(dReader.GetString(1), (byte)dReader.GetInt64(2),
+                            dReader.GetString(3), dReader.GetString(4), dReader.GetString(5),
+                            dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
                         sList.Add(s);
                     }
 

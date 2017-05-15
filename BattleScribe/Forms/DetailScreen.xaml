@@ -116,7 +116,9 @@
                     <ScrollViewer Name="scrollFeats" HorizontalAlignment="Left" Height="139" Margin="386,39,0,0" VerticalAlignment="Top" Width="281">
                         <StackPanel Name="stackFeats" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </ScrollViewer>
-                    <ScrollViewer Name="scrollFeatures" HorizontalAlignment="Left" Height="315" Margin="386,215,0,0" VerticalAlignment="Top" Width="281"/>
+                    <ScrollViewer Name="scrollFeatures" HorizontalAlignment="Left" Height="315" Margin="386,215,0,0" VerticalAlignment="Top" Width="281">
+                        <StackPanel Name="stackFeatures" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    </ScrollViewer>
                     <Button Name="btnAddFeat" Content="Add Feat" HorizontalAlignment="Left" Margin="304,39,0,0" VerticalAlignment="Top" Width="75" Click="btnAddFeat_Click"/>
                     <Button Name="btnRemoveFeat" Content="Remove" HorizontalAlignment="Left" Margin="304,64,0,0" VerticalAlignment="Top" Width="75" Click="btnRemoveFeat_Click"/>
                     <Button Name="btnAddFeature" Content="Add Feature" HorizontalAlignment="Left" Margin="304,216,0,0" VerticalAlignment="Top" Width="75"/>
