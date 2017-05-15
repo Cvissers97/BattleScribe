@@ -108,7 +108,7 @@ namespace BattleScribe.Forms
                 {
                     if (cbClasses.SelectedItem != null)
                     {
-                        CalcPrepAbleSpells();
+                        lbPrepSpells.Content = "Preparable spells: " + CalcPrepAbleSpells();
                         panelKnownSpells.Children.Clear();
                         panelCantrips.Children.Clear();
 
@@ -560,25 +560,65 @@ namespace BattleScribe.Forms
             }
         }
 
-        private void CalcPrepAbleSpells()
+        private void BtnPrepareSpellClick(object sender, RoutedEventArgs e)
+        {
+            List<CheckBox> temp = new List<CheckBox>();
+            foreach (CheckBox c in panelKnownSpells.Children)
+            {
+                if (c.IsChecked == true)
+                {
+                    temp.Add(c);
+                }
+            }
+
+            foreach (CheckBox c in temp)
+            {
+                panelKnownSpells.Children.Remove(c);
+                panelPrepSpells.Children.Add(c);
+                c.IsChecked = false;
+            }
+        }
+
+        private void BtnUnprepareSpellClick(object sender, RoutedEventArgs e)
+        {
+            List<CheckBox> temp = new List<CheckBox>();
+            foreach (CheckBox c in panelPrepSpells.Children)
+            {
+                if (c.IsChecked == true)
+                {
+                    temp.Add(c);
+                }
+            }
+
+            foreach (CheckBox c in temp)
+            {
+                panelPrepSpells.Children.Remove(c);
+                panelKnownSpells.Children.Add(c);
+                c.IsChecked = false;
+            }
+        }
+
+        private string CalcPrepAbleSpells()
         {
             prepareableSpells = 1; //set default
             switch (cbClasses.SelectedItem.ToString())
             {
-                case "Ranger":
-                    prepareableSpells += Convert.ToInt32(character.CalcMod("WIS", 0));
-                    break;
                 case "Cleric":
                     break;
                 case "Bard":
+                    prepareableSpells += Convert.ToInt32(character.CalcMod("CHA", 0));
                     break;
                 case "Sorcerer":
+                    prepareableSpells += Convert.ToInt32(character.CalcMod("CHA", 0));
                     break;
                 case "Wizard":
+                    prepareableSpells += Convert.ToInt32(character.CalcMod("INT", 0));
                     break;
                 case "Druid":
+                    prepareableSpells += Convert.ToInt32(character.CalcMod("WIS", 0));
                     break;
                 case "Warlock":
+                    prepareableSpells += Convert.ToInt32(character.CalcMod("CHA", 0));
                     break;
                 default:
                     prepareableSpells = 0;
@@ -586,6 +626,10 @@ namespace BattleScribe.Forms
                     spellsKnown = 0;
                     break;
             }
+
+            if (prepareableSpells <= 0)
+                prepareableSpells = 1;//Minimun of prepable spells is always 1
+            return prepareableSpells.ToString();
         }
 
         private void CbClass_SelectionChanged(object sender, SelectionChangedEventArgs e)

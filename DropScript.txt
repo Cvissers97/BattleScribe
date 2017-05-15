@@ -32,3 +32,5 @@ DROP TABLE [Race_Features];
 GO
 DROP TABLE [Spells];
 GO
+DROP TABLE [Feats];
+GO

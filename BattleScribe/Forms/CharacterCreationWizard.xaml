@@ -112,7 +112,7 @@
             </Grid>
         </Grid>
         <CheckBox Name="cbStartMoney" Content="Roll starting money instead." HorizontalAlignment="Left" Margin="399,189,0,0" VerticalAlignment="Top"/>
-        <WrapPanel Name="panelSkills" HorizontalAlignment="Left" Height="93" Margin="10,371,0,0" VerticalAlignment="Top" Width="652">
+        <WrapPanel Name="panelSkills" Orientation="Vertical" HorizontalAlignment="Left" Height="93" Margin="10,371,0,0" VerticalAlignment="Top" Width="652">
         </WrapPanel>
         <Label Name="lbSkills" Content="Skills" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top"/>
         <Label Name="lbMiscProf" Content="Miscellaneous Proficiencies" HorizontalAlignment="Left" Margin="397,209,0,0" VerticalAlignment="Top"/>
@@ -123,18 +123,18 @@
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <WrapPanel x:Name="panelLanguages" HorizontalAlignment="Left" Height="93" Margin="10,521,0,0" VerticalAlignment="Top" Width="652"/>
+        <WrapPanel x:Name="panelLanguages" Orientation="Vertical" HorizontalAlignment="Left" Height="93" Margin="10,521,0,0" VerticalAlignment="Top" Width="652"/>
         <Label x:Name="lbLanguage" Content="Languages" HorizontalAlignment="Left" Margin="10,490,0,0" VerticalAlignment="Top"/>
 
 
         <Label Name="lbCantrip"  Content="Cantrips" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <WrapPanel Name="panelCantrips" HorizontalAlignment="Left" Height="71" Margin="10,41,0,0" VerticalAlignment="Top" Width="654"/>
+        <WrapPanel Name="panelCantrips" Orientation="Vertical" HorizontalAlignment="Left" Height="71" Margin="10,41,0,0" VerticalAlignment="Top" Width="654"/>
         <Label Name="lbKnownSpells" Content="Available spells" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
-        <WrapPanel Name="panelKnownSpells" HorizontalAlignment="Left" Height="395" Margin="10,161,0,0" VerticalAlignment="Top" Width="255"/>
-        <WrapPanel Name="panelPrepSpells" HorizontalAlignment="Left" Height="400" Margin="409,156,0,0" VerticalAlignment="Top" Width="255"/>
+        <WrapPanel Name="panelKnownSpells" Orientation="Vertical" HorizontalAlignment="Left" Height="395" Margin="10,161,0,0" VerticalAlignment="Top" Width="255"/>
+        <WrapPanel Name="panelPrepSpells" Orientation="Vertical" HorizontalAlignment="Left" Height="400" Margin="409,156,0,0" VerticalAlignment="Top" Width="255"/>
         <Label Name="lbPrepSpells" Content="Preparable spells left: 02" HorizontalAlignment="Left" Margin="513,130,0,0" VerticalAlignment="Top"/>
-        <Button Name="btnPrepare" Content="Prepare" HorizontalAlignment="Left" Margin="277,161,0,0" VerticalAlignment="Top" Width="119" Height="25"/>
-        <Button Name="btnUnprepare" Content="Unprepare" HorizontalAlignment="Left" Margin="277,194,0,0" VerticalAlignment="Top" Width="119" Height="25"/>
+        <Button Name="btnPrepare" Content="Prepare" HorizontalAlignment="Left" Margin="277,161,0,0" VerticalAlignment="Top" Width="119" Height="25" Click="BtnPrepareSpellClick"/>
+        <Button Name="btnUnprepare" Content="Unprepare" HorizontalAlignment="Left" Margin="277,194,0,0" VerticalAlignment="Top" Width="119" Height="25" Click="BtnUnprepareSpellClick"/>
 
 
     </Grid>

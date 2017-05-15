@@ -91,7 +91,6 @@ namespace BattleScribe.Classes
                 default:
                     temp = 200;
                     break;
-
             }
 
             temp = Math.Floor((((temp + raceMod) - 10) / 2));
