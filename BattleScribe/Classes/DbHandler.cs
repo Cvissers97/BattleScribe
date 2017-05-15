@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlServerCe;
+using System.Windows;
 
 namespace BattleScribe.Classes
 {
@@ -31,6 +32,85 @@ namespace BattleScribe.Classes
             {
                 System.Windows.MessageBox.Show(e.Message.ToString());
             }
+        }
+
+        public List<Feature> GetFeaturesByRace(string race)
+        {
+            List<Feature> features = new List<Feature>();
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT ID FROM RACE WHERE NAME = @Name";
+            int race_id = 0;
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"name", race);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        race_id = dReader.GetInt32(0);
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            sql = "SELECT * FROM RACE_FEATURES WHERE RACE_ID = @ID";
+            con = new SqlCeConnection();
+            conString = Properties.Settings.Default.conString;
+            con.ConnectionString = conString;
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"ID", race_id);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        Feature feature = new Feature(dReader.GetInt32(0),
+                            dReader.GetString(2), dReader.GetString(3));
+
+                        features.Add(feature);
+                    }
+
+                    con.Close();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            return features;
+        }
+
+        public List<Feature> GetFeaturesByClass(string race)
+        {
+            List<Feature> features = new List<Feature>();
+
+            return features;
         }
 
         //Methode to get a list of all races and its features

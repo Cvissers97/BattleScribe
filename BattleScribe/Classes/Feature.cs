@@ -8,20 +8,20 @@ namespace BattleScribe.Classes
 {
     public class Feature
     {
+        public int id;
         public string name;
         public string description;
-        public bool hasAcquired;
 
         public Feature()
         {
  
         }
 
-        public Feature(string name, string description, bool hasAcquired)
+        public Feature(int id, string name, string description)
         {
+            this.id = id;
             this.name = name;
             this.description = description;
-            this.hasAcquired = hasAcquired;
         }
 
         public string GetName()
@@ -32,16 +32,6 @@ namespace BattleScribe.Classes
         public string GetDesc()
         {
             return description;
-        }
-
-        public bool AcquiredCheck()
-        {
-            return hasAcquired;
-        }
-
-        public void Acquire(bool acquire)
-        {
-            this.hasAcquired = acquire;
         }
     }
 }

@@ -12,25 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace BattleScribe.Forms.Pop_ups.Features
+namespace BattleScribe.Forms.Pop_ups.Spells
 {
     /// <summary>
-    /// Interaction logic for ViewFeature.xaml
+    /// Interaction logic for ViewSpell.xaml
     /// </summary>
-    public partial class ViewFeature : Window
+    public partial class ViewSpell : Window
     {
-        public ViewFeature()
+        public ViewSpell()
         {
             InitializeComponent();
-        }
-
-        public ViewFeature(string name, string description)
-        {
-            InitializeComponent();
-
-            tbName.Text = name;
-            rtbDesc.Document.Blocks.Clear();
-            rtbDesc.Document.Blocks.Add(new Paragraph(new Run(description)));
         }
     }
 }

@@ -10,27 +10,30 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BattleScribe.Forms.Pop_ups.Features
+namespace BattleScribe.Controls.Features
 {
     /// <summary>
-    /// Interaction logic for ViewFeature.xaml
+    /// Interaction logic for FeatureControl.xaml
     /// </summary>
-    public partial class ViewFeature : Window
+    public partial class FeatureControl : UserControl
     {
-        public ViewFeature()
+        private int id;
+        private bool isRacial;
+
+        public FeatureControl()
         {
             InitializeComponent();
         }
 
-        public ViewFeature(string name, string description)
+        public FeatureControl(int id, bool racial)
         {
             InitializeComponent();
 
-            tbName.Text = name;
-            rtbDesc.Document.Blocks.Clear();
-            rtbDesc.Document.Blocks.Add(new Paragraph(new Run(description)));
+            this.id = id;
+            this.isRacial = racial;
         }
     }
 }

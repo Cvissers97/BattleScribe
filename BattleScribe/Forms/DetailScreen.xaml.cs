@@ -1,5 +1,6 @@
 ﻿using BattleScribe.Classes;
 using BattleScribe.Controls.Feats;
+using BattleScribe.Controls.Features;
 using BattleScribe.Forms.Pop_ups;
 using System;
 using System.Collections.Generic;
@@ -24,14 +25,26 @@ namespace BattleScribe.Forms
     {
         private int curHPNum;
         private List<Feat> feats;
+        private List<Feature> raceFeatures;
+        private Character c;
+        private DbHandler db;
 
         public DetailScreen()
         {
             InitializeComponent();
 
             feats = new List<Feat>();
+            raceFeatures = new List<Feature>();
+            db = new DbHandler();
+
             curHPNum = 0;
             UpdateFeatList();
+
+            //Temporary character
+            c = new Character();
+            c.SetRace("Drow Elf");
+
+            UpdateFeatureList();
         }
 
         private void btnPlusHP_Click(object sender, RoutedEventArgs e)
@@ -79,6 +92,22 @@ namespace BattleScribe.Forms
                 FeatControl feat = new FeatControl(f.id);
                 feat.lbFeatName.Content = f.GetName();
                 stackFeats.Children.Add(feat);
+            }
+        }
+
+        private void UpdateFeatureList()
+        {
+            // Merge acquired features with race features here, then transform them into stackpanels
+
+            raceFeatures = db.GetFeaturesByRace(c.GetRace());
+
+            stackFeatures.Children.Clear();
+
+            foreach (Feature f in raceFeatures)
+            {
+                FeatureControl feature = new FeatureControl(f.id, true);
+                feature.lbName.Content = f.GetName();
+                stackFeatures.Children.Add(feature);
             }
         }
 

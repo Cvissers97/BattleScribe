@@ -62,6 +62,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Features\FeatureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Weapon\WeaponControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +91,9 @@
     <Compile Include="Classes\Spell.cs" />
     <Compile Include="Controls\Feats\FeatControl.xaml.cs">
       <DependentUpon>FeatControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Features\FeatureControl.xaml.cs">
+      <DependentUpon>FeatureControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Weapon\WeaponControl.xaml.cs">
       <DependentUpon>WeaponControl.xaml</DependentUpon>
@@ -198,6 +205,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\Pop-ups\Spells\ViewSpell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -281,6 +292,9 @@
     </Compile>
     <Compile Include="Forms\Pop-ups\Items\ViewWeapon.xaml.cs">
       <DependentUpon>ViewWeapon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Spells\ViewSpell.xaml.cs">
+      <DependentUpon>ViewSpell.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
