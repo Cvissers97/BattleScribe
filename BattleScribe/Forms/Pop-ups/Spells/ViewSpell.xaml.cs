@@ -23,5 +23,18 @@ namespace BattleScribe.Forms.Pop_ups.Spells
         {
             InitializeComponent();
         }
+
+        public ViewSpell(string name, string level, string range, string components, string duration, string castTime, string higherLevels, string desc)
+        {
+            InitializeComponent();
+            this.tbName.Text = name;
+            this.tbLevel.Text = level;
+            this.tbRange.Text = range;
+            this.tbComponents.Text = components;
+            this.tbDuration.Text = duration;
+            this.tbCast.Text = castTime;
+            this.tbHigher.Text = higherLevels;
+            this.rtbDesc.AppendText(desc);
+        }
     }
 }

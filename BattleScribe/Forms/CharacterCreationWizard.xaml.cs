@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BattleScribe.Classes;
+using BattleScribe.Forms;
 
 namespace BattleScribe.Forms
 {
@@ -25,12 +26,13 @@ namespace BattleScribe.Forms
         byte screen;
         DbHandler db;
         Character character;
-        int totalPoints, prepareableSpells, cantripsKnown, spellsKnown;
+        int totalPoints, cantripsKnown, spellsKnown;
         List<CharacterRace> race;
         byte raceStr, raceDex, raceCon, raceInt, raceWis, raceCha;
         List<string> allLangs, allSkills;
         List<Spell> spellList, cantripList;
         List<CheckBox> cbSpellList, cbLangList, cbSkillList, cbCantripList;
+        string[] spellsKnownArray;
         
 
         public CharacterCreationWizard()
@@ -44,7 +46,6 @@ namespace BattleScribe.Forms
             totalPoints = 27; // max amount of points according to D&D rules
             lbPoints.Content = "Total Points: " + totalPoints;
             cbSpellList = new List<CheckBox>();
-            prepareableSpells = 0;
         }
         
         //Add all stats to a list
@@ -99,56 +100,6 @@ namespace BattleScribe.Forms
            return totalPoints;
         }
 
-        private void btnNext_Click(object sender, RoutedEventArgs e)
-        {
-            if (screen < 3)
-            {
-                screen++;
-                if (screen == 3)
-                {
-                    if (cbClasses.SelectedItem != null)
-                    {
-                        lbPrepSpells.Content = "Preparable spells: " + CalcPrepAbleSpells();
-                        panelKnownSpells.Children.Clear();
-                        panelCantrips.Children.Clear();
-
-                        spellList = db.GetSpellsByClass(cbClasses.SelectedItem.ToString(), 1);
-
-                        cantripList = db.GetSpellsByClass(cbClasses.SelectedItem.ToString(), 0);
-                        cbSpellList = new List<CheckBox>();
-                        cbCantripList = new List<CheckBox>();
-
-                        foreach (Spell s in spellList)
-                        {
-                            CheckBox c = new CheckBox();
-                            c.Content = s.GetName();
-                            c.Margin = new Thickness(5, 0, 5, 0);
-                            panelKnownSpells.Children.Add(c);
-                            cbSpellList.Add(c);
-                        }
-
-                        foreach (Spell s in cantripList)
-                        {
-                            CheckBox c = new CheckBox();
-                            c.Content = s.GetName();
-                            c.Margin = new Thickness(5, 0, 5, 0);
-                            panelCantrips.Children.Add(c);
-                            cbCantripList.Add(c);
-                        }
-                    }
-                }
-                UpdateScreen();
-            }
-        }
-
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            if (screen > 0)
-            {
-                screen--;
-                UpdateScreen();
-            }
-        }
 
         //Handels screen transistions
         private void UpdateScreen()
@@ -410,6 +361,90 @@ namespace BattleScribe.Forms
 
         }
 
+        //Handels all the button clicks in this screen
+        #region Btn click events
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (screen < 3)
+            {
+                screen++;
+                if (screen == 3)
+                {
+                    if (cbClasses.SelectedItem != null)
+                    {
+                        panelKnownSpells.Children.Clear();
+                        panelCantrips.Children.Clear();
+                        panelPrepSpells.Children.Clear();
+
+                        spellList = db.GetSpellsByClass(cbClasses.SelectedItem.ToString(), 1);
+
+                        cantripList = db.GetSpellsByClass(cbClasses.SelectedItem.ToString(), 0);
+                        cbSpellList = new List<CheckBox>();
+                        cbCantripList = new List<CheckBox>();
+
+                        if ((string)cbClasses.SelectedItem == "Cleric" || (string)cbClasses.SelectedItem == "Druid")
+                        {
+                            foreach (Spell s in spellList)
+                            {
+                                CheckBox c = new CheckBox();
+                                c.IsChecked = true;
+                                c.Content = s.GetName();
+                                c.Margin = new Thickness(5, 0, 5, 0);
+                                panelPrepSpells.Children.Add(c);
+                                cbSpellList.Add(c);
+                                c.PreviewMouseRightButtonUp += (_sender, _e) => SpellRightClick(_sender, _e, s);
+                            }
+                            btnPrepare.IsEnabled = false;
+                            btnUnprepare.IsEnabled = false;
+                            lbPrepSpells.Visibility = Visibility.Hidden;
+                        }
+                        else
+                        {
+                            foreach (Spell s in spellList)
+                            {
+                                CheckBox c = new CheckBox();
+                                c.Content = s.GetName();
+                                c.Margin = new Thickness(5, 0, 5, 0);
+                                panelKnownSpells.Children.Add(c);
+                                cbSpellList.Add(c);
+                                c.PreviewMouseRightButtonUp += (_sender, _e) => SpellRightClick(_sender, _e, s);
+                            }
+                            btnPrepare.IsEnabled = true;
+                            btnUnprepare.IsEnabled = true;
+                            lbPrepSpells.Visibility = Visibility.Visible;
+                        }
+
+                        foreach (Spell s in cantripList)
+                        {
+                            CheckBox c = new CheckBox();
+                            c.Content = s.GetName();
+                            c.Margin = new Thickness(5, 0, 5, 0);
+                            panelCantrips.Children.Add(c);
+                            cbCantripList.Add(c);
+                            c.PreviewMouseRightButtonUp += (_sender, _e) => SpellRightClick(_sender, _e, s);
+                        }
+                    }
+                }
+                UpdateScreen();
+            }
+        }
+
+        private void SpellRightClick(object sender, RoutedEventArgs e, Spell s)
+        {
+            Pop_ups.Spells.ViewSpell view = new Pop_ups.Spells.ViewSpell(s.GetName(), s.GetLevel().ToString(), s.GetRange(), s.GetComponents(), s.GetDuration(), s.GetCastTime(),
+                s.GetHigher(), s.GetDesc());
+            view.Show();
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (screen > 0)
+            {
+                screen--;
+                UpdateScreen();
+            }
+        }
+
         private void BtnPlusSTR_Click(object sender, RoutedEventArgs e)
         {
             if ((character.GetStr() + 1) < 16)
@@ -573,10 +608,12 @@ namespace BattleScribe.Forms
 
             foreach (CheckBox c in temp)
             {
+                spellsKnown -= 1;
                 panelKnownSpells.Children.Remove(c);
                 panelPrepSpells.Children.Add(c);
                 c.IsChecked = false;
             }
+            lbPrepSpells.Content = "You can still pick " + spellsKnown + " spells";
         }
 
         private void BtnUnprepareSpellClick(object sender, RoutedEventArgs e)
@@ -592,49 +629,79 @@ namespace BattleScribe.Forms
 
             foreach (CheckBox c in temp)
             {
+                spellsKnown += 1;
                 panelPrepSpells.Children.Remove(c);
                 panelKnownSpells.Children.Add(c);
                 c.IsChecked = false;
             }
+            lbPrepSpells.Content = "You can still pick " + spellsKnown + " spells";
         }
 
-        private string CalcPrepAbleSpells()
+
+
+        private void FinishClick(object sender, RoutedEventArgs e)
         {
-            prepareableSpells = 1; //set default
+            CreateCharacter();
+        }
+        #endregion
+
+        private void CreateCharacter()
+        {
+            Character c = new Character(tbName.Text, tbTitle.Text, tbAge.Text, tbSize.Text, tbAlignment.Text, (bool)chFemale.IsChecked, (bool)chMale.IsChecked, 
+                GetRichTbString(rtbBonds), GetRichTbString(rtbIdeals), GetRichTbString(rtbAppearance), GetRichTbString(rtbFlaws), GetRichTbString(rtbBackstory), character.GetStr(), 
+                character.GetDex(), character.GetCon(), character.GetInt(), character.GetWis(), character.GetCha());
+        }
+
+        string GetRichTbString(RichTextBox rtb)
+        {
+            string text = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd).Text;
+            return text;
+        }
+
+        private string[] CalcKnownSpells()
+        {
+            string[] temp = new string[2];
+            cantripsKnown = 0;
+            spellsKnown = 0;
             switch (cbClasses.SelectedItem.ToString())
             {
                 case "Cleric":
+                    cantripsKnown += 3;
+                    spellsKnown += -1;
                     break;
                 case "Bard":
-                    prepareableSpells += Convert.ToInt32(character.CalcMod("CHA", 0));
+                    cantripsKnown += 2;
+                    spellsKnown += 4;
                     break;
                 case "Sorcerer":
-                    prepareableSpells += Convert.ToInt32(character.CalcMod("CHA", 0));
+                    cantripsKnown += 4;
+                    spellsKnown += 2;
                     break;
                 case "Wizard":
-                    prepareableSpells += Convert.ToInt32(character.CalcMod("INT", 0));
+                    cantripsKnown += 3;
+                    spellsKnown += -1;
                     break;
                 case "Druid":
-                    prepareableSpells += Convert.ToInt32(character.CalcMod("WIS", 0));
+                    cantripsKnown += 2;
+                    spellsKnown += 2;
                     break;
                 case "Warlock":
-                    prepareableSpells += Convert.ToInt32(character.CalcMod("CHA", 0));
+                    cantripsKnown += 2;
+                    spellsKnown += 2;
                     break;
                 default:
-                    prepareableSpells = 0;
-                    cantripsKnown = 0;
-                    spellsKnown = 0;
                     break;
             }
+            temp[0] = cantripsKnown.ToString();
+            temp[1] = spellsKnown.ToString();
 
-            if (prepareableSpells <= 0)
-                prepareableSpells = 1;//Minimun of prepable spells is always 1
-            return prepareableSpells.ToString();
+            return temp;
         }
 
         private void CbClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            spellsKnownArray = CalcKnownSpells();
+            lbPrepSpells.Content = "You can still pick " + spellsKnownArray[0] + " spells.";
         }
 
         //Racecb selection change to calc race bonus, features and langs
@@ -698,7 +765,7 @@ namespace BattleScribe.Forms
                     raceInt = 2;
                     raceCon = 1;
                     break;
-                case "Half Elf" :
+                case "Half Elf":
                     raceCha = 2;
                     //1 increase in two of choose
                     break;
@@ -713,5 +780,7 @@ namespace BattleScribe.Forms
             }
             InitScores();
         }
+
+
     }
 }

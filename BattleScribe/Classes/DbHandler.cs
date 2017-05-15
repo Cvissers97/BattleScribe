@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlServerCe;
 using System.Windows;
+using BattleScribe.Classes;
+using BattleScribe.Classes.Items;
 
 namespace BattleScribe.Classes
 {
@@ -113,7 +115,7 @@ namespace BattleScribe.Classes
             return features;
         }
 
-        //Methode to get a list of all races and its features
+        //Method to get a list of all races and its features
         public List<CharacterRace> GetRaces()
         {
             conString = Properties.Settings.Default.conString;
@@ -151,6 +153,7 @@ namespace BattleScribe.Classes
             }
         }
 
+        //Get all spells no filter
         public List<Spell> GetSpells()
         {
             conString = Properties.Settings.Default.conString;
@@ -194,6 +197,7 @@ namespace BattleScribe.Classes
             }
         }
 
+        //Get all spells by class and level
         public List<Spell> GetSpellsByClass(string char_Class, int spellLvl)
         {
             conString = Properties.Settings.Default.conString;
@@ -253,7 +257,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        Spell s = new Spell(dReader.GetString(1), (byte)dReader.GetInt64(2),
+                        Spell s = new Spell(dReader.GetString(1), (byte)dReader.GetInt32(2),
                             dReader.GetString(3), dReader.GetString(4), dReader.GetString(5),
                             dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
                         sList.Add(s);
@@ -272,6 +276,7 @@ namespace BattleScribe.Classes
             }
         }
 
+        //get all classes
         public List<CharacterClass> GetClasses()
         {
             conString = Properties.Settings.Default.conString;
@@ -306,6 +311,57 @@ namespace BattleScribe.Classes
                 con.Close();
                 return null;
             }
+        }
+
+        public List<Weapon> GetWeapons()
+        {
+            List<Weapon> weapons = new List<Weapon>();
+
+            return weapons;
+        }
+
+        public List<Item> GetAllItems()
+        {
+            List<Item> items = new List<Item>();
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            List<Spell> sList = new List<Spell>();
+            string sql;
+            int class_id = 0;
+
+           // sql = "";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"name", );
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+
+                    while (dReader.Read())
+                    {
+                        class_id = dReader.GetInt32(0);
+                    }
+
+                    //con.Close();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+
+            return items;
         }
     }
 }
