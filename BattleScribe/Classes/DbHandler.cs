@@ -313,55 +313,55 @@ namespace BattleScribe.Classes
             }
         }
 
-        public List<Weapon> GetWeapons()
-        {
-            List<Weapon> weapons = new List<Weapon>();
+        //public List<Weapon> GetWeapons()
+        //{
+        //    List<Weapon> weapons = new List<Weapon>();
 
-            return weapons;
-        }
+        //    return weapons;
+        //}
 
-        public List<Item> GetAllItems()
-        {
-            List<Item> items = new List<Item>();
+        //public List<Item> GetAllItems()
+        //{
+        //    List<Item> items = new List<Item>();
 
-            conString = Properties.Settings.Default.conString;
-            con = new SqlCeConnection();
-            con.ConnectionString = conString;
-            List<Spell> sList = new List<Spell>();
-            string sql;
-            int class_id = 0;
+        //    conString = Properties.Settings.Default.conString;
+        //    con = new SqlCeConnection();
+        //    con.ConnectionString = conString;
+        //    List<Spell> sList = new List<Spell>();
+        //    string sql;
+        //    int class_id = 0;
 
-           // sql = "";
+        //   // sql = "";
 
-            try
-            {
-                using (con)
-                {
-                    com.Connection = con;
-                    com.CommandText = sql;
-                    com.Parameters.AddWithValue(@"name", );
-                    con.Open();
-                    com.ExecuteNonQuery();
-                    dReader = com.ExecuteReader();
-
-
-                    while (dReader.Read())
-                    {
-                        class_id = dReader.GetInt32(0);
-                    }
-
-                    //con.Close();
-                    com.Parameters.Clear();
-                }
-            }
-            catch (Exception e)
-            {
-                System.Windows.MessageBox.Show(e.Message.ToString());
-                con.Close();
-            }
+        //    try
+        //    {
+        //        using (con)
+        //        {
+        //            com.Connection = con;
+        //            com.CommandText = sql;
+        //            com.Parameters.AddWithValue(@"name", );
+        //            con.Open();
+        //            com.ExecuteNonQuery();
+        //            dReader = com.ExecuteReader();
 
 
-            return items;
-        }
+        //            while (dReader.Read())
+        //            {
+        //                class_id = dReader.GetInt32(0);
+        //            }
+
+        //            //con.Close();
+        //            com.Parameters.Clear();
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        System.Windows.MessageBox.Show(e.Message.ToString());
+        //        con.Close();
+        //    }
+
+
+        //    return items;
+        //}
     }
 }
