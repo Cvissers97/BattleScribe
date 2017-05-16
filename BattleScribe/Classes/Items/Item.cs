@@ -15,6 +15,7 @@ namespace BattleScribe.Classes.Items
         protected bool attuneable;
         protected double weight;
         protected double estimateValue;
+        protected bool isEquip;
 
         public Item()
         {
@@ -29,6 +30,7 @@ namespace BattleScribe.Classes.Items
             this.proficient = proficient;
             this.attuneable = proficient;
             this.weight = weight;
+            isEquip = false;
         }
 
         public string GetName()
@@ -99,6 +101,16 @@ namespace BattleScribe.Classes.Items
         public void SetValue(double estimateValue)
         {
             this.estimateValue = estimateValue;
+        }
+
+        public bool GetEquip()
+        {
+            return isEquip;
+        }
+
+        public bool SetEquip(bool equip)
+        {
+            isEquip = equip;
         }
     }
 }
