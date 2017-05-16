@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BattleScribe.Classes.Items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,9 @@ namespace BattleScribe.Classes
         private byte wis;
         private byte cha;
 
+        private List<Item> items;
+        private List<Weapon> weapons;
+        private List<Armour> armours;
 
         public Character()
         {
@@ -63,6 +67,12 @@ namespace BattleScribe.Classes
             this._int = _int;
             this.wis = wis;
             this.cha = cha;
+
+            items = new List<Item>();
+            weapons = new List<Weapon>();
+            armours = new List<Armour>();
+
+
         }
 
         //Calc the modifier for skills

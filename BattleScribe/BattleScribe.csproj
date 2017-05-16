@@ -66,6 +66,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Items\ItemLegend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Weapon\WeaponControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +98,9 @@
     </Compile>
     <Compile Include="Controls\Features\FeatureControl.xaml.cs">
       <DependentUpon>FeatureControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Items\ItemLegend.xaml.cs">
+      <DependentUpon>ItemLegend.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Weapon\WeaponControl.xaml.cs">
       <DependentUpon>WeaponControl.xaml</DependentUpon>
