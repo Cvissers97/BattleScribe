@@ -9,6 +9,7 @@ namespace BattleScribe.Classes
 {
     public class Character
     {
+        private int id;
         private string name;
         private string title;
         private string age;
@@ -41,9 +42,21 @@ namespace BattleScribe.Classes
             _int = 8;
             wis = 8;
             cha = 8;
+
+            items = new List<Item>();
+            weapons = new List<Weapon>();
+            armours = new List<Armour>();
         }
 
-        
+        //Id constructor, used for testing the inventory system.
+        public Character(int id)
+        {
+            this.id = id;
+
+            items = new List<Item>();
+            weapons = new List<Weapon>();
+            armours = new List<Armour>();
+        }
 
         public Character(string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
             , string bonds, string ideals, string appearance, string flaws, string backstory, byte str, byte dex,
@@ -300,5 +313,48 @@ namespace BattleScribe.Classes
             this.race = race;
         }
 
+        public List<Weapon> GetAllWeapons()
+        {
+            return weapons;
+        }
+
+        public List<Item> GetAllItems()
+        {
+            return items;
+        }
+
+        public List<Armour> GetAllArmours()
+        {
+            return armours;
+        }
+
+        public void AddWeapon(Weapon w)
+        {
+            if (w != null)
+            {
+                weapons.Add(w);
+            }
+        }
+
+        public void AddItem(Item i)
+        {
+            if (i != null)
+            {
+                items.Add(i);
+            }
+        }
+
+        public void AddArmour(Armour a)
+        {
+            if (a != null)
+            {
+                armours.Add(a);
+            }
+        }
+
+        public int GetID()
+        {
+            return this.id;
+        }
     }
 }

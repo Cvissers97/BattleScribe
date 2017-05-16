@@ -16,13 +16,14 @@ namespace BattleScribe.Classes.Items
         protected double weight;
         protected double estimateValue;
         protected bool isEquip;
+        protected int id;
 
         public Item()
         {
 
         }
 
-        public Item(string name, string description, string type, bool proficient, bool attuneable, double weight)
+        public Item(int id, string name, string description, string type, bool proficient, bool attuneable, double weight)
         {
             this.name = name;
             this.description = description;
@@ -30,6 +31,7 @@ namespace BattleScribe.Classes.Items
             this.proficient = proficient;
             this.attuneable = proficient;
             this.weight = weight;
+            this.id = id;
             isEquip = false;
         }
 
@@ -108,9 +110,14 @@ namespace BattleScribe.Classes.Items
             return isEquip;
         }
 
-        public bool SetEquip(bool equip)
+        public void SetEquip(bool equip)
         {
             isEquip = equip;
+        }
+
+        public int GetID()
+        {
+            return this.id;
         }
     }
 }

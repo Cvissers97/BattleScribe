@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleScribe.Classes.Items
 {
-    class Armour : Item
+    public class Armour : Item
     {
         private bool stealthDisadvantage;
         private int baseArmour;
@@ -19,10 +19,10 @@ namespace BattleScribe.Classes.Items
  
         }
 
-        public Armour(string name, string description, 
+        public Armour(int id, string name, string description, 
             string type, bool proficient, bool attuneable, double weight,
             bool stealthDisadvantage, int baseArmour, int bonusArmour, string modifier)
-            :base(name, description, type, proficient, attuneable, weight)
+            :base(id, name, description, type, proficient, attuneable, weight)
         {
             this.stealthDisadvantage = stealthDisadvantage;
             this.baseArmour = baseArmour;

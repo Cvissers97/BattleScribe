@@ -66,6 +66,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Items\ItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Items\ItemLegend.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -98,6 +102,9 @@
     </Compile>
     <Compile Include="Controls\Features\FeatureControl.xaml.cs">
       <DependentUpon>FeatureControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Items\ItemControl.xaml.cs">
+      <DependentUpon>ItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Items\ItemLegend.xaml.cs">
       <DependentUpon>ItemLegend.xaml</DependentUpon>
@@ -149,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Pop-ups\Features\ViewFeature.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pop-ups\Items\ItemChoice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,6 +265,9 @@
     </Compile>
     <Compile Include="Forms\Pop-ups\Features\ViewFeature.xaml.cs">
       <DependentUpon>ViewFeature.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\ItemChoice.xaml.cs">
+      <DependentUpon>ItemChoice.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pop-ups\Items\Money\AddMoney.xaml.cs">
       <DependentUpon>AddMoney.xaml</DependentUpon>
