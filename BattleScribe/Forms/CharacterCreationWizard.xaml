@@ -11,7 +11,7 @@
         <CheckBox Name="chMale" Content="♂" HorizontalAlignment="Left" Margin="64,131,0,0" VerticalAlignment="Top"/>
         <CheckBox Name="chFemale" Content="♀" HorizontalAlignment="Left" Margin="97,131,0,0" VerticalAlignment="Top"/>
         <Image x:Name="imgChar" HorizontalAlignment="Left" Height="100" Margin="10,151,0,0" VerticalAlignment="Top" Width="114" Source="/BattleScribe;component/Resources/Test/placeholder.jpg"/>
-        <Button Name="btnUpload" Content="Upload" HorizontalAlignment="Left" Margin="79,256,0,0" VerticalAlignment="Top" Width="45" Height="20"/>
+        <Button Name="btnUpload" Content="Upload" HorizontalAlignment="Left" Margin="79,256,0,0" VerticalAlignment="Top" Width="45" Height="20" Click="btnUpload_Click"/>
         <Label Name="lbAppearance" Content="Appearance" HorizontalAlignment="Left" Margin="129,125,0,0" VerticalAlignment="Top"/>
         <RichTextBox Name="rtbAppearance" HorizontalAlignment="Left" Height="100" Margin="129,151,0,0" VerticalAlignment="Top" Width="195">
             <FlowDocument>

@@ -313,6 +313,7 @@ namespace BattleScribe.Classes
             }
         }
 
+
         public List<Item> GetAllItems()
         {
             List<Item> items = new List<Item>();
@@ -356,5 +357,6 @@ namespace BattleScribe.Classes
 
             return items;
         }
+        
     }
 }

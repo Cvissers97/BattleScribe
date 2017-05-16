@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BattleScribe.Classes;
 using BattleScribe.Forms;
+using Microsoft.Win32;
+using System.IO;
 
 namespace BattleScribe.Forms
 {
@@ -33,7 +35,6 @@ namespace BattleScribe.Forms
         List<Spell> spellList, cantripList;
         List<CheckBox> cbSpellList, cbLangList, cbSkillList, cbCantripList;
         string[] spellsKnownArray;
-        
 
         public CharacterCreationWizard()
         {
@@ -779,6 +780,19 @@ namespace BattleScribe.Forms
             InitScores();
         }
 
+        private void btnUpload_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
 
+            dlg.Title = "Select a picture for your character";
+            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
+
+            if (dlg.ShowDialog() == true)
+            {
+                imgChar.Source = new BitmapImage(new Uri(dlg.FileName));
+            }
+
+
+        }
     }
 }
