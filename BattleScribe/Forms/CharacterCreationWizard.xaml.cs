@@ -36,6 +36,7 @@ namespace BattleScribe.Forms
         List<CheckBox> cbSpellList, cbLangList, cbSkillList, cbCantripList;
         string[] spellsKnownArray;
         Image image;
+        byte[] imageArray;
 
         public CharacterCreationWizard()
         {
@@ -783,17 +784,20 @@ namespace BattleScribe.Forms
 
         private void btnUpload_Click(object sender, RoutedEventArgs e)
         {
+            string path = string.Empty;
             OpenFileDialog dlg = new OpenFileDialog();
+            BitmapImage temp = null;
 
             dlg.Title = "Select a picture for your character";
             dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
 
             if (dlg.ShowDialog() == true)
             {
-                imgChar.Source = new BitmapImage(new Uri(dlg.FileName));
+                temp = new BitmapImage(new Uri(dlg.FileName));
+                imgChar.Source = temp;
             }
 
-            image = imgChar;
+            imageArray = System.IO.File.ReadAllBytes(dlg.FileName);
         }
     }
 }
