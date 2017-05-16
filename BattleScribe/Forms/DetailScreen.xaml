@@ -165,9 +165,9 @@
                 <Grid Background="#f9f9f9">
                     <Label Content="Spells" HorizontalAlignment="Left" Margin="178,10,0,0" VerticalAlignment="Top"/>
                     <ScrollViewer HorizontalAlignment="Left" Height="523" Margin="178,41,0,0" VerticalAlignment="Top" Width="484"/>
-                    <Button Content="Add Spell" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
-                    <Button Content="Prepare / Unprepare" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
-                    <Button Content="Remove Spell" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
+                    <Button Name="btnAddSpell" Content="Add Spell" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="163" Height="28" Click="btnAddSpell_Click"/>
+                    <Button Name="btnPrepSpell" Content="Prepare / Unprepare" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
+                    <Button Name="btnRemSpell" Content="Remove Spell" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
                     <Label Content="Known Spells" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top"/>
                     <Label Content="Preparable Spells" HorizontalAlignment="Left" Margin="10,183,0,0" VerticalAlignment="Top"/>
                     <TextBox Name="tbKnown" HorizontalAlignment="Left" Height="23" Margin="123,156,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="50"/>

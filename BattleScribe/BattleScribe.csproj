@@ -159,6 +159,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\Pop-ups\Items\AddStandardArmour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\Pop-ups\Items\AddStandardItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -273,6 +277,9 @@
     </Compile>
     <Compile Include="Forms\Pop-ups\Features\ViewFeature.xaml.cs">
       <DependentUpon>ViewFeature.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pop-ups\Items\AddStandardArmour.xaml.cs">
+      <DependentUpon>AddStandardArmour.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pop-ups\Items\AddStandardItem.xaml.cs">
       <DependentUpon>AddStandardItem.xaml</DependentUpon>

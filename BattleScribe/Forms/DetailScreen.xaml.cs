@@ -144,5 +144,11 @@ namespace BattleScribe.Forms
             feats = newFeats;
             UpdateFeatList();
         }
+
+        private void btnAddSpell_Click(object sender, RoutedEventArgs e)
+        {
+            AddSpell a = new AddSpell();
+            a.Show();
+        }
     }
 }

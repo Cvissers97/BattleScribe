@@ -29,27 +29,34 @@ namespace BattleScribe.Forms.Pop_ups.Items
         public ItemChoice(int characterId)
         {
             InitializeComponent();
-
             this.characterId = characterId;
         }
 
         private void btnItem_Click(object sender, RoutedEventArgs e)
         {
+            AddStandardItem a = new AddStandardItem(characterId);
+            a.Show();
             this.Close();
         }
 
         private void btnWeapon_Click(object sender, RoutedEventArgs e)
         {
+            AddStandardWeapon a = new AddStandardWeapon(characterId);
+            a.Show();
             this.Close();
         }
 
         private void btnArmour_Click(object sender, RoutedEventArgs e)
         {
+            AddStandardArmour a = new AddStandardArmour(characterId);
+            a.Show();
             this.Close();
         }
 
         private void btnCustItem_Click(object sender, RoutedEventArgs e)
         {
+            AddItem a = new AddItem();
+            a.Show();
             this.Close();
         }
 
@@ -62,6 +69,8 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         private void btnCustArmour_Click(object sender, RoutedEventArgs e)
         {
+            AddArmour a = new AddArmour(characterId);
+            a.Show();
             this.Close();
         }
     }

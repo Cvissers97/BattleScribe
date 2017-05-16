@@ -19,9 +19,18 @@ namespace BattleScribe.Forms.Pop_ups.Items
     /// </summary>
     public partial class AddStandardWeapon : Window
     {
+        private int characterId;
+
         public AddStandardWeapon()
         {
             InitializeComponent();
+        }
+
+        public AddStandardWeapon(int id)
+        {
+            InitializeComponent();
+
+            this.characterId = id;
         }
     }
 }

@@ -19,9 +19,18 @@ namespace BattleScribe.Forms.Pop_ups.Items
     /// </summary>
     public partial class AddItem : Window
     {
+        private int characterId;
+
         public AddItem()
         {
             InitializeComponent();
+        }
+
+        public AddItem(int id)
+        {
+            InitializeComponent();
+
+            this.characterId = id;
         }
     }
 }
