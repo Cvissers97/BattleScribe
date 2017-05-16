@@ -193,6 +193,25 @@
 
                 </Grid>
             </TabItem>
+            <TabItem Header="Skills and Languages">
+                <Grid Background="#f9f9f9">
+                    <WrapPanel Name="panelSkills" HorizontalAlignment="Left" Height="79" Margin="10,62,0,0" VerticalAlignment="Top" Width="642"/>
+                    <Label Content="Skills" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top"/>
+                    <WrapPanel Name="panelLanguages" HorizontalAlignment="Left" Height="79" Margin="10,191,0,0" VerticalAlignment="Top" Width="312"/>
+                    <Label Content="Languages" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"/>
+                    <RichTextBox Name="rtbOtherProf" HorizontalAlignment="Left" Height="79" Margin="344,191,0,0" VerticalAlignment="Top" Width="308">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="Other Proficiencies"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label Content="Other Proficiencies" HorizontalAlignment="Left" Margin="344,160,0,0" VerticalAlignment="Top"/>
+
+
+
+                </Grid>
+            </TabItem>
         </TabControl>
 
         <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Left" Margin="593,632,0,0" VerticalAlignment="Top" Width="86" Height="39"/>
