@@ -357,8 +357,6 @@ namespace BattleScribe.Forms
             lbINT.Content = "INT" + " " + (character.GetInt() + raceInt) + " (" + character.CalcMod("INT", (double)raceInt) + ")";
             lbWIS.Content = "WIS" + " " + (character.GetWis() + raceWis) + " (" + character.CalcMod("WIS", (double)raceWis) + ")";
             lbCHA.Content = "CHA" + " " + (character.GetCha() + raceCha) + " (" + character.CalcMod("CHA", (double)raceCha) + ")";
-
-
         }
 
         //Handels all the button clicks in this screen
@@ -566,7 +564,7 @@ namespace BattleScribe.Forms
                     lbPoints.Content = "Total points: " + CalcPoints();
                 }
                 else
-                    character.SetWis((byte)(character.GetWis() - 1));
+                   character.SetWis((byte)(character.GetWis() - 1));
             }
         }
 

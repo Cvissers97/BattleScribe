@@ -313,13 +313,6 @@ namespace BattleScribe.Classes
             }
         }
 
-        public List<Weapon> GetWeapons()
-        {
-            List<Weapon> weapons = new List<Weapon>();
-
-            return weapons;
-        }
-
         public List<Item> GetAllItems()
         {
             List<Item> items = new List<Item>();
@@ -339,7 +332,7 @@ namespace BattleScribe.Classes
                 {
                     com.Connection = con;
                     com.CommandText = sql;
-                    com.Parameters.AddWithValue(@"name", );
+                   // com.Parameters.AddWithValue(@"name", );
                     con.Open();
                     com.ExecuteNonQuery();
                     dReader = com.ExecuteReader();

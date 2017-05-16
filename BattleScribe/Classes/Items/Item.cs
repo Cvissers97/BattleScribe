@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleScribe.Classes.Items
 {
-    class Item
+    public class Item
     {
         protected string name;
         protected string description;
