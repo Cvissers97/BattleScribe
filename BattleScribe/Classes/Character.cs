@@ -28,6 +28,9 @@ namespace BattleScribe.Classes
         private byte _int;
         private byte wis;
         private byte cha;
+        private int charClass;
+        private string personality;
+        private string background;
 
         private List<Item> items;
         private List<Weapon> weapons;
@@ -43,11 +46,10 @@ namespace BattleScribe.Classes
             cha = 8;
         }
 
-        
-
         public Character(string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
             , string bonds, string ideals, string appearance, string flaws, string backstory, byte str, byte dex,
-            byte con, byte _int, byte wis, byte cha)
+            byte con, byte _int, byte wis, byte cha, int charClass, string personality, string background,
+            string charRace)
         {
             this.name = name;
             this.title = title;
@@ -67,6 +69,10 @@ namespace BattleScribe.Classes
             this._int = _int;
             this.wis = wis;
             this.cha = cha;
+            this.charClass = charClass;
+            this.personality = personality;
+            this.background = background;
+            this.race = charRace;
 
             items = new List<Item>();
             weapons = new List<Weapon>();
@@ -125,7 +131,7 @@ namespace BattleScribe.Classes
             List<string> temp = new List<string>();
 
             temp.Add("Acrobatics");
-            temp.Add("AnimalHandeling");
+            temp.Add("Animal Handeling");
             temp.Add("Arcana");
             temp.Add("Athletics");
             temp.Add("Deception");
@@ -138,7 +144,7 @@ namespace BattleScribe.Classes
             temp.Add("Perception");
             temp.Add("Performance");
             temp.Add("Religion");
-            temp.Add("SleightofHand");
+            temp.Add("Sleight of Hand");
             temp.Add("Stealth");
             temp.Add("Survival");
 
@@ -165,9 +171,23 @@ namespace BattleScribe.Classes
             temp.Add("Infernal");
             temp.Add("Primordial");
             temp.Add("Sylvan");
-            temp.Add("Undercommon");
+            temp.Add("Under Common");
 
             return temp;
+        }
+
+        public string GetBackGround()
+        {
+            return background;
+        }
+        public string GetPersonality()
+        {
+            return personality;
+        }
+
+        public int GetClass()
+        {
+            return charClass;
         }
 
         public string GetName()

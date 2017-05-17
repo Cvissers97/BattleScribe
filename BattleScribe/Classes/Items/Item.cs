@@ -108,7 +108,7 @@ namespace BattleScribe.Classes.Items
             return isEquip;
         }
 
-        public bool SetEquip(bool equip)
+        public void SetEquip(bool equip)
         {
             isEquip = equip;
         }

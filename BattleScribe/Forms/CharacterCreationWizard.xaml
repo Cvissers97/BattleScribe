@@ -98,20 +98,11 @@
         <Label Name="lbPoints" Content="Available Points:" HorizontalAlignment="Left" Margin="150,100,0,0" VerticalAlignment="Top"/>
         <Label Name="lbBackground" Content="Background" HorizontalAlignment="Left" Margin="397,22,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbBackgrounds" HorizontalAlignment="Left" Margin="475,22,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
-        <Label x:Name="lbEquipment" Content="Equipment" HorizontalAlignment="Left" Margin="397,53,0,0" VerticalAlignment="Top"/>
         <Grid HorizontalAlignment="Left" Height="41" Margin="397,85,0,0" VerticalAlignment="Top" Width="278">
-            <RadioButton Name="rbEquip1A" Content="a" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <RadioButton Name="rbEquip1B" Content="b" HorizontalAlignment="Left" Margin="136,13,0,0" VerticalAlignment="Top"/>
             <Grid HorizontalAlignment="Left" Height="40" Margin="0,31,0,-30" VerticalAlignment="Top" Width="278">
-                <RadioButton Name="rbEquip2A" Content="a" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <RadioButton Name="rbEquip2B" Content="b" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top"/>
-                <Grid HorizontalAlignment="Left" Height="40" Margin="0,29,0,-29" VerticalAlignment="Top" Width="278">
-                    <RadioButton Name="rbEquip3A" Content="a" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                    <RadioButton Name="rbEquip3B" Content="b" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top"/>
-                </Grid>
+                <Grid HorizontalAlignment="Left" Height="40" Margin="0,29,0,-29" VerticalAlignment="Top" Width="278"/>
             </Grid>
         </Grid>
-        <CheckBox Name="cbStartMoney" Content="Roll starting money instead." HorizontalAlignment="Left" Margin="399,189,0,0" VerticalAlignment="Top"/>
         <WrapPanel Name="panelSkills" Orientation="Vertical" HorizontalAlignment="Left" Height="93" Margin="10,371,0,0" VerticalAlignment="Top" Width="652">
         </WrapPanel>
         <Label Name="lbSkills" Content="Skills" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top"/>

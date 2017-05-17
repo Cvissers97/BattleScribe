@@ -36,6 +36,64 @@ namespace BattleScribe.Classes
             }
         }
 
+        public int CreateCharacter(Character c)
+        {
+            List<Feature> features = new List<Feature>();
+            int result = 0;
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background)";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"Name", c.GetName());
+                    com.Parameters.AddWithValue(@"Class", c.GetClass());
+                    com.Parameters.AddWithValue(@"Race", c.GetRace());
+                    com.Parameters.AddWithValue(@"Level", 1);
+                    com.Parameters.AddWithValue(@"Age", c.GetAge());
+                    com.Parameters.AddWithValue(@"Size", c.GetSize());
+                    com.Parameters.AddWithValue(@"Appearance", c.GetAppearance());
+                    // Image line Not added yet com.Parameters.AddWithValue(@"", c.GetName());
+                    com.Parameters.AddWithValue(@"Title", c.GetTitle());
+                    com.Parameters.AddWithValue(@"Personality", c.GetPersonality());
+                    com.Parameters.AddWithValue(@"Ideals", c.GetIdeals());
+                    com.Parameters.AddWithValue(@"Bonds", c.GetBonds());
+                    com.Parameters.AddWithValue(@"Flaws", c.GetFlaws());
+                    com.Parameters.AddWithValue(@"Backstory", c.GetBackstory());
+                    com.Parameters.AddWithValue(@"Alignment", c.GetAlignment());
+                    com.Parameters.AddWithValue(@"IsMale", c.GetIsMale());
+                    com.Parameters.AddWithValue(@"IsFemale", c.GetIsFemale());
+                    com.Parameters.AddWithValue(@"Str", c.GetStr());
+                    com.Parameters.AddWithValue(@"Dex", c.GetDex());
+                    com.Parameters.AddWithValue(@"Con", c.GetCon());
+                    com.Parameters.AddWithValue(@"Wis", c.GetWis());
+                    com.Parameters.AddWithValue(@"Int", c.GetInt());
+                    com.Parameters.AddWithValue(@"Cha", c.GetCha());
+                    com.Parameters.AddWithValue(@"Background", c.GetBackGround());
+                    //com.Parameters.AddWithValue(@"MiscProfs", c.GetMiscProfs());
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.CommandText = "SELECT @@IDENTITY";
+                    result = Convert.ToInt32(com.ExecuteScalar());
+                    com.Parameters.Clear();
+                  
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            return result;
+        }
+
         public List<Feature> GetFeaturesByRace(string race)
         {
             List<Feature> features = new List<Feature>();
@@ -115,6 +173,39 @@ namespace BattleScribe.Classes
             return features;
         }
 
+        public void InsertSpells(int[] spellId, int charId)
+        {
+            string sql = "INSERT INTO Character_SpellList (Char_Id, Spell_Id, Is_Prepared) VALUES (@Char_Id, @SpellId, 0)";
+
+            for (int i = 0; i < spellId.Length; i++)
+            {
+                conString = Properties.Settings.Default.conString;
+                con = new SqlCeConnection();
+                con.ConnectionString = conString;
+                try
+                {
+                    using (con)
+                    {
+                        com.Connection = con;
+                        com.CommandText = sql;
+                        com.Parameters.AddWithValue(@"Char_Id", charId);
+                        com.Parameters.AddWithValue(@"SpellId", spellId[i]);
+                        con.Open();
+                        com.ExecuteNonQuery();
+
+                        com.Parameters.Clear();
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Windows.MessageBox.Show(e.Message.ToString());
+                    con.Close();
+                }
+            }
+            con.Close();
+                
+        }
+
         //Method to get a list of all races and its features
         public List<CharacterRace> GetRaces()
         {
@@ -178,7 +269,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        Spell s = new Spell(dReader.GetString(1), (byte)dReader.GetInt32(2),
+                        Spell s = new Spell(dReader.GetInt32(0).ToString(), dReader.GetString(1), (byte)dReader.GetInt32(2),
                              dReader.GetString(3), dReader.GetString(4), dReader.GetString(5),
                              dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
                         spellList.Add(s);
@@ -257,7 +348,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        Spell s = new Spell(dReader.GetString(1), (byte)dReader.GetInt32(2),
+                        Spell s = new Spell(dReader.GetInt32(0).ToString(), dReader.GetString(1), (byte)dReader.GetInt32(2),
                             dReader.GetString(3), dReader.GetString(4), dReader.GetString(5),
                             dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
                         sList.Add(s);

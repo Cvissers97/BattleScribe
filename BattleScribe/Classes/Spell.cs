@@ -8,6 +8,7 @@ namespace BattleScribe.Classes
 {
     public class Spell
     {
+        private string id;
         private string name;
         private byte level;
         private string school;
@@ -24,8 +25,9 @@ namespace BattleScribe.Classes
 
         }
 
-        public Spell(string name, byte level, string school, string castTime, string range, string components, string duration, string desc, string atHigherLevels)
+        public Spell(string id ,string name, byte level, string school, string castTime, string range, string components, string duration, string desc, string atHigherLevels)
         {
+            this.id = id;
             this.name = name;
             this.level = level;
             this.school = school;
@@ -40,6 +42,11 @@ namespace BattleScribe.Classes
         public override string ToString()
         {
             return this.name;
+        }
+
+        public string GetId()
+        {
+            return this.id;
         }
 
         public string GetName()

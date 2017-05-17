@@ -15,6 +15,7 @@ using BattleScribe.Classes;
 using BattleScribe.Forms;
 using Microsoft.Win32;
 using System.IO;
+using BattleScribe.Classes.Items;
 
 namespace BattleScribe.Forms
 {
@@ -28,11 +29,11 @@ namespace BattleScribe.Forms
         byte screen;
         DbHandler db;
         Character character;
-        int totalPoints, cantripsKnown, spellsKnown;
+        int totalPoints, cantripsKnown, spellsKnown, charId;
         List<CharacterRace> race;
         byte raceStr, raceDex, raceCon, raceInt, raceWis, raceCha;
         List<string> allLangs, allSkills;
-        List<Spell> spellList, cantripList;
+        List<Spell> spellList, cantripList, pickedSpells;
         List<CheckBox> cbSpellList, cbLangList, cbSkillList, cbCantripList;
         string[] spellsKnownArray;
         Image image;
@@ -49,6 +50,7 @@ namespace BattleScribe.Forms
             totalPoints = 27; // max amount of points according to D&D rules
             lbPoints.Content = "Total Points: " + totalPoints;
             cbSpellList = new List<CheckBox>();
+            cbBackgrounds.Items.Add("Hermit");
         }
         
         //Add all stats to a list
@@ -102,7 +104,6 @@ namespace BattleScribe.Forms
             }
            return totalPoints;
         }
-
 
         //Handels screen transistions
         private void UpdateScreen()
@@ -188,14 +189,6 @@ namespace BattleScribe.Forms
             lbPoints.Visibility = Visibility.Hidden;
             lbBackground.Visibility = Visibility.Hidden;
             cbBackgrounds.Visibility = Visibility.Hidden;
-            lbEquipment.Visibility = Visibility.Hidden;
-            rbEquip1A.Visibility = Visibility.Hidden;
-            rbEquip2A.Visibility = Visibility.Hidden;
-            rbEquip3A.Visibility = Visibility.Hidden;
-            rbEquip1B.Visibility = Visibility.Hidden;
-            rbEquip2B.Visibility = Visibility.Hidden;
-            rbEquip3B.Visibility = Visibility.Hidden;
-            cbStartMoney.Visibility = Visibility.Hidden;
             panelSkills.Visibility = Visibility.Hidden;
             lbSkills.Visibility = Visibility.Hidden;
             lbMiscProf.Visibility = Visibility.Hidden;
@@ -275,14 +268,6 @@ namespace BattleScribe.Forms
             lbPoints.Visibility = Visibility.Visible;
             lbBackground.Visibility = Visibility.Visible;
             cbBackgrounds.Visibility = Visibility.Visible;
-            lbEquipment.Visibility = Visibility.Visible;
-            rbEquip1A.Visibility = Visibility.Visible;
-            rbEquip2A.Visibility = Visibility.Visible;
-            rbEquip3A.Visibility = Visibility.Visible;
-            rbEquip1B.Visibility = Visibility.Visible;
-            rbEquip2B.Visibility = Visibility.Visible;
-            rbEquip3B.Visibility = Visibility.Visible;
-            cbStartMoney.Visibility = Visibility.Visible;
             panelSkills.Visibility = Visibility.Visible;
             lbSkills.Visibility = Visibility.Visible;
             lbMiscProf.Visibility = Visibility.Visible;
@@ -642,15 +627,74 @@ namespace BattleScribe.Forms
 
         private void FinishClick(object sender, RoutedEventArgs e)
         {
+            int[] spellIds = new int[panelPrepSpells.Children.Count];
+            int temp = 0;
+
+            foreach (CheckBox c in panelPrepSpells.Children)
+            {
+                foreach (Spell s in spellList)
+                {
+                    if ((string)c.Content == s.GetName())
+                    {
+                        spellIds[temp] = Convert.ToInt32(s.GetId());
+                        temp++;
+                        break;
+                    }
+                }
+            }
+
+            List<bool> chosenSkills = new List<bool>();
+            List<bool> chosenLangs = new List<bool>();
+
+            foreach (CheckBox c in panelSkills.Children)
+            {
+                if (c.IsChecked == true)
+                {
+                    chosenSkills.Add(true);
+                }
+                else
+                {
+                    chosenSkills.Add(false);
+                }
+            }
+
+            foreach (CheckBox c in panelLanguages.Children)
+            {
+                if (c.IsChecked == true)
+                {
+                    chosenSkills.Add(true);
+                }
+                else
+                {
+                    chosenSkills.Add(false);
+                }
+            }
+
+
             CreateCharacter();
+            //db.InsertSkills;
+            //db.InsertLangs;
+            db.InsertSpells(spellIds, charId);
         }
         #endregion
 
         private void CreateCharacter()
         {
-            Character c = new Character(tbName.Text, tbTitle.Text, tbAge.Text, tbSize.Text, tbAlignment.Text, (bool)chFemale.IsChecked, (bool)chMale.IsChecked, 
-                GetRichTbString(rtbBonds), GetRichTbString(rtbIdeals), GetRichTbString(rtbAppearance), GetRichTbString(rtbFlaws), GetRichTbString(rtbBackstory), character.GetStr(), 
-                character.GetDex(), character.GetCon(), character.GetInt(), character.GetWis(), character.GetCha());
+            byte tempStr = Convert.ToByte(character.GetStr() + raceStr);
+            byte tempDex = Convert.ToByte(character.GetDex() + raceDex);
+            byte tempCon = Convert.ToByte(character.GetCon() + raceCon);
+            byte tempWis = Convert.ToByte(character.GetWis() + raceWis);
+            byte tempInt = Convert.ToByte(character.GetInt() + raceInt);
+            byte tempCha = Convert.ToByte(character.GetCha() + raceCha);
+
+
+
+            Character charac = new Character(tbName.Text, tbTitle.Text, tbAge.Text, tbSize.Text, tbAlignment.Text, (bool)chFemale.IsChecked, (bool)chMale.IsChecked, 
+                GetRichTbString(rtbBonds), GetRichTbString(rtbIdeals), GetRichTbString(rtbAppearance), GetRichTbString(rtbFlaws), GetRichTbString(rtbBackstory), tempStr,
+                tempDex, tempCon, tempInt, tempWis, tempCha, (cbClasses.SelectedIndex + 1), GetRichTbString(rtbPersonality), (cbBackgrounds.SelectedIndex + 1).ToString(),
+                (cbRaces.SelectedIndex + 1).ToString());
+
+            charId = db.CreateCharacter(charac);
         }
 
         string GetRichTbString(RichTextBox rtb)
