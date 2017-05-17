@@ -45,6 +45,7 @@ namespace BattleScribe.Classes
         private string personality;
         private string background;
         private int proficiency;
+        private byte[] image;
 
         private List<Skill> skills;
         private List<Item> items;
@@ -92,7 +93,7 @@ namespace BattleScribe.Classes
         public Character(string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
             , string bonds, string ideals, string appearance, string flaws, string backstory, byte str, byte dex,
             byte con, byte _int, byte wis, byte cha, int charClass, string personality, string background,
-            string charRace)
+            string charRace, byte[] image)
         {
             this.name = name;
             this.title = title;
@@ -116,6 +117,7 @@ namespace BattleScribe.Classes
             this.personality = personality;
             this.background = background;
             this.race = charRace;
+            this.image = image;
 
             items = new List<Item>();
             weapons = new List<Weapon>();
@@ -325,6 +327,11 @@ namespace BattleScribe.Classes
             temp.Add("Under Common");
 
             return temp;
+        }
+
+        public byte[] GetImage()
+        {
+            return image;
         }
 
         public string GetBackGround()

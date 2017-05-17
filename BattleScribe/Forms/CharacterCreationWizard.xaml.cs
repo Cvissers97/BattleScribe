@@ -675,18 +675,17 @@ namespace BattleScribe.Forms
             {
                 if (c.IsChecked == true)
                 {
-                    chosenSkills.Add(true);
+                    chosenLangs.Add(true);
                 }
                 else
                 {
-                    chosenSkills.Add(false);
+                    chosenLangs.Add(false);
                 }
             }
 
-
             CreateCharacter();
-            //db.InsertSkills;
-            //db.InsertLangs;
+            db.InsertSkills(chosenSkills, charId);
+            db.InsertLangs(chosenLangs, charId);
             db.InsertSpells(spellIds, charId);
         }
         #endregion
@@ -700,12 +699,10 @@ namespace BattleScribe.Forms
             byte tempInt = Convert.ToByte(character.GetInt() + raceInt);
             byte tempCha = Convert.ToByte(character.GetCha() + raceCha);
 
-
-
             Character charac = new Character(tbName.Text, tbTitle.Text, tbAge.Text, tbSize.Text, tbAlignment.Text, (bool)chFemale.IsChecked, (bool)chMale.IsChecked, 
                 GetRichTbString(rtbBonds), GetRichTbString(rtbIdeals), GetRichTbString(rtbAppearance), GetRichTbString(rtbFlaws), GetRichTbString(rtbBackstory), tempStr,
                 tempDex, tempCon, tempInt, tempWis, tempCha, (cbClasses.SelectedIndex + 1), GetRichTbString(rtbPersonality), (cbBackgrounds.SelectedIndex + 1).ToString(),
-                (cbRaces.SelectedIndex + 1).ToString());
+                (cbRaces.SelectedIndex + 1).ToString(), imageArray);
 
             charId = db.CreateCharacter(charac);
         }
