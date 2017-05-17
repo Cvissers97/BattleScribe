@@ -36,3 +36,6 @@ DROP TABLE [Spells];
 GO
 DROP TABLE [Feats];
 GO
+DROP TABLE [Character_Inventory];
+GO
+DROP TABLE [Items_Misc];

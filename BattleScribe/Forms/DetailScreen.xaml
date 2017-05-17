@@ -82,24 +82,24 @@
 
 
 
-                    <Label x:Name="lbSTR" Content="STR 15 (+2)" HorizontalAlignment="Left" Margin="10,137,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="lbDEX" Content="DEX 15 (+2)" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="lbCON" Content="CON 15 (+2)" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="lbINT" Content="INT 08 (-1)" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="lbWIS" Content="WIS 08 (-1)" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="lbCHA" Content="CHA 08 (-1)" HorizontalAlignment="Left" Margin="10,237,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="btnPlusSTR" Content="+" HorizontalAlignment="Left" Margin="114,144,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnMinSTR" Content="-" HorizontalAlignment="Left" Margin="134,144,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnPlusDEX" Content="+" HorizontalAlignment="Left" Margin="114,165,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnMinDEX" Content="-" HorizontalAlignment="Left" Margin="134,165,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnPlusCON"  Content="+" HorizontalAlignment="Left" Margin="114,185,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnMinCON" Content="-" HorizontalAlignment="Left" Margin="134,185,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnPlusINT"  Content="+" HorizontalAlignment="Left" Margin="114,205,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnMinINT" Content="-" HorizontalAlignment="Left" Margin="134,205,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnPlusWIS"  Content="+" HorizontalAlignment="Left" Margin="114,226,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnMinWIS" Content="-" HorizontalAlignment="Left" Margin="134,226,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnPlusCHA"  Content="+" HorizontalAlignment="Left" Margin="114,245,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnMinCHA" Content="-" HorizontalAlignment="Left" Margin="134,245,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Label x:Name="lbSTR" Content="STR 15 (+2)" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbDEX" Content="DEX 15 (+2)" HorizontalAlignment="Left" Margin="10,184,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbCON" Content="CON 15 (+2)" HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbINT" Content="INT 08 (-1)" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbWIS" Content="WIS 08 (-1)" HorizontalAlignment="Left" Margin="10,244,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbCHA" Content="CHA 08 (-1)" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="btnPlusSTR" Content="+" HorizontalAlignment="Left" Margin="114,171,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinSTR" Content="-" HorizontalAlignment="Left" Margin="134,171,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnPlusDEX" Content="+" HorizontalAlignment="Left" Margin="114,192,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinDEX" Content="-" HorizontalAlignment="Left" Margin="134,192,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnPlusCON"  Content="+" HorizontalAlignment="Left" Margin="114,212,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinCON" Content="-" HorizontalAlignment="Left" Margin="134,212,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnPlusINT"  Content="+" HorizontalAlignment="Left" Margin="114,232,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinINT" Content="-" HorizontalAlignment="Left" Margin="134,232,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnPlusWIS"  Content="+" HorizontalAlignment="Left" Margin="114,253,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinWIS" Content="-" HorizontalAlignment="Left" Margin="134,253,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnPlusCHA"  Content="+" HorizontalAlignment="Left" Margin="114,272,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Button x:Name="btnMinCHA" Content="-" HorizontalAlignment="Left" Margin="134,272,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
                     <Label Content="Level" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
                     <Label Content="EXP" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top"/>
                     <Label Content="Max HP" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top"/>
@@ -109,7 +109,7 @@
                     <TextBox Name="tbEXP" HorizontalAlignment="Left" Height="23" Margin="114,34,0,0" TextWrapping="Wrap" Text="EXP" VerticalAlignment="Top" Width="120"/>
                     <TextBox Name="tbMaxHP" HorizontalAlignment="Left" Height="23" Margin="114,60,0,0" TextWrapping="Wrap" Text="Max HP" VerticalAlignment="Top" Width="120"/>
                     <TextBox Name="tbTempHP" HorizontalAlignment="Left" Height="23" Margin="114,86,0,0" TextWrapping="Wrap" Text="Temp HP" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbCurHP" HorizontalAlignment="Left" Height="23" Margin="114,113,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbCurHP" HorizontalAlignment="Left" Height="23" Margin="114,112,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="120"/>
                     <Button x:Name="btnPlusHP" Content="+" HorizontalAlignment="Left" Margin="239,62,0,0" VerticalAlignment="Top" Width="21" Height="21" HorizontalContentAlignment="Center" FontSize="10" Click="btnPlusHP_Click"/>
                     <Label Content="Feats" HorizontalAlignment="Left" Margin="386,8,0,0" VerticalAlignment="Top"/>
                     <Label Content="Features" HorizontalAlignment="Left" Margin="386,185,0,0" VerticalAlignment="Top"/>
@@ -133,6 +133,8 @@
                     <Button x:Name="btnMinMove" Content="-" HorizontalAlignment="Left" Margin="134,375,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
                     <Button x:Name="btnPlusInit"  Content="+" HorizontalAlignment="Left" Margin="114,408,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
                     <Button x:Name="btnMinInit" Content="-" HorizontalAlignment="Left" Margin="134,408,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
+                    <Label Content="Proficiency" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="tbProficiency" HorizontalAlignment="Left" Height="23" Margin="114,137,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="120"/>
 
                 </Grid>
             </TabItem>
