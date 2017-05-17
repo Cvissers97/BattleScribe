@@ -150,7 +150,7 @@
             <TabItem Header="Inventory">
                 <Grid Background="#f9f9f9">
                     <Button Name="btnEquip" Content="Equip / Unequip" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
-                    <Button Name="btnAddItem" Content="Add Item" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
+                    <Button Name="btnAddItem" Content="Add Item" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="btnAddItem_Click"/>
                     <Button Name="btnModifyItem" Content="Modify Item" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
                     <Button Name="btnDropItem" Content="Drop Item" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
                     <Button Name="btnAddMoney" Content="Add Money" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
@@ -172,6 +172,26 @@
                     <Label Name="lbGold" Content="Gold: 32" HorizontalAlignment="Left" Margin="13,439,0,0" VerticalAlignment="Top" Width="114"/>
                     <Label Name="lbSilver" Content="Silver: 120" HorizontalAlignment="Left" Margin="13,469,0,0" VerticalAlignment="Top" Width="114"/>
                     <Label Name="lbCopper" Content="Copper: 322" HorizontalAlignment="Left" Margin="13,496,0,0" VerticalAlignment="Top" Width="114"/>
+
+
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Skills and Languages">
+                <Grid Background="#f9f9f9">
+                    <WrapPanel Name="panelSkills" HorizontalAlignment="Left" Height="79" Margin="10,62,0,0" VerticalAlignment="Top" Width="642"/>
+                    <Label Content="Skills" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top"/>
+                    <WrapPanel Name="panelLanguages" HorizontalAlignment="Left" Height="79" Margin="10,191,0,0" VerticalAlignment="Top" Width="312"/>
+                    <Label Content="Languages" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"/>
+                    <RichTextBox Name="rtbOtherProf" HorizontalAlignment="Left" Height="79" Margin="344,191,0,0" VerticalAlignment="Top" Width="308">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="Other Proficiencies"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label Content="Other Proficiencies" HorizontalAlignment="Left" Margin="344,160,0,0" VerticalAlignment="Top"/>
 
 
 

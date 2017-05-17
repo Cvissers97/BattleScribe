@@ -10,27 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BattleScribe.Forms.Pop_ups.Items
+namespace BattleScribe.Controls.Items
 {
     /// <summary>
-    /// Interaction logic for AddArmour.xaml
+    /// Interaction logic for ItemControl.xaml
     /// </summary>
-    public partial class AddArmour : Window
+    public partial class ItemControl : UserControl
     {
-        private int characterId;
+        private int id;
 
-        public AddArmour()
+        public ItemControl()
         {
             InitializeComponent();
         }
 
-        public AddArmour(int id)
+        public ItemControl(int id)
         {
             InitializeComponent();
 
-            this.characterId = id;
+            this.id = id;
         }
     }
 }

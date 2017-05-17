@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BattleScribe.Classes.Items
 {
-    class Weapon : Item
+    public class Weapon : Item
     {
         private int diceAmount;
         private int diceSides;
@@ -22,12 +22,12 @@ namespace BattleScribe.Classes.Items
  
         }
 
-        public Weapon(string name, string description, 
+        public Weapon(int id, string name, string description, 
             int diceAmount, int diceSides,  string type, 
             bool proficient, bool attuneable, double weight,
             string modifier, int bonusDamage, string baseDamageType, 
             string bonusDamageType)
-            :base(name, description, type, proficient, attuneable, weight)
+            :base(id, name, description, type, proficient, attuneable, weight)
         {
             this.diceAmount = diceAmount;
             this.diceSides = diceSides;

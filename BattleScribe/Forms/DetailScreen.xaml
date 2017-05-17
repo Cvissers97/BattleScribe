@@ -165,9 +165,9 @@
                 <Grid Background="#f9f9f9">
                     <Label Content="Spells" HorizontalAlignment="Left" Margin="178,10,0,0" VerticalAlignment="Top"/>
                     <ScrollViewer HorizontalAlignment="Left" Height="523" Margin="178,41,0,0" VerticalAlignment="Top" Width="484"/>
-                    <Button Content="Add Spell" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
-                    <Button Content="Prepare / Unprepare" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
-                    <Button Content="Remove Spell" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
+                    <Button Name="btnAddSpell" Content="Add Spell" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="163" Height="28" Click="btnAddSpell_Click"/>
+                    <Button Name="btnPrepSpell" Content="Prepare / Unprepare" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
+                    <Button Name="btnRemSpell" Content="Remove Spell" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
                     <Label Content="Known Spells" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top"/>
                     <Label Content="Preparable Spells" HorizontalAlignment="Left" Margin="10,183,0,0" VerticalAlignment="Top"/>
                     <TextBox Name="tbKnown" HorizontalAlignment="Left" Height="23" Margin="123,156,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="50"/>
@@ -190,6 +190,25 @@
                     <TextBox Name="tbSlot7" HorizontalAlignment="Left" Height="22" Margin="58,381,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
                     <TextBox Name="tbSlot8" HorizontalAlignment="Left" Height="22" Margin="58,407,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
                     <TextBox Name="tbSlot9" HorizontalAlignment="Left" Height="22" Margin="58,433,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Skills and Languages">
+                <Grid Background="#f9f9f9">
+                    <WrapPanel Name="panelSkills" HorizontalAlignment="Left" Height="79" Margin="10,62,0,0" VerticalAlignment="Top" Width="642"/>
+                    <Label Content="Skills" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top"/>
+                    <WrapPanel Name="panelLanguages" HorizontalAlignment="Left" Height="79" Margin="10,191,0,0" VerticalAlignment="Top" Width="312"/>
+                    <Label Content="Languages" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"/>
+                    <RichTextBox Name="rtbOtherProf" HorizontalAlignment="Left" Height="79" Margin="344,191,0,0" VerticalAlignment="Top" Width="308">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="Other Proficiencies"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label Content="Other Proficiencies" HorizontalAlignment="Left" Margin="344,160,0,0" VerticalAlignment="Top"/>
+
+
 
                 </Grid>
             </TabItem>

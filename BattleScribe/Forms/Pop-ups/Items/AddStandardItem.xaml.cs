@@ -15,18 +15,18 @@ using System.Windows.Shapes;
 namespace BattleScribe.Forms.Pop_ups.Items
 {
     /// <summary>
-    /// Interaction logic for AddArmour.xaml
+    /// Interaction logic for AddStandardItem.xaml
     /// </summary>
-    public partial class AddArmour : Window
+    public partial class AddStandardItem : Window
     {
         private int characterId;
 
-        public AddArmour()
+        public AddStandardItem()
         {
             InitializeComponent();
         }
 
-        public AddArmour(int id)
+        public AddStandardItem(int id)
         {
             InitializeComponent();
 
