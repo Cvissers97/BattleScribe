@@ -36,6 +36,49 @@ namespace BattleScribe.Classes
             }
         }
 
+        public void InsertSkills(List<bool> skills, int charId)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "INSERT INTO Character_Skills (Char_Id, Acrobatics, Animal_Handeling, Arcana, Athletics, Deception, History, Insight, Intimidation, Investigation, Medicine, Nature, Perception, Performance, Religion, Sleight_Of_Hand, Stealth, Survival) VALUES (@char_Id, @acro, @aniHand, @arc, @athlet, @decep, @hist, @insight, @intim,@invest, @med, @nat, @percep, @perf, @rel, @slhnd, @stealth, @surv)";
+            
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    com.Parameters.AddWithValue(@"acro", skills.ElementAt(0));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(1));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(2));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(3));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(4));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(5));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(6));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(7));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(8));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(9));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(10));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(11));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(12));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(13));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(14));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(15));
+                    com.Parameters.AddWithValue(@"", skills.ElementAt(16));
+                    con.Open();
+                    com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+        }
+
         public int CreateCharacter(Character c)
         {
             List<Feature> features = new List<Feature>();

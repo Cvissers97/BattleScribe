@@ -630,6 +630,19 @@ namespace BattleScribe.Forms
             int[] spellIds = new int[panelPrepSpells.Children.Count];
             int temp = 0;
 
+            foreach (CheckBox c in panelCantrips.Children)
+            {
+                foreach (Spell s in spellList)
+                {
+                    if ((string)c.Content == s.GetName())
+                    {
+                        spellIds[temp] = Convert.ToInt32(s.GetId());
+                        temp++;
+                        break;
+                    }
+                }
+            }
+
             foreach (CheckBox c in panelPrepSpells.Children)
             {
                 foreach (Spell s in spellList)
