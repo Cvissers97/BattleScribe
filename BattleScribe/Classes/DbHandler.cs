@@ -36,13 +36,12 @@ namespace BattleScribe.Classes
             }
         }
 
-        public void InsertSkills(List<bool> skills, int charId)
+        public void InsertLangs(List<bool> langs, int charId)
         {
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "INSERT INTO Character_Skills (Char_Id, Acrobatics, Animal_Handeling, Arcana, Athletics, Deception, History, Insight, Intimidation, Investigation, Medicine, Nature, Perception, Performance, Religion, Sleight_Of_Hand, Stealth, Survival) VALUES (@char_Id, @acro, @aniHand, @arc, @athlet, @decep, @hist, @insight, @intim,@invest, @med, @nat, @percep, @perf, @rel, @slhnd, @stealth, @surv)";
-            
+            string sql = "INSERT INTO Character_Languages (Char_Id, Common, Dwarvish, Elvish, Giant, Gnomish, Goblin, Halfling, Orc, Abyssal, Celestial, Draconic, Deep_Speech, Infernal, Primordial, Sylvan, Undercommon) VALUES (@charId, @com, @dwarf, @elf, @giant, @gnome, @goblin, @halfling, @orc, @aby, @cele, @drac, @deep, @infer, @prim, @sylv, @underco)";
 
             try
             {
@@ -51,25 +50,26 @@ namespace BattleScribe.Classes
                     com.Connection = con;
                     com.CommandText = sql;
                     com.Parameters.AddWithValue(@"charId", charId);
-                    com.Parameters.AddWithValue(@"acro", skills.ElementAt(0));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(1));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(2));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(3));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(4));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(5));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(6));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(7));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(8));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(9));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(10));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(11));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(12));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(13));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(14));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(15));
-                    com.Parameters.AddWithValue(@"", skills.ElementAt(16));
+                    com.Parameters.AddWithValue(@"com", langs.ElementAt(0));
+                    com.Parameters.AddWithValue(@"dwarf", langs.ElementAt(1));
+                    com.Parameters.AddWithValue(@"elf", langs.ElementAt(2));
+                    com.Parameters.AddWithValue(@"giant", langs.ElementAt(3));
+                    com.Parameters.AddWithValue(@"gnome", langs.ElementAt(4));
+                    com.Parameters.AddWithValue(@"goblin", langs.ElementAt(5));
+                    com.Parameters.AddWithValue(@"halfling", langs.ElementAt(6));
+                    com.Parameters.AddWithValue(@"orc", langs.ElementAt(7));
+                    com.Parameters.AddWithValue(@"aby", langs.ElementAt(8));
+                    com.Parameters.AddWithValue(@"cele", langs.ElementAt(9));
+                    com.Parameters.AddWithValue(@"drac", langs.ElementAt(10));
+                    com.Parameters.AddWithValue(@"deep", langs.ElementAt(11));
+                    com.Parameters.AddWithValue(@"infer", langs.ElementAt(12));
+                    com.Parameters.AddWithValue(@"prim", langs.ElementAt(13));
+                    com.Parameters.AddWithValue(@"sylv", langs.ElementAt(14));
+                    com.Parameters.AddWithValue(@"underco", langs.ElementAt(15));
+
                     con.Open();
                     com.ExecuteNonQuery();
+                    com.Parameters.Clear();
                 }
             }
             catch (Exception e)
@@ -77,6 +77,53 @@ namespace BattleScribe.Classes
                 System.Windows.MessageBox.Show(e.Message.ToString());
                 con.Close();
             }
+            con.Close();
+        }
+            
+        
+
+        public void InsertSkills(List<bool> skills, int charId)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "INSERT INTO Character_Skills (Char_Id, Acrobatics, Animal_Handeling, Arcana, Athletics, Deception, History, Insight, Intimidation, Investigation, Medicine, Nature, Perception, Performance, Religion, Sleight_Of_Hand, Stealth, Survival) VALUES (@char_Id, @acro, @aniHand, @arc, @athlet, @decep, @hist, @insight, @intim,@invest, @med, @nat, @percep, @perf, @rel, @slhnd, @stealth, @surv)";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"char_Id", charId);
+                    com.Parameters.AddWithValue(@"acro", skills.ElementAt(0));
+                    com.Parameters.AddWithValue(@"aniHand", skills.ElementAt(1));
+                    com.Parameters.AddWithValue(@"arc", skills.ElementAt(2));
+                    com.Parameters.AddWithValue(@"athlet", skills.ElementAt(3));
+                    com.Parameters.AddWithValue(@"decep", skills.ElementAt(4));
+                    com.Parameters.AddWithValue(@"hist", skills.ElementAt(5));
+                    com.Parameters.AddWithValue(@"insight", skills.ElementAt(6));
+                    com.Parameters.AddWithValue(@"intim", skills.ElementAt(7));
+                    com.Parameters.AddWithValue(@"invest", skills.ElementAt(8));
+                    com.Parameters.AddWithValue(@"med", skills.ElementAt(9));
+                    com.Parameters.AddWithValue(@"nat", skills.ElementAt(10));
+                    com.Parameters.AddWithValue(@"percep", skills.ElementAt(11));
+                    com.Parameters.AddWithValue(@"perf", skills.ElementAt(12));
+                    com.Parameters.AddWithValue(@"rel", skills.ElementAt(13));
+                    com.Parameters.AddWithValue(@"slhnd", skills.ElementAt(14));
+                    com.Parameters.AddWithValue(@"stealth", skills.ElementAt(15));
+                    com.Parameters.AddWithValue(@"surv", skills.ElementAt(16));
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            con.Close();
         }
 
         public int CreateCharacter(Character c)
@@ -87,7 +134,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background)";
+            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background)";
 
             try
             {
@@ -102,7 +149,7 @@ namespace BattleScribe.Classes
                     com.Parameters.AddWithValue(@"Age", c.GetAge());
                     com.Parameters.AddWithValue(@"Size", c.GetSize());
                     com.Parameters.AddWithValue(@"Appearance", c.GetAppearance());
-                    // Image line Not added yet com.Parameters.AddWithValue(@"", c.GetName());
+                    com.Parameters.AddWithValue(@"Image", c.GetImage());
                     com.Parameters.AddWithValue(@"Title", c.GetTitle());
                     com.Parameters.AddWithValue(@"Personality", c.GetPersonality());
                     com.Parameters.AddWithValue(@"Ideals", c.GetIdeals());
