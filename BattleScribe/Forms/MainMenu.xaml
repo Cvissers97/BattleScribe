@@ -1,12 +1,12 @@
 ﻿<Window x:Class="BattleScribe.Forms.MainMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainMenu" Height="616" Width="354" ResizeMode="NoResize">
-    <Grid>
+        Title="MainMenu" Height="632.418" Width="598.776" ResizeMode="NoResize">
+    <Grid Margin="0,0,4,0">
         <Button Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="10,537,0,0" VerticalAlignment="Top" Width="150" Height="40"/>
-        <Button Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="188,537,0,0" VerticalAlignment="Top" Width="150" Height="40"/>
-        <ScrollViewer Name="scroll" HorizontalAlignment="Left" Height="494" Margin="10,10,0,0" VerticalAlignment="Top" Width="328">
-            <StackPanel Name="stack" HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="318"/>
+        <Button Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="429,537,0,0" VerticalAlignment="Top" Width="150" Height="40"/>
+        <ScrollViewer Name="scroll" HorizontalAlignment="Left" Height="494" Margin="10,10,0,0" VerticalAlignment="Top" Width="569">
+            <StackPanel Name="stack" HorizontalAlignment="Left" Height="494" VerticalAlignment="Top" Width="559"/>
         </ScrollViewer>
 
     </Grid>

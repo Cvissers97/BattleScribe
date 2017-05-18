@@ -9,15 +9,18 @@ namespace BattleScribe.Classes
     public class CharacterClass
     {
         private string className;
+        private int classId;
 
         public CharacterClass()
         {
  
         }
 
-        public CharacterClass(string className)
+        public CharacterClass(string className, int classId)
         {
             this.className = className;
+            this.classId = classId;
+
         }
 
         public string GetName()
@@ -25,6 +28,10 @@ namespace BattleScribe.Classes
             return this.className;
         }
 
+        public int GetId()
+        {
+            return classId;
+        }
 
     }
 }

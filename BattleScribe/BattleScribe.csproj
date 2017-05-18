@@ -41,6 +41,7 @@
       <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,6 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\Char\MainScreenCharacter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Feats\FeatControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,6 +107,9 @@
     <Compile Include="Classes\CharacterRace.cs" />
     <Compile Include="Classes\LogHandler.cs" />
     <Compile Include="Classes\Spell.cs" />
+    <Compile Include="Controls\Char\MainScreenCharacter.xaml.cs">
+      <DependentUpon>MainScreenCharacter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Feats\FeatControl.xaml.cs">
       <DependentUpon>FeatControl.xaml</DependentUpon>
     </Compile>

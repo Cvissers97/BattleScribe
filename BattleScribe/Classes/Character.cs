@@ -48,6 +48,8 @@ namespace BattleScribe.Classes
         private byte[] image;
         private int maxHitPoints;
         private int curHitPoints;
+        private int level;
+        private CharacterClass cClass;
 
         private List<Skill> skills;
         private List<Item> items;
@@ -92,6 +94,15 @@ namespace BattleScribe.Classes
             proficiency = 2;
             maxHitPoints = 37;
             curHitPoints = maxHitPoints;
+        }
+
+        public Character(int id, byte[] image, string name, int charClass, int level)
+        {
+            this.id = id;
+            this.image = image;
+            this.name = name;
+            this.charClass = charClass;
+            this.level = level;
         }
 
         public Character(string name, string title, string age, string size, string alignment, bool isFemale, bool isMale

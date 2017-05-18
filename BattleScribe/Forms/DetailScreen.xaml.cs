@@ -26,6 +26,7 @@ namespace BattleScribe.Forms
         private int curHPNum;
         private List<Feat> feats;
         private List<Feature> raceFeatures;
+        private List<CharacterRace> charRaces;
         private Character c;
         private DbHandler db;
 
@@ -45,6 +46,20 @@ namespace BattleScribe.Forms
             c.SetRace("Drow Elf");
 
             UpdateFeatureList();
+        }
+
+        public DetailScreen(BattleScribe.Classes.Character character)
+        {
+            feats = new List<Feat>();
+            raceFeatures = new List<Feature>();
+            db = new DbHandler();
+            charRaces = new List<CharacterRace>();
+
+
+            InitializeComponent();
+            c = character;
+            UpdateFeatureList();
+           // UpdateFeatList();
         }
 
         private void btnPlusHP_Click(object sender, RoutedEventArgs e)
@@ -98,8 +113,16 @@ namespace BattleScribe.Forms
         private void UpdateFeatureList()
         {
             // Merge acquired features with race features here, then transform them into stackpanels
+            charRaces = db.GetRaces();
+            foreach(CharacterRace r in charRaces)
+            {
+                if (Convert.ToInt32(c.GetRace()) == r.GetId())
+                {
+                    raceFeatures = db.GetFeaturesByRace(r.GetName());
+                }
+            }
 
-            raceFeatures = db.GetFeaturesByRace(c.GetRace());
+
 
             stackFeatures.Children.Clear();
 
@@ -117,10 +140,14 @@ namespace BattleScribe.Forms
             List<int> remIdList = new List<int>();
             List<Feat> newFeats = new List<Feat>();
 
-            foreach (Feat f in feats)
+            if (feats.Count > 0)
             {
-                newFeats.Add(f);
+                foreach (Feat f in feats)
+                {
+                    newFeats.Add(f);
+                }
             }
+
 
             foreach (FeatControl featCon in stackFeats.Children)
             {
