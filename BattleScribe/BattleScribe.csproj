@@ -79,6 +79,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Skills\SkillControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Weapon\WeaponControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +105,7 @@
     <Compile Include="Classes\Items\Item.cs" />
     <Compile Include="Classes\Items\Weapon.cs" />
     <Compile Include="Classes\CharacterRace.cs" />
+    <Compile Include="Classes\LogHandler.cs" />
     <Compile Include="Classes\Spell.cs" />
     <Compile Include="Controls\Char\MainScreenCharacter.xaml.cs">
       <DependentUpon>MainScreenCharacter.xaml</DependentUpon>
@@ -116,6 +121,9 @@
     </Compile>
     <Compile Include="Controls\Items\ItemLegend.xaml.cs">
       <DependentUpon>ItemLegend.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Skills\SkillControl.xaml.cs">
+      <DependentUpon>SkillControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Weapon\WeaponControl.xaml.cs">
       <DependentUpon>WeaponControl.xaml</DependentUpon>

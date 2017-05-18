@@ -3,6 +3,7 @@ using BattleScribe.Classes.Items;
 using BattleScribe.Controls;
 using BattleScribe.Controls.Items;
 using BattleScribe.Forms;
+using BattleScribe.Forms.Pop_ups;
 using BattleScribe.Forms.Pop_ups.Items;
 using System;
 using System.Collections.Generic;
@@ -23,19 +24,26 @@ namespace BattleScribe.Forms
     public partial class PlayScreen : Window
     {
         private Character c;
+        public LogHandler log;
 
         public PlayScreen()
         {
             InitializeComponent();
-
-            UpdateInventory();
+            InitialiseBase();
         }
 
         public PlayScreen(Character c)
         {
             InitializeComponent();
+            InitialiseBase();
 
             this.c = c;
+        }
+
+        private void InitialiseBase()
+        {
+            log = new LogHandler();
+            UpdateInventory();
         }
 
         private void UpdateInventory()
@@ -56,7 +64,6 @@ namespace BattleScribe.Forms
             c.AddArmour(chainmail);
 
             ItemControl temp;
-
             foreach (Weapon w in c.GetAllWeapons())
             {
                 temp = new ItemControl(w.GetID());
@@ -98,6 +105,12 @@ namespace BattleScribe.Forms
         {
             ItemChoice i = new ItemChoice(c.GetID());
             i.Show();
+        }
+
+        private void btnRollCheck_Click(object sender, RoutedEventArgs e)
+        {
+            RollSkillScreen r = new RollSkillScreen(c, this);
+            r.Show();
         }
     }
 }

@@ -5,7 +5,7 @@
     <Grid>
         <RadioButton Name="rbAdvantage" Content="Advantage" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="rbDisadvantage" Content="Disadvantage" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="188,11,0,0" TextWrapping="Wrap" Text="Bonus" VerticalAlignment="Top" Width="71"/>
+        <TextBox Name="tbBonus" HorizontalAlignment="Left" Height="23" Margin="188,11,0,0" TextWrapping="Wrap" Text="Bonus" VerticalAlignment="Top" Width="71" TextChanged="tbBonus_TextChanged"/>
         <Label Content="Bonus" HorizontalAlignment="Left" Margin="140,8,0,0" VerticalAlignment="Top"/>
         <ScrollViewer Name="scrollSkills" HorizontalAlignment="Left" Height="187" Margin="10,62,0,0" VerticalAlignment="Top" Width="249">
             <StackPanel Name="stackSkills" HorizontalAlignment="Left" VerticalAlignment="Top"/>

@@ -7,6 +7,18 @@ using System.Threading.Tasks;
 
 namespace BattleScribe.Classes
 {
+    public struct Skill
+    {
+        public string name;
+        public bool acquired;
+
+        public Skill(string name, bool acquired)
+        {
+            this.acquired = acquired;
+            this.name = name;
+        }
+    }
+
     public class Character
     {
         private int id;
@@ -32,10 +44,12 @@ namespace BattleScribe.Classes
         private int charClass;
         private string personality;
         private string background;
+        private int proficiency;
         private byte[] image;
         private int level;
         private CharacterClass cClass;
 
+        private List<Skill> skills;
         private List<Item> items;
         private List<Weapon> weapons;
         private List<Armour> armours;
@@ -62,6 +76,20 @@ namespace BattleScribe.Classes
             items = new List<Item>();
             weapons = new List<Weapon>();
             armours = new List<Armour>();
+            skills = new List<Skill>();
+
+            foreach (string s in SkillsList())
+            {
+                skills.Add(new Skill(s, false));
+            }
+
+            str = 10;
+            _int = 15;
+            wis = 20;
+            cha = 40;
+            dex = 2;
+
+            proficiency = 2;
         }
 
         public Character(int id, byte[] image, string name, int charClass, int level)
@@ -105,8 +133,116 @@ namespace BattleScribe.Classes
             items = new List<Item>();
             weapons = new List<Weapon>();
             armours = new List<Armour>();
+            skills = new List<Skill>();
 
+            foreach (string s in SkillsList())
+            {
+                skills.Add(new Skill(s, false));
+            }
 
+            //For testing
+            proficiency = 2;
+        }
+
+        public int GetModifier(string skillName)
+        {
+            int mod = 0;
+            double add = 0;
+
+            foreach (Skill skill in skills)
+            {
+                if (skill.name == skillName)
+                {
+                    switch (skillName)
+                    {
+                        default:
+                            add = 1337;
+                            break;
+
+                        case "Athletics":
+                            add = Math.Floor(((double)str - 10) / 2);
+                            break;
+
+                        case "Acrobatics":
+                            add = Math.Floor(((double)dex - 10) / 2);
+                            break;
+
+                        case "Sleight of Hand":
+                            add = Math.Floor(((double)dex - 10) / 2);
+                            break;
+
+                        case "Stealth":
+                            add = Math.Floor(((double)dex - 10) / 2);
+                            break;
+
+                        case "Arcana":
+                            add = Math.Floor(((double)_int - 10) / 2);
+                            break;
+
+                        case "History":
+                            add = Math.Floor(((double)_int - 10) / 2);
+                            break;
+
+                        case "Investigation":
+                            add = Math.Floor(((double)_int - 10) / 2);
+                            break;
+
+                        case "Nature":
+                            add = Math.Floor(((double)_int - 10) / 2);
+                            break;
+
+                        case "Religion":
+                            add = Math.Floor(((double)_int - 10) / 2);
+                            break;
+
+                        case "Animal Handeling":
+                            add = Math.Floor(((double)wis - 10) / 2);
+                            break;
+
+                        case "Insight":
+                            add = Math.Floor(((double)wis - 10) / 2);
+                            break;
+
+                        case "Medicine":
+                            add = Math.Floor(((double)wis - 10) / 2);
+                            break;
+
+                        case "Perception":
+                            add = Math.Floor(((double)wis - 10) / 2);
+                            break;
+
+                        case "Survival":
+                            add = Math.Floor(((double)wis - 10) / 2);
+                            break;
+
+                        case "Deception":
+                            add = Math.Floor(((double)cha - 10) / 2);
+                            break;
+
+                        case "Intimidation":
+                            add = Math.Floor(((double)cha - 10) / 2);
+                            break;
+
+                        case "Performance":
+                            add = Math.Floor(((double)cha - 10) / 2);
+                            break;
+
+                        case "Persuasion":
+                            add = Math.Floor(((double)cha - 10) / 2);
+                            break;
+                    }
+
+                    mod += (int)add;
+
+                    if (skill.acquired)
+                    {
+                        mod += proficiency;
+                    }
+
+                    return mod;
+                }
+            }
+            return mod;
         }
 
         //Calc the modifier for skills
