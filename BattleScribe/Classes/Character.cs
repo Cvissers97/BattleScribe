@@ -46,6 +46,8 @@ namespace BattleScribe.Classes
         private string background;
         private int proficiency;
         private byte[] image;
+        private int maxHitPoints;
+        private int curHitPoints;
 
         private List<Skill> skills;
         private List<Item> items;
@@ -88,6 +90,8 @@ namespace BattleScribe.Classes
             dex = 2;
 
             proficiency = 2;
+            maxHitPoints = 37;
+            curHitPoints = maxHitPoints;
         }
 
         public Character(string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
@@ -520,6 +524,26 @@ namespace BattleScribe.Classes
         public int GetID()
         {
             return this.id;
+        }
+
+        public int GetMaxHealth()
+        {
+            return maxHitPoints;
+        }
+
+        public void SetMaxHealth(int targetHealth)
+        {
+            maxHitPoints = targetHealth;
+        }
+
+        public int GetCurrentHealth()
+        {
+            return curHitPoints;
+        }
+
+        public void SetCurrentHealth(int targetHealth)
+        {
+            curHitPoints = targetHealth;
         }
     }
 }

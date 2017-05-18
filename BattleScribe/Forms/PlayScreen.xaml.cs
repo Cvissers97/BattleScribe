@@ -38,11 +38,12 @@ namespace BattleScribe.Forms
             InitialiseBase();
 
             this.c = c;
+            lbHealth.Content = c.GetMaxHealth();
         }
 
         private void InitialiseBase()
         {
-            log = new LogHandler();
+            log = new LogHandler(listAction);
             UpdateInventory();
         }
 

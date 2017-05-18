@@ -83,7 +83,7 @@ namespace BattleScribe.Forms.Pop_ups
 
             List<int> temp = new List<int>();
             temp.Add(result);
-            p.log.DisplayResult(temp, p.listAction);
+            p.log.DisplayResult(temp);
             this.Close();
         }
     }
