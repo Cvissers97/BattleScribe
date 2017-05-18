@@ -8,6 +8,7 @@ namespace BattleScribe.Classes
 {
     public class CharacterRace
     {
+        private int id;
         private string name;
         public List<Feature> features;
 
@@ -16,15 +17,20 @@ namespace BattleScribe.Classes
             
         }
 
-        public CharacterRace(string name)
+        public CharacterRace(int id, string name)
         {
             this.name = name;
-            //this.features = features;
+            this.id = id;
         }
 
         public string GetName()
         {
             return name;
+        }
+
+        public int GetId()
+        {
+            return this.id;
         }
 
         public List<Feature> GetFeatures()

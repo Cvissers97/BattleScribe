@@ -33,6 +33,8 @@ namespace BattleScribe.Classes
         private string personality;
         private string background;
         private byte[] image;
+        private int level;
+        private CharacterClass cClass;
 
         private List<Item> items;
         private List<Weapon> weapons;
@@ -60,6 +62,15 @@ namespace BattleScribe.Classes
             items = new List<Item>();
             weapons = new List<Weapon>();
             armours = new List<Armour>();
+        }
+
+        public Character(int id, byte[] image, string name, int charClass, int level)
+        {
+            this.id = id;
+            this.image = image;
+            this.name = name;
+            this.charClass = charClass;
+            this.level = level;
         }
 
         public Character(string name, string title, string age, string size, string alignment, bool isFemale, bool isMale

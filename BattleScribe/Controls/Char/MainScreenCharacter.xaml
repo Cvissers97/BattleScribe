@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="BattleScribe.Controls.Char.MainScreenCharacter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="90" BorderBrush="Black" BorderThickness="1" Width="535"
+             MouseLeftButtonUp="UserControl_MouseLeftButtonUp">
+    <Grid Margin="0,0,8,-2">
+        <Image Name="image" Width="80" Margin="10,10,459,11" RenderTransformOrigin="0.453,0.72"/>
+        <Label Name="lblName" HorizontalContentAlignment="Center" Margin="95,10,230,11" FontWeight="Bold" FontSize="18" />
+        <Label Name="lblClass" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="18" Margin="313,10,129,10" />
+    </Grid>
+</UserControl>

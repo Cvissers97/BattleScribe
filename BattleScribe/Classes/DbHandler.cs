@@ -184,7 +184,44 @@ namespace BattleScribe.Classes
             return result;
         }
 
-        public List<Feature> GetFeaturesByRace(string race)
+        public List<Character> GetCharacterForMain()
+        {
+            List<Character> temp = new List<Character>();
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT Id, Image, Name, Class, Level  FROM Character";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        temp.Add(new Character(dReader.GetInt32(0), (byte[])dReader["Image"], dReader.GetString(2),dReader.GetInt32(3), dReader.GetInt32(4)));
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            con.Close();
+            return temp;
+
+        }
+
+        public List<Feature> GetFeaturesByRace(string name)
         {
             List<Feature> features = new List<Feature>();
 
@@ -200,7 +237,7 @@ namespace BattleScribe.Classes
                 {
                     com.Connection = con;
                     com.CommandText = sql;
-                    com.Parameters.AddWithValue(@"name", race);
+                    com.Parameters.AddWithValue(@"name", name);
                     con.Open();
                     com.ExecuteNonQuery();
                     dReader = com.ExecuteReader();
@@ -318,7 +355,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        CharacterRace r = new CharacterRace(dReader.GetString(1));
+                        CharacterRace r = new CharacterRace(dReader.GetInt32(0),dReader.GetString(1));
                         temp.Add(r);
                     }
                     con.Close();
@@ -478,7 +515,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        CharacterClass c = new CharacterClass(dReader.GetString(1));
+                        CharacterClass c = new CharacterClass(dReader.GetString(1), dReader.GetInt32(0));
                         temp.Add(c);
                     }
                     con.Close();

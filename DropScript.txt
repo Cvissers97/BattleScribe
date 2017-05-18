@@ -14,19 +14,21 @@ DROP TABLE [Character_Languages];
 GO
 DROP TABLE [Character_Skills];
 GO
+DROP TABLE [Character_Spells];
+GO
+DROP TABLE [Character_Inventory];
+GO
 DROP TABLE [Class];
 GO
 DROP TABLE [Class_Features];
 GO
 DROP TABLE [Class_Spells];
 GO
-DROP TABLE [Class_StartEquipment];
-GO
-DROP TABLE [Class_StartSkills];
-GO
 DROP TABLE [Item_Type];
 GO
 DROP TABLE [Items];
+GO
+DROP TABLE [Items_Misc];
 GO
 DROP TABLE [Race];
 GO
