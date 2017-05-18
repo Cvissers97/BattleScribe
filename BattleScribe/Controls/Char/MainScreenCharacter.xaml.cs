@@ -50,12 +50,13 @@ namespace BattleScribe.Controls.Char
                     lblClass.Content = cl.GetName();
                 }
             }
+            lblLevel.Content += c.GetLevel().ToString();
 
         }
 
         private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            BattleScribe.Forms.DetailScreen newScreen = new Forms.DetailScreen(character);
+            BattleScribe.Forms.DetailScreen newScreen = new Forms.DetailScreen(character, image);
 
             newScreen.Show();
             Window parentWindow = Application.Current.MainWindow;

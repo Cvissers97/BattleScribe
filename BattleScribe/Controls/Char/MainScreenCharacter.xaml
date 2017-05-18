@@ -7,7 +7,8 @@
              MouseLeftButtonUp="UserControl_MouseLeftButtonUp">
     <Grid Margin="0,0,8,-2">
         <Image Name="image" Width="80" Margin="10,10,459,11" RenderTransformOrigin="0.453,0.72"/>
-        <Label Name="lblName" HorizontalContentAlignment="Center" Margin="95,10,230,11" FontWeight="Bold" FontSize="18" />
-        <Label Name="lblClass" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="18" Margin="313,10,129,10" />
+        <Label Name="lblName" Content="Name" HorizontalContentAlignment="Center" Margin="95,16,230,5" FontWeight="Bold" FontSize="18" />
+        <Label Name="lblClass" Content="Class" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="18" Margin="300,15,116,5" />
+        <Label Name="lblLevel" Margin="414,15,30,6" FontWeight="Bold" FontSize="18" Content="Level: " />
     </Grid>
 </UserControl>

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainMenu" Height="632.418" Width="598.776" ResizeMode="NoResize">
     <Grid Margin="0,0,4,0">
-        <Button Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="10,537,0,0" VerticalAlignment="Top" Width="150" Height="40"/>
+        <Button Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="10,537,0,0" VerticalAlignment="Top" Width="150" Height="40" Click="BtnCreate_Click"/>
         <Button Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="429,537,0,0" VerticalAlignment="Top" Width="150" Height="40"/>
         <ScrollViewer Name="scroll" HorizontalAlignment="Left" Height="494" Margin="10,10,0,0" VerticalAlignment="Top" Width="569">
             <StackPanel Name="stack" HorizontalAlignment="Left" Height="494" VerticalAlignment="Top" Width="559"/>

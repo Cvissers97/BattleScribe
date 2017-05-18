@@ -23,10 +23,12 @@ namespace BattleScribe.Forms
     /// </summary>
     public partial class DetailScreen : Window
     {
-        private int curHPNum;
+        private int curHPNum, charId;
         private List<Feat> feats;
         private List<Feature> raceFeatures;
         private List<CharacterRace> charRaces;
+        private List<Skill> skills;
+        private List<Language> langs;
         private Character c;
         private DbHandler db;
 
@@ -48,18 +50,65 @@ namespace BattleScribe.Forms
             UpdateFeatureList();
         }
 
-        public DetailScreen(BattleScribe.Classes.Character character)
+        public DetailScreen(BattleScribe.Classes.Character character, Image i)
         {
+            InitializeComponent();
             feats = new List<Feat>();
             raceFeatures = new List<Feature>();
             db = new DbHandler();
             charRaces = new List<CharacterRace>();
+            skills = new List<Skill>();
+            imgChar.Source = i.Source;
+            langs = new List<Language>();
+            charId = character.GetID();
+            
+
+            c = db.GetCharacterById(charId);
+            skills = db.GetSkillsByCharId(charId);
+            langs = db.GetLangsByCharId(charId);
+            Init();
+
+        }
+
+        private void Init()
+        {
+            tbName.Text = c.GetName();
+            tbAge.Text = c.GetAge();
+            tbAlignment.Text = c.GetAlignment();
+            rtbAppearance.Document.Blocks.Add(new Paragraph(new Run(c.GetAppearance())));
+            rtbBackstory.Document.Blocks.Add(new Paragraph(new Run(c.GetBackstory())));
+            rtbBonds.Document.Blocks.Add(new Paragraph(new Run(c.GetBonds())));
+            rtbIdeals.Document.Blocks.Add(new Paragraph(new Run(c.GetIdeals())));
+            rtbPersonality.Document.Blocks.Add(new Paragraph(new Run(c.GetPersonality())));
+            tbTitle.Text = c.GetTitle();
+            tbSize.Text = c.GetSize();
+
+            if (c.GetIsMale())
+                chMale.IsChecked = true;
+            if (c.GetIsFemale())
+                chFemale.IsChecked = true;
+            rtbFlaws.Document.Blocks.Add(new Paragraph(new Run(c.GetFlaws())));
+
+            foreach (Skill s in skills)
+            {
+                CheckBox cBox = new CheckBox();
+                cBox.IsChecked = s.acquired;
+                cBox.Content = s.name;
+                panelSkills.Children.Add(cBox);
+            }
+
+            foreach (Language l in langs)
+            {
+                CheckBox cbox = new CheckBox();
+                cbox.IsChecked = l.acquired;
+                cbox.Content = l.name;
+                panelLanguages.Children.Add(cbox);
+            }
 
 
-            InitializeComponent();
-            c = character;
+
             UpdateFeatureList();
-           // UpdateFeatList();
+            UpdateFeatList();
         }
 
         private void btnPlusHP_Click(object sender, RoutedEventArgs e)
