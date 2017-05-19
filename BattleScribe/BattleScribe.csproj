@@ -83,6 +83,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Spells\SpellControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Spells\SpellLegend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Spells\SpellPrepControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -128,6 +136,12 @@
     </Compile>
     <Compile Include="Controls\Skills\SkillControl.xaml.cs">
       <DependentUpon>SkillControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Spells\SpellControl.xaml.cs">
+      <DependentUpon>SpellControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Spells\SpellLegend.xaml.cs">
+      <DependentUpon>SpellLegend.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Spells\SpellPrepControl.xaml.cs">
       <DependentUpon>SpellPrepControl.xaml</DependentUpon>

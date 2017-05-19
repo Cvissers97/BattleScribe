@@ -76,7 +76,9 @@
                     <ScrollViewer Name="scrollAttacks" HorizontalAlignment="Left" Height="70" Margin="81,150,0,0" VerticalAlignment="Top" Width="359"/>
 
                     <Label Content="Spells" HorizontalAlignment="Left" Margin="81,224,0,0" VerticalAlignment="Top"/>
-                    <ScrollViewer Name="scrollSpells" HorizontalAlignment="Left" Height="111" Margin="81,250,0,0" VerticalAlignment="Top" Width="359"/>
+                    <ScrollViewer Name="scrollSpells" HorizontalAlignment="Left" Height="111" Margin="81,250,0,0" VerticalAlignment="Top" Width="359">
+                        <StackPanel Name="panelSpells" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </ScrollViewer>
 
                     <Label Content="Feats" HorizontalAlignment="Left" Margin="84,411,0,0" VerticalAlignment="Top"/>
                     <ScrollViewer Name="scrollFeats" HorizontalAlignment="Left" Height="129" Margin="81,437,0,0" VerticalAlignment="Top" Width="137"/>
@@ -86,9 +88,6 @@
                         <StackPanel Name="panelFeatures" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </ScrollViewer>
 
-                    <Image Name="imgLifeSave" HorizontalAlignment="Left" Height="24" Margin="504,60,0,0" VerticalAlignment="Top" Width="109" Source="/BattleScribe;component/Resources/Icons/Death Saves/3_life.png"/>
-                    <Image Name="imgDeathSave" HorizontalAlignment="Left" Height="24" Margin="504,84,0,0" VerticalAlignment="Top" Width="109" Source="/BattleScribe;component/Resources/Icons/Death Saves/3_life.png"/>
-
                     <Label Content="Death Save" HorizontalAlignment="Left" Margin="506,34,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="109"/>
                     <ListBox Name="listAction" HorizontalAlignment="Left" Height="210" Margin="455,359,0,0" VerticalAlignment="Top" Width="204"/>
                     <Label Name="lbActionLog" Content="Action Log" HorizontalAlignment="Left" Margin="459,335,0,0" VerticalAlignment="Top"/>
@@ -97,6 +96,8 @@
                     <Label Name="lbSpellMod" Content="Casting modifier: +7" HorizontalAlignment="Left" Margin="459,272,0,0" VerticalAlignment="Top" Height="27"/>
                     <Label Name="lbSpellSaveDC" Content="Spell Save DC: 12" HorizontalAlignment="Left" Margin="459,295,0,0" VerticalAlignment="Top" Height="27"/>
                     <Label Name="lbHealth" Content="HP: 10" HorizontalAlignment="Left" Margin="94,91,0,0" Width="59" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
+                    <Label Name="lbDeathSave" Content="Death: 0" HorizontalAlignment="Left" Margin="519,60,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="80"/>
+                    <Label Name="lbLifeSave" Content="Life: 0" HorizontalAlignment="Left" Margin="519,80,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="80"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Roleplay">
