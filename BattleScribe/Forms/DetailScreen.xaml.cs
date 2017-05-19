@@ -75,14 +75,15 @@ namespace BattleScribe.Forms
             langs = new List<Language>();
             spells = new List<Spell>();
             charId = character.GetID();
-            c.SetSkillList(skills);
-            c.SetLangList(langs);
+
             
 
             c = db.GetCharacterById(charId);
             skills = db.GetSkillsByCharId(charId);
             langs = db.GetLangsByCharId(charId);
             spells = db.GetSpellsByCharId(charId);
+            c.SetSkillList(skills);
+            c.SetLangList(langs);
             Init();
 
         }
