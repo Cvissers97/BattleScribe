@@ -65,6 +65,16 @@ namespace BattleScribe.Classes
         private int experiencePoints;
         private bool inspiration;
 
+        private byte slot1;
+        private byte slot2;
+        private byte slot3;
+        private byte slot4;
+        private byte slot5;
+        private byte slot6;
+        private byte slot7;
+        private byte slot8;
+        private byte slot9;
+
         private CharacterClass cClass;
 
         private List<Feature> raceFeatures;
@@ -111,7 +121,7 @@ namespace BattleScribe.Classes
             cha = 40;
             dex = 2;
 
-            proficiency = 2;
+            proficiency = 0;
             maxHitPoints = 37;
             curHitPoints = maxHitPoints;
         }
@@ -182,7 +192,7 @@ namespace BattleScribe.Classes
             }
 
             //For testing
-            proficiency = 2;
+            proficiency = 0;
         }
 
         public Character(int id ,string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
@@ -733,6 +743,20 @@ namespace BattleScribe.Classes
             }
 
             return features;
+        }
+
+        public void SetSlots(byte slot1, byte slot2, byte slot3, byte slot4,
+            byte slot5, byte slot6, byte slot7, byte slot8, byte slot9)
+        {
+            this.slot1 = slot1;
+            this.slot2 = slot2;
+            this.slot3 = slot3;
+            this.slot4 = slot4;
+            this.slot5 = slot5;
+            this.slot6 = slot6;
+            this.slot7 = slot7;
+            this.slot8 = slot8;
+            this.slot9 = slot9;
         }
     }
 }

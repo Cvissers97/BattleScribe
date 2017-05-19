@@ -186,7 +186,46 @@ namespace BattleScribe.Classes
 
             return result;
         }
-		
+
+        public int GetRaceMovementById(int raceId)
+        {
+            int move = 30;
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT MovementSpeed FROM RACE WHERE ID = @ID";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"Id", raceId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        move = dReader.GetInt32(0);
+                    }
+
+                    com.Parameters.Clear();
+                    con.Close();
+                }
+            }
+            catch (Exception error)
+            {
+                con.Close();
+                MessageBox.Show(error.ToString());
+                throw;
+            }
+
+            return move;
+        }
+
         public int GetMaxHPByClass(int classId)
         {
             int hp = 0;

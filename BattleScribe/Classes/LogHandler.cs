@@ -27,5 +27,10 @@ namespace BattleScribe.Classes
 
             list.Items.Add(message);
         }
+
+        public void Write(string text)
+        {
+            list.Items.Add(text);
+        }
     }
 }

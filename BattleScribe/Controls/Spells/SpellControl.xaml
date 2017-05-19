@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="BattleScribe.Controls.Spells.SpellControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="28" d:DesignWidth="359">
+    <Grid>
+        <Label Name="lbName" Content="lbName" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="127"/>
+        <Label Name="lbComp" Content="lbComp" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="127" Margin="127,0,0,0"/>
+        <Label Name="lbSlot" Content="lbSlot" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="105" Margin="254,0,0,0"/>
+    </Grid>
+</UserControl>

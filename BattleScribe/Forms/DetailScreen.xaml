@@ -123,16 +123,6 @@
                     <Button Name="btnRemoveFeat" Content="Remove" HorizontalAlignment="Left" Margin="304,64,0,0" VerticalAlignment="Top" Width="75" Click="btnRemoveFeat_Click"/>
                     <Button Name="btnAddFeature" Content="Add Feature" HorizontalAlignment="Left" Margin="304,216,0,0" VerticalAlignment="Top" Width="75"/>
                     <Button Name="btnRemoveFeature" Content="Remove" HorizontalAlignment="Left" Margin="304,241,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Label Content="Bonus" HorizontalAlignment="Left" Margin="10,296,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Armor Class + 0" HorizontalAlignment="Left" Margin="10,337,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Movement + 0" HorizontalAlignment="Left" Margin="10,368,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Initiative + 0" HorizontalAlignment="Left" Margin="10,399,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="btnPlusArmor"  Content="+" HorizontalAlignment="Left" Margin="114,344,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnMinArmor" Content="-" HorizontalAlignment="Left" Margin="134,344,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnPlusMove"  Content="+" HorizontalAlignment="Left" Margin="114,375,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnMinMove" Content="-" HorizontalAlignment="Left" Margin="134,375,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnPlusInit"  Content="+" HorizontalAlignment="Left" Margin="114,408,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
-                    <Button x:Name="btnMinInit" Content="-" HorizontalAlignment="Left" Margin="134,408,0,0" VerticalAlignment="Top" Width="15" Height="13" HorizontalContentAlignment="Center" FontSize="10"/>
                     <Label Content="Proficiency" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
                     <TextBox Name="tbProficiency" HorizontalAlignment="Left" Height="23" Margin="114,137,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="120"/>
 

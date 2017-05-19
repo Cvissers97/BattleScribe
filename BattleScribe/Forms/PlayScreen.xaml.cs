@@ -3,6 +3,7 @@ using BattleScribe.Classes.Items;
 using BattleScribe.Controls;
 using BattleScribe.Controls.Features;
 using BattleScribe.Controls.Items;
+using BattleScribe.Controls.Spells;
 using BattleScribe.Forms;
 using BattleScribe.Forms.Pop_ups;
 using BattleScribe.Forms.Pop_ups.Items;
@@ -29,6 +30,8 @@ namespace BattleScribe.Forms
         private DbHandler db;
         private Image imgTempDat;
         private List<Feature> features;
+        byte lifeThrow;
+        byte deathThrow;
 
         public PlayScreen()
         {
@@ -47,15 +50,40 @@ namespace BattleScribe.Forms
         {
             imgTempDat = new Image();
             imgTempDat.Source = imgInsp.Source;
+            db = new DbHandler();
+
+            lifeThrow = 0;
+            deathThrow = 0;
 
             UpdateInventory();
             UpdateInspiration();
             UpdateHealth();
             UpdateStats();
             UpdateFeatures();
+            UpdateDeath();
+            UpdateSpells();
 
             log = new LogHandler(listAction);
-            db = new DbHandler();
+        }
+
+        private void UpdateSpells()
+        {
+            panelSpells.Children.Clear();
+
+            SpellLegend leg = new SpellLegend();
+            panelSpells.Children.Add(leg);
+
+            List<Spell> spells = db.GetSpellsByCharId(c.GetID());
+            SpellControl spell;
+
+            foreach (Spell s in spells)
+            {
+                spell = new SpellControl(s);
+                spell.lbName.Content = s.GetName();
+                spell.lbComp.Content = s.GetComponents();
+                spell.lbSlot.Content = s.GetLevel() + " Slot";
+                panelSpells.Children.Add(spell);
+            }
         }
 
         private void UpdateFeatures()
@@ -97,6 +125,9 @@ namespace BattleScribe.Forms
 
             lbCHAMod.Content = c.CalcMod("CHA", 0);
             lbCHAStat.Content = c.GetCha();
+
+            lbPassPerc.Content = (10 + c.GetModifier("Perception"));
+            lbMove.Content = db.GetRaceMovementById(Convert.ToInt32(c.GetRace()));
         }
 
         public void UpdateInspiration()
@@ -115,6 +146,13 @@ namespace BattleScribe.Forms
         {
             lbHealth.Content = "HP: " + c.GetCurrentHealth();
         }
+
+        private void UpdateDeath()
+        {
+            lbLifeSave.Content = "Life: " + lifeThrow;
+            lbDeathSave.Content = "Death: " + deathThrow;
+        }
+
         private void UpdateInventory()
         {
             stackInventory.Children.Clear();
@@ -214,7 +252,29 @@ namespace BattleScribe.Forms
 
         private void menuDeath_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (DiceThrower.ThrowDice(0, 20, 0) >= 10)
+            {
+                log.Write("Death saving throw: Life");
+                lifeThrow++;
+
+                if (lifeThrow == 3)
+                {
+                    MessageBox.Show("Stable");
+                    lifeThrow = 0;
+                }
+            }
+            else
+            {   
+                log.Write("Death saving throw: Death");
+                deathThrow++;
+
+                if (deathThrow == 3)
+                {
+                    MessageBox.Show("ded");
+                    deathThrow = 0;
+                }
+            }
+            UpdateDeath();
         }
 
         private void menuHurt_Click(object sender, RoutedEventArgs e)
