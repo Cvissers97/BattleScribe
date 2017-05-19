@@ -22,6 +22,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
         private int characterId;
         private List<int> diceSides;
         private List<string> modifiers;
+        private DetailScreen screen;
 
         public AddWeapon()
         {
@@ -93,6 +94,41 @@ namespace BattleScribe.Forms.Pop_ups.Items
             }
 
             MessageBox.Show("Adding items for character ID: " + characterId);
+        }
+
+        public AddWeapon(DetailScreen screen)
+        {
+            this.screen = screen;
+            InitializeComponent();
+            diceSides = new List<int>();
+            modifiers = new List<string>();
+
+            // Adding all the dicesides
+            diceSides.Add(2);
+            diceSides.Add(4);
+            diceSides.Add(6);
+            diceSides.Add(8);
+            diceSides.Add(10);
+            diceSides.Add(12);
+            diceSides.Add(20);
+
+            foreach (int i in diceSides)
+            {
+                cbDiceSides.Items.Add(i);
+            }
+
+            // Adding all modifiers
+            modifiers.Add("STR");
+            modifiers.Add("DEX");
+            modifiers.Add("CON");
+            modifiers.Add("INT");
+            modifiers.Add("WIS");
+            modifiers.Add("CHA");
+
+            foreach (string s in modifiers)
+            {
+                cbModifier.Items.Add(s);
+            }
         }
     }
 }

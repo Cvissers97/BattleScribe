@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BattleScribe.Controls.Spells;
+using BattleScribe.Forms.Pop_ups.Items;
 
 namespace BattleScribe.Forms
 {
@@ -244,6 +245,12 @@ namespace BattleScribe.Forms
             AddSpell a = new AddSpell(this);
             a.Show();
         }
+
+        private void BtnAddItem_Click(object sender, RoutedEventArgs e)
+        {
+            ItemChoice temp = new ItemChoice();
+            temp.Show();
+		}
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {

@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BattleScribe.Classes;
+using BattleScribe.Classes.Items;
 
 namespace BattleScribe.Forms.Pop_ups.Items
 {
@@ -20,6 +22,10 @@ namespace BattleScribe.Forms.Pop_ups.Items
     public partial class AddStandardItem : Window
     {
         private int characterId;
+        private DetailScreen screen;
+        private DbHandler db;
+        private List<Item> itemList;
+        
 
         public AddStandardItem()
         {
@@ -31,6 +37,19 @@ namespace BattleScribe.Forms.Pop_ups.Items
             InitializeComponent();
 
             this.characterId = id;
+        }
+
+        public AddStandardItem(DetailScreen screen)
+        {
+            InitializeComponent();
+            this.screen = screen;
+            db = new DbHandler();
+            Init();
+        }
+
+        public void Init()
+        {
+            
         }
     }
 }
