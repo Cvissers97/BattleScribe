@@ -35,5 +35,12 @@ namespace BattleScribe.Controls.Features
             this.id = id;
             this.isRacial = racial;
         }
+
+        public FeatureControl(int id)
+        {
+            InitializeComponent();
+
+            this.id = id;
+        }
     }
 }

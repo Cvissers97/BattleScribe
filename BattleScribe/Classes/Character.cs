@@ -32,6 +32,8 @@ namespace BattleScribe.Classes
 
     public class Character
     {
+        private DbHandler db;
+
         private int id;
         private string name;
         private string title;
@@ -64,6 +66,9 @@ namespace BattleScribe.Classes
         private bool inspiration;
 
         private CharacterClass cClass;
+
+        private List<Feature> raceFeatures;
+        private List<Feature> classFeatures;
 
         private List<Skill> skills;
         private List<Item> items;
@@ -129,6 +134,8 @@ namespace BattleScribe.Classes
             byte con, byte _int, byte wis, byte cha, int charClass, string personality, string background,
             string charRace, byte[] image, int level)
         {
+
+            db = new DbHandler();
             this.name = name;
             this.title = title;
             this.age = age;
@@ -154,10 +161,19 @@ namespace BattleScribe.Classes
             this.image = image;
             this.level = level;
 
+            int temp = db.GetMaxHPByClass(charClass);
+            maxHitPoints = temp;
+            curHitPoints = temp;
+
+            inspiration = false;
+
             items = new List<Item>();
             weapons = new List<Weapon>();
             armours = new List<Armour>();
             skills = new List<Skill>();
+
+            raceFeatures = db.GetFeaturesByRace(race);
+            classFeatures = new List<Feature>();
 
             foreach (string s in SkillsList())
             {
@@ -173,6 +189,7 @@ namespace BattleScribe.Classes
     byte con, byte _int, byte wis, byte cha, int charClass, string personality, string background,
     string charRace, int level)
         {
+            db = new DbHandler();
             this.id = id;
             this.name = name;
             this.title = title;
@@ -198,6 +215,15 @@ namespace BattleScribe.Classes
             this.race = charRace;
             this.level = level;
 
+            int temp = db.GetMaxHPByClass(charClass);
+            maxHitPoints = temp;
+            curHitPoints = temp;
+
+            inspiration = false;
+
+            raceFeatures = db.GetFeaturesByRace(race);
+            classFeatures = new List<Feature>();
+
             items = new List<Item>();
             weapons = new List<Weapon>();
             armours = new List<Armour>();
@@ -208,6 +234,36 @@ namespace BattleScribe.Classes
         {
             int mod = 0;
             double add = 0;
+
+            switch (skillName)
+            {
+                default:
+                    break;
+
+                case "STR":
+                    add = Math.Floor(((double)str - 10) / 2);
+                    return mod + (int)add;
+
+                case "DEX":
+                    add = Math.Floor(((double)dex - 10) / 2);
+                    return mod + (int)add;
+
+                case "CON":
+                    add = Math.Floor(((double)con - 10) / 2);
+                    return mod + (int)add;
+
+                case "INT":
+                    add = Math.Floor(((double)_int - 10) / 2);
+                    return mod + (int)add;
+
+                case "WIS":
+                    add = Math.Floor(((double)wis - 10) / 2);
+                    return mod + (int)add;
+
+                case "CHA":
+                    add = Math.Floor(((double)cha - 10) / 2);
+                    return mod + (int)add;
+            }
 
             foreach (Skill skill in skills)
             {
@@ -561,17 +617,29 @@ namespace BattleScribe.Classes
 
         public List<Weapon> GetAllWeapons()
         {
-            return weapons;
+            if (weapons != null)
+            {
+                return weapons;
+            }
+            return new List<Weapon>();
         }
 
         public List<Item> GetAllItems()
         {
-            return items;
+            if (items != null)
+            {
+                return items;
+            }
+            return new List<Item>();
         }
 
         public List<Armour> GetAllArmours()
         {
-            return armours;
+            if (armours != null)
+            {
+                return armours;
+            }
+            return new List<Armour>();
         }
 
         public void AddWeapon(Weapon w)
@@ -636,6 +704,25 @@ namespace BattleScribe.Classes
             }
 
             return inspiration;
+        }
+
+        public List<Feature> GetAllFeatures()
+        {
+            List<Feature> features = new List<Feature>();
+            raceFeatures = db.GetFeaturesByRaceId(Convert.ToInt32(race));
+
+            foreach (Feature f in raceFeatures)
+            {
+                f.isRacial = true;
+                features.Add(f);
+            }
+
+            foreach (Feature f in classFeatures)
+            {
+                features.Add(f);
+            }
+
+            return features;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BattleScribe.Classes;
 using BattleScribe.Classes.Items;
 using BattleScribe.Controls;
+using BattleScribe.Controls.Features;
 using BattleScribe.Controls.Items;
 using BattleScribe.Forms;
 using BattleScribe.Forms.Pop_ups;
@@ -26,6 +27,8 @@ namespace BattleScribe.Forms
         private Character c;
         public LogHandler log;
         private DbHandler db;
+        private Image imgTempDat;
+        private List<Feature> features;
 
         public PlayScreen()
         {
@@ -36,20 +39,41 @@ namespace BattleScribe.Forms
         public PlayScreen(Character c)
         {
             InitializeComponent();
-            InitialiseBase();
-
             this.c = c;
-            lbHealth.Content = c.GetMaxHealth();
+            InitialiseBase();
         }
 
         private void InitialiseBase()
         {
+            imgTempDat = new Image();
+            imgTempDat.Source = imgInsp.Source;
+
             UpdateInventory();
+            UpdateInspiration();
             UpdateHealth();
             UpdateStats();
+            UpdateFeatures();
 
             log = new LogHandler(listAction);
             db = new DbHandler();
+        }
+
+        private void UpdateFeatures()
+        {
+            panelFeatures.Children.Clear();
+
+            FeatureControl temp;
+            int idCount = 0;
+
+            features = c.GetAllFeatures();
+
+            foreach (Feature f in features)
+            {
+                temp = new FeatureControl(idCount);
+                temp.lbName.Content = f.GetName();
+                panelFeatures.Children.Add(temp);
+                idCount++;
+            }
         }
 
         public void UpdateStats()
@@ -79,11 +103,11 @@ namespace BattleScribe.Forms
         {
             if (c.GetInspiration())
             {
-                //imgInsp.Source = "/BattleScribe;component/Resources/Icons/Buttons/Inspiration_Button.png";
+                imgInsp.Source = imgTemp.Source;
             }
             else
             {
-
+                imgInsp.Source = imgTempDat.Source;
             }
         }
 
@@ -99,16 +123,8 @@ namespace BattleScribe.Forms
             //Read out all items in the character's inventory (Armour, Weapon, Item)
             //Turn all of them into stackpanels
 
-            //Temp character for inventory testing. Write proper getters/setters for inventory later
-            c = new Character(13);
-            Weapon sword = new Weapon(30, "Flamesword", "Hot", 1, 4, "Weapon", true, true, 10.5, "DEX", 10, "Slashing", "Fire");
-            c.AddWeapon(sword);
-            Item ring = new Item(20, "Ring", "Fancy ring", "Jewelry", false, true, 0.5);
-            c.AddItem(ring);
-            Armour chainmail = new Armour(2, "Chainmail", "Mail of chains", "Armour", true, true, 35, true, 10, 3, "STR");
-            c.AddArmour(chainmail);
-
             ItemControl temp;
+
             foreach (Weapon w in c.GetAllWeapons())
             {
                 temp = new ItemControl(w.GetID());
@@ -170,12 +186,14 @@ namespace BattleScribe.Forms
         private void btnInspiration_Click(object sender, RoutedEventArgs e)
         {
             c.ToggleInspiration();
-            
+            UpdateInspiration();
         }
 
         private void btnInitiative_Click(object sender, RoutedEventArgs e)
         {
-
+            List<int> results = new List<int>();
+            results.Add(DiceThrower.ThrowDice(0, 20, c.GetModifier("DEX")));
+            log.DisplayResult(results);
         }
 
         private void btnHitDie_Click(object sender, RoutedEventArgs e)
