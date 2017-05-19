@@ -20,6 +20,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
     public partial class AddItem : Window
     {
         private int characterId;
+        private DetailScreen screen;
 
         public AddItem()
         {
@@ -31,6 +32,12 @@ namespace BattleScribe.Forms.Pop_ups.Items
             InitializeComponent();
 
             this.characterId = id;
+        }
+
+        public AddItem(DetailScreen screen)
+        {
+            InitializeComponent();
+            this.screen = screen;
         }
     }
 }

@@ -20,6 +20,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
     public partial class ItemChoice : Window
     {
         private int characterId;
+        private DetailScreen screen;
 
         public ItemChoice()
         {
@@ -30,6 +31,11 @@ namespace BattleScribe.Forms.Pop_ups.Items
         {
             InitializeComponent();
             this.characterId = characterId;
+        }
+        public ItemChoice(DetailScreen screen)
+        {
+            InitializeComponent();
+            this.screen = screen;
         }
 
         private void btnItem_Click(object sender, RoutedEventArgs e)

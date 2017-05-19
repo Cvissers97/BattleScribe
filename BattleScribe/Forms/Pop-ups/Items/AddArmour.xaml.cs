@@ -20,6 +20,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
     public partial class AddArmour : Window
     {
         private int characterId;
+        private DetailScreen screen;
 
         public AddArmour()
         {
@@ -31,6 +32,12 @@ namespace BattleScribe.Forms.Pop_ups.Items
             InitializeComponent();
 
             this.characterId = id;
+        }
+
+        public AddArmour(DetailScreen screen)
+        {
+            InitializeComponent();
+            this.screen = screen;
         }
     }
 }
