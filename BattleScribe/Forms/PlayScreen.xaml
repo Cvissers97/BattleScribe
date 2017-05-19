@@ -39,14 +39,35 @@
                     <Label x:Name="lbCHAMod" Content="(-1)" HorizontalAlignment="Left" Margin="10,381,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" FontSize="16"/>
                     <Label x:Name="lbCHAStat" Content="8" HorizontalAlignment="Left" Margin="10,404,0,0" VerticalAlignment="Top" Height="25" HorizontalContentAlignment="Center" Width="50"/>
 
-                    <Image Name="btnHeart" HorizontalAlignment="Left" Height="80" Margin="81,31,0,0" VerticalAlignment="Top" Width="80" Source="../Resources/Icons/Buttons/Health_Button.png"/>
-                    <Image Name="btnInspiration" HorizontalAlignment="Left" Height="80" Margin="179,31,0,0" VerticalAlignment="Top" Width="80" Source="/BattleScribe;component/Resources/Icons/Buttons/Inspiration_Button.png"/>
-                    <Image Name="btnInitiative" HorizontalAlignment="Left" Height="80" Margin="278,31,0,0" VerticalAlignment="Top" Width="80" Source="/BattleScribe;component/Resources/Icons/Buttons/Initiative_Button.png"/>
+                    <Button Padding="-4" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Name="btnHeart" HorizontalAlignment="Left" Height="60" Margin="94,31,0,0" VerticalAlignment="Top" Width="59" Click="btnHeart_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Name="menuHeal" Header="Heal.." Click="menuHeal_Click">
+                                </MenuItem>
+                                <MenuItem Name="menuHurt" Header="Take Damage.." Click="menuHurt_Click"> 
+                                </MenuItem>
+                                <MenuItem Name="menuDeath" Header="Roll Death Save" Click="menuDeath_Click">
+                                </MenuItem>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                        <StackPanel>
+                            <Image Stretch="UniformToFill" Source="/BattleScribe;component/Resources/Icons/Buttons/Health_Button.png"/>
+                        </StackPanel>
+                    </Button>
+                    <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Name="btnInspiration" HorizontalAlignment="Left" Height="80" Margin="179,31,0,0" VerticalAlignment="Top" Width="80" Click="btnInspiration_Click">
+                        <StackPanel>
+                            <Image Name="imgInsp" Stretch="UniformToFill" Source="/BattleScribe;component/Resources/Icons/Buttons/Inspiration_Button.png"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Name="btnInitiative" HorizontalAlignment="Left" Height="80" Margin="278,31,0,0" VerticalAlignment="Top" Width="80" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="btnInitiative_Click">
+                        <StackPanel>
+                            <Image Stretch="UniformToFill" Source="/BattleScribe;component/Resources/Icons/Buttons/Initiative_Button.png"/>
+                        </StackPanel>
+                    </Button>
                     <Image Name="imgArmor" HorizontalAlignment="Left" Height="25" Margin="377,38,0,0" VerticalAlignment="Top" Width="25" Source="/BattleScribe;component/Resources/Icons/Statistics/Armor_Class.png"/>
                     <Image Name="imgMove" HorizontalAlignment="Left" Height="25" Margin="376,66,0,0" VerticalAlignment="Top" Width="25" Source="/BattleScribe;component/Resources/Icons/Statistics/Speed.png"/>
                     <Image Name="imgPassPerc" HorizontalAlignment="Left" Height="30" Margin="376,88,0,0" VerticalAlignment="Top" Width="27" Source="/BattleScribe;component/Resources/Icons/Statistics/Passive_Perception.png"/>
 
-                    <Label Name="lbHealth" Content="100" HorizontalAlignment="Left" Margin="92,51,0,0" VerticalAlignment="Top" Height="32" Width="56" FontSize="19" HorizontalContentAlignment="Center"/>
                     <Label Name="lbArmor" Content="18" HorizontalAlignment="Left" Margin="406,36,0,0" VerticalAlignment="Top" Height="24"/>
                     <Label Name="lbMove" Content="30 ft" HorizontalAlignment="Left" Margin="406,62,0,0" VerticalAlignment="Top" Height="24"/>
                     <Label Name="lbPassPerc" Content="11" HorizontalAlignment="Left" Margin="406,87,0,0" VerticalAlignment="Top" Height="24"/>
@@ -73,7 +94,7 @@
                     <Button Name="btnCast" Content="Cast" HorizontalAlignment="Left" Margin="459,250,0,0" VerticalAlignment="Top" Width="200" Height="22"/>
                     <Label Name="lbSpellMod" Content="Casting modifier: +7" HorizontalAlignment="Left" Margin="459,272,0,0" VerticalAlignment="Top" Height="27"/>
                     <Label Name="lbSpellSaveDC" Content="Spell Save DC: 12" HorizontalAlignment="Left" Margin="459,295,0,0" VerticalAlignment="Top" Height="27"/>
-
+                    <Label Name="lbHealth" Content="HP: 10" HorizontalAlignment="Left" Margin="94,91,0,0" Width="59" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Roleplay">
@@ -200,7 +221,7 @@
         </TabControl>
         <Button Name="btnRollCheck" Content="Roll Check" HorizontalAlignment="Left" Margin="10,621,0,0" VerticalAlignment="Top" Width="92" Height="42" Click="btnRollCheck_Click"/>
         <Button Name="btnAddExp" Content="Add Exp" HorizontalAlignment="Left" Margin="170,621,0,0" VerticalAlignment="Top" Width="92" Height="42"/>
-        <Button Name="btnHotDie" Content="Roll Hit Die" HorizontalAlignment="Left" Margin="365,621,0,0" VerticalAlignment="Top" Width="92" Height="42"/>
+        <Button Name="btnHitDie" Content="Roll Hit Die" HorizontalAlignment="Left" Margin="365,621,0,0" VerticalAlignment="Top" Width="92" Height="42" Click="btnHitDie_Click"/>
         <Button Name="btnPrepareSpells" Content="Prepare Spells" HorizontalAlignment="Left" Margin="569,621,0,0" VerticalAlignment="Top" Width="92" Height="42"/>
     </Grid>
 </Window>

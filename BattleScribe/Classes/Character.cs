@@ -49,6 +49,9 @@ namespace BattleScribe.Classes
         private int maxHitPoints;
         private int curHitPoints;
         private int level;
+        private int experiencePoints;
+        private bool inspiration;
+
         private CharacterClass cClass;
 
         private List<Skill> skills;
@@ -94,6 +97,11 @@ namespace BattleScribe.Classes
             proficiency = 2;
             maxHitPoints = 37;
             curHitPoints = maxHitPoints;
+        }
+
+        public void ReceiveExperiencePoints(int amount)
+        {
+            experiencePoints += amount;
         }
 
         public Character(int id, byte[] image, string name, int charClass, int level)
@@ -363,6 +371,11 @@ namespace BattleScribe.Classes
             return charClass;
         }
 
+        public string GetClassName()
+        {
+            return cClass.GetName();
+        }
+
         public string GetName()
         {
             return name;
@@ -555,6 +568,21 @@ namespace BattleScribe.Classes
         public void SetCurrentHealth(int targetHealth)
         {
             curHitPoints = targetHealth;
+        }
+
+        public void ToggleInspiration()
+        {
+            inspiration = !inspiration;
+        }
+
+        public bool GetInspiration()
+        {
+            if (inspiration == null)
+            {
+                inspiration = false;
+            }
+
+            return inspiration;
         }
     }
 }

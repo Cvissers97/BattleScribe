@@ -300,6 +300,45 @@ namespace BattleScribe.Classes
             return features;
         }
 
+        public int GetHitDiceByClass(string _class)
+        {
+            int hit = 0;
+
+            string sql = "SELECT HIT_DICE FROM CLASS WHERE NAME = @NAME";
+            con = new SqlCeConnection();
+            conString = Properties.Settings.Default.conString;
+            con.ConnectionString = conString;
+
+            try
+            {
+                    using (con)
+                    {
+                        com.Connection = con;
+                        com.CommandText = sql;
+                        com.Parameters.AddWithValue(@"NAME", _class);
+                        con.Open();
+                        com.ExecuteNonQuery();
+                        dReader = com.ExecuteReader();
+
+                        while (dReader.Read())
+                        {
+                            hit = Convert.ToInt32(dReader.GetString(0));
+                        }
+
+                        con.Close();
+                        com.Parameters.Clear();
+                    }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
+                throw;
+            }
+
+            MessageBox.Show(hit.ToString());
+            return hit;
+        }
+
         public void InsertSpells(int[] spellId, int charId)
         {
             string sql = "INSERT INTO Character_SpellList (Char_Id, Spell_Id, Is_Prepared) VALUES (@Char_Id, @SpellId, 0)";

@@ -25,6 +25,7 @@ namespace BattleScribe.Forms
     {
         private Character c;
         public LogHandler log;
+        private DbHandler db;
 
         public PlayScreen()
         {
@@ -43,10 +44,53 @@ namespace BattleScribe.Forms
 
         private void InitialiseBase()
         {
-            log = new LogHandler(listAction);
             UpdateInventory();
+            UpdateHealth();
+            UpdateStats();
+
+            log = new LogHandler(listAction);
+            db = new DbHandler();
         }
 
+        public void UpdateStats()
+        {
+            // Gets the stats from the character object and calculates the approperate modifiers
+
+            lbSTRMod.Content = c.CalcMod("STR", 0);
+            lbSTRStat.Content = c.GetStr();
+
+            lbDEXMod.Content = c.CalcMod("DEX", 0);
+            lbDEXStat.Content = c.GetDex();
+
+            lbCONMod.Content = c.CalcMod("CON", 0);
+            lbCONStat.Content = c.GetCon();
+
+            lbINTMod.Content = c.CalcMod("INT", 0);
+            lbINTStat.Content = c.GetInt();
+
+            lbWISMod.Content = c.CalcMod("WIS", 0);
+            lbWISStat.Content = c.GetWis();
+
+            lbCHAMod.Content = c.CalcMod("CHA", 0);
+            lbCHAStat.Content = c.GetCha();
+        }
+
+        public void UpdateInspiration()
+        {
+            if (c.GetInspiration())
+            {
+                //imgInsp.Source = "/BattleScribe;component/Resources/Icons/Buttons/Inspiration_Button.png";
+            }
+            else
+            {
+
+            }
+        }
+
+        public void UpdateHealth()
+        {
+            lbHealth.Content = "HP: " + c.GetCurrentHealth();
+        }
         private void UpdateInventory()
         {
             stackInventory.Children.Clear();
@@ -107,11 +151,63 @@ namespace BattleScribe.Forms
             ItemChoice i = new ItemChoice(c.GetID());
             i.Show();
         }
-
+        
         private void btnRollCheck_Click(object sender, RoutedEventArgs e)
         {
             RollSkillScreen r = new RollSkillScreen(c, this);
             r.Show();
+        }
+
+        private void btnHeart_Click(object sender, RoutedEventArgs e)
+        {
+            if (c.GetCurrentHealth() - 1 != -1)
+            {
+                c.SetCurrentHealth(c.GetCurrentHealth() - 1);
+                UpdateHealth();
+            }
+        }
+
+        private void btnInspiration_Click(object sender, RoutedEventArgs e)
+        {
+            c.ToggleInspiration();
+            
+        }
+
+        private void btnInitiative_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnHitDie_Click(object sender, RoutedEventArgs e)
+        {
+            int hitDice;
+            hitDice = db.GetHitDiceByClass(c.GetClassName());
+        }
+
+        private void btnHeart_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+        }
+
+        private void menuHeal_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber a = new AddNumber(this, "HEAL");
+            a.Show();
+        }
+
+        private void menuDeath_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void menuHurt_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber a = new AddNumber(this, "DAMAGE");
+            a.Show();
+        }
+
+        public Character GetCharacter()
+        {
+            return c;
         }
     }
 }
