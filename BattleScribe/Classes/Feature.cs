@@ -11,6 +11,7 @@ namespace BattleScribe.Classes
         public int id;
         public string name;
         public string description;
+        public bool isRacial;
 
         public Feature()
         {

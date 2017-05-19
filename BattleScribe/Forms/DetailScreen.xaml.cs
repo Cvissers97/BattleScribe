@@ -182,8 +182,6 @@ namespace BattleScribe.Forms
                 }
             }
 
-
-
             stackFeatures.Children.Clear();
 
             foreach (Feature f in raceFeatures)
@@ -242,6 +240,13 @@ namespace BattleScribe.Forms
         {
             ItemChoice temp = new ItemChoice();
             temp.Show();
+		}
+
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            PlayScreen play = new PlayScreen(c);
+            play.Show();
+            this.Close();
         }
     }
 }

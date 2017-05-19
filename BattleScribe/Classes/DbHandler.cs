@@ -130,11 +130,12 @@ namespace BattleScribe.Classes
         {
             List<Feature> features = new List<Feature>();
             int result = 0;
+            int maxHP = GetMaxHPByClass(c.GetClass());
 
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background)";
+            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background, MAX_HP, CUR_HP) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background, @MAX_HP, @MAX_HP)";
 
             try
             {
@@ -166,6 +167,8 @@ namespace BattleScribe.Classes
                     com.Parameters.AddWithValue(@"Int", c.GetInt());
                     com.Parameters.AddWithValue(@"Cha", c.GetCha());
                     com.Parameters.AddWithValue(@"Background", c.GetBackGround());
+                    com.Parameters.AddWithValue(@"MAX_HP", maxHP);
+                    
                     //com.Parameters.AddWithValue(@"MiscProfs", c.GetMiscProfs());
                     con.Open();
                     com.ExecuteNonQuery();
@@ -183,7 +186,45 @@ namespace BattleScribe.Classes
 
             return result;
         }
+		
+        public int GetMaxHPByClass(int classId)
+        {
+            int hp = 0;
 
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT HP_LVL_1 FROM CLASS WHERE ID = @ID";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"Id", classId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        hp = dReader.GetInt32(0);
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            con.Close();
+
+			return hp;
+		}
+			
         public List<Spell> GetSpellsByCharId(int id)
         {
             List<Spell> spells = new List<Spell>();
@@ -205,6 +246,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
+
                         Spell s = new Spell("0", dReader.GetString(1), Convert.ToByte(dReader.GetInt32(2)), dReader.GetString(3), dReader.GetString(4), dReader.GetString(5), dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
                         spells.Add(s);
                     }
@@ -382,6 +424,46 @@ namespace BattleScribe.Classes
 
         }
 
+        public List<Feature> GetFeaturesByRaceId(int id)
+        {
+            List<Feature> features = new List<Feature>();
+            string sql = "SELECT * FROM RACE_FEATURES WHERE RACE_ID = @ID";
+            con = new SqlCeConnection();
+            conString = Properties.Settings.Default.conString;
+            con.ConnectionString = conString;
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"ID", id);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        Feature feature = new Feature(dReader.GetInt32(0),
+                            dReader.GetString(2), dReader.GetString(3));
+
+                        features.Add(feature);
+                    }
+
+                    con.Close();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            return features;
+        }
+
         public List<Feature> GetFeaturesByRace(string name)
         {
             List<Feature> features = new List<Feature>();
@@ -459,6 +541,45 @@ namespace BattleScribe.Classes
             List<Feature> features = new List<Feature>();
 
             return features;
+        }
+
+        public int GetHitDiceByClass(string _class)
+        {
+            int hit = 0;
+
+            string sql = "SELECT HIT_DICE FROM CLASS WHERE NAME = @NAME";
+            con = new SqlCeConnection();
+            conString = Properties.Settings.Default.conString;
+            con.ConnectionString = conString;
+
+            try
+            {
+                    using (con)
+                    {
+                        com.Connection = con;
+                        com.CommandText = sql;
+                        com.Parameters.AddWithValue(@"NAME", _class);
+                        con.Open();
+                        com.ExecuteNonQuery();
+                        dReader = com.ExecuteReader();
+
+                        while (dReader.Read())
+                        {
+                            hit = Convert.ToInt32(dReader.GetString(0));
+                        }
+
+                        con.Close();
+                        com.Parameters.Clear();
+                    }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
+                throw;
+            }
+
+            MessageBox.Show(hit.ToString());
+            return hit;
         }
 
         public void InsertSpells(int[] spellId, int charId)

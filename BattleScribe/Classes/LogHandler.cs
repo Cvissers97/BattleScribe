@@ -9,21 +9,23 @@ namespace BattleScribe.Classes
 {
     public class LogHandler
     {
-        public LogHandler()
+        ListBox list;
+
+        public LogHandler(ListBox l)
         {
- 
+            this.list = l;
         }
 
-        public void DisplayResult(List<int> results, ListBox box)
+        public void DisplayResult(List<int> results)
         {
-            string message = "Results of the rolls: ";
+            string message = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + " - Results: ";
 
             foreach (int i in results)
             {
                 message += "[" + i.ToString() +"]" + " ";
             }
 
-            box.Items.Add(message);
+            list.Items.Add(message);
         }
     }
 }

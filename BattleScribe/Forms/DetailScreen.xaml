@@ -218,7 +218,7 @@
             </TabItem>
         </TabControl>
 
-        <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Left" Margin="593,632,0,0" VerticalAlignment="Top" Width="86" Height="39"/>
+        <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Left" Margin="593,632,0,0" VerticalAlignment="Top" Width="86" Height="39" Click="btnPlay_Click"/>
         <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="502,632,0,0" VerticalAlignment="Top" Width="86" Height="39"/>
         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="411,632,0,0" VerticalAlignment="Top" Width="86" Height="39"/>
 
