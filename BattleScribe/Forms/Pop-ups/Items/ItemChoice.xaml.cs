@@ -40,42 +40,42 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         private void btnItem_Click(object sender, RoutedEventArgs e)
         {
-            AddStandardItem a = new AddStandardItem(characterId);
+            AddStandardItem a = new AddStandardItem(screen);
             a.Show();
             this.Close();
         }
 
         private void btnWeapon_Click(object sender, RoutedEventArgs e)
         {
-            AddStandardWeapon a = new AddStandardWeapon(characterId);
+            AddStandardWeapon a = new AddStandardWeapon(screen);
             a.Show();
             this.Close();
         }
 
         private void btnArmour_Click(object sender, RoutedEventArgs e)
         {
-            AddStandardArmour a = new AddStandardArmour(characterId);
+            AddStandardArmour a = new AddStandardArmour(screen);
             a.Show();
             this.Close();
         }
 
         private void btnCustItem_Click(object sender, RoutedEventArgs e)
         {
-            AddItem a = new AddItem();
+            AddItem a = new AddItem(screen);
             a.Show();
             this.Close();
         }
 
         private void btnCustWeapon_Click(object sender, RoutedEventArgs e)
         {
-            AddWeapon a = new AddWeapon(characterId);
+            AddWeapon a = new AddWeapon(screen);
             a.Show();
             this.Close();
         }
 
         private void btnCustArmour_Click(object sender, RoutedEventArgs e)
         {
-            AddArmour a = new AddArmour(characterId);
+            AddArmour a = new AddArmour(screen);
             a.Show();
             this.Close();
         }
