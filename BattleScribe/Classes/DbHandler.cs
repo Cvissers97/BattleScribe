@@ -186,7 +186,7 @@ namespace BattleScribe.Classes
 
             return result;
         }
-
+		
         public int GetMaxHPByClass(int classId)
         {
             int hp = 0;
@@ -195,6 +195,17 @@ namespace BattleScribe.Classes
             con = new SqlCeConnection();
             con.ConnectionString = conString;
             string sql = "SELECT HP_LVL_1 FROM CLASS WHERE ID = @ID";
+			
+			return hp;
+		}
+			
+        public List<Spell> GetSpellsByCharId(int id)
+        {
+            List<Spell> spells = new List<Spell>();
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT s.*  FROM Character_SpellList list JOIN Spells s ON list.Spell_Id = s.Spell_Id WHERE list.Char_Id = @id ";
 
             try
             {
@@ -202,25 +213,28 @@ namespace BattleScribe.Classes
                 {
                     com.Connection = con;
                     com.CommandText = sql;
-                    com.Parameters.AddWithValue(@"ID", classId);
+                    com.Parameters.AddWithValue(@"Id", id);
                     con.Open();
                     com.ExecuteNonQuery();
                     dReader = com.ExecuteReader();
 
                     while (dReader.Read())
                     {
-                        hp = dReader.GetInt32(0);
+
+                        Spell s = new Spell("0", dReader.GetString(1), Convert.ToByte(dReader.GetInt32(2)), dReader.GetString(3), dReader.GetString(4), dReader.GetString(5), dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
+                        spells.Add(s);
                     }
+
+                    com.Parameters.Clear();
                 }
             }
-            catch (Exception error)
+            catch (Exception e)
             {
+                System.Windows.MessageBox.Show(e.Message.ToString());
                 con.Close();
-                MessageBox.Show(error.ToString());
-                throw;
             }
-
-            return hp;
+            con.Close();
+            return spells; 
         }
 
         public List<Skill> GetSkillsByCharId(int id)

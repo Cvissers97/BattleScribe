@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BattleScribe.Controls.Spells;
 
 namespace BattleScribe.Forms
 {
@@ -29,6 +30,7 @@ namespace BattleScribe.Forms
         private List<CharacterRace> charRaces;
         private List<Skill> skills;
         private List<Language> langs;
+        private List<Spell> spells;
         private Character c;
         private DbHandler db;
 
@@ -60,12 +62,14 @@ namespace BattleScribe.Forms
             skills = new List<Skill>();
             imgChar.Source = i.Source;
             langs = new List<Language>();
+            spells = new List<Spell>();
             charId = character.GetID();
             
 
             c = db.GetCharacterById(charId);
             skills = db.GetSkillsByCharId(charId);
             langs = db.GetLangsByCharId(charId);
+            spells = db.GetSpellsByCharId(charId);
             Init();
 
         }
@@ -103,6 +107,12 @@ namespace BattleScribe.Forms
                 cbox.IsChecked = l.acquired;
                 cbox.Content = l.name;
                 panelLanguages.Children.Add(cbox);
+            }
+
+            foreach (Spell s in spells)
+            {
+                SpellPrepControl pSpells = new SpellPrepControl(s);
+                panelSpells.Children.Add(pSpells);
             }
 
 
@@ -221,7 +231,7 @@ namespace BattleScribe.Forms
 
         private void btnAddSpell_Click(object sender, RoutedEventArgs e)
         {
-            AddSpell a = new AddSpell();
+            AddSpell a = new AddSpell(this);
             a.Show();
         }
 

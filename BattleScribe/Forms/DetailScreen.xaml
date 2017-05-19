@@ -166,7 +166,9 @@
             <TabItem Header="Magic">
                 <Grid Background="#f9f9f9">
                     <Label Content="Spells" HorizontalAlignment="Left" Margin="178,10,0,0" VerticalAlignment="Top"/>
-                    <ScrollViewer HorizontalAlignment="Left" Height="523" Margin="178,41,0,0" VerticalAlignment="Top" Width="484"/>
+                    <ScrollViewer HorizontalAlignment="Left" Height="523" Margin="178,41,0,0" VerticalAlignment="Top" Width="484">
+                        <StackPanel Name="panelSpells" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </ScrollViewer>
                     <Button Name="btnAddSpell" Content="Add Spell" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="163" Height="28" Click="btnAddSpell_Click"/>
                     <Button Name="btnPrepSpell" Content="Prepare / Unprepare" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
                     <Button Name="btnRemSpell" Content="Remove Spell" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="163" Height="28"/>

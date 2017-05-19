@@ -20,25 +20,28 @@ namespace BattleScribe.Forms.Pop_ups
         private Character c;
         private DbHandler db;
         private List<Spell> spells;
+        private Spell spell;
+        private DetailScreen screen;
 
-        public AddSpell()
+        public AddSpell(DetailScreen detailScreen)
         {
             InitializeComponent();
 
             db = new DbHandler();
             spells = new List<Spell>();
+            screen = detailScreen;
 
             GetSpells();
         }
 
-        public AddSpell(Character c)
+        public AddSpell(Character c, DetailScreen detailScreen)
         {
             InitializeComponent();
 
             this.c = c;
             db = new DbHandler();
             spells = new List<Spell>();
-
+            screen = detailScreen;
             GetSpells();
         }
 
@@ -67,7 +70,17 @@ namespace BattleScribe.Forms.Pop_ups
 
                 rtbDesc.Document.Blocks.Clear();
                 rtbDesc.Document.Blocks.Add(new Paragraph(new Run(temp.GetDesc())));
+                spell = temp;
             }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            BattleScribe.Controls.Spells.SpellPrepControl temp = new Controls.Spells.SpellPrepControl(spell);
+            screen.panelSpells.Children.Add(temp);
+
+            this.Close();
+
         }
     }
 }

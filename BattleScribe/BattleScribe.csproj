@@ -83,6 +83,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Spells\SpellPrepControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Weapon\WeaponControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +128,9 @@
     </Compile>
     <Compile Include="Controls\Skills\SkillControl.xaml.cs">
       <DependentUpon>SkillControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Spells\SpellPrepControl.xaml.cs">
+      <DependentUpon>SpellPrepControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Weapon\WeaponControl.xaml.cs">
       <DependentUpon>WeaponControl.xaml</DependentUpon>
