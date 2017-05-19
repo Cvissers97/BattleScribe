@@ -52,6 +52,16 @@ namespace BattleScribe.Forms
             UpdateFeatureList();
         }
 
+        private void UpdateStats()
+        {
+            lbSTR.Content = "STR " + c.GetStr() + " " + "(" + c.GetModifier("STR") + ")";
+            lbDEX.Content = "DEX " + c.GetDex() + " " + "(" + c.GetModifier("DEX") + ")";
+            lbCON.Content = "CON " + c.GetCon() + " " + "(" + c.GetModifier("CON") + ")";
+            lbINT.Content = "INT " + c.GetInt() + " " + "(" + c.GetModifier("INT") + ")";
+            lbWIS.Content = "WIS " + c.GetWis() + " " + "(" + c.GetModifier("WIS") + ")";
+            lbCHA.Content = "CHA " + c.GetCha() + " " + "(" + c.GetModifier("CHA") + ")";
+        }
+
         public DetailScreen(BattleScribe.Classes.Character character, Image i)
         {
             InitializeComponent();
@@ -116,7 +126,7 @@ namespace BattleScribe.Forms
             }
 
 
-
+            UpdateStats();
             UpdateFeatureList();
             UpdateFeatList();
         }
@@ -240,6 +250,88 @@ namespace BattleScribe.Forms
             PlayScreen play = new PlayScreen(c);
             play.Show();
             this.Close();
+        }
+
+        private void btnPlusSTR_Click(object sender, RoutedEventArgs e)
+        {
+            c.SetStr((byte)(c.GetStr() + 1));
+            UpdateStats();
+        }
+
+        private void btnMinSTR_Click(object sender, RoutedEventArgs e)
+        {
+            c.SetStr((byte)(c.GetStr() - 1));
+            UpdateStats();
+
+        }
+
+        private void btnPlusDEX_Click(object sender, RoutedEventArgs e)
+        {
+            c.SetDex((byte)(c.GetDex() + 1));
+            UpdateStats();
+
+        }
+
+        private void btnMinDEX_Click(object sender, RoutedEventArgs e)
+        {
+            c.SetDex((byte)(c.GetDex() - 1));
+            UpdateStats();
+
+        }
+
+        private void btnPlusCON_Click(object sender, RoutedEventArgs e)
+        {
+            c.SetCon((byte)(c.GetCon() + 1));
+            UpdateStats();
+
+        }
+
+        private void btnMinCON_Click(object sender, RoutedEventArgs e)
+        {
+            c.SetCon((byte)(c.GetCon() - 1));
+            UpdateStats();
+        }
+
+        private void btnPlusINT_Click(object sender, RoutedEventArgs e)
+        {
+            c.SetInt((byte)(c.GetInt() + 1));
+            UpdateStats();
+
+        }
+
+        private void btnMinINT_Click(object sender, RoutedEventArgs e)
+        {
+            c.SetInt((byte)(c.GetInt() - 1));
+            UpdateStats();
+
+        }
+
+        private void btnPlusWIS_Click(object sender, RoutedEventArgs e)
+        {
+            c.SetWis((byte)(c.GetWis() + 1));
+            UpdateStats();
+
+        }
+
+        private void btnMinWIS_Click(object sender, RoutedEventArgs e)
+        {
+            c.SetWis((byte)(c.GetWis() - 1));
+            UpdateStats();
+
+        }
+
+        private void btnMinCHA_Click(object sender, RoutedEventArgs e)
+        {
+            c.SetCha((byte)(c.GetCha() - 1));
+            UpdateStats();
+
+        }
+
+        private void btnPlusCHA_Click(object sender, RoutedEventArgs e)
+        {
+            c.SetCha((byte)(c.GetCha() + 1));
+            UpdateStats();
+
         }
     }
 }
