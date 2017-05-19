@@ -184,6 +184,43 @@ namespace BattleScribe.Classes
             return result;
         }
 
+        public List<Spell> GetSpellsByCharId(int id)
+        {
+            List<Spell> spells = new List<Spell>();
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT s.*  FROM Character_SpellList list JOIN Spells s ON list.Spell_Id = s.Spell_Id WHERE list.Char_Id = @id ";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"Id", id);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        Spell s = new Spell("0", dReader.GetString(1), Convert.ToByte(dReader.GetInt32(2)), dReader.GetString(3), dReader.GetString(4), dReader.GetString(5), dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
+                        spells.Add(s);
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            con.Close();
+            return spells; 
+        }
+
         public List<Skill> GetSkillsByCharId(int id)
         {
             List<Skill> skills = new List<Skill>();

@@ -40,7 +40,7 @@ namespace BattleScribe.Forms
 
             foreach(Character cha in c)
             {
-                MainScreenCharacter temp = new MainScreenCharacter(cha, cClass);
+                SpellPrepare temp = new SpellPrepare(cha, cClass);
                 stack.Children.Add(temp);
             }
         }
