@@ -9,6 +9,6 @@
     <Grid Margin="0,0,-2,-2" Width="450">
         <CheckBox Content="Prepared" FontWeight="Bold"  Margin="316,6,60,7"/>
         <Label Name="lblName" Content="Name" HorizontalContentAlignment="Center" Margin="0,0,325,0" FontWeight="Bold"  />
-        <Label Name="lblLvl" Content="level" HorizontalContentAlignment="Center" Margin="158,0,167,0" FontWeight="Bold"  />
+        <Label Name="lblLvl" Content="level" HorizontalContentAlignment="Center" Margin="158,0,139,0" FontWeight="Bold"  />
     </Grid>
 </UserControl>

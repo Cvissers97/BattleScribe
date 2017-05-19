@@ -14,7 +14,7 @@ DROP TABLE [Character_Languages];
 GO
 DROP TABLE [Character_Skills];
 GO
-DROP TABLE [Character_Spells];
+DROP TABLE [Character_SpellList];
 GO
 DROP TABLE [Character_Inventory];
 GO
