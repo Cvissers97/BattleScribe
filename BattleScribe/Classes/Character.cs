@@ -71,6 +71,7 @@ namespace BattleScribe.Classes
         private List<Feature> classFeatures;
 
         private List<Skill> skills;
+        private List<Language> langs;
         private List<Item> items;
         private List<Weapon> weapons;
         private List<Armour> armours;
@@ -456,6 +457,15 @@ namespace BattleScribe.Classes
             return temp;
         }
 
+        public void SetSkillList(List<Skill> skills)
+        {
+            this.skills = skills;
+        }
+
+        public void SetLangList(List<Language> lang)
+        {
+            this.langs = lang;
+        }
         public int GetLevel()
         {
             return level;

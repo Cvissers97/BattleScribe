@@ -627,14 +627,24 @@ namespace BattleScribe.Forms
 
         private void FinishClick(object sender, RoutedEventArgs e)
         {
-            int[] spellIds = new int[panelPrepSpells.Children.Count];
+            int checkedCantrips = 0;
+
+            foreach (CheckBox c in panelCantrips.Children)
+            {
+                if (c.IsChecked == true)
+                {
+                    checkedCantrips += 1;
+                }
+            }
+
+            int[] spellIds = new int[panelPrepSpells.Children.Count + checkedCantrips];
             int temp = 0;
 
             foreach (CheckBox c in panelCantrips.Children)
             {
-                foreach (Spell s in spellList)
+                foreach (Spell s in cantripList)
                 {
-                    if ((string)c.Content == s.GetName())
+                    if ((string)c.Content == s.GetName() && c.IsChecked == true)
                     {
                         spellIds[temp] = Convert.ToInt32(s.GetId());
                         temp++;
