@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BattleScribe.Classes;
 using BattleScribe.Classes.Items;
+using BattleScribe.Controls.Items;
 
 namespace BattleScribe.Forms.Pop_ups.Items
 {
@@ -25,6 +26,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
         private DetailScreen screen;
         private DbHandler db;
         private List<Item> itemList;
+        private Item item;
         
 
         public AddStandardItem()
@@ -49,7 +51,33 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         public void Init()
         {
-            
+            itemList = db.GetAllAdventuringGear();
+
+            foreach (Item i in itemList)
+            {
+                tbName.Items.Add(i.GetName());
+            }
         }
+
+        private void TbName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (Item i in itemList)
+            {
+                if (i.GetName() == (string)tbName.SelectedItem)
+                {
+                    tbWeight.Text = i.GetWeight();
+                    tbValue.Text = i.GetValue();
+                    item = i;
+                    break;
+                }
+            }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            ItemControl temp = new ItemControl(item);
+            screen.panelInv.Children.Add(temp);
+        }
+
     }
 }

@@ -224,6 +224,41 @@ namespace BattleScribe.Classes
 
 			return hp;
 		}
+
+        public List<Item> GetAllAdventuringGear()
+        {
+            List<Item> items = new List<Item>();
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT adv.* FROM Items i JOIN Adventuring_Gear adv ON i.Item_Id = adv.Id AND i.Type_Id = 3 ";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        items.Add(new Item(dReader.GetInt32(0), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), 3));
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            con.Close();
+            return items; 
+        }
 			
         public List<Spell> GetSpellsByCharId(int id)
         {

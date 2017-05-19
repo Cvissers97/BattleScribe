@@ -20,7 +20,7 @@ namespace BattleScribe.Classes.Items
         }
 
         public Armour(int id, string name, string description, 
-            string type, bool proficient, bool attuneable, double weight,
+            string type, bool proficient, bool attuneable, string weight,
             bool stealthDisadvantage, int baseArmour, int bonusArmour, string modifier)
             :base(id, name, description, type, proficient, attuneable, weight)
         {

@@ -148,7 +148,9 @@
                     <Button Name="btnAddMoney" Content="Add Money" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
                     <Button Name="btnLoseMoney" Content="Lose Money" HorizontalAlignment="Left" Margin="10,225,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
                     <Label Content="Inventory" HorizontalAlignment="Left" Margin="146,25,0,0" VerticalAlignment="Top"/>
-                    <ScrollViewer Name="scrollInventory" HorizontalAlignment="Left" Height="278" Margin="146,56,0,0" VerticalAlignment="Top" Width="509"/>
+                    <ScrollViewer Name="scrollInventory" HorizontalAlignment="Left" Height="278" Margin="146,56,0,0" VerticalAlignment="Top" Width="509">
+                        <StackPanel Name="panelInv" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </ScrollViewer>
                     <Label Content="Equipped" HorizontalAlignment="Left" Margin="147,375,0,0" VerticalAlignment="Top"/>
                     <ScrollViewer HorizontalAlignment="Left" Height="120" Margin="146,406,0,0" VerticalAlignment="Top" Width="509"/>
                     <Label Name="lbCarryCapacity" Content="Carry capacity 53 / 120 lbs" HorizontalAlignment="Left" Margin="506,339,0,0" VerticalAlignment="Top"/>

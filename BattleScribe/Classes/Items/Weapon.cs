@@ -24,7 +24,7 @@ namespace BattleScribe.Classes.Items
 
         public Weapon(int id, string name, string description, 
             int diceAmount, int diceSides,  string type, 
-            bool proficient, bool attuneable, double weight,
+            bool proficient, bool attuneable, string weight,
             string modifier, int bonusDamage, string baseDamageType, 
             string bonusDamageType)
             :base(id, name, description, type, proficient, attuneable, weight)

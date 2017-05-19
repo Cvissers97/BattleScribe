@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BattleScribe.Classes.Items;
 
 namespace BattleScribe.Controls.Items
 {
@@ -32,6 +33,17 @@ namespace BattleScribe.Controls.Items
             InitializeComponent();
 
             this.id = id;
+        }
+
+        public ItemControl(Item i)
+        {
+            InitializeComponent();
+            lbName.Content = i.GetName();
+            lbType.Content = "Adventuring gear";
+            lbValue.Content = i.GetValue();
+            lbWeight.Content = i.GetWeight();
+            lbAttune.Content = "-";
+            lbProficiency.Content = "-";
         }
     }
 }

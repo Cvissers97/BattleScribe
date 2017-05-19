@@ -13,8 +13,8 @@ namespace BattleScribe.Classes.Items
         protected string type;
         protected bool proficient;
         protected bool attuneable;
-        protected double weight;
-        protected double estimateValue;
+        protected string weight;
+        protected string estimateValue;
         protected bool isEquip;
         protected int id;
 
@@ -23,7 +23,16 @@ namespace BattleScribe.Classes.Items
 
         }
 
-        public Item(int id, string name, string description, string type, bool proficient, bool attuneable, double weight)
+        public Item(int id, string name, string cost, string weight, int typeId)
+        {
+            this.id = id;
+            this.name = name;
+            this.estimateValue = cost; ;
+            this.weight = weight;
+            this.type = typeId.ToString();
+        }
+
+        public Item(int id, string name, string description, string type, bool proficient, bool attuneable, string weight)
         {
             this.name = name;
             this.description = description;
@@ -85,22 +94,22 @@ namespace BattleScribe.Classes.Items
             this.attuneable = attuneable;
         }
 
-        public double GetWeight()
+        public string GetWeight()
         {
             return this.weight;
         }
 
-        public void SetWeight(double weight)
+        public void SetWeight(string weight)
         {
             this.weight = weight;
         }
 
-        public double GetValue()
+        public string GetValue()
         {
             return estimateValue;
         }
 
-        public void SetValue(double estimateValue)
+        public void SetValue(string estimateValue)
         {
             this.estimateValue = estimateValue;
         }

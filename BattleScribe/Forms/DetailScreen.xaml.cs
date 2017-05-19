@@ -25,7 +25,8 @@ namespace BattleScribe.Forms
     /// </summary>
     public partial class DetailScreen : Window
     {
-        private int curHPNum, charId;
+        public int charId;
+        private int curHPNum;
         private List<Feat> feats;
         private List<Feature> raceFeatures;
         private List<CharacterRace> charRaces;
@@ -251,7 +252,7 @@ namespace BattleScribe.Forms
 
         private void BtnAddItem_Click(object sender, RoutedEventArgs e)
         {
-            ItemChoice temp = new ItemChoice();
+            ItemChoice temp = new ItemChoice(this);
             temp.Show();
 		}
 
