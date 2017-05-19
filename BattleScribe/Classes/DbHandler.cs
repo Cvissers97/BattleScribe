@@ -195,7 +195,33 @@ namespace BattleScribe.Classes
             con = new SqlCeConnection();
             con.ConnectionString = conString;
             string sql = "SELECT HP_LVL_1 FROM CLASS WHERE ID = @ID";
-			
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"Id", classId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        hp = dReader.GetInt32(0);
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            con.Close();
+
 			return hp;
 		}
 			
