@@ -110,7 +110,7 @@ namespace BattleScribe.Classes
             cha = 40;
             dex = 2;
 
-            proficiency = 2;
+            proficiency = 0;
             maxHitPoints = 37;
             curHitPoints = maxHitPoints;
         }
@@ -181,7 +181,7 @@ namespace BattleScribe.Classes
             }
 
             //For testing
-            proficiency = 2;
+            proficiency = 0;
         }
 
         public Character(int id ,string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
