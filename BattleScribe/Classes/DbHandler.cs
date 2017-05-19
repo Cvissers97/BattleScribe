@@ -184,6 +184,130 @@ namespace BattleScribe.Classes
             return result;
         }
 
+        public List<Skill> GetSkillsByCharId(int id)
+        {
+            List<Skill> skills = new List<Skill>();
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT Acrobatics, Animal_Handeling, Arcana, Athletics, Deception, History, Insight, Intimidation, Investigation, Medicine, Nature, Perception, Performance, Religion, Sleight_Of_Hand, Stealth, Survival FROM Character_Skills WHERE Char_Id = @Id";
+            Character c = new Character();
+            List<string> skillNames = c.SkillsList();
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"Id", id);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        for (int i = 0; i < skillNames.Count; i++)
+                        {
+                            Skill s = new Skill(skillNames.ElementAt(i), dReader.GetBoolean(i));
+                            skills.Add(s);
+                        }
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            con.Close();
+            return skills;
+        }
+
+        public List<Language> GetLangsByCharId(int id)
+        {
+            List<Language> langs = new List<Language>();
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT Common, Dwarvish, Elvish, Giant, Gnomish, Goblin, Halfling, Orc, Abyssal, Celestial, Draconic, Deep_Speech, Infernal, Primordial, Sylvan, Undercommon FROM Character_Languages WHERE Char_Id = @Id";
+            Character c = new Character();
+            List<string> langNames = c.LangList();
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"Id", id);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        for (int i = 0; i < langNames.Count; i++)
+                        {
+                            Language l = new Language(langNames.ElementAt(i), dReader.GetBoolean(i));
+                            langs.Add(l);
+                        }
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            con.Close();
+            return langs;
+        }
+
+        public Character GetCharacterById(int id)
+        {
+            Character c = null;
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT * FROM Character WHERE Id = @Id";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"Id", id);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        c = new Character(dReader.GetInt32(0), dReader.GetString(1), dReader.GetString(9), dReader.GetString(5), dReader.GetString(6), dReader.GetString(15), dReader.GetBoolean(17), dReader.GetBoolean(16), dReader.GetString(12), dReader.GetString(11), dReader.GetString(7), dReader.GetString(13), dReader.GetString(14), dReader.GetByte(18), dReader.GetByte(19), dReader.GetByte(20), dReader.GetByte(21), dReader.GetByte(22), dReader.GetByte(23), dReader.GetInt32(2), dReader.GetString(10), dReader.GetInt32(24).ToString(), dReader.GetInt32(3).ToString(), dReader.GetInt32(4));
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            con.Close();
+
+
+
+            return c;
+        }
+
         public List<Character> GetCharacterForMain()
         {
             List<Character> temp = new List<Character>();

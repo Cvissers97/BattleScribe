@@ -45,5 +45,12 @@ namespace BattleScribe.Forms
             }
         }
 
+        private void BtnCreate_Click(object sender, RoutedEventArgs e)
+        {
+            CharacterCreationWizard wizard = new CharacterCreationWizard();
+            wizard.Show();
+            this.Close();
+        }
+
     }
 }

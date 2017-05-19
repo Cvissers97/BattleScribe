@@ -7,6 +7,17 @@ using System.Threading.Tasks;
 
 namespace BattleScribe.Classes
 {
+    public struct Language
+    {
+        public string name;
+        public bool acquired;
+
+        public Language(string name, bool acquired)
+        {
+            this.name = name;
+            this.acquired = acquired;
+        }
+    }
     public struct Skill
     {
         public string name;
@@ -116,7 +127,7 @@ namespace BattleScribe.Classes
         public Character(string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
             , string bonds, string ideals, string appearance, string flaws, string backstory, byte str, byte dex,
             byte con, byte _int, byte wis, byte cha, int charClass, string personality, string background,
-            string charRace, byte[] image)
+            string charRace, byte[] image, int level)
         {
             this.name = name;
             this.title = title;
@@ -141,6 +152,7 @@ namespace BattleScribe.Classes
             this.background = background;
             this.race = charRace;
             this.image = image;
+            this.level = level;
 
             items = new List<Item>();
             weapons = new List<Weapon>();
@@ -154,6 +166,42 @@ namespace BattleScribe.Classes
 
             //For testing
             proficiency = 2;
+        }
+
+        public Character(int id ,string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
+    , string bonds, string ideals, string appearance, string flaws, string backstory, byte str, byte dex,
+    byte con, byte _int, byte wis, byte cha, int charClass, string personality, string background,
+    string charRace, int level)
+        {
+            this.id = id;
+            this.name = name;
+            this.title = title;
+            this.age = age;
+            this.size = size;
+            this.alignment = alignment;
+            this.isFemale = isFemale;
+            this.isMale = isMale;
+            this.bonds = bonds;
+            this.ideals = ideals;
+            this.appearance = appearance;
+            this.flaws = flaws;
+            this.backstory = backstory;
+            this.str = str;
+            this.dex = dex;
+            this.con = con;
+            this._int = _int;
+            this.wis = wis;
+            this.cha = cha;
+            this.charClass = charClass;
+            this.personality = personality;
+            this.background = background;
+            this.race = charRace;
+            this.level = level;
+
+            items = new List<Item>();
+            weapons = new List<Weapon>();
+            armours = new List<Armour>();
+            skills = new List<Skill>();
         }
 
         public int GetModifier(string skillName)
@@ -343,13 +391,18 @@ namespace BattleScribe.Classes
             temp.Add("Abyssal");
             temp.Add("Celestial");
             temp.Add("Draconic");
-            temp.Add("DeepSpeech");
+            temp.Add("Deep Speech");
             temp.Add("Infernal");
             temp.Add("Primordial");
             temp.Add("Sylvan");
             temp.Add("Under Common");
 
             return temp;
+        }
+
+        public int GetLevel()
+        {
+            return level;
         }
 
         public byte[] GetImage()

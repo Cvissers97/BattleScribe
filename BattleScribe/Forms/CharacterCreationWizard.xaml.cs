@@ -683,10 +683,23 @@ namespace BattleScribe.Forms
                 }
             }
 
-            CreateCharacter();
-            db.InsertSkills(chosenSkills, charId);
-            db.InsertLangs(chosenLangs, charId);
-            db.InsertSpells(spellIds, charId);
+            try
+            {
+                CreateCharacter();
+                db.InsertSkills(chosenSkills, charId);
+                db.InsertLangs(chosenLangs, charId);
+                db.InsertSpells(spellIds, charId);
+                MessageBox.Show("Character created. Have fun!");
+                MainMenu m = new MainMenu();
+                m.Show();
+                this.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong during character creation. Please try again");
+            }
+            
+
         }
         #endregion
 
@@ -702,7 +715,7 @@ namespace BattleScribe.Forms
             Character charac = new Character(tbName.Text, tbTitle.Text, tbAge.Text, tbSize.Text, tbAlignment.Text, (bool)chFemale.IsChecked, (bool)chMale.IsChecked, 
                 GetRichTbString(rtbBonds), GetRichTbString(rtbIdeals), GetRichTbString(rtbAppearance), GetRichTbString(rtbFlaws), GetRichTbString(rtbBackstory), tempStr,
                 tempDex, tempCon, tempInt, tempWis, tempCha, (cbClasses.SelectedIndex + 1), GetRichTbString(rtbPersonality), (cbBackgrounds.SelectedIndex + 1).ToString(),
-                (cbRaces.SelectedIndex + 1).ToString(), imageArray);
+                (cbRaces.SelectedIndex + 1).ToString(), imageArray, 1);
 
             charId = db.CreateCharacter(charac);
         }
