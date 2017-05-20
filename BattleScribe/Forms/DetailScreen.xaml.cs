@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BattleScribe.Controls.Spells;
 using BattleScribe.Forms.Pop_ups.Items;
+using BattleScribe.Classes.Items;
 
 namespace BattleScribe.Forms
 {
@@ -26,7 +27,7 @@ namespace BattleScribe.Forms
     public partial class DetailScreen : Window
     {
         public int charId;
-        private int curHPNum;
+        private int curHPNum, totalItemWeight;
         private List<Feat> feats;
         private List<Feature> raceFeatures;
         private List<CharacterRace> charRaces;
@@ -35,6 +36,7 @@ namespace BattleScribe.Forms
         private List<Spell> spells;
         private Character c;
         private DbHandler db;
+        private List<Item> itemsInInv;
 
         public DetailScreen()
         {
@@ -75,9 +77,8 @@ namespace BattleScribe.Forms
             imgChar.Source = i.Source;
             langs = new List<Language>();
             spells = new List<Spell>();
+            itemsInInv = new List<Item>();
             charId = character.GetID();
-
-            
 
             c = db.GetCharacterById(charId);
             skills = db.GetSkillsByCharId(charId);
@@ -101,6 +102,7 @@ namespace BattleScribe.Forms
             rtbPersonality.Document.Blocks.Add(new Paragraph(new Run(c.GetPersonality())));
             tbTitle.Text = c.GetTitle();
             tbSize.Text = c.GetSize();
+            lbCarryCapacity.Content = "Carry capacity: " + totalItemWeight.ToString() + " / " + c.CalcCarryWeight().ToString();
 
             if (c.GetIsMale())
                 chMale.IsChecked = true;
@@ -167,6 +169,13 @@ namespace BattleScribe.Forms
         {
             feats.Add(feat);
             UpdateFeatList();
+        }
+
+        private int CalcWeigth()
+        {
+            int temp = 0;
+
+            return temp;
         }
 
         private void UpdateFeatList()
@@ -342,7 +351,42 @@ namespace BattleScribe.Forms
         {
             c.SetCha((byte)(c.GetCha() + 1));
             UpdateStats();
+        }
 
+        public void AddItemToInventory(Item i)
+        {
+            itemsInInv.Add(i);
+        }
+
+        public List<Item> GetItemsInInventory()
+        {
+            return itemsInInv;
+        }
+
+        public void UpdateCarryCapacity()
+        {
+            totalItemWeight = 0;
+            foreach (Item i in itemsInInv)
+            {
+                string weight = i.GetWeight();
+                string temp = string.Empty;
+                int result;
+                
+                for (int j = 0; j < weight.Length; j++)
+                {
+                    if (int.TryParse(weight[j].ToString(), out result))
+                    {
+                        temp += weight[j];
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                if(temp != "")
+                    totalItemWeight += Convert.ToInt32(temp);
+            }
+            lbCarryCapacity.Content = "Carry capacity: " + totalItemWeight.ToString() + " / " + c.CalcCarryWeight().ToString();
         }
     }
 }

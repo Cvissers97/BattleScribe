@@ -39,7 +39,7 @@ namespace BattleScribe.Controls.Items
         {
             InitializeComponent();
             lbName.Content = i.GetName();
-            lbType.Content = "Adventuring gear";
+            lbType.Content = "Adv. gear";
             lbValue.Content = i.GetValue();
             lbWeight.Content = i.GetWeight();
             lbAttune.Content = "-";

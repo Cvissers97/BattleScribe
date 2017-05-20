@@ -372,6 +372,13 @@ namespace BattleScribe.Classes
             return mod;
         }
 
+        public int CalcCarryWeight()
+        {
+            int temp = str;
+            temp *= 15;
+            return temp;
+        }
+
         //Calc the modifier for skills
         public string CalcMod(string stat, double raceMod)
         {
