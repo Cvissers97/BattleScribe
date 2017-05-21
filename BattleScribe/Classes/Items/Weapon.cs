@@ -12,7 +12,6 @@ namespace BattleScribe.Classes.Items
         private string modifier;
         //Bonus damage can be positive and negative.
         private float bonusDamage;
-
         private string baseDamageType;
         private string bonusDamageType;
 

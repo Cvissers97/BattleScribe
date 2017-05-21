@@ -13,6 +13,7 @@ namespace BattleScribe.Classes.Items
         private string modifier;
         //Bonus armor can be a negative integer, as well.
         private int bonusArmour;
+        private int strReq;
 
         public Armour()
         {
@@ -21,13 +22,15 @@ namespace BattleScribe.Classes.Items
 
         public Armour(int id, string name, string description, 
             string type, bool proficient, bool attuneable, string weight,
-            bool stealthDisadvantage, int baseArmour, int bonusArmour, string modifier, int quantity)
+            bool stealthDisadvantage, int baseArmour, int bonusArmour, string modifier, int quantity, int strReq, string estimatedValue)
             :base(id, name, description, type, proficient, attuneable, weight, quantity)
         {
             this.stealthDisadvantage = stealthDisadvantage;
             this.baseArmour = baseArmour;
             this.modifier = modifier;
             this.bonusArmour = bonusArmour;
+            this.strReq = strReq;
+            this.estimateValue = estimatedValue;
         }
 
         public bool GetStealthDis()
@@ -48,6 +51,11 @@ namespace BattleScribe.Classes.Items
         public void SetBaseArmour(int amount)
         {
             this.baseArmour = amount;
+        }
+
+        public int GetStrReq()
+        {
+            return this.strReq;
         }
 
         public string GetModifier()

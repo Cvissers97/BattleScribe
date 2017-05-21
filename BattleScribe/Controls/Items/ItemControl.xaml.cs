@@ -58,7 +58,19 @@ namespace BattleScribe.Controls.Items
             lbAttune.Content = w.GetAttunement();
             lbProficiency.Content = "WIP";
             lbQuantity.Content = w.GetQuantity();
-             this.item = w;
+            this.item = w;
+        }
+
+        public ItemControl(Armour a)
+        {
+            InitializeComponent();
+            lbName.Content = a.GetName();
+            lbType.Content = a.GetItemType();
+            lbWeight.Content = a.GetWeight();
+            lbAttune.Content = a.GetAttunement();
+            lbProficiency.Content = "WIP";
+            lbQuantity.Content = a.GetQuantity();
+            this.item = a;
         }
 
         private void UserControl_MouseRightButtonUp(object sender, MouseButtonEventArgs e)

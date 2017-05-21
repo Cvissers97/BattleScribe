@@ -194,7 +194,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "SELECT Name FROM Backgrounds";
+            string sql = "SELECT Name FROM Backgrounds ORDER BY Name";
 
             try
             {
@@ -357,8 +357,6 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        float temp = Convert.ToSingle(dReader.GetDouble(4));
-
                         weapons.Add(new Weapon(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(9), dReader.GetString(2), dReader.GetString(8), false, dReader.GetBoolean(6), Convert.ToSingle(dReader.GetDouble(4)).ToString(), dReader.GetString(11), Convert.ToSingle(dReader.GetDouble(12)), dReader.GetString(3), "geen idee", 0));
                     }
 
@@ -372,6 +370,41 @@ namespace BattleScribe.Classes
             }
             con.Close();
             return weapons;
+        }
+
+        public List<Armour> GetAllArmour()
+        {
+            List<Armour> armour = new List<Armour>();
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT ar.*, i.Id FROM Items i JOIN Armour ar ON i.Item_Id = ar.Id AND i.Type_Id = 2";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        armour.Add(new Armour(dReader.GetInt32(13), dReader.GetString(1),dReader.GetString(2), "Armour", false, dReader.GetBoolean(12), Convert.ToSingle(dReader.GetDouble(9)).ToString(), dReader.GetBoolean(8), dReader.GetInt32(5),  dReader.GetInt32(4), dReader.GetString(6), 1, dReader.GetInt32(7), Convert.ToSingle(dReader.GetDouble(10)).ToString()));
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+                con.Close();
+            }
+            con.Close();
+            return armour;
         }
 			
         public List<Spell> GetSpellsByCharId(int id)

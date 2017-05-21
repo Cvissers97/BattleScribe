@@ -393,17 +393,22 @@ namespace BattleScribe.Forms
 
             foreach (Item i in itemsInInv)
             {
+                ItemControl itemC = new ItemControl();
+
                 if (i.GetType().Name == "Item")
                 {
-                    ItemControl itemC = new ItemControl(i);
-                    panelInv.Children.Add(itemC);
+                    itemC = new ItemControl(i);
                 }
                 else if (i.GetType().Name == "Weapon")
                 {
-                    ItemControl itemC = new ItemControl((Weapon)i);
-                    panelInv.Children.Add(itemC);
+                    itemC = new ItemControl((Weapon)i);
+                    
                 }
-
+                else if (i.GetType().Name == "Armour")
+                {
+                    itemC = new ItemControl((Armour)i);
+                }
+                panelInv.Children.Add(itemC);
             }
             UpdateCarryCapacity();
         }

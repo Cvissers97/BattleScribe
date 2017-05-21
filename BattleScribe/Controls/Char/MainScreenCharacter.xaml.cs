@@ -35,12 +35,17 @@ namespace BattleScribe.Controls.Char
             character = c;
             InitializeComponent();
 
-            using(MemoryStream ms = new MemoryStream(c.GetImage()))
+            if (c.GetImage().Count() > 1)
             {
-                BitmapDecoder decoder = BitmapDecoder.Create(ms,
-                BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
-                image.Source = decoder.Frames[0];
+                using (MemoryStream ms = new MemoryStream(c.GetImage()))
+                {
+                    BitmapDecoder decoder = BitmapDecoder.Create(ms,
+                    BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                    image.Source = decoder.Frames[0];
+                }
             }
+
+
             lblName.Content = c.GetName();
 
             foreach(CharacterClass cl in cClass)

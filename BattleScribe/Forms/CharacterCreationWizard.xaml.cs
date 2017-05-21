@@ -51,6 +51,7 @@ namespace BattleScribe.Forms
             lbPoints.Content = "Total Points: " + totalPoints;
             cbSpellList = new List<CheckBox>();
             backgrounds = new List<string>();
+            imageArray = new byte[0];
         }
         
         //Add all stats to a list
@@ -300,6 +301,10 @@ namespace BattleScribe.Forms
             cbSkillList = new List<CheckBox>();
             cbLangList = new List<CheckBox>();
             backgrounds = db.GetBackgrounds();
+            cbBackgrounds.SelectedIndex = 0;
+            cbClasses.SelectedIndex = 0;
+            cbRaces.SelectedIndex = 0;
+
 
             foreach (string s in backgrounds)
             {
@@ -881,7 +886,8 @@ namespace BattleScribe.Forms
                 imgChar.Source = temp;
             }
 
-            imageArray = System.IO.File.ReadAllBytes(dlg.FileName);
+            if(dlg.FileName != null)
+                imageArray = System.IO.File.ReadAllBytes(dlg.FileName);
         }
     }
 }
