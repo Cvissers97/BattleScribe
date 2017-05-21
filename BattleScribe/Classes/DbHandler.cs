@@ -270,7 +270,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "SELECT adv.* FROM Items i JOIN Adventuring_Gear adv ON i.Item_Id = adv.Id AND i.Type_Id = 3 ";
+            string sql = "SELECT adv.*, i.Id FROM Items i JOIN Adventuring_Gear adv ON i.Item_Id = adv.Id AND i.Type_Id = 3";
 
             try
             {
@@ -284,7 +284,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        items.Add(new Item(dReader.GetInt32(0), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), 3));
+                        items.Add(new Item(dReader.GetInt32(4), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), 3, 0));
                     }
 
                     com.Parameters.Clear();
@@ -297,6 +297,43 @@ namespace BattleScribe.Classes
             }
             con.Close();
             return items; 
+        }
+
+        public List<Weapon> GetAllWeapons()
+        {
+            List<Weapon> weapons = new List<Weapon>();
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT wep.*, i.Id FROM Items i JOIN Weapons wep ON i.Item_Id = wep.Id AND i.Type_Id = 1";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        float temp = Convert.ToSingle(dReader.GetDouble(4));
+
+                        weapons.Add(new Weapon(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(9), dReader.GetString(2), dReader.GetString(8), false, dReader.GetBoolean(6), Convert.ToSingle(dReader.GetDouble(4)).ToString(), dReader.GetString(11), Convert.ToSingle(dReader.GetDouble(12)), dReader.GetString(3), "geen idee", 0));
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+                con.Close();
+            }
+            con.Close();
+            return weapons;
         }
 			
         public List<Spell> GetSpellsByCharId(int id)

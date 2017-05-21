@@ -18,7 +18,7 @@
         <CheckBox Name="chkAttune" Content="Attunable" HorizontalAlignment="Left" Margin="188,79,0,0" VerticalAlignment="Top"/>
         <CheckBox Name="chkProf" Content="Proficient" HorizontalAlignment="Left" Margin="188,99,0,0" VerticalAlignment="Top"/>
         <Label Content="Weight" HorizontalAlignment="Left" Margin="183,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.623,-0.192"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="236,45,0,0" TextWrapping="Wrap" Text="Weight" VerticalAlignment="Top" Width="95"/>
+        <TextBox Name="tbWeight" HorizontalAlignment="Left" Height="23" Margin="236,45,0,0" TextWrapping="Wrap" Text="Weight" VerticalAlignment="Top" Width="95"/>
         <Label Content="lbs" HorizontalAlignment="Left" Margin="336,41,0,0" VerticalAlignment="Top"/>
 
     </Grid>

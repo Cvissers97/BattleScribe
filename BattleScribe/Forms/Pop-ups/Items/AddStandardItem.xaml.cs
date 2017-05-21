@@ -75,10 +75,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            ItemControl temp = new ItemControl(item);
-            screen.panelInv.Children.Add(temp);
             screen.AddItemToInventory(item);
-            screen.UpdateCarryCapacity();
         }
 
     }

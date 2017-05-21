@@ -165,11 +165,10 @@ namespace BattleScribe.Forms
 
             foreach (Weapon w in c.GetAllWeapons())
             {
-                temp = new ItemControl(w.GetID());
+                temp = new ItemControl(w.GetId());
                 temp.lbName.Content = w.GetName();
                 temp.lbType.Content = w.GetType();
                 temp.lbProficiency.Content = w.GetProficient();
-                temp.lbValue.Content = w.GetValue();
                 temp.lbWeight.Content = w.GetWeight();
                 temp.lbAttune.Content = w.GetAttunement();
                 stackInventory.Children.Add(temp);
@@ -177,11 +176,10 @@ namespace BattleScribe.Forms
 
             foreach (Item i in c.GetAllItems())
             {
-                temp = new ItemControl(i.GetID());
+                temp = new ItemControl(i.GetId());
                 temp.lbName.Content = i.GetName();
                 temp.lbType.Content = i.GetItemType();
                 temp.lbProficiency.Content = i.GetProficient();
-                temp.lbValue.Content = i.GetValue();
                 temp.lbWeight.Content = i.GetWeight();
                 temp.lbAttune.Content = i.GetAttunement();
                 stackInventory.Children.Add(temp);
@@ -189,11 +187,10 @@ namespace BattleScribe.Forms
 
             foreach (Armour a in c.GetAllArmours())
             {
-                temp = new ItemControl(a.GetID());
+                temp = new ItemControl(a.GetId());
                 temp.lbName.Content = a.GetName();
                 temp.lbType.Content = a.GetItemType();
                 temp.lbProficiency.Content = a.GetProficient();
-                temp.lbValue.Content = a.GetValue();
                 temp.lbWeight.Content = a.GetWeight();
                 temp.lbAttune.Content = a.GetAttunement();
                 stackInventory.Children.Add(temp);

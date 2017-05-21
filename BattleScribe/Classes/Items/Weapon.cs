@@ -8,11 +8,10 @@ namespace BattleScribe.Classes.Items
 {
     public class Weapon : Item
     {
-        private int diceAmount;
-        private int diceSides;
+        private string damage;
         private string modifier;
         //Bonus damage can be positive and negative.
-        private int bonusDamage;
+        private float bonusDamage;
 
         private string baseDamageType;
         private string bonusDamageType;
@@ -23,38 +22,22 @@ namespace BattleScribe.Classes.Items
         }
 
         public Weapon(int id, string name, string description, 
-            int diceAmount, int diceSides,  string type, 
+            string damage,  string type, 
             bool proficient, bool attuneable, string weight,
-            string modifier, int bonusDamage, string baseDamageType, 
-            string bonusDamageType)
-            :base(id, name, description, type, proficient, attuneable, weight)
+            string modifier, float bonusDamage, string baseDamageType, 
+            string bonusDamageType, int quantity)
+            :base(id, name, description, type, proficient, attuneable, weight, quantity)
         {
-            this.diceAmount = diceAmount;
-            this.diceSides = diceSides;
+            this.damage = damage;
             this.modifier = modifier;
             this.bonusDamage = bonusDamage;
             this.baseDamageType = baseDamageType;
             this.bonusDamageType = bonusDamageType;
         }
 
-        public int GetDiceAmount()
+        public string GetDamage()
         {
-            return this.diceAmount;
-        }
-
-        public void SetDiceAmount(int amount)
-        {
-            this.diceAmount = amount;
-        }
-
-        public int GetDiceSides()
-        {
-            return this.diceSides;
-        }
-
-        public void SetDiceSides(int amount)
-        {
-            this.diceSides = amount;
+            return this.damage;
         }
 
         public string GetModifier()

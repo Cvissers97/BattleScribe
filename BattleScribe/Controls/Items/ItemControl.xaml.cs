@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BattleScribe.Classes.Items;
+using BattleScribe.Forms.Pop_ups.Items;
 
 namespace BattleScribe.Controls.Items
 {
@@ -22,6 +23,7 @@ namespace BattleScribe.Controls.Items
     public partial class ItemControl : UserControl
     {
         private int id;
+        private Item item;
 
         public ItemControl()
         {
@@ -40,10 +42,29 @@ namespace BattleScribe.Controls.Items
             InitializeComponent();
             lbName.Content = i.GetName();
             lbType.Content = "Adv. gear";
-            lbValue.Content = i.GetValue();
             lbWeight.Content = i.GetWeight();
             lbAttune.Content = "-";
             lbProficiency.Content = "-";
+            lbQuantity.Content = i.GetQuantity();
+            this.item = i;
+        }
+
+        public ItemControl(Weapon w)
+        {
+            InitializeComponent();
+            lbName.Content = w.GetName();
+            lbType.Content = w.GetItemType();
+            lbWeight.Content = w.GetWeight();
+            lbAttune.Content = w.GetAttunement();
+            lbProficiency.Content = "WIP";
+            lbQuantity.Content = w.GetQuantity();
+             this.item = w;
+        }
+
+        private void UserControl_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ViewItem temp = new ViewItem(item);
+            temp.Show();
         }
     }
 }

@@ -16,23 +16,28 @@ namespace BattleScribe.Classes.Items
         protected string weight;
         protected string estimateValue;
         protected bool isEquip;
-        protected int id;
+        protected int id, quantity;
 
         public Item()
         {
 
         }
 
-        public Item(int id, string name, string cost, string weight, int typeId)
+        public Item(int id, string name, string cost, string weight, int typeId, int quantity)
         {
             this.id = id;
             this.name = name;
             this.estimateValue = cost; ;
             this.weight = weight;
             this.type = typeId.ToString();
+            this.quantity = quantity;
+            if (this.quantity == 0)
+            {
+                this.quantity = 1;
+            }
         }
 
-        public Item(int id, string name, string description, string type, bool proficient, bool attuneable, string weight)
+        public Item(int id, string name, string description, string type, bool proficient, bool attuneable, string weight, int quantity)
         {
             this.name = name;
             this.description = description;
@@ -42,6 +47,11 @@ namespace BattleScribe.Classes.Items
             this.weight = weight;
             this.id = id;
             isEquip = false;
+            this.quantity = quantity;
+            if (this.quantity == 0)
+            {
+                this.quantity = 1;
+            }
         }
 
         public string GetName()
@@ -124,9 +134,19 @@ namespace BattleScribe.Classes.Items
             isEquip = equip;
         }
 
-        public int GetID()
+        public int GetId()
         {
             return this.id;
+        }
+
+        public int GetQuantity()
+        {
+            return this.quantity;
+        }
+
+        public void IncrementQuantity()
+        {
+            this.quantity += 1;
         }
     }
 }

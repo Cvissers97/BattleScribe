@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using BattleScribe.Controls.Spells;
 using BattleScribe.Forms.Pop_ups.Items;
 using BattleScribe.Classes.Items;
+using BattleScribe.Controls.Items;
 
 namespace BattleScribe.Forms
 {
@@ -355,7 +356,44 @@ namespace BattleScribe.Forms
 
         public void AddItemToInventory(Item i)
         {
-            itemsInInv.Add(i);
+            bool duplicate = false;
+            foreach (Item item in itemsInInv)
+            {
+                if (item.GetId() == i.GetId())
+                {
+                    i.IncrementQuantity();
+                    duplicate = true;
+                }
+            }
+            if (!duplicate)
+            {
+                ItemControl temp = new ItemControl(i);
+                panelInv.Children.Add(temp);
+                itemsInInv.Add(i);
+            }
+            UpdateInventory();
+            
+        }
+
+        private void UpdateInventory()
+        {
+            panelInv.Children.Clear();
+
+            foreach (Item i in itemsInInv)
+            {
+                if (i.GetType().Name == "Item")
+                {
+                    ItemControl itemC = new ItemControl(i);
+                    panelInv.Children.Add(itemC);
+                }
+                else if (i.GetType().Name == "Weapon")
+                {
+                    ItemControl itemC = new ItemControl((Weapon)i);
+                    panelInv.Children.Add(itemC);
+                }
+
+            }
+            UpdateCarryCapacity();
         }
 
         public List<Item> GetItemsInInventory()
@@ -383,8 +421,15 @@ namespace BattleScribe.Forms
                         break;
                     }
                 }
-                if(temp != "")
-                    totalItemWeight += Convert.ToInt32(temp);
+
+                if (temp != "")
+                {
+                    result = (Convert.ToInt32(temp) * i.GetQuantity()); 
+                    totalItemWeight += result;
+                }
+                
+
+                
             }
             lbCarryCapacity.Content = "Carry capacity: " + totalItemWeight.ToString() + " / " + c.CalcCarryWeight().ToString();
         }
