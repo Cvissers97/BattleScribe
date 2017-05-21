@@ -88,6 +88,24 @@ namespace BattleScribe.Forms
 
         private void UpdateFeatures()
         {
+            List<int> acquiredFeatureIds = db.GetCharacterClassFeaturesIds(c.GetID());
+            List<Feature> allClassFeatures = db.GetFeaturesByClass(Convert.ToString(c.GetClass()));
+            List<Feature> acquiredClassFeatures = new List<Feature>();
+
+            foreach (int i in acquiredFeatureIds)
+            {
+                foreach (Feature f in allClassFeatures)
+                {
+                    if (f.id == i)
+                    {
+                        acquiredClassFeatures.Add(f);
+                        break;
+                    }
+                }
+            }
+
+            c.SetClassFeatures(acquiredClassFeatures);
+
             panelFeatures.Children.Clear();
 
             FeatureControl temp;

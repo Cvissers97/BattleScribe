@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BattleScribe.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,16 +23,18 @@ namespace BattleScribe.Controls.Features
     {
         private int id;
         private bool isRacial;
+        public Feature feature;
 
         public FeatureControl()
         {
             InitializeComponent();
         }
 
-        public FeatureControl(int id, bool racial)
+        public FeatureControl(int id, bool racial, Feature feature)
         {
             InitializeComponent();
 
+            this.feature = feature;
             this.id = id;
             this.isRacial = racial;
         }
