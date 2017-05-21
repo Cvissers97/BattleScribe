@@ -32,7 +32,7 @@ namespace BattleScribe.Forms
         int totalPoints, cantripsKnown, spellsKnown, charId;
         List<CharacterRace> race;
         byte raceStr, raceDex, raceCon, raceInt, raceWis, raceCha;
-        List<string> allLangs, allSkills;
+        List<string> allLangs, allSkills, backgrounds;
         List<Spell> spellList, cantripList, pickedSpells;
         List<CheckBox> cbSpellList, cbLangList, cbSkillList, cbCantripList;
         string[] spellsKnownArray;
@@ -50,7 +50,7 @@ namespace BattleScribe.Forms
             totalPoints = 27; // max amount of points according to D&D rules
             lbPoints.Content = "Total Points: " + totalPoints;
             cbSpellList = new List<CheckBox>();
-            cbBackgrounds.Items.Add("Hermit");
+            backgrounds = new List<string>();
         }
         
         //Add all stats to a list
@@ -299,6 +299,13 @@ namespace BattleScribe.Forms
             allSkills = character.SkillsList();
             cbSkillList = new List<CheckBox>();
             cbLangList = new List<CheckBox>();
+            backgrounds = db.GetBackgrounds();
+
+            foreach (string s in backgrounds)
+            {
+                cbBackgrounds.Items.Add(s);
+            }
+
 
             //fill dropdown with races
             foreach (CharacterRace r in race)

@@ -93,6 +93,12 @@ namespace BattleScribe.Forms
 
         private void Init()
         {
+            rtbAppearance.Document.Blocks.Clear();
+            rtbBackstory.Document.Blocks.Clear();
+            rtbBonds.Document.Blocks.Clear();
+            rtbIdeals.Document.Blocks.Clear();
+            rtbPersonality.Document.Blocks.Clear();
+            tbTitle.Text = c.GetTitle();
             tbName.Text = c.GetName();
             tbAge.Text = c.GetAge();
             tbAlignment.Text = c.GetAlignment();
@@ -110,6 +116,9 @@ namespace BattleScribe.Forms
             if (c.GetIsFemale())
                 chFemale.IsChecked = true;
             rtbFlaws.Document.Blocks.Add(new Paragraph(new Run(c.GetFlaws())));
+
+            ItemLegend itemLegend = new ItemLegend();
+            panelInv.Children.Add(itemLegend);
 
             foreach (Skill s in skills)
             {
@@ -379,6 +388,9 @@ namespace BattleScribe.Forms
         {
             panelInv.Children.Clear();
 
+            ItemLegend itemLegend = new ItemLegend();
+            panelInv.Children.Add(itemLegend);
+
             foreach (Item i in itemsInInv)
             {
                 if (i.GetType().Name == "Item")
@@ -427,9 +439,6 @@ namespace BattleScribe.Forms
                     result = (Convert.ToInt32(temp) * i.GetQuantity()); 
                     totalItemWeight += result;
                 }
-                
-
-                
             }
             lbCarryCapacity.Content = "Carry capacity: " + totalItemWeight.ToString() + " / " + c.CalcCarryWeight().ToString();
         }

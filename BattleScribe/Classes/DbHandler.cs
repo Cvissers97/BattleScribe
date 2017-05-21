@@ -187,6 +187,44 @@ namespace BattleScribe.Classes
             return result;
         }
 
+        public List<string> GetBackgrounds()
+        {
+            List<string> backgrounds = new List<string>();
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT Name FROM Backgrounds";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        backgrounds.Add(dReader.GetString(0));
+                    }
+
+                    com.Parameters.Clear();
+                    con.Close();
+                }
+            }
+            catch (Exception error)
+            {
+                con.Close();
+                MessageBox.Show(error.ToString());
+                throw;
+            }
+
+            return backgrounds;
+        }
+
         public int GetRaceMovementById(int raceId)
         {
             int move = 30;

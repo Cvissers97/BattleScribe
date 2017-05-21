@@ -11,6 +11,6 @@
         <Label Name="lbProficiency" Content="Proficiency" Width="72" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Margin="303,0,0,0" BorderThickness="1" BorderBrush="#ffffff"/>
         <Label Name="lbWeight" Content="Weight" Width="62" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Margin="438,0,0,0" BorderThickness="1" BorderBrush="#ffffff"/>
         <Label Name="lbAttune" Content="Attuneable" Width="72" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Margin="231,0,0,0" BorderThickness="1" BorderBrush="#ffffff"/>
-        <Label Name="lbValue" Content="Value" Width="63" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Margin="375,0,0,0" BorderThickness="1" BorderBrush="#ffffff"/>
+        <Label Name="lbValue" Content="Qty." Width="63" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Margin="375,0,0,0" BorderThickness="1" BorderBrush="#ffffff"/>
     </Grid>
 </UserControl>
