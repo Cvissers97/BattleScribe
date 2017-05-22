@@ -1028,6 +1028,42 @@ namespace BattleScribe.Classes
             }
         }
 
+        public CharacterClass GetClassById(int classId)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT * FROM Class WHERE id = @id";
+            CharacterClass temp = new CharacterClass();
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.Add(@"id", classId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        temp = new CharacterClass(dReader.GetString(1), dReader.GetInt32(0), dReader.GetString(2), dReader.GetString(3), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
+                    }
+                    con.Close();
+                    com.Parameters.Clear();
+                }
+                return temp;
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+                return null;
+            }
+        }
+
 
         public List<Item> GetAllItems()
         {

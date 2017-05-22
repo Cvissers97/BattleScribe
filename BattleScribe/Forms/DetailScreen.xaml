@@ -203,16 +203,31 @@
                         </FlowDocument>
                     </RichTextBox>
                     <Label Content="Other Proficiencies" HorizontalAlignment="Left" Margin="344,160,0,0" VerticalAlignment="Top"/>
-
-
-
+                    <RichTextBox Name="rtbWepProfs" HorizontalAlignment="Left" Height="157" Margin="10,390,0,0" VerticalAlignment="Top" Width="312">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <RichTextBox Name="rtbArmourProfs" HorizontalAlignment="Left" Height="157" Margin="344,390,0,0" VerticalAlignment="Top" Width="308">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Label Content="Weapons" HorizontalAlignment="Left" Margin="10,359,0,0" VerticalAlignment="Top"/>
+                    <Label HorizontalAlignment="Left" Margin="344,359,0,0" VerticalAlignment="Top">
+                        <Label Content="Armour"/>
+                    </Label>
                 </Grid>
             </TabItem>
         </TabControl>
 
         <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Left" Margin="593,632,0,0" VerticalAlignment="Top" Width="86" Height="39" Click="btnPlay_Click"/>
         <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="502,632,0,0" VerticalAlignment="Top" Width="86" Height="39"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="411,632,0,0" VerticalAlignment="Top" Width="86" Height="39"/>
+        <Button x:Name="btnMainMenu" Content="Main menu" HorizontalAlignment="Left" Margin="411,632,0,0" VerticalAlignment="Top" Width="86" Height="39" Click="BtnMainMenu_Click"/>
 
 
 

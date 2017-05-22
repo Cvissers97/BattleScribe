@@ -37,6 +37,7 @@ namespace BattleScribe.Forms
         private List<Language> langs;
         private List<Spell> spells;
         private Character c;
+        private CharacterClass cClass;
         private DbHandler db;
         private List<Item> itemsInInv;
         
@@ -81,9 +82,12 @@ namespace BattleScribe.Forms
             langs = new List<Language>();
             spells = new List<Spell>();
             itemsInInv = new List<Item>();
+            cClass = new CharacterClass();
             charId = character.GetID();
 
+            
             c = db.GetCharacterById(charId);
+            cClass = db.GetClassById(c.GetClass());
             skills = db.GetSkillsByCharId(charId);
             langs = db.GetLangsByCharId(charId);
             spells = db.GetSpellsByCharId(charId);
@@ -100,6 +104,8 @@ namespace BattleScribe.Forms
             rtbBonds.Document.Blocks.Clear();
             rtbIdeals.Document.Blocks.Clear();
             rtbPersonality.Document.Blocks.Clear();
+            rtbArmourProfs.Document.Blocks.Clear();
+            rtbWepProfs.Document.Blocks.Clear();
             tbTitle.Text = c.GetTitle();
             tbName.Text = c.GetName();
             tbAge.Text = c.GetAge();
@@ -109,6 +115,8 @@ namespace BattleScribe.Forms
             rtbBonds.Document.Blocks.Add(new Paragraph(new Run(c.GetBonds())));
             rtbIdeals.Document.Blocks.Add(new Paragraph(new Run(c.GetIdeals())));
             rtbPersonality.Document.Blocks.Add(new Paragraph(new Run(c.GetPersonality())));
+            rtbWepProfs.Document.Blocks.Add(new Paragraph(new Run(cClass.GetWepProfs())));
+            rtbArmourProfs.Document.Blocks.Add(new Paragraph(new Run(cClass.GetArmourProfs())));
             tbTitle.Text = c.GetTitle();
             tbSize.Text = c.GetSize();
             lbCarryCapacity.Content = "Carry capacity: " + totalItemWeight.ToString() + " / " + c.CalcCarryWeight().ToString();
@@ -478,6 +486,13 @@ namespace BattleScribe.Forms
         {
             AddFeature add = new AddFeature(c, this);
             add.Show();
+        }
+
+        private void BtnMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenu m = new MainMenu();
+            m.Show();
+            this.Close();
         }
     }
 }
