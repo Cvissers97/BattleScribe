@@ -80,6 +80,8 @@ namespace BattleScribe.Classes
         private List<Feature> raceFeatures;
         private List<Feature> classFeatures;
 
+        private List<Feat> feats;
+
         private List<Skill> skills;
         private List<Language> langs;
         private List<Item> items;
@@ -755,6 +757,16 @@ namespace BattleScribe.Classes
         public void SetClassFeatures(List<Feature> input)
         {
             this.classFeatures = input;
+        }
+
+        public void SetCharFeats(List<Feat> input)
+        {
+            this.feats = input;
+        }
+
+        public List<Feat> GetFeats()
+        {
+            return this.feats;
         }
 
         public void SetSlots(byte slot1, byte slot2, byte slot3, byte slot4,

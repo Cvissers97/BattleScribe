@@ -81,7 +81,9 @@
                     </ScrollViewer>
 
                     <Label Content="Feats" HorizontalAlignment="Left" Margin="84,411,0,0" VerticalAlignment="Top"/>
-                    <ScrollViewer Name="scrollFeats" HorizontalAlignment="Left" Height="129" Margin="81,437,0,0" VerticalAlignment="Top" Width="137"/>
+                    <ScrollViewer Name="scrollFeats" HorizontalAlignment="Left" Height="129" Margin="81,437,0,0" VerticalAlignment="Top" Width="137">
+                        <StackPanel Name="stackFeats" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </ScrollViewer>
 
                     <Label Content="Features" HorizontalAlignment="Left" Margin="241,411,0,0" VerticalAlignment="Top"/>
                     <ScrollViewer Name="scrollFeatures" HorizontalAlignment="Left" Height="129" Margin="237,437,0,0" VerticalAlignment="Top" Width="203">

@@ -40,7 +40,8 @@ namespace BattleScribe.Forms
         private CharacterClass cClass;
         private DbHandler db;
         private List<Item> itemsInInv;
-        
+        private List<Feature> acquiredClassFeatures;
+        private List<Feat> acquiredFeats;
 
         public DetailScreen()
         {
@@ -181,7 +182,7 @@ namespace BattleScribe.Forms
 
         private void btnAddFeat_Click(object sender, RoutedEventArgs e)
         {
-            AddFeat add = new AddFeat(this);
+            AddFeat add = new AddFeat(this, c);
             add.Show();
         }
 
@@ -198,16 +199,34 @@ namespace BattleScribe.Forms
             return temp;
         }
 
-        private void UpdateFeatList()
+        public void UpdateFeatList()
         {
             //Connect to the character database later, fill in dynamically
-
             stackFeats.Children.Clear();
+
+            List<int> featIds = db.GetCharacterClassFeatIds(c.GetID());
+            List<Feat> allFeats = db.GetAllFeats();
+            acquiredFeats = new List<Feat>();
+
+            foreach (int i in featIds)
+            {
+                foreach (Feat f in allFeats)
+                {
+                    if (f.id == i)
+                    {
+                        acquiredFeats.Add(f);
+                        break;
+                    }
+                }
+            }
+
+            c.SetCharFeats(acquiredFeats);
+            feats = c.GetFeats();
 
             foreach (Feat f in feats)
             {
-                //Make new entries for the scrollviewer
-                FeatControl feat = new FeatControl(f.id);
+                //Make some childeren :^)
+                FeatControl feat = new FeatControl(f, false);
                 feat.lbFeatName.Content = f.GetName();
                 stackFeats.Children.Add(feat);
             }
@@ -217,7 +236,7 @@ namespace BattleScribe.Forms
         {
             List<int> featureClassIds = db.GetCharacterClassFeaturesIds(c.GetID());
             List<Feature> allClassFeatures = db.GetFeaturesByClass(Convert.ToString(c.GetClass()));
-            List<Feature> acquiredClassFeatures = new List<Feature>();
+            acquiredClassFeatures = new List<Feature>();
 
             stackFeatures.Children.Clear();
 
@@ -262,38 +281,18 @@ namespace BattleScribe.Forms
         private void btnRemoveFeat_Click(object sender, RoutedEventArgs e)
         {
             // List of Feat IDs that need to be removed.
-            List<int> remIdList = new List<int>();
-            List<Feat> newFeats = new List<Feat>();
 
-            if (feats.Count > 0)
+            List<int> ToRemoveIds = new List<int>();
+
+            foreach (FeatControl fcon in stackFeats.Children)
             {
-                foreach (Feat f in feats)
+                if (fcon.GetSelect())
                 {
-                    newFeats.Add(f);
+                    ToRemoveIds.Add(fcon.feat.id);
                 }
             }
 
-
-            foreach (FeatControl featCon in stackFeats.Children)
-            {
-                if (featCon.GetSelect())
-                {
-                    remIdList.Add(featCon.GetID());
-                }
-            }
-
-            foreach (int i in remIdList)
-            {
-                foreach (Feat f in feats)
-                {
-                    if (f.id == i)
-                    {
-                        newFeats.Remove(f);
-                    }
-                }
-            }
-
-            feats = newFeats;
+            db.RemoveFeats(c.GetID(), ToRemoveIds);
             UpdateFeatList();
         }
 
@@ -488,11 +487,28 @@ namespace BattleScribe.Forms
             add.Show();
         }
 
+
         private void BtnMainMenu_Click(object sender, RoutedEventArgs e)
         {
             MainMenu m = new MainMenu();
             m.Show();
             this.Close();
+		}
+
+        private void btnRemoveFeature_Click(object sender, RoutedEventArgs e)
+        {
+            List<int> ToRemoveIds = new List<int>();
+
+            foreach (FeatureControl fcon in stackFeatures.Children)
+            {
+                if (fcon.isSelected)
+                {
+                    ToRemoveIds.Add(fcon.feature.id);
+                }
+            }
+
+            db.RemoveFeatures(c.GetID(), ToRemoveIds);
+            UpdateFeatureList();
         }
     }
 }
