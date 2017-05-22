@@ -752,6 +752,11 @@ namespace BattleScribe.Classes
             return features;
         }
 
+        public void SetClassFeatures(List<Feature> input)
+        {
+            this.classFeatures = input;
+        }
+
         public void SetSlots(byte slot1, byte slot2, byte slot3, byte slot4,
             byte slot5, byte slot6, byte slot7, byte slot8, byte slot9)
         {

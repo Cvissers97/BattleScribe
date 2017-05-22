@@ -232,7 +232,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "SELECT MovementSpeed FROM RACE WHERE ID = @ID";
+            string sql = "SELECT Movement_Speed FROM RACE WHERE ID = @ID";
 
             try
             {
@@ -718,9 +718,42 @@ namespace BattleScribe.Classes
             return features;
         }
 
-        public List<Feature> GetFeaturesByClass(string race)
+        public List<Feature> GetFeaturesByClass(string classId)
         {
             List<Feature> features = new List<Feature>();
+
+            string sql = "SELECT Id, NAME, DESCRIPTION FROM CLASS_FEATURES WHERE CLASS_ID = @classId";
+            con = new SqlCeConnection();
+            conString = Properties.Settings.Default.conString;
+            con.ConnectionString = conString;
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"classId", classId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        Feature feat = new Feature(dReader.GetInt32(0), dReader.GetString(1), dReader.GetString(2));
+                        features.Add(feat);
+                    }
+
+                    con.Close();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
+                con.Close();
+                throw;
+            }
 
             return features;
         }
@@ -1039,6 +1072,114 @@ namespace BattleScribe.Classes
 
             return items;
         }
-        
+
+        public List<int> GetCharacterClassFeaturesIds(int charId)
+        {
+            List<int> featureIds = new List<int>();
+            string sql;
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            sql = "SELECT FeatureId FROM CHARACTER_FEATURES WHERE CharId = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        featureIds.Add(dReader.GetInt32(0));
+                    }
+
+                    com.Parameters.Clear();
+                    con.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+                com.Parameters.Clear();
+                con.Close();
+            }
+
+            return featureIds;
+        }
+
+        public bool AddFeatureToCharacter(int characterId, int classFeatureId)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT COUNT(*) FROM CHARACTER_FEATURES WHERE CharId = @charId AND FeatureId = @featureId";
+            int count = 0;
+            
+            try
+            {
+                using (con)
+                {
+                    com.Parameters.AddWithValue(@"charId", characterId);
+                    com.Parameters.AddWithValue(@"featureId", classFeatureId);
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        count = dReader.GetInt32(0);
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+                com.Parameters.Clear();
+                con.Close();
+                return false;
+            }
+
+            if (count > 0)
+            {
+                return false;
+            }
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+		    sql = "INSERT INTO CHARACTER_FEATURES(CharId, FeatureId)VALUES(@charId, @featureId)";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", characterId);
+                    com.Parameters.AddWithValue(@"featureId", classFeatureId);
+
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                return false;
+            }
+
+            return true;
+        }
     }
 }

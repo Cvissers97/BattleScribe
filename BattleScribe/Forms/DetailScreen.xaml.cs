@@ -19,6 +19,7 @@ using BattleScribe.Controls.Spells;
 using BattleScribe.Forms.Pop_ups.Items;
 using BattleScribe.Classes.Items;
 using BattleScribe.Controls.Items;
+using BattleScribe.Forms.Pop_ups.Features;
 
 namespace BattleScribe.Forms
 {
@@ -38,6 +39,7 @@ namespace BattleScribe.Forms
         private Character c;
         private DbHandler db;
         private List<Item> itemsInInv;
+        
 
         public DetailScreen()
         {
@@ -203,8 +205,33 @@ namespace BattleScribe.Forms
             }
         }
 
-        private void UpdateFeatureList()
+        public void UpdateFeatureList()
         {
+            List<int> featureClassIds = db.GetCharacterClassFeaturesIds(c.GetID());
+            List<Feature> allClassFeatures = db.GetFeaturesByClass(Convert.ToString(c.GetClass()));
+            List<Feature> acquiredClassFeatures = new List<Feature>();
+
+            stackFeatures.Children.Clear();
+
+            foreach (int i in featureClassIds)
+            {
+                foreach (Feature f in allClassFeatures)
+                {
+                    if (f.id == i)
+                    {
+                        acquiredClassFeatures.Add(f);
+                        break;
+                    }
+                }
+            }
+
+            foreach (Feature f in acquiredClassFeatures)
+            {
+                FeatureControl feature = new FeatureControl(f.id, false, f);
+                feature.lbName.Content = f.GetName();
+                stackFeatures.Children.Add(feature);
+            }
+
             // Merge acquired features with race features here, then transform them into stackpanels
             charRaces = db.GetRaces();
             foreach(CharacterRace r in charRaces)
@@ -215,11 +242,10 @@ namespace BattleScribe.Forms
                 }
             }
 
-            stackFeatures.Children.Clear();
 
             foreach (Feature f in raceFeatures)
             {
-                FeatureControl feature = new FeatureControl(f.id, true);
+                FeatureControl feature = new FeatureControl(f.id, true, f);
                 feature.lbName.Content = f.GetName();
                 stackFeatures.Children.Add(feature);
             }
@@ -446,6 +472,12 @@ namespace BattleScribe.Forms
                 }
             }
             lbCarryCapacity.Content = "Carry capacity: " + totalItemWeight.ToString() + " / " + c.CalcCarryWeight().ToString();
+        }
+
+        private void btnAddFeature_Click(object sender, RoutedEventArgs e)
+        {
+            AddFeature add = new AddFeature(c, this);
+            add.Show();
         }
     }
 }
