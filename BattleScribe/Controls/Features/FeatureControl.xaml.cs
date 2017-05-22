@@ -24,6 +24,8 @@ namespace BattleScribe.Controls.Features
         private int id;
         private bool isRacial;
         public Feature feature;
+        public bool isSelected;
+        private Brush normalBackground;
 
         public FeatureControl()
         {
@@ -37,6 +39,8 @@ namespace BattleScribe.Controls.Features
             this.feature = feature;
             this.id = id;
             this.isRacial = racial;
+            normalBackground = this.Background;
+            isSelected = false;
         }
 
         public FeatureControl(int id)
@@ -44,6 +48,23 @@ namespace BattleScribe.Controls.Features
             InitializeComponent();
 
             this.id = id;
+        }
+
+        private void Grid_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!isRacial)
+            {
+                isSelected = !isSelected;
+            }
+
+            if (isSelected)
+            {
+                this.Background = new SolidColorBrush(System.Windows.Media.Colors.Aquamarine);
+            }
+            else
+            {
+                this.Background = normalBackground;
+            }
         }
     }
 }

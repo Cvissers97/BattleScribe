@@ -1,6 +1,7 @@
 ﻿using BattleScribe.Classes;
 using BattleScribe.Classes.Items;
 using BattleScribe.Controls;
+using BattleScribe.Controls.Feats;
 using BattleScribe.Controls.Features;
 using BattleScribe.Controls.Items;
 using BattleScribe.Controls.Spells;
@@ -30,6 +31,7 @@ namespace BattleScribe.Forms
         private DbHandler db;
         private Image imgTempDat;
         private List<Feature> features;
+        private List<Feat> feats;
         byte lifeThrow;
         byte deathThrow;
 
@@ -60,6 +62,7 @@ namespace BattleScribe.Forms
             UpdateHealth();
             UpdateStats();
             UpdateFeatures();
+            UpdateFeats();
             UpdateDeath();
             UpdateSpells();
 
@@ -103,22 +106,47 @@ namespace BattleScribe.Forms
                     }
                 }
             }
-
             c.SetClassFeatures(acquiredClassFeatures);
 
             panelFeatures.Children.Clear();
-
-            FeatureControl temp;
-            int idCount = 0;
-
             features = c.GetAllFeatures();
+            FeatureControl temp;
 
             foreach (Feature f in features)
             {
-                temp = new FeatureControl(idCount);
+                temp = new FeatureControl(f.id, true, f);
                 temp.lbName.Content = f.GetName();
                 panelFeatures.Children.Add(temp);
-                idCount++;
+            }
+        }
+
+        private void UpdateFeats()
+        {
+            List<int> acquiredFeatIds = db.GetCharacterClassFeatIds(c.GetID());
+            List<Feat> allFeats = db.GetAllFeats();
+            List<Feat> acquiredFeats = new List<Feat>();
+
+            foreach (int i in acquiredFeatIds)
+            {
+                foreach (Feat f in allFeats)
+                {
+                    if (f.id == i)
+                    {
+                        acquiredFeats.Add(f);
+                        break;
+                    }
+                }
+            }
+
+            c.SetCharFeats(acquiredFeats);
+            feats = c.GetFeats();
+
+            FeatControl temp;
+            foreach (Feat f in feats)
+            {
+                temp = new FeatControl(f, true);
+                temp.lbFeatName.Content = f.GetName();
+                stackFeats.Children.Add(temp);
             }
         }
 
@@ -276,6 +304,7 @@ namespace BattleScribe.Forms
                 {
                     MessageBox.Show("Stable");
                     lifeThrow = 0;
+                    deathThrow = 0;
                 }
             }
             else
@@ -287,6 +316,7 @@ namespace BattleScribe.Forms
                 {
                     MessageBox.Show("ded");
                     deathThrow = 0;
+                    lifeThrow = 0;
                 }
             }
             UpdateDeath();

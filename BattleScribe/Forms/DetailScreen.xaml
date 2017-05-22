@@ -122,7 +122,7 @@
                     <Button Name="btnAddFeat" Content="Add Feat" HorizontalAlignment="Left" Margin="304,39,0,0" VerticalAlignment="Top" Width="75" Click="btnAddFeat_Click"/>
                     <Button Name="btnRemoveFeat" Content="Remove" HorizontalAlignment="Left" Margin="304,64,0,0" VerticalAlignment="Top" Width="75" Click="btnRemoveFeat_Click"/>
                     <Button Name="btnAddFeature" Content="Add Feature" HorizontalAlignment="Left" Margin="304,216,0,0" VerticalAlignment="Top" Width="75" Click="btnAddFeature_Click"/>
-                    <Button Name="btnRemoveFeature" Content="Remove" HorizontalAlignment="Left" Margin="304,241,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Name="btnRemoveFeature" Content="Remove" HorizontalAlignment="Left" Margin="304,241,0,0" VerticalAlignment="Top" Width="75" Click="btnRemoveFeature_Click"/>
                     <Label Content="Proficiency" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
                     <TextBox Name="tbProficiency" HorizontalAlignment="Left" Height="23" Margin="114,137,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="120"/>
 

@@ -79,8 +79,8 @@ namespace BattleScribe.Classes
             }
             con.Close();
         }
-            
-        
+
+
 
         public void InsertSkills(List<bool> skills, int charId)
         {
@@ -168,14 +168,14 @@ namespace BattleScribe.Classes
                     com.Parameters.AddWithValue(@"Cha", c.GetCha());
                     com.Parameters.AddWithValue(@"Background", c.GetBackGround());
                     com.Parameters.AddWithValue(@"MAX_HP", maxHP);
-                    
+
                     //com.Parameters.AddWithValue(@"MiscProfs", c.GetMiscProfs());
                     con.Open();
                     com.ExecuteNonQuery();
                     com.CommandText = "SELECT @@IDENTITY";
                     result = Convert.ToInt32(com.ExecuteScalar());
                     com.Parameters.Clear();
-                  
+
                 }
             }
             catch (Exception e)
@@ -299,8 +299,8 @@ namespace BattleScribe.Classes
             }
             con.Close();
 
-			return hp;
-		}
+            return hp;
+        }
 
         public List<Item> GetAllAdventuringGear()
         {
@@ -334,7 +334,7 @@ namespace BattleScribe.Classes
                 con.Close();
             }
             con.Close();
-            return items; 
+            return items;
         }
 
         public List<Weapon> GetAllWeapons()
@@ -392,7 +392,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        armour.Add(new Armour(dReader.GetInt32(13), dReader.GetString(1),dReader.GetString(2), "Armour", false, dReader.GetBoolean(12), Convert.ToSingle(dReader.GetDouble(9)).ToString(), dReader.GetBoolean(8), dReader.GetInt32(5),  dReader.GetInt32(4), dReader.GetString(6), 1, dReader.GetInt32(7), Convert.ToSingle(dReader.GetDouble(10)).ToString()));
+                        armour.Add(new Armour(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(2), "Armour", false, dReader.GetBoolean(12), Convert.ToSingle(dReader.GetDouble(9)).ToString(), dReader.GetBoolean(8), dReader.GetInt32(5), dReader.GetInt32(4), dReader.GetString(6), 1, dReader.GetInt32(7), Convert.ToSingle(dReader.GetDouble(10)).ToString()));
                     }
 
                     com.Parameters.Clear();
@@ -406,7 +406,7 @@ namespace BattleScribe.Classes
             con.Close();
             return armour;
         }
-			
+
         public List<Spell> GetSpellsByCharId(int id)
         {
             List<Spell> spells = new List<Spell>();
@@ -442,7 +442,7 @@ namespace BattleScribe.Classes
                 con.Close();
             }
             con.Close();
-            return spells; 
+            return spells;
         }
 
         public List<Skill> GetSkillsByCharId(int id)
@@ -590,7 +590,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        temp.Add(new Character(dReader.GetInt32(0), (byte[])dReader["Image"], dReader.GetString(2),dReader.GetInt32(3), dReader.GetInt32(4)));
+                        temp.Add(new Character(dReader.GetInt32(0), (byte[])dReader["Image"], dReader.GetString(2), dReader.GetInt32(3), dReader.GetInt32(4)));
                     }
 
                     com.Parameters.Clear();
@@ -769,23 +769,23 @@ namespace BattleScribe.Classes
 
             try
             {
-                    using (con)
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"NAME", _class);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
                     {
-                        com.Connection = con;
-                        com.CommandText = sql;
-                        com.Parameters.AddWithValue(@"NAME", _class);
-                        con.Open();
-                        com.ExecuteNonQuery();
-                        dReader = com.ExecuteReader();
-
-                        while (dReader.Read())
-                        {
-                            hit = Convert.ToInt32(dReader.GetString(0));
-                        }
-
-                        con.Close();
-                        com.Parameters.Clear();
+                        hit = Convert.ToInt32(dReader.GetString(0));
                     }
+
+                    con.Close();
+                    com.Parameters.Clear();
+                }
             }
             catch (Exception error)
             {
@@ -827,7 +827,7 @@ namespace BattleScribe.Classes
                 }
             }
             con.Close();
-                
+
         }
 
         //Method to get a list of all races and its features
@@ -852,7 +852,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        CharacterRace r = new CharacterRace(dReader.GetInt32(0),dReader.GetString(1));
+                        CharacterRace r = new CharacterRace(dReader.GetInt32(0), dReader.GetString(1));
                         temp.Add(r);
                     }
                     con.Close();
@@ -898,13 +898,13 @@ namespace BattleScribe.Classes
                              dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
                         spellList.Add(s);
                     }
-                    
+
                     con.Close();
                     com.Parameters.Clear();
                 }
                 return spellList;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 System.Windows.MessageBox.Show(e.Message.ToString());
                 con.Close();
@@ -938,7 +938,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        class_id = dReader.GetInt32(0);   
+                        class_id = dReader.GetInt32(0);
                     }
 
                     //con.Close();
@@ -1048,7 +1048,7 @@ namespace BattleScribe.Classes
                 {
                     com.Connection = con;
                     com.CommandText = sql;
-                   // com.Parameters.AddWithValue(@"name", );
+                    // com.Parameters.AddWithValue(@"name", );
                     con.Open();
                     com.ExecuteNonQuery();
                     dReader = com.ExecuteReader();
@@ -1120,7 +1120,7 @@ namespace BattleScribe.Classes
             con.ConnectionString = conString;
             string sql = "SELECT COUNT(*) FROM CHARACTER_FEATURES WHERE CharId = @charId AND FeatureId = @featureId";
             int count = 0;
-            
+
             try
             {
                 using (con)
@@ -1157,7 +1157,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-		    sql = "INSERT INTO CHARACTER_FEATURES(CharId, FeatureId)VALUES(@charId, @featureId)";
+            sql = "INSERT INTO CHARACTER_FEATURES(CharId, FeatureId)VALUES(@charId, @featureId)";
 
             try
             {
@@ -1180,6 +1180,228 @@ namespace BattleScribe.Classes
             }
 
             return true;
+        }
+
+        public void RemoveFeatures(int charId, List<int> featureIds)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "DELETE FROM CHARACTER_FEATURES WHERE FeatureId = @featureID AND CharId = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+
+                    foreach (int i in featureIds)
+                    {
+                        com.Parameters.AddWithValue(@"charId", charId);
+                        com.Parameters.AddWithValue(@"featureId", i);
+                        com.ExecuteNonQuery();
+                        com.Parameters.Clear();
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                con.Close();
+            }
+
+            con.Close();
+        }
+
+        public void RemoveFeats(int charId, List<int> featIds)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "DELETE FROM CHARACTER_FEATS WHERE FeatId = @featId AND CharId = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+
+                    foreach (int i in featIds)
+                    {
+                        com.Parameters.AddWithValue(@"charId", charId);
+                        com.Parameters.AddWithValue(@"featId", i);
+                        com.ExecuteNonQuery();
+                        com.Parameters.Clear();
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                con.Close();
+            }
+
+            con.Close();
+        }
+
+
+        public bool AddFeatToCharacter(int characterId, int classFeatId)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT COUNT(*) FROM CHARACTER_FEATS WHERE CharId = @charId AND FeatId = @featId";
+            int count = 0;
+
+            try
+            {
+                using (con)
+                {
+                    com.Parameters.AddWithValue(@"charId", characterId);
+                    com.Parameters.AddWithValue(@"featId", classFeatId);
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        count = dReader.GetInt32(0);
+                    }
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+                com.Parameters.Clear();
+                con.Close();
+                return false;
+            }
+
+            if (count > 0)
+            {
+                return false;
+            }
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            sql = "INSERT INTO CHARACTER_FEATS(CharId, FeatId)VALUES(@charId, @featId)";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", characterId);
+                    com.Parameters.AddWithValue(@"featId", classFeatId);
+
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                return false;
+            }
+
+            return true;
+
+        }
+
+        public List<int> GetCharacterClassFeatIds(int charId)
+        {
+            List<int> featIds = new List<int>();
+            string sql;
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            sql = "SELECT FeatId FROM CHARACTER_FEATS WHERE CharId = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        featIds.Add(dReader.GetInt32(0));
+                    }
+
+                    com.Parameters.Clear();
+                    con.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+                com.Parameters.Clear();
+                con.Close();
+            }
+
+            return featIds;
+        }
+
+        public List<Feat> GetAllFeats()
+        {
+            List<Feat> feats = new List<Feat>();
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT Name, Description, Prereq, Id FROM Feats";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        Feat temp = new Feat(dReader.GetString(0), dReader.GetString(1),
+                            dReader.GetString(2), dReader.GetInt32(3));
+
+                        feats.Add(temp);
+                    }
+
+                    com.Parameters.Clear();
+                    con.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+                com.Parameters.Clear();
+                con.Close();
+            }
+
+            return feats;
         }
     }
 }
