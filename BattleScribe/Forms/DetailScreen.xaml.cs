@@ -403,7 +403,7 @@ namespace BattleScribe.Forms
             {
                 if (item.GetId() == i.GetId())
                 {
-                    i.IncrementQuantity();
+                    item.IncrementQuantity();
                     duplicate = true;
                 }
             }
@@ -414,7 +414,6 @@ namespace BattleScribe.Forms
                 itemsInInv.Add(i);
             }
             UpdateInventory();
-            
         }
 
         private void UpdateInventory()
@@ -509,6 +508,36 @@ namespace BattleScribe.Forms
 
             db.RemoveFeatures(c.GetID(), ToRemoveIds);
             UpdateFeatureList();
+        }
+
+        private void btnDropItem_Click(object sender, RoutedEventArgs e)
+        {
+            List<ItemControl> controlList = new List<ItemControl>();
+
+            foreach (ItemControl control in panelInv.Children.OfType<ItemControl>())
+            {
+                if (control.GetIsSelected())
+                {
+                    controlList.Add(control);
+                }
+            }
+
+            foreach (ItemControl c in controlList)
+            {
+                Item temp = c.GetItem();
+
+                if (temp.GetQuantity() > 1)
+                {
+                    temp.DecrementQuantity();
+                }
+                else
+                {
+                    panelInv.Children.Remove(c);
+                    itemsInInv.Remove(c.GetItem());
+                }
+            }
+
+            UpdateInventory();
         }
     }
 }

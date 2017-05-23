@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="29" d:DesignWidth="500" Background="#fff375"
-             MouseRightButtonUp="UserControl_MouseRightButtonUp">
+             MouseRightButtonUp="UserControl_MouseRightButtonUp"
+             MouseLeftButtonUp="UserControl_MouseLeftButtonUp"
+             >
     <Grid>
         <Label Name="lbName" Content="Name" Width="169" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" BorderThickness="1" BorderBrush="#ffffff"/>
         <Label Name="lbType" Content="Type" Width="62" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" BorderThickness="1" BorderBrush="#ffffff" Margin="169,0,0,0"/>

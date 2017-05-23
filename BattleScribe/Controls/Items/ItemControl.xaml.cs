@@ -22,8 +22,9 @@ namespace BattleScribe.Controls.Items
     /// </summary>
     public partial class ItemControl : UserControl
     {
-        private int id;
+        private int id, Quantity;
         private Item item;
+        private bool isSelected;
 
         public ItemControl()
         {
@@ -77,6 +78,30 @@ namespace BattleScribe.Controls.Items
         {
             ViewItem temp = new ViewItem(item);
             temp.Show();
+        }
+
+        private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!isSelected)
+            {
+                this.Background = new SolidColorBrush(System.Windows.Media.Colors.Aquamarine);
+                isSelected = true;
+            }
+            else
+            {
+                isSelected = false;
+                this.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255,243,117));
+            }
+        }
+
+        public Item GetItem()
+        {
+            return this.item;
+        }
+
+        public bool GetIsSelected()
+        {
+            return isSelected;
         }
     }
 }
