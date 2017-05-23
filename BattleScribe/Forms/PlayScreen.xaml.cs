@@ -65,8 +65,16 @@ namespace BattleScribe.Forms
             UpdateFeats();
             UpdateDeath();
             UpdateSpells();
+            UpdateSavingThrows();
 
             log = new LogHandler(listAction);
+        }
+
+        private void UpdateSavingThrows()
+        {
+            string[] throws = db.GetSavingThrowByClass(c.GetClass());
+
+            c.SetSavingThrows(throws[0], throws[1]);
         }
 
         private void UpdateSpells()
@@ -302,7 +310,7 @@ namespace BattleScribe.Forms
 
                 if (lifeThrow == 3)
                 {
-                    MessageBox.Show("Stable");
+                    MessageBox.Show("Stablised!");
                     lifeThrow = 0;
                     deathThrow = 0;
                 }
@@ -314,12 +322,43 @@ namespace BattleScribe.Forms
 
                 if (deathThrow == 3)
                 {
-                    MessageBox.Show("ded");
+                    MessageBox.Show("Farewell.");
                     deathThrow = 0;
                     lifeThrow = 0;
                 }
             }
             UpdateDeath();
+        }
+
+        private void PerformSavingThrow(string stat, bool advantage, bool disadvantage)
+        {
+            string[] throws = c.GetSavingThrows();
+            int mod = 0;
+            List<int> result = new List<int>();
+            mod += c.GetModifier(stat);
+
+            if (throws[0] == stat || throws[1] == stat)
+            {
+                mod += c.GetProfiencyBonus();
+            }
+
+            if (advantage || disadvantage)
+            {
+                if (advantage)
+                {
+                    result.Add(DiceThrower.ThrowSavingThrowAdvantage(mod, true));
+                }
+                else
+                {
+                    result.Add(DiceThrower.ThrowSavingThrowAdvantage(mod, true));
+                }
+            }
+            else
+            {
+                result.Add(DiceThrower.ThrowSavingThrow(mod));
+            }
+
+            log.DisplayResult(result);
         }
 
         private void menuHurt_Click(object sender, RoutedEventArgs e)
@@ -331,6 +370,96 @@ namespace BattleScribe.Forms
         public Character GetCharacter()
         {
             return c;
+        }
+
+        private void rectCha_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PerformSavingThrow("CHA", false, false);
+        }
+
+        private void rectWis_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PerformSavingThrow("WIS", false, false);
+        }
+
+        private void rectInt_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PerformSavingThrow("INT", false, false);
+        }
+
+        private void rectCon_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PerformSavingThrow("CON", false, false);
+        }
+
+        private void rectDex_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PerformSavingThrow("DEX", false, false);
+        }
+
+        private void rectStr_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PerformSavingThrow("STR", false, false);
+        }
+
+        private void menuStrAdv_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("STR", true, false);
+        }
+
+        private void menuStrDis_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("STR", false, true);
+        }
+
+        private void menuDexAdv_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("DEX", true, false);
+        }
+
+        private void menuDexDis_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("DEX", false, true);
+        }
+
+        private void menuConAdv_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("CON", true, false);
+        }
+
+        private void menuConDis_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("CON", false, true);
+        }
+
+        private void menuIntAdv_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("INT", true, false);
+        }
+
+        private void menuIntDis_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("INT", false, true);
+        }
+
+        private void menuWisAdv_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("WIS", true, false);
+        }
+
+        private void menuWisDis_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("WIS", false, true);
+        }
+
+        private void menuChaAdv_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("CHA", true, false);
+        }
+
+        private void menuChaDis_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("CHA", false, true);
         }
     }
 }

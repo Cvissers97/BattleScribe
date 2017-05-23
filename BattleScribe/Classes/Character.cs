@@ -65,6 +65,9 @@ namespace BattleScribe.Classes
         private int experiencePoints;
         private bool inspiration;
 
+        private string savingThrow1;
+        private string savingThrow2;
+
         private byte slot1;
         private byte slot2;
         private byte slot3;
@@ -105,6 +108,9 @@ namespace BattleScribe.Classes
         //Id constructor, used for testing the inventory system.
         public Character(int id)
         {
+            //Base proficiency
+            proficiency = 2;
+
             this.id = id;
 
             items = new List<Item>();
@@ -147,6 +153,8 @@ namespace BattleScribe.Classes
             byte con, byte _int, byte wis, byte cha, int charClass, string personality, string background,
             string charRace, byte[] image, int level)
         {
+            //Base proficiency
+            proficiency = 2;
 
             db = new DbHandler();
             this.name = name;
@@ -202,6 +210,9 @@ namespace BattleScribe.Classes
     byte con, byte _int, byte wis, byte cha, int charClass, string personality, string background,
     string charRace, int level)
         {
+            //Base proficiency
+            proficiency = 2;
+
             db = new DbHandler();
             this.id = id;
             this.name = name;
@@ -781,6 +792,27 @@ namespace BattleScribe.Classes
             this.slot7 = slot7;
             this.slot8 = slot8;
             this.slot9 = slot9;
+        }
+
+        public void SetSavingThrows(string first, string second)
+        {
+            savingThrow1 = first;
+            savingThrow2 = second;
+        }
+
+        public string[] GetSavingThrows()
+        {
+            string[] throws = new string[2];
+
+            throws[0] = savingThrow1;
+            throws[1] = savingThrow2;
+
+            return throws;
+        }
+
+        public int GetProfiencyBonus()
+        {
+            return proficiency;
         }
     }
 }

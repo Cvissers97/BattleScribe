@@ -797,6 +797,45 @@ namespace BattleScribe.Classes
             return hit;
         }
 
+        public string[] GetSavingThrowByClass(int id)
+        {
+            string[] throws = new string[2];
+
+            string sql = "SELECT Saving_Throw1, Saving_Throw2 FROM Class WHERE id = @id";
+            con = new SqlCeConnection();
+            conString = Properties.Settings.Default.conString;
+            con.ConnectionString = conString;
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"id", id);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        throws[0] = dReader.GetString(0);
+                        throws[1] = dReader.GetString(1);
+                    }
+
+                    con.Close();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
+                throw;
+            }
+
+            return throws;
+        }
+
         public void InsertSpells(int[] spellId, int charId)
         {
             string sql = "INSERT INTO Character_SpellList (Char_Id, Spell_Id, Is_Prepared) VALUES (@Char_Id, @SpellId, 0)";

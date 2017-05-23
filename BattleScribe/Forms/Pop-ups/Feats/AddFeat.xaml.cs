@@ -76,12 +76,10 @@ namespace BattleScribe.Forms.Pop_ups
             {
                 Feat temp = (Feat)cbFeat.SelectedItem;
 
-                if (db.AddFeatToCharacter(c.GetID(), temp.id))
+                if (!db.AddFeatToCharacter(c.GetID(), temp.id))
                 {
-                    this.Close();
+                    MessageBox.Show("You already have this feature!");
                 }
-
-                this.Close();
             }
             else
             {
