@@ -171,7 +171,7 @@ namespace BattleScribe.Forms
                 throw;
             }
 
-            AddHealth add = new AddHealth(curHPNum, 3, "Wizard", this);
+            AddHealth add = new AddHealth(curHPNum, c.GetModifier("CON"), c.GetClass(), this);
             add.Show();
         }
 

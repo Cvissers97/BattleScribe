@@ -32,6 +32,7 @@ namespace BattleScribe.Forms
         private Image imgTempDat;
         private List<Feature> features;
         private List<Feat> feats;
+        private List<CharacterClass> cClass;
         byte lifeThrow;
         byte deathThrow;
 
@@ -66,8 +67,26 @@ namespace BattleScribe.Forms
             UpdateDeath();
             UpdateSpells();
             UpdateSavingThrows();
+            UpdateTitle();
 
             log = new LogHandler(listAction);
+        }
+
+        private void UpdateTitle()
+        {
+            cClass = db.GetClasses();
+            string _class = "CLASS";
+
+            foreach (CharacterClass cl in cClass)
+            {
+                if (cl.GetId() == c.GetClass())
+                {
+                    _class = cl.GetName();
+                    break;
+                }
+            }
+
+            this.Title = c.GetName() + ", " + "level " + c.GetLevel() + " " + _class;
         }
 
         private void UpdateSavingThrows()
@@ -81,19 +100,22 @@ namespace BattleScribe.Forms
         {
             panelSpells.Children.Clear();
 
-            SpellLegend leg = new SpellLegend();
-            panelSpells.Children.Add(leg);
+            //SpellLegend leg = new SpellLegend();
+            //panelSpells.Children.Add(leg);
 
             List<Spell> spells = db.GetSpellsByCharId(c.GetID());
             SpellControl spell;
 
             foreach (Spell s in spells)
             {
-                spell = new SpellControl(s);
-                spell.lbName.Content = s.GetName();
-                spell.lbComp.Content = s.GetComponents();
-                spell.lbSlot.Content = s.GetLevel() + " Slot";
-                panelSpells.Children.Add(spell);
+                if (s.GetPrepared())
+                {
+                    spell = new SpellControl(s);
+                    spell.lbName.Content = s.GetName();
+                    spell.lbComp.Content = s.GetComponents();
+                    spell.lbSlot.Content = s.GetLevel() + " Slot";
+                    panelSpells.Children.Add(spell);  
+                }
             }
         }
 
@@ -288,7 +310,7 @@ namespace BattleScribe.Forms
         private void btnHitDie_Click(object sender, RoutedEventArgs e)
         {
             int hitDice;
-            hitDice = db.GetHitDiceByClass(c.GetClassName());
+            hitDice = db.GetHitDiceByClass(c.GetClass());
         }
 
         private void btnHeart_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -350,7 +372,7 @@ namespace BattleScribe.Forms
                 }
                 else
                 {
-                    result.Add(DiceThrower.ThrowSavingThrowAdvantage(mod, true));
+                    result.Add(DiceThrower.ThrowSavingThrowAdvantage(mod, false));
                 }
             }
             else

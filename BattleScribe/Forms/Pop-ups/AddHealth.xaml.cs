@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BattleScribe.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,20 +21,20 @@ namespace BattleScribe.Forms.Pop_ups
     public partial class AddHealth : Window
     {
         private Random rand;
+        private DbHandler db;
         private DetailScreen detail;
 
         private int currentHP;
         private int conModifier;
         private int newHP;
-        private int diceSides;
-        private string characterClass;
+        private double diceSides;
 
         public AddHealth()
         {
             InitializeComponent();
         }
 
-        public AddHealth(int CurHP, int conMod, string characterClass, DetailScreen detail)
+        public AddHealth(int CurHP, int conMod, int classId, DetailScreen detail)
         {
             InitializeComponent();
 
@@ -41,39 +42,28 @@ namespace BattleScribe.Forms.Pop_ups
             this.currentHP = CurHP;
             this.newHP = 0;
             this.conModifier = conMod;
-            this.characterClass = characterClass;
+            db = new DbHandler();
 
             lbCurHP.Content = "Current HP: " + (currentHP + newHP);
-            
-            //Fill in the other classes later
-            switch (characterClass)
-            {
-                case "Wizard":
-                    diceSides = 6;
-                    break;
-                    
-                case "Barbarian":
-                    diceSides = 12;
-                    break;
-            }
+
+            diceSides = db.GetHitDiceByClass(classId);
         }
 
         private void btnUpHealth_Click(object sender, RoutedEventArgs e)
         {
-            newHP += (diceSides / 2 + 1) + conModifier;
+            newHP += (int)Math.Floor(diceSides / 2) + 1 + conModifier;
             lbCurHP.Content = "Current HP: " + (currentHP + newHP);
         }
 
         private void btnRollHealth_Click(object sender, RoutedEventArgs e)
         {
             rand = new Random();
-            newHP += (rand.Next(1, 6)) + conModifier;
+            newHP += (rand.Next(1, (int)diceSides)) + conModifier;
             lbCurHP.Content = "Current HP: " + (currentHP + newHP);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBox.Show(currentHP.ToString() + " " + newHP.ToString());
             detail.SetNewHealth(currentHP + newHP);
         }
     }

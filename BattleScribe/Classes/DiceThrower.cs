@@ -26,6 +26,7 @@ namespace BattleScribe.Classes
                {
                    _throw = r.Next(0, sides);
                }
+               _throw++;
                result += _throw;
            }
 
@@ -43,7 +44,8 @@ namespace BattleScribe.Classes
 
            for (int i = 0; i < temp; i++)
            {
-               result = r.Next(1, 20);
+               result = r.Next(0, 20);
+               result++;
            }
            result += mod;
 

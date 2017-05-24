@@ -65,6 +65,8 @@ namespace BattleScribe.Classes
         private int experiencePoints;
         private bool inspiration;
 
+        // INT, WIS, CHA (etc.)
+        private string spellMod;
         private string savingThrow1;
         private string savingThrow2;
 
@@ -132,6 +134,7 @@ namespace BattleScribe.Classes
             proficiency = 0;
             maxHitPoints = 37;
             curHitPoints = maxHitPoints;
+            SetSpellMod();
         }
 
         public void ReceiveExperiencePoints(int amount)
@@ -201,8 +204,7 @@ namespace BattleScribe.Classes
                 skills.Add(new Skill(s, false));
             }
 
-            //For testing
-            proficiency = 0;
+            SetSpellMod();
         }
 
         public Character(int id ,string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
@@ -252,6 +254,60 @@ namespace BattleScribe.Classes
             weapons = new List<Weapon>();
             armours = new List<Armour>();
             skills = new List<Skill>();
+
+            SetSpellMod();
+        }
+
+        public void SetSpellMod()
+        {
+            switch (charClass)
+            {
+                default:
+                    spellMod = "NONE";
+                    break;
+                case 2:
+                    //Bard
+                    spellMod = "CHA";
+                    break;
+                case 3:
+                    //Cleric
+                    spellMod = "WIS";
+                    break;
+                case 4:
+                    //Druid
+                    spellMod = "WIS";
+
+                    break;
+                case 5:
+                    //Fighter
+                    spellMod = "INT";
+                    break;
+                case 7:
+                    //Paladin
+                    spellMod = "CHA";
+
+                    break;
+                case 8:
+                    //Ranger
+                    spellMod = "WIS";
+                    break;
+                case 9:
+                    //Rogue
+                    spellMod = "INT";
+                    break;
+                case 10:
+                    //Sorcerer
+                    spellMod = "CHA";
+                    break;
+                case 11:
+                    //Warlock
+                    spellMod = "CHA";
+                    break;
+                case 12:
+                    //Wizard
+                    spellMod = "INT";
+                    break;
+            }
         }
 
         public int GetModifier(string skillName)

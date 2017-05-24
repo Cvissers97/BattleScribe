@@ -6,8 +6,7 @@
         <ScrollViewer Name="scrollSpells" HorizontalAlignment="Left" Height="234" Margin="10,10,0,0" VerticalAlignment="Top" Width="402">
             <StackPanel Name="stackSpells" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </ScrollViewer>
-        <Button Name="btnPrepare" Content="Prepare" HorizontalAlignment="Left" Margin="417,43,0,0" VerticalAlignment="Top" Width="113"/>
-        <Button Name="btnFinish" Content="Finish" HorizontalAlignment="Left" Margin="417,224,0,0" VerticalAlignment="Top" Width="113"/>
+        <Button Name="btnFinish" Content="Finish" HorizontalAlignment="Left" Margin="417,207,0,0" VerticalAlignment="Top" Width="113" Height="37"/>
         <Label Name="lbPrep" Content="Spells Left: 1" HorizontalAlignment="Left" Margin="417,12,0,0" VerticalAlignment="Top"/>
 
     </Grid>
