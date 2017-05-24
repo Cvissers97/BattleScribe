@@ -92,6 +92,7 @@ namespace BattleScribe.Forms
             skills = db.GetSkillsByCharId(charId);
             langs = db.GetLangsByCharId(charId);
             spells = db.GetSpellsByCharId(charId);
+            c.SetKnownSpells(spells);
             c.SetSkillList(skills);
             c.SetLangList(langs);
             Init();
@@ -171,7 +172,7 @@ namespace BattleScribe.Forms
                 throw;
             }
 
-            AddHealth add = new AddHealth(curHPNum, 3, "Wizard", this);
+            AddHealth add = new AddHealth(curHPNum, c.GetModifier("CON"), c.GetClass(), this);
             add.Show();
         }
 

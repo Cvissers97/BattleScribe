@@ -442,7 +442,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "SELECT s.*  FROM Character_SpellList list JOIN Spells s ON list.Spell_Id = s.Spell_Id WHERE list.Char_Id = @id ";
+            string sql = "SELECT s.*, list.Is_Prepared  FROM Character_SpellList list JOIN Spells s ON list.Spell_Id = s.Spell_Id WHERE list.Char_Id = @id ";
 
             try
             {
@@ -457,8 +457,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-
-                        Spell s = new Spell("0", dReader.GetString(1), Convert.ToByte(dReader.GetInt32(2)), dReader.GetString(3), dReader.GetString(4), dReader.GetString(5), dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
+                        Spell s = new Spell(Convert.ToString(dReader.GetInt32(0)), dReader.GetString(1), Convert.ToByte(dReader.GetInt32(2)), dReader.GetString(3), dReader.GetString(4), dReader.GetString(5), dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9), dReader.GetBoolean(10));
                         spells.Add(s);
                     }
 
@@ -580,7 +579,17 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        c = new Character(dReader.GetInt32(0), dReader.GetString(1), dReader.GetString(9), dReader.GetString(5), dReader.GetString(6), dReader.GetString(15), dReader.GetBoolean(17), dReader.GetBoolean(16), dReader.GetString(12), dReader.GetString(11), dReader.GetString(7), dReader.GetString(13), dReader.GetString(14), dReader.GetByte(18), dReader.GetByte(19), dReader.GetByte(20), dReader.GetByte(21), dReader.GetByte(22), dReader.GetByte(23), dReader.GetInt32(2), dReader.GetString(10), dReader.GetInt32(24).ToString(), dReader.GetInt32(3).ToString(), dReader.GetInt32(4));
+                        c = new Character(dReader.GetInt32(0), dReader.GetString(1),
+                            dReader.GetString(9), dReader.GetString(5),
+                            dReader.GetString(6), dReader.GetString(15),
+                            dReader.GetBoolean(17), dReader.GetBoolean(16),
+                            dReader.GetString(12), dReader.GetString(11),
+                            dReader.GetString(7), dReader.GetString(13),
+                            dReader.GetString(14), dReader.GetByte(18), 
+                            dReader.GetByte(19), dReader.GetByte(20), 
+                            dReader.GetByte(22), dReader.GetByte(21), 
+                            dReader.GetByte(23), dReader.GetInt32(2), 
+                            dReader.GetString(10), dReader.GetInt32(24).ToString(), dReader.GetInt32(3).ToString(), dReader.GetInt32(4));
                     }
 
                     com.Parameters.Clear();
@@ -787,11 +796,11 @@ namespace BattleScribe.Classes
             return features;
         }
 
-        public int GetHitDiceByClass(string _class)
+        public int GetHitDiceByClass(int _class)
         {
             int hit = 0;
 
-            string sql = "SELECT HIT_DICE FROM CLASS WHERE NAME = @NAME";
+            string sql = "SELECT HIT_DICE FROM CLASS WHERE ID = @ID";
             con = new SqlCeConnection();
             conString = Properties.Settings.Default.conString;
             con.ConnectionString = conString;
@@ -802,7 +811,7 @@ namespace BattleScribe.Classes
                 {
                     com.Connection = con;
                     com.CommandText = sql;
-                    com.Parameters.AddWithValue(@"NAME", _class);
+                    com.Parameters.AddWithValue(@"ID", _class);
                     con.Open();
                     com.ExecuteNonQuery();
                     dReader = com.ExecuteReader();
@@ -863,6 +872,61 @@ namespace BattleScribe.Classes
             }
 
             return throws;
+        }
+
+        public void PrepareSpells(List<int> spellIds, int charId)
+        {
+            //Unprepare all other spells
+            string sql = "UPDATE Character_SpellList SET Is_Prepared = 0 WHERE Char_Id = @CharId";
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"CharId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            sql = "UPDATE Character_SpellList SET Is_Prepared = 1 WHERE Spell_Id = @spellId AND Char_Id = @CharId";
+
+            foreach (int i in spellIds)
+            {
+                conString = Properties.Settings.Default.conString;
+                con = new SqlCeConnection();
+                con.ConnectionString = conString;
+                try
+                {
+                    using (con)
+                    {
+                        com.Connection = con;
+                        com.CommandText = sql;
+                        com.Parameters.AddWithValue(@"CharId", charId);
+                        com.Parameters.AddWithValue(@"SpellId", i);
+                        con.Open();
+                        com.ExecuteNonQuery();
+                        com.Parameters.Clear();
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Windows.MessageBox.Show(e.Message.ToString());
+                    con.Close();
+                }
+            }
+            con.Close();
         }
 
         public void InsertSpells(int[] spellId, int charId)
@@ -963,7 +1027,7 @@ namespace BattleScribe.Classes
                     {
                         Spell s = new Spell(dReader.GetInt32(0).ToString(), dReader.GetString(1), (byte)dReader.GetInt32(2),
                              dReader.GetString(3), dReader.GetString(4), dReader.GetString(5),
-                             dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
+                             dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9), false);
                         spellList.Add(s);
                     }
 
@@ -1042,7 +1106,7 @@ namespace BattleScribe.Classes
                     {
                         Spell s = new Spell(dReader.GetInt32(0).ToString(), dReader.GetString(1), (byte)dReader.GetInt32(2),
                             dReader.GetString(3), dReader.GetString(4), dReader.GetString(5),
-                            dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9));
+                            dReader.GetString(6), dReader.GetString(7), dReader.GetString(8), dReader.GetString(9), false);
                         sList.Add(s);
                     }
 

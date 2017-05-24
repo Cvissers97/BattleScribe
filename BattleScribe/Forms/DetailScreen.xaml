@@ -105,10 +105,10 @@
                     <Label Content="Max HP" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top"/>
                     <Label Content="Temporary HP" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top"/>
                     <Label Content="Current HP" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top"/>
-                    <TextBox Name="tbLevel" HorizontalAlignment="Left" Height="23" Margin="114,8,0,0" TextWrapping="Wrap" Text="Level" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbEXP" HorizontalAlignment="Left" Height="23" Margin="114,34,0,0" TextWrapping="Wrap" Text="EXP" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbMaxHP" HorizontalAlignment="Left" Height="23" Margin="114,60,0,0" TextWrapping="Wrap" Text="Max HP" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbTempHP" HorizontalAlignment="Left" Height="23" Margin="114,86,0,0" TextWrapping="Wrap" Text="Temp HP" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbLevel" HorizontalAlignment="Left" Height="23" Margin="114,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbEXP" HorizontalAlignment="Left" Height="23" Margin="114,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbMaxHP" HorizontalAlignment="Left" Height="23" Margin="114,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbTempHP" HorizontalAlignment="Left" Height="23" Margin="114,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <TextBox Name="tbCurHP" HorizontalAlignment="Left" Height="23" Margin="114,112,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="120"/>
                     <Button x:Name="btnPlusHP" Content="+" HorizontalAlignment="Left" Margin="239,62,0,0" VerticalAlignment="Top" Width="21" Height="21" HorizontalContentAlignment="Center" FontSize="10" Click="btnPlusHP_Click"/>
                     <Label Content="Feats" HorizontalAlignment="Left" Margin="386,8,0,0" VerticalAlignment="Top"/>
@@ -226,7 +226,7 @@
         </TabControl>
 
         <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Left" Margin="593,632,0,0" VerticalAlignment="Top" Width="86" Height="39" Click="btnPlay_Click"/>
-        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="502,632,0,0" VerticalAlignment="Top" Width="86" Height="39"/>
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="502,632,0,0" VerticalAlignment="Top" Width="86" Height="39" ToolTip="Saves all changes. Features and Feats are saved on change."/>
         <Button x:Name="btnMainMenu" Content="Main menu" HorizontalAlignment="Left" Margin="411,632,0,0" VerticalAlignment="Top" Width="86" Height="39" Click="BtnMainMenu_Click"/>
 
 

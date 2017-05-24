@@ -203,7 +203,7 @@ namespace BattleScribe.Forms
             lbKnownSpells.Visibility = Visibility.Hidden;
             panelKnownSpells.Visibility = Visibility.Hidden;
             panelPrepSpells.Visibility = Visibility.Hidden;
-            lbPrepSpells.Visibility = Visibility.Hidden;
+            //lbPrepSpells.Visibility = Visibility.Hidden;
             btnPrepare.Visibility = Visibility.Hidden;
             btnUnprepare.Visibility = Visibility.Hidden;
 
@@ -284,7 +284,7 @@ namespace BattleScribe.Forms
             lbKnownSpells.Visibility = Visibility.Visible;
             panelKnownSpells.Visibility = Visibility.Visible;
             panelPrepSpells.Visibility = Visibility.Visible;
-            lbPrepSpells.Visibility = Visibility.Visible;
+            //lbPrepSpells.Visibility = Visibility.Visible;
             btnPrepare.Visibility = Visibility.Visible;
             btnUnprepare.Visibility = Visibility.Visible;
                     break;
@@ -394,7 +394,7 @@ namespace BattleScribe.Forms
                             }
                             btnPrepare.IsEnabled = false;
                             btnUnprepare.IsEnabled = false;
-                            lbPrepSpells.Visibility = Visibility.Hidden;
+                            //lbPrepSpells.Visibility = Visibility.Hidden;
                         }
                         else
                         {
@@ -409,7 +409,7 @@ namespace BattleScribe.Forms
                             }
                             btnPrepare.IsEnabled = true;
                             btnUnprepare.IsEnabled = true;
-                            lbPrepSpells.Visibility = Visibility.Visible;
+                            //lbPrepSpells.Visibility = Visibility.Visible;
                         }
 
                         foreach (Spell s in cantripList)
@@ -611,7 +611,7 @@ namespace BattleScribe.Forms
                 panelPrepSpells.Children.Add(c);
                 c.IsChecked = false;
             }
-            lbPrepSpells.Content = "You can still pick " + spellsKnown + " spells";
+            //lbPrepSpells.Content = "You can still pick " + spellsKnown + " spells";
         }
 
         private void BtnUnprepareSpellClick(object sender, RoutedEventArgs e)
@@ -632,7 +632,7 @@ namespace BattleScribe.Forms
                 panelKnownSpells.Children.Add(c);
                 c.IsChecked = false;
             }
-            lbPrepSpells.Content = "You can still pick " + spellsKnown + " spells";
+            //lbPrepSpells.Content = "You can still pick " + spellsKnown + " spells";
         }
 
 
@@ -791,7 +791,7 @@ namespace BattleScribe.Forms
         private void CbClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             spellsKnownArray = CalcKnownSpells();
-            lbPrepSpells.Content = "You can still pick " + spellsKnownArray[0] + " spells.";
+            //lbPrepSpells.Content = "You can still pick " + spellsKnownArray[0] + " spells.";
         }
 
         //Racecb selection change to calc race bonus, features and langs

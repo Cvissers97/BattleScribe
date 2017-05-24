@@ -123,9 +123,8 @@
         <Label Name="lbKnownSpells" Content="Available spells" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
         <WrapPanel Name="panelKnownSpells" Orientation="Vertical" HorizontalAlignment="Left" Height="395" Margin="10,161,0,0" VerticalAlignment="Top" Width="255"/>
         <WrapPanel Name="panelPrepSpells" Orientation="Vertical" HorizontalAlignment="Left" Height="400" Margin="409,156,0,0" VerticalAlignment="Top" Width="255"/>
-        <Label Name="lbPrepSpells" Content="Known spells left: " HorizontalAlignment="Left" Margin="513,130,0,0" VerticalAlignment="Top"/>
-        <Button Name="btnPrepare" Content="Prepare" HorizontalAlignment="Left" Margin="277,161,0,0" VerticalAlignment="Top" Width="119" Height="25" Click="BtnPrepareSpellClick"/>
-        <Button Name="btnUnprepare" Content="Unprepare" HorizontalAlignment="Left" Margin="277,194,0,0" VerticalAlignment="Top" Width="119" Height="25" Click="BtnUnprepareSpellClick"/>
+        <Button Name="btnPrepare" Content="Add" HorizontalAlignment="Left" Margin="277,161,0,0" VerticalAlignment="Top" Width="119" Height="25" Click="BtnPrepareSpellClick"/>
+        <Button Name="btnUnprepare" Content="Remove" HorizontalAlignment="Left" Margin="277,194,0,0" VerticalAlignment="Top" Width="119" Height="25" Click="BtnUnprepareSpellClick"/>
 
 
     </Grid>
