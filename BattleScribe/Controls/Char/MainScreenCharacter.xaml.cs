@@ -21,16 +21,16 @@ namespace BattleScribe.Controls.Char
     /// <summary>
     /// Interaction logic for MainScreenCharacter.xaml
     /// </summary>
-    public partial class SpellPrepare : UserControl
+    public partial class MainScreenCharacter : UserControl
     {
         public Classes.Character character;
         
-        public SpellPrepare()
+        public MainScreenCharacter()
         {
             InitializeComponent();
         }
 
-        public SpellPrepare(Classes.Character c, List<CharacterClass> cClass)
+        public MainScreenCharacter(Classes.Character c, List<CharacterClass> cClass)
         {
             character = c;
             InitializeComponent();

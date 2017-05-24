@@ -57,7 +57,7 @@ namespace BattleScribe.Forms
             lifeThrow = 0;
             deathThrow = 0;
 
-            UpdateInventory();
+            //UpdateInventory();
             UpdateInspiration();
             UpdateHealth();
             UpdateStats();
@@ -207,49 +207,7 @@ namespace BattleScribe.Forms
             lbDeathSave.Content = "Death: " + deathThrow;
         }
 
-        private void UpdateInventory()
-        {
-            stackInventory.Children.Clear();
-            ItemLegend leg = new ItemLegend();
-            stackInventory.Children.Add(leg);
-            //Read out all items in the character's inventory (Armour, Weapon, Item)
-            //Turn all of them into stackpanels
 
-            ItemControl temp;
-
-            foreach (Weapon w in c.GetAllWeapons())
-            {
-                temp = new ItemControl(w.GetId());
-                temp.lbName.Content = w.GetName();
-                temp.lbType.Content = w.GetType();
-                temp.lbProficiency.Content = w.GetProficient();
-                temp.lbWeight.Content = w.GetWeight();
-                temp.lbAttune.Content = w.GetAttunement();
-                stackInventory.Children.Add(temp);
-            }
-
-            foreach (Item i in c.GetAllItems())
-            {
-                temp = new ItemControl(i.GetId());
-                temp.lbName.Content = i.GetName();
-                temp.lbType.Content = i.GetItemType();
-                temp.lbProficiency.Content = i.GetProficient();
-                temp.lbWeight.Content = i.GetWeight();
-                temp.lbAttune.Content = i.GetAttunement();
-                stackInventory.Children.Add(temp);
-            }
-
-            foreach (Armour a in c.GetAllArmours())
-            {
-                temp = new ItemControl(a.GetId());
-                temp.lbName.Content = a.GetName();
-                temp.lbType.Content = a.GetItemType();
-                temp.lbProficiency.Content = a.GetProficient();
-                temp.lbWeight.Content = a.GetWeight();
-                temp.lbAttune.Content = a.GetAttunement();
-                stackInventory.Children.Add(temp);
-            }
-        }
 
         private void btnAddItem_Click(object sender, RoutedEventArgs e)
         {

@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BattleScribe.Classes;
+using BattleScribe.Classes.Items;
 
 namespace BattleScribe.Forms.Pop_ups.Items
 {
@@ -23,6 +25,8 @@ namespace BattleScribe.Forms.Pop_ups.Items
         private List<int> diceSides;
         private List<string> modifiers;
         private DetailScreen screen;
+        private DbHandler dbhandler;
+        private Weapon weapon;
 
         public AddWeapon()
         {
@@ -129,6 +133,11 @@ namespace BattleScribe.Forms.Pop_ups.Items
             {
                 cbModifier.Items.Add(s);
             }
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

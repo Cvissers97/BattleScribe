@@ -71,7 +71,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            screen.AddItemToInventory(armour);
+            //screen.AddItemToInventory(armour);
         }
     }
 }

@@ -20,20 +20,20 @@
         <Label Content="Weight" HorizontalAlignment="Left" Margin="183,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.623,-0.192"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="236,45,0,0" TextWrapping="Wrap" Text="Weight" VerticalAlignment="Top" Width="95"/>
         <Label Content="lbs" HorizontalAlignment="Left" Margin="336,41,0,0" VerticalAlignment="Top"/>
-        <Button Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Margin="300,293,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Margin="286,295,0,0" VerticalAlignment="Top" Width="75" Click="BtnAdd_Click"/>
         <Label Content="Damage" HorizontalAlignment="Left" Margin="14,172,0,0" VerticalAlignment="Top"/>
         <Label Content="Damage Type" HorizontalAlignment="Left" Margin="14,228,0,0" VerticalAlignment="Top"/>
-        <Label Content="Bonus" HorizontalAlignment="Left" Margin="14,290,0,0" VerticalAlignment="Top"/>
-        <Label Content="Attack" HorizontalAlignment="Left" Margin="14,259,0,0" VerticalAlignment="Top"/>
+        <Label Content="Type 2" HorizontalAlignment="Left" Margin="14,290,0,0" VerticalAlignment="Top"/>
+        <Label Content="Type 1" HorizontalAlignment="Left" Margin="14,259,0,0" VerticalAlignment="Top"/>
         <TextBox Name="tbAttackType" HorizontalAlignment="Left" Height="23" Margin="57,262,0,0" TextWrapping="Wrap" Text="Attack" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="tbBonusType" HorizontalAlignment="Left" Height="23" Margin="57,292,0,0" TextWrapping="Wrap" Text="Bonus" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="tbDiceAmount" HorizontalAlignment="Left" Height="22" Margin="19,198,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="38"/>
         <Label Name="lbD" Content="D" HorizontalAlignment="Left" Margin="55,196,0,0" VerticalAlignment="Top" Height="24"/>
-        <ComboBox Name="cbModifier" HorizontalAlignment="Left" Margin="113,198,0,0" VerticalAlignment="Top" Width="24"/>
-        <ComboBox Name="cbDiceSides" HorizontalAlignment="Left" Margin="73,198,0,0" VerticalAlignment="Top" Width="24"/>
-        <Label Content="+" HorizontalAlignment="Left" Margin="95,195,0,0" VerticalAlignment="Top"/>
-        <Label Content="+" HorizontalAlignment="Left" Margin="135,195,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tbBonusDamage" HorizontalAlignment="Left" Height="23" Margin="153,197,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="35"/>
+        <ComboBox Name="cbModifier" HorizontalAlignment="Left" Margin="150,198,0,0" VerticalAlignment="Top" Width="58"/>
+        <ComboBox Name="cbDiceSides" HorizontalAlignment="Left" Margin="73,198,0,0" VerticalAlignment="Top" Width="53"/>
+        <Label Content="+" HorizontalAlignment="Left" Margin="129,195,0,0" VerticalAlignment="Top"/>
+        <Label Content="+" HorizontalAlignment="Left" Margin="211,195,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="tbBonusDamage" HorizontalAlignment="Left" Height="23" Margin="230,198,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="35"/>
 
     </Grid>
 </Window>

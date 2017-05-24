@@ -396,89 +396,16 @@ namespace BattleScribe.Forms
             UpdateStats();
         }
 
-        public void AddItemToInventory(Item i)
-        {
-            bool duplicate = false;
-            foreach (Item item in itemsInInv)
-            {
-                if (item.GetId() == i.GetId())
-                {
-                    item.IncrementQuantity();
-                    duplicate = true;
-                }
-            }
-            if (!duplicate)
-            {
-                ItemControl temp = new ItemControl(i);
-                panelInv.Children.Add(temp);
-                itemsInInv.Add(i);
-            }
-            UpdateInventory();
-        }
 
-        private void UpdateInventory()
-        {
-            panelInv.Children.Clear();
 
-            ItemLegend itemLegend = new ItemLegend();
-            panelInv.Children.Add(itemLegend);
 
-            foreach (Item i in itemsInInv)
-            {
-                ItemControl itemC = new ItemControl();
-
-                if (i.GetType().Name == "Item")
-                {
-                    itemC = new ItemControl(i);
-                }
-                else if (i.GetType().Name == "Weapon")
-                {
-                    itemC = new ItemControl((Weapon)i);
-                    
-                }
-                else if (i.GetType().Name == "Armour")
-                {
-                    itemC = new ItemControl((Armour)i);
-                }
-                panelInv.Children.Add(itemC);
-            }
-            UpdateCarryCapacity();
-        }
 
         public List<Item> GetItemsInInventory()
         {
             return itemsInInv;
         }
 
-        public void UpdateCarryCapacity()
-        {
-            totalItemWeight = 0;
-            foreach (Item i in itemsInInv)
-            {
-                string weight = i.GetWeight();
-                string temp = string.Empty;
-                int result;
-                
-                for (int j = 0; j < weight.Length; j++)
-                {
-                    if (int.TryParse(weight[j].ToString(), out result))
-                    {
-                        temp += weight[j];
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
 
-                if (temp != "")
-                {
-                    result = (Convert.ToInt32(temp) * i.GetQuantity()); 
-                    totalItemWeight += result;
-                }
-            }
-            lbCarryCapacity.Content = "Carry capacity: " + totalItemWeight.ToString() + " / " + c.CalcCarryWeight().ToString();
-        }
 
         private void btnAddFeature_Click(object sender, RoutedEventArgs e)
         {
@@ -537,7 +464,7 @@ namespace BattleScribe.Forms
                 }
             }
 
-            UpdateInventory();
+           // UpdateInventory();
         }
     }
 }

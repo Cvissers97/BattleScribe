@@ -71,7 +71,10 @@ namespace BattleScribe.Forms.Pop_ups
 
         private void Execute()
         {
-            int amount = Convert.ToInt32(tbAmount.Text);
+            int amount = 0;
+
+            if(tbAmount.Text != "")
+                amount = Convert.ToInt32(tbAmount.Text);
 
             switch (setting)
             {

@@ -112,6 +112,7 @@
     <Compile Include="Classes\DbHandler.cs" />
     <Compile Include="Classes\DiceThrower.cs" />
     <Compile Include="Classes\Feature.cs" />
+    <Compile Include="Classes\InventoryManager.cs" />
     <Compile Include="Classes\Items\Armour.cs" />
     <Compile Include="Classes\Feat.cs" />
     <Compile Include="Classes\Items\Item.cs" />

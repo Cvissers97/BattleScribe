@@ -337,6 +337,35 @@ namespace BattleScribe.Classes
             return items;
         }
 
+        public void AddWeapon(Weapon w)
+        {
+            string sql = "INSERT INTO Weapons (Name, Damage, Damage_Type, Weight, Properties, Attunable, Cost_In_Gold, Type, Description, Bonus_Type, Modifier, Bonus_Damage) VALUES (@Char_Id, @SpellId, 0)";
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    
+                    con.Open();
+                    com.ExecuteNonQuery();
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            
+            con.Close();
+        }
+
         public List<Weapon> GetAllWeapons()
         {
             List<Weapon> weapons = new List<Weapon>();

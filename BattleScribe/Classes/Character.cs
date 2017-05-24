@@ -655,56 +655,7 @@ namespace BattleScribe.Classes
             this.race = race;
         }
 
-        public List<Weapon> GetAllWeapons()
-        {
-            if (weapons != null)
-            {
-                return weapons;
-            }
-            return new List<Weapon>();
-        }
 
-        public List<Item> GetAllItems()
-        {
-            if (items != null)
-            {
-                return items;
-            }
-            return new List<Item>();
-        }
-
-        public List<Armour> GetAllArmours()
-        {
-            if (armours != null)
-            {
-                return armours;
-            }
-            return new List<Armour>();
-        }
-
-        public void AddWeapon(Weapon w)
-        {
-            if (w != null)
-            {
-                weapons.Add(w);
-            }
-        }
-
-        public void AddItem(Item i)
-        {
-            if (i != null)
-            {
-                items.Add(i);
-            }
-        }
-
-        public void AddArmour(Armour a)
-        {
-            if (a != null)
-            {
-                armours.Add(a);
-            }
-        }
 
         public int GetID()
         {
@@ -813,6 +764,11 @@ namespace BattleScribe.Classes
         public int GetProfiencyBonus()
         {
             return proficiency;
+        }
+
+        public void SetItemsInInventory(List<Item> itemsInInventory)
+        {
+            this.items = itemsInInventory;
         }
     }
 }

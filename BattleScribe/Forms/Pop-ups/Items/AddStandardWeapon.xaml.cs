@@ -60,7 +60,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            screen.AddItemToInventory(Weapon);
+            //screen.AddItemToInventory(Weapon);
         }
 
         private void CbName_SelectionChanged(object sender, SelectionChangedEventArgs e)
