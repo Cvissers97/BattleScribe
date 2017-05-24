@@ -145,5 +145,10 @@ namespace BattleScribe.Classes
         {
             return this.isPrepared;
         }
+
+        public void SetPrepared(bool target)
+        {
+            this.isPrepared = target;
+        }
     }
 }

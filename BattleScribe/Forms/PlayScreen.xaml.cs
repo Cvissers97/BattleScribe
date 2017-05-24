@@ -114,6 +114,10 @@ namespace BattleScribe.Forms
 
             foreach (Spell s in spells)
             {
+                if (s.GetLevel() == 0)
+                {
+                    s.SetPrepared(true);
+                }
                 if (s.GetPrepared())
                 {
                     spell = new SpellControl(s);
