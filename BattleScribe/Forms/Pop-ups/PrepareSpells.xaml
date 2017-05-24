@@ -1,13 +1,13 @@
 ﻿<Window x:Class="BattleScribe.Forms.Pop_ups.PrepareSpells"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="PrepareSpells" Height="303.023" Width="567.293" ResizeMode="NoResize">
+        Title="PrepareSpells" Height="303.023" Width="612.293" ResizeMode="NoResize">
     <Grid>
-        <ScrollViewer Name="scrollSpells" HorizontalAlignment="Left" Height="234" Margin="10,10,0,0" VerticalAlignment="Top" Width="402">
+        <ScrollViewer Name="scrollSpells" HorizontalAlignment="Left" Height="234" Margin="10,10,0,0" VerticalAlignment="Top" Width="450">
             <StackPanel Name="stackSpells" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </ScrollViewer>
-        <Button Name="btnFinish" Content="Finish" HorizontalAlignment="Left" Margin="417,207,0,0" VerticalAlignment="Top" Width="113" Height="37"/>
-        <Label Name="lbPrep" Content="Spells Left: 1" HorizontalAlignment="Left" Margin="417,12,0,0" VerticalAlignment="Top"/>
+        <Button Name="btnFinish" Content="Finish" HorizontalAlignment="Left" Margin="468,207,0,0" VerticalAlignment="Top" Width="113" Height="37" Click="btnFinish_Click"/>
+        <Label Name="lbPrep" Content="Preparable spells: " HorizontalAlignment="Left" Margin="468,10,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

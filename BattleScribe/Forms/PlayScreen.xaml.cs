@@ -68,8 +68,14 @@ namespace BattleScribe.Forms
             UpdateSpells();
             UpdateSavingThrows();
             UpdateTitle();
+            UpdateButtons();
 
             log = new LogHandler(listAction);
+        }
+
+        private void UpdateButtons()
+        {
+
         }
 
         private void UpdateTitle()
@@ -96,7 +102,7 @@ namespace BattleScribe.Forms
             c.SetSavingThrows(throws[0], throws[1]);
         }
 
-        private void UpdateSpells()
+        public void UpdateSpells()
         {
             panelSpells.Children.Clear();
 
@@ -275,6 +281,7 @@ namespace BattleScribe.Forms
 
         private void btnAddItem_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("PLAYSCREEN");
             ItemChoice i = new ItemChoice(c.GetID());
             i.Show();
         }
@@ -482,6 +489,12 @@ namespace BattleScribe.Forms
         private void menuChaDis_Click(object sender, RoutedEventArgs e)
         {
             PerformSavingThrow("CHA", false, true);
+        }
+
+        private void btnPrepareSpells_Click(object sender, RoutedEventArgs e)
+        {
+            PrepareSpells prep = new PrepareSpells(this, c);
+            prep.Show();
         }
     }
 }

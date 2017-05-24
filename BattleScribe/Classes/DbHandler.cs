@@ -550,7 +550,17 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        c = new Character(dReader.GetInt32(0), dReader.GetString(1), dReader.GetString(9), dReader.GetString(5), dReader.GetString(6), dReader.GetString(15), dReader.GetBoolean(17), dReader.GetBoolean(16), dReader.GetString(12), dReader.GetString(11), dReader.GetString(7), dReader.GetString(13), dReader.GetString(14), dReader.GetByte(18), dReader.GetByte(19), dReader.GetByte(20), dReader.GetByte(21), dReader.GetByte(22), dReader.GetByte(23), dReader.GetInt32(2), dReader.GetString(10), dReader.GetInt32(24).ToString(), dReader.GetInt32(3).ToString(), dReader.GetInt32(4));
+                        c = new Character(dReader.GetInt32(0), dReader.GetString(1),
+                            dReader.GetString(9), dReader.GetString(5),
+                            dReader.GetString(6), dReader.GetString(15),
+                            dReader.GetBoolean(17), dReader.GetBoolean(16),
+                            dReader.GetString(12), dReader.GetString(11),
+                            dReader.GetString(7), dReader.GetString(13),
+                            dReader.GetString(14), dReader.GetByte(18), 
+                            dReader.GetByte(19), dReader.GetByte(20), 
+                            dReader.GetByte(22), dReader.GetByte(21), 
+                            dReader.GetByte(23), dReader.GetInt32(2), 
+                            dReader.GetString(10), dReader.GetInt32(24).ToString(), dReader.GetInt32(3).ToString(), dReader.GetInt32(4));
                     }
 
                     com.Parameters.Clear();
@@ -833,6 +843,61 @@ namespace BattleScribe.Classes
             }
 
             return throws;
+        }
+
+        public void PrepareSpells(List<int> spellIds, int charId)
+        {
+            //Unprepare all other spells
+            string sql = "UPDATE Character_SpellList SET Is_Prepared = 0 WHERE Char_Id = @CharId";
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"CharId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            sql = "UPDATE Character_SpellList SET Is_Prepared = 1 WHERE Spell_Id = @spellId AND Char_Id = @CharId";
+
+            foreach (int i in spellIds)
+            {
+                conString = Properties.Settings.Default.conString;
+                con = new SqlCeConnection();
+                con.ConnectionString = conString;
+                try
+                {
+                    using (con)
+                    {
+                        com.Connection = con;
+                        com.CommandText = sql;
+                        com.Parameters.AddWithValue(@"CharId", charId);
+                        com.Parameters.AddWithValue(@"SpellId", i);
+                        con.Open();
+                        com.ExecuteNonQuery();
+                        com.Parameters.Clear();
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Windows.MessageBox.Show(e.Message.ToString());
+                    con.Close();
+                }
+            }
+            con.Close();
         }
 
         public void InsertSpells(int[] spellId, int charId)

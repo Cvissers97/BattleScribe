@@ -93,6 +93,8 @@ namespace BattleScribe.Classes
         private List<Weapon> weapons;
         private List<Armour> armours;
 
+        private List<Spell> knownSpells;
+
         public Character()
         {
             str = 8;
@@ -263,7 +265,7 @@ namespace BattleScribe.Classes
             switch (charClass)
             {
                 default:
-                    spellMod = "NONE";
+                    spellMod = "INT";
                     break;
                 case 2:
                     //Bard
@@ -308,6 +310,11 @@ namespace BattleScribe.Classes
                     spellMod = "INT";
                     break;
             }
+        }
+
+        public string GetSpellMod()
+        {
+            return this.spellMod;
         }
 
         public int GetModifier(string skillName)
@@ -674,6 +681,16 @@ namespace BattleScribe.Classes
         public void SetStr(byte str)
         {
             this.str = str;
+        }
+
+        public void SetKnownSpells(List<Spell> spells)
+        {
+            this.knownSpells = spells;
+        }
+
+        public List<Spell> GetKnownSpells()
+        {
+            return this.knownSpells;
         }
 
         public void SetDex(byte dex)
