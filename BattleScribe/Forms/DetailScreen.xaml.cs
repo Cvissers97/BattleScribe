@@ -42,6 +42,7 @@ namespace BattleScribe.Forms
         private List<Item> itemsInInv;
         private List<Feature> acquiredClassFeatures;
         private List<Feat> acquiredFeats;
+        public InventoryManager inventory;
 
         public DetailScreen()
         {
@@ -154,6 +155,7 @@ namespace BattleScribe.Forms
                 panelSpells.Children.Add(pSpells);
             }
 
+            inventory = new InventoryManager(c, panelInv, lbCarryCapacity);
 
             UpdateStats();
             UpdateFeatureList();
@@ -397,17 +399,6 @@ namespace BattleScribe.Forms
             UpdateStats();
         }
 
-
-
-
-
-        public List<Item> GetItemsInInventory()
-        {
-            return itemsInInv;
-        }
-
-
-
         private void btnAddFeature_Click(object sender, RoutedEventArgs e)
         {
             AddFeature add = new AddFeature(c, this);
@@ -440,32 +431,36 @@ namespace BattleScribe.Forms
 
         private void btnDropItem_Click(object sender, RoutedEventArgs e)
         {
-            List<ItemControl> controlList = new List<ItemControl>();
+            List<ItemControl> loopList = new List<ItemControl>();
 
-            foreach (ItemControl control in panelInv.Children.OfType<ItemControl>())
+            foreach (ItemControl i in panelInv.Children.OfType<ItemControl>())
             {
-                if (control.GetIsSelected())
-                {
-                    controlList.Add(control);
-                }
+                loopList.Add(i);
             }
 
-            foreach (ItemControl c in controlList)
+            foreach (ItemControl i in loopList)
             {
-                Item temp = c.GetItem();
+                if (i.GetIsSelected())
+                {
+                    switch (i.typeItem)
+                    {
+                        default:
+                            MessageBox.Show("INVALID ITEM TYPE!");
+                            break;
 
-                if (temp.GetQuantity() > 1)
-                {
-                    temp.DecrementQuantity();
-                }
-                else
-                {
-                    panelInv.Children.Remove(c);
-                    itemsInInv.Remove(c.GetItem());
+                        case "WEAPON":
+                            Weapon wep = (Weapon)i.GetItem();
+                            inventory.RemoveWeapon(wep);
+                            break;
+
+                        case "ARMOUR":
+                            break;
+
+                        case "ITEM":
+                            break;
+                    }
                 }
             }
-
-           // UpdateInventory();
         }
     }
 }

@@ -25,6 +25,7 @@ namespace BattleScribe.Controls.Items
         private int id, Quantity;
         private Item item;
         private bool isSelected;
+        public string typeItem;
 
         public ItemControl()
         {
@@ -48,6 +49,7 @@ namespace BattleScribe.Controls.Items
             lbProficiency.Content = "-";
             lbQuantity.Content = i.GetQuantity();
             this.item = i;
+            this.typeItem = "ITEM";
         }
 
         public ItemControl(Weapon w)
@@ -60,6 +62,7 @@ namespace BattleScribe.Controls.Items
             lbProficiency.Content = "WIP";
             lbQuantity.Content = w.GetQuantity();
             this.item = w;
+            this.typeItem = "WEAPON";
         }
 
         public ItemControl(Armour a)
@@ -72,6 +75,7 @@ namespace BattleScribe.Controls.Items
             lbProficiency.Content = "WIP";
             lbQuantity.Content = a.GetQuantity();
             this.item = a;
+            this.typeItem = "ARMOUR";
         }
 
         private void UserControl_MouseRightButtonUp(object sender, MouseButtonEventArgs e)

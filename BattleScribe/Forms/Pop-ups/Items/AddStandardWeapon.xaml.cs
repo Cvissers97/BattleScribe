@@ -25,7 +25,8 @@ namespace BattleScribe.Forms.Pop_ups.Items
         private DetailScreen screen;
         private DbHandler db;
         private List<Weapon> weaponList;
-        private Weapon Weapon;
+        private Weapon weapon;
+        private InventoryManager inventory;
 
         public AddStandardWeapon()
         {
@@ -45,6 +46,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
             db = new DbHandler();
             InitializeComponent();
             this.screen = screen;
+            this.inventory = screen.inventory;
             Init();
         }
 
@@ -60,7 +62,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            //screen.AddItemToInventory(Weapon);
+            inventory.AddWeapon(weapon);
         }
 
         private void CbName_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,7 +75,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
                     tbAttackType.Text = w.GetBaseDamageType();
                     tbType.Text = w.GetItemType();
                     tbWeight.Text = w.GetWeight();
-                    Weapon = w;
+                    weapon = w;
                     break;
                 }
             }
