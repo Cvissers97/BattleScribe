@@ -30,7 +30,8 @@ namespace BattleScribe.Classes
 
         public void Write(string text)
         {
-            list.Items.Add(text);
+            string message = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + " - " + text;
+            list.Items.Insert(0, message);
         }
     }
 }

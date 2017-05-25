@@ -33,8 +33,11 @@ namespace BattleScribe.Forms
         private List<Feature> features;
         private List<Feat> feats;
         private List<CharacterClass> cClass;
+        private Spell chosenSpell;
         byte lifeThrow;
         byte deathThrow;
+        int spellMod;
+        int spellDc;
 
         public PlayScreen()
         {
@@ -104,6 +107,9 @@ namespace BattleScribe.Forms
 
         public void UpdateSpells()
         {
+            spellMod = 0;
+            spellDc = 0;
+
             panelSpells.Children.Clear();
 
             //SpellLegend leg = new SpellLegend();
@@ -120,13 +126,20 @@ namespace BattleScribe.Forms
                 }
                 if (s.GetPrepared())
                 {
-                    spell = new SpellControl(s);
+                    spell = new SpellControl(s, this);
                     spell.lbName.Content = s.GetName();
                     spell.lbComp.Content = s.GetComponents();
                     spell.lbSlot.Content = s.GetLevel() + " Slot";
                     panelSpells.Children.Add(spell);  
                 }
             }
+
+            spellMod = c.GetModifier(c.GetSpellMod()) + c.GetProfiencyBonus();
+            lbSpellMod.Content = "Casting modifier: " + spellMod;
+            spellDc = c.GetModifier(c.GetSpellMod()) + c.GetProfiencyBonus() + 8;
+            lbSpellSaveDC.Content = "Save DC: " + spellDc;
+
+            //c.SetSlots(3, 3, 3, 3, 3, 3, 3, 3, 3);
         }
 
         private void UpdateFeatures()
@@ -225,6 +238,24 @@ namespace BattleScribe.Forms
             else
             {
                 imgInsp.Source = imgTempDat.Source;
+            }
+        }
+
+        public void ChooseSpell(Spell spell)
+        {
+            chosenSpell = spell;
+
+            // Highlighting
+            foreach (SpellControl spellCon in panelSpells.Children)
+            {
+                if (spellCon.GetSpell() == spell)
+                {
+                    spellCon.Highlight(true);
+                }
+                else
+                {
+                    spellCon.Highlight(false);
+                }
             }
         }
 
@@ -457,6 +488,70 @@ namespace BattleScribe.Forms
         {
             PrepareSpells prep = new PrepareSpells(this, c);
             prep.Show();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAttack cust = new CustomAttack(c, this);
+            cust.Show();
+        }
+
+        private void btnCast_Click(object sender, RoutedEventArgs e)
+        {
+            if (chosenSpell == null)
+            {
+                MessageBox.Show("No spell selected.");
+            }
+            else
+            {
+                if (chosenSpell.GetLevel() == 0)
+                {
+                    log.Write("You cast " + chosenSpell.GetName());
+                }
+                else
+                {
+                    if (c.SpendSlot(chosenSpell.GetLevel()))
+                    {
+                        log.Write("You cast " + chosenSpell.GetName());
+                    }
+                    else
+                    {
+                        MessageBox.Show("No level " + chosenSpell.GetLevel() + " slot available");
+                    }
+                }
+            }
+        }
+
+        public void CastAtHigherLevel(byte slot)
+        {
+            if (chosenSpell.GetLevel() > slot)
+            {
+                MessageBox.Show("Spell slot " + slot + " is too weak to process this spell.");
+            }
+            else
+            {
+                if (chosenSpell.GetLevel() == 0)
+                {
+                    MessageBox.Show("Cantrips can not be cast with higher level slots.");
+                }
+                else
+                {
+                    if (c.SpendSlot(slot))
+                    {
+                        log.Write("You cast " + chosenSpell.GetName());
+                    }
+                    else
+                    {
+                        MessageBox.Show("No level " + slot + " slot available");
+                    }
+                }
+            }
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            AddNumber add = new AddNumber(this, "SPELL");
+            add.Show();
         }
     }
 }

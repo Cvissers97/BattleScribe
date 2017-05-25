@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BattleScribe.Classes
 {
@@ -64,6 +65,15 @@ namespace BattleScribe.Classes
         private int level;
         private int experiencePoints;
         private bool inspiration;
+
+        // Custom Attack
+        public int lastToHit;
+        public int lastDiceAmount;
+        public int lastDiceSide;
+        public int lastDiceAmount2;
+        public int lastDiceSide2;
+        public int lastBonus;
+
 
         // INT, WIS, CHA (etc.)
         private string spellMod;
@@ -816,6 +826,90 @@ namespace BattleScribe.Classes
             this.slot7 = slot7;
             this.slot8 = slot8;
             this.slot9 = slot9;
+        }
+
+        public bool SpendSlot(byte slotNumber)
+        {
+            switch (slotNumber)
+            {
+                default:
+                    MessageBox.Show("Invalid slot!");
+                    return false;
+
+                case 1:
+                    if (slot1 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot1 -= 1;
+                    return true;
+
+                case 2:
+                    if (slot2 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot2 -= 1;
+                    return true;
+
+                case 3:
+                    if (slot3 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot3 -= 1;
+                    return true;
+
+                case 4:
+                    if (slot4 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot4 -= 1;
+
+                    return true;
+
+                case 5:
+                    if (slot5 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot5 -= 1;
+
+                    return true;
+
+                case 6:
+                    if (slot6 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot6 -= 1;
+                    return true;
+
+                case 7:
+                    if (slot7 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot7 -= 1;
+                    return true;
+
+                case 8:
+                    if (slot8 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot8 -= 1;
+                    return true;
+
+                case 9:
+                    if (slot9 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot9 -= 1;
+                    return true;
+            }
         }
 
         public void SetSavingThrows(string first, string second)

@@ -149,8 +149,22 @@
                     <Label Content="Death Save" HorizontalAlignment="Left" Margin="506,34,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="109"/>
                     <ListBox Name="listAction" HorizontalAlignment="Left" Height="210" Margin="455,359,0,0" VerticalAlignment="Top" Width="204"/>
                     <Label Name="lbActionLog" Content="Action Log" HorizontalAlignment="Left" Margin="459,335,0,0" VerticalAlignment="Top"/>
-                    <Button Name="btnAttack" Content="Attack" HorizontalAlignment="Left" Margin="459,151,0,0" VerticalAlignment="Top" Width="200" Height="22"/>
-                    <Button Name="btnCast" Content="Cast" HorizontalAlignment="Left" Margin="459,250,0,0" VerticalAlignment="Top" Width="200" Height="22"/>
+                    <Button Name="btnAttack" Content="Attack" HorizontalAlignment="Left" Margin="459,151,0,0" VerticalAlignment="Top" Width="200" Height="22">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Make custom attack..." Click="MenuItem_Click">
+                                </MenuItem>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button Name="btnCast" Content="Cast" HorizontalAlignment="Left" Margin="459,250,0,0" VerticalAlignment="Top" Width="200" Height="22" Click="btnCast_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Cast with higher slot..." Click="MenuItem_Click_1">
+                                </MenuItem>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
                     <Label Name="lbSpellMod" Content="Casting modifier: +7" HorizontalAlignment="Left" Margin="459,272,0,0" VerticalAlignment="Top" Height="27"/>
                     <Label Name="lbSpellSaveDC" Content="Spell Save DC: 12" HorizontalAlignment="Left" Margin="459,295,0,0" VerticalAlignment="Top" Height="27"/>
                     <Label Name="lbHealth" Content="HP: 10" HorizontalAlignment="Left" Margin="94,91,0,0" Width="59" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
