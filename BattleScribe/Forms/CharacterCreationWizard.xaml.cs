@@ -740,6 +740,7 @@ namespace BattleScribe.Forms
                 (cbRaces.SelectedIndex + 1).ToString(), imageArray, 1);
 
             charId = db.CreateCharacter(charac);
+            db.CreateMoney(charId);
         }
 
         string GetRichTbString(RichTextBox rtb)

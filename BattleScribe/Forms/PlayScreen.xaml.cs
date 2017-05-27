@@ -8,6 +8,7 @@ using BattleScribe.Controls.Spells;
 using BattleScribe.Forms;
 using BattleScribe.Forms.Pop_ups;
 using BattleScribe.Forms.Pop_ups.Items;
+using BattleScribe.Forms.Pop_ups.Items.Money;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,10 +35,13 @@ namespace BattleScribe.Forms
         private List<Feat> feats;
         private List<CharacterClass> cClass;
         private Spell chosenSpell;
+        private MoneyManager money;
         byte lifeThrow;
         byte deathThrow;
         int spellMod;
         int spellDc;
+
+        public int expToAdd;
 
         public PlayScreen()
         {
@@ -60,6 +64,7 @@ namespace BattleScribe.Forms
 
             lifeThrow = 0;
             deathThrow = 0;
+            expToAdd = 0;
 
             //UpdateInventory();
             UpdateInspiration();
@@ -73,6 +78,7 @@ namespace BattleScribe.Forms
             UpdateTitle();
             UpdateButtons();
 
+            money = new MoneyManager(c, this);
             log = new LogHandler(listAction);
         }
 
@@ -552,6 +558,34 @@ namespace BattleScribe.Forms
         {
             AddNumber add = new AddNumber(this, "SPELL");
             add.Show();
+        }
+
+        private void btnAddExp_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber add = new AddNumber(this, "EXP");
+            add.Show();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (expToAdd > 0)
+            {
+                db.AddExperience(c.GetID(), expToAdd);
+            }
+
+            money.SaveMoney();
+        }
+
+        private void btnAddMoney_Click(object sender, RoutedEventArgs e)
+        {
+            AddMoney add = new AddMoney(money);
+            add.Show();
+        }
+
+        private void btnLoseMoney_Click(object sender, RoutedEventArgs e)
+        {
+            SpendMoney spend = new SpendMoney(money);
+            spend.Show();
         }
     }
 }

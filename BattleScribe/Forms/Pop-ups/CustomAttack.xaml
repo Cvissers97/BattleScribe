@@ -16,6 +16,8 @@
         <Label Content="D" HorizontalAlignment="Left" Margin="177,104,0,0" VerticalAlignment="Top" Height="24"/>
         <Label Content="+" HorizontalAlignment="Left" Margin="245,103,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbBonus" HorizontalAlignment="Left" Height="22" Margin="263,106,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="38"/>
+        <CheckBox Name="chkProf" Content="Proficient" HorizontalAlignment="Left" Margin="202,59,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="20,153,0,0" VerticalAlignment="Top" Width="75" Click="btnClear_Click" />
 
     </Grid>
 </Window>

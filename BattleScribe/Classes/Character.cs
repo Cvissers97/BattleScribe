@@ -149,11 +149,6 @@ namespace BattleScribe.Classes
             SetSpellMod();
         }
 
-        public void ReceiveExperiencePoints(int amount)
-        {
-            experiencePoints += amount;
-        }
-
         public Character(int id, byte[] image, string name, int charClass, int level)
         {
             this.id = id;
@@ -217,6 +212,8 @@ namespace BattleScribe.Classes
             }
 
             SetSpellMod();
+
+            // Constructor called for making a character.
         }
 
         public Character(int id ,string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
@@ -268,6 +265,8 @@ namespace BattleScribe.Classes
             skills = new List<Skill>();
 
             SetSpellMod();
+
+            // Constructor called after making a character.
         }
 
         public void SetSpellMod()

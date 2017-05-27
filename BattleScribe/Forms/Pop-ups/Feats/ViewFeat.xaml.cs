@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BattleScribe.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,24 @@ namespace BattleScribe.Forms.Pop_ups.Feats
     /// </summary>
     public partial class ViewFeat : Window
     {
+        private Feat feat;
+
         public ViewFeat()
         {
             InitializeComponent();
+        }
+
+        public ViewFeat(Feat feat)
+        {
+            InitializeComponent();
+
+            this.feat = feat;
+
+            tbName.Text = feat.GetName();
+            tbPrereq.Text = feat.GetPrereq();
+
+            rtbDesc.Document.Blocks.Clear();
+            rtbDesc.Document.Blocks.Add(new Paragraph(new Run(feat.GetDesc())));
         }
     }
 }

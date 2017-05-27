@@ -126,6 +126,35 @@ namespace BattleScribe.Classes
             con.Close();
         }
 
+        public void CreateMoney(int charId)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+			string sql = "INSERT INTO Character_Money (CharId, copper, silver, gold, platinum) VALUES (@CharId, 0, 0, 0, 0)";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"CharId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            con.Close();
+        }
+
         public int CreateCharacter(Character c)
         {
             List<Feature> features = new List<Feature>();
@@ -135,7 +164,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background, MAX_HP, CUR_HP) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background, @MAX_HP, @MAX_HP)";
+            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background, MAX_HP, CUR_HP, Experience) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background, @MAX_HP, @MAX_HP, 0)";
 
             try
             {
@@ -185,6 +214,81 @@ namespace BattleScribe.Classes
             }
 
             return result;
+        }
+
+        public void UpdateMoney(int charId, int copper, int silver, int gold, int platinum)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "UPDATE CHARACTER_MONEY SET copper = @copper, silver = @silver, gold = @gold, platinum = @platinum WHERE CharId = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"CharId", charId);
+                    com.Parameters.AddWithValue(@"copper", copper);
+                    com.Parameters.AddWithValue(@"silver", silver);
+                    com.Parameters.AddWithValue(@"gold", gold);
+                    com.Parameters.AddWithValue(@"platinum", platinum);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+                    com.Parameters.Clear();
+                    con.Close();
+                }
+            }
+            catch (Exception error)
+            {
+                con.Close();
+                MessageBox.Show(error.ToString());
+                throw;
+            }
+        }
+
+        public int[] GetMoney(int charId)
+        {
+            int[] dosh = new int[4];
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT copper, silver, gold, platinum FROM Character_Money WHERE CharId = @CharId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"CharId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        dosh[0] = dReader.GetInt32(0);
+                        dosh[1] = dReader.GetInt32(1);
+                        dosh[2] = dReader.GetInt32(2);
+                        dosh[3] = dReader.GetInt32(3);
+                    }
+
+                    com.Parameters.Clear();
+                    con.Close();
+                }
+            }
+            catch (Exception error)
+            {
+                con.Close();
+                MessageBox.Show(error.ToString());
+                throw;
+            }
+
+            return dosh;
         }
 
         public List<string> GetBackgrounds()
@@ -1348,6 +1452,36 @@ namespace BattleScribe.Classes
             }
 
             return true;
+        }
+
+        public void AddExperience(int charId, int amount)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "Update Character SET Experience = Experience + @amount WHERE  Id = @CharId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    com.Parameters.AddWithValue(@"amount", amount);
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                con.Close();
+            }
+
+            con.Close();
         }
 
         public void RemoveFeatures(int charId, List<int> featureIds)

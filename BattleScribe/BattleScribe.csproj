@@ -119,6 +119,7 @@
     <Compile Include="Classes\Items\Weapon.cs" />
     <Compile Include="Classes\CharacterRace.cs" />
     <Compile Include="Classes\LogHandler.cs" />
+    <Compile Include="Classes\MoneyManager.cs" />
     <Compile Include="Classes\Spell.cs" />
     <Compile Include="Controls\Char\MainScreenCharacter.xaml.cs">
       <DependentUpon>MainScreenCharacter.xaml</DependentUpon>

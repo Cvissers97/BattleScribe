@@ -20,20 +20,20 @@
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <TextBox Name="tbName" HorizontalAlignment="Left" Height="23" Margin="57,14,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="183"/>
-        <TextBox Name="tbAge" HorizontalAlignment="Left" Height="23" Margin="57,45,0,0" TextWrapping="Wrap" Text="Age" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="tbSize" HorizontalAlignment="Left" Height="23" Margin="57,76,0,0" TextWrapping="Wrap" Text="Size" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="tbName" HorizontalAlignment="Left" Height="23" Margin="57,14,0,0" TextWrapping="Wrap" Text="Adventurer Adventureson" VerticalAlignment="Top" Width="183"/>
+        <TextBox Name="tbAge" HorizontalAlignment="Left" Height="23" Margin="57,45,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="tbSize" HorizontalAlignment="Left" Height="23" Margin="57,76,0,0" TextWrapping="Wrap" Text="5'1" VerticalAlignment="Top" Width="120"/>
         <Label Name="lbAgeExtra" Content="years old" HorizontalAlignment="Left" Margin="182,41,0,0" VerticalAlignment="Top"/>
         <Label Name="lbSizeExtra" Content="ft" HorizontalAlignment="Left" Margin="182,72,0,0" VerticalAlignment="Top"/>
         <Label Name="lbTitle" Content="Title" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top"/>
         <Label Name="lbAlignment" Content="Alignment" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tbTitle" HorizontalAlignment="Left" Height="23" Margin="79,307,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="tbAlignment" HorizontalAlignment="Left" Height="23" Margin="80,338,0,0" TextWrapping="Wrap" Text="Alignment" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="tbTitle" HorizontalAlignment="Left" Height="23" Margin="79,307,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="tbAlignment" HorizontalAlignment="Left" Height="23" Margin="80,338,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Name="lbPersonality" Content="Personality" HorizontalAlignment="Left" Margin="343,10,0,0" VerticalAlignment="Top"/>
         <RichTextBox Name="rtbPersonality" HorizontalAlignment="Left" Height="70" Margin="343,41,0,0" VerticalAlignment="Top" Width="332">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="Personality"/>
+                    <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
@@ -41,7 +41,7 @@
         <RichTextBox x:Name="rtbFlaws" HorizontalAlignment="Left" Height="70" Margin="343,366,0,0" VerticalAlignment="Top" Width="332">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="Flaws"/>
+                    <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
@@ -49,7 +49,7 @@
         <RichTextBox x:Name="rtbIdeals" HorizontalAlignment="Left" Height="70" Margin="343,149,0,0" VerticalAlignment="Top" Width="332">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="Ideals"/>
+                    <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
@@ -57,7 +57,7 @@
         <RichTextBox x:Name="rtbBonds" HorizontalAlignment="Left" Height="70" Margin="343,258,0,0" VerticalAlignment="Top" Width="332">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="Bonds"/>
+                    <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
@@ -65,7 +65,7 @@
         <RichTextBox Name="rtbBackstory" HorizontalAlignment="Left" Height="186" Margin="10,451,0,0" VerticalAlignment="Top" Width="665">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="Backstory"/>
+                    <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
@@ -110,7 +110,7 @@
         <RichTextBox Name="rtbMiscProf" HorizontalAlignment="Left" Height="72" Margin="399,240,0,0" VerticalAlignment="Top" Width="263">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="Miscellaneous proficiencies"/>
+                    <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>

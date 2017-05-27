@@ -90,7 +90,7 @@ namespace BattleScribe.Forms.Pop_ups
                     break;
 
                 case "EXP":
-                    play.GetCharacter().ReceiveExperiencePoints(amount);
+                    play.expToAdd += amount;
                     break;
 
                 case "HEAL":

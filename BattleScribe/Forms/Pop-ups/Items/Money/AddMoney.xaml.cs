@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BattleScribe.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +15,20 @@ using System.Windows.Shapes;
 
 namespace BattleScribe.Forms.Pop_ups.Items.Money
 {
-    /// <summary>
-    /// Interaction logic for AddMoney.xaml
-    /// </summary>
     public partial class AddMoney : Window
     {
+        MoneyManager money;
+
         public AddMoney()
         {
             InitializeComponent();
+        }
+
+        public AddMoney(MoneyManager money)
+        {
+            InitializeComponent();
+
+            this.money = money;
         }
 
         private void tbPlat_TextChanged(object sender, TextChangedEventArgs e)
@@ -54,6 +61,40 @@ namespace BattleScribe.Forms.Pop_ups.Items.Money
             {
                 tbCop.Text = string.Empty;
             }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            int copper = 0;
+            int silver = 0;
+            int gold = 0;
+            int platinum = 0;
+
+            try
+            {
+                if (tbCop.Text != "")
+                {
+                    copper = Convert.ToInt32(tbCop.Text);
+                }
+                if (tbSilv.Text != "")
+                {
+                    silver = Convert.ToInt32(tbSilv.Text);
+                }
+                if (tbGold.Text != "")
+                {
+                    gold = Convert.ToInt32(tbGold.Text);
+                }
+                if (tbPlat.Text != "")
+                {
+                    platinum = Convert.ToInt32(tbPlat.Text);
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Invalid input.");
+            }
+
+            money.ReceiveMoney(copper, silver, gold, platinum);
         }
     }
 }
