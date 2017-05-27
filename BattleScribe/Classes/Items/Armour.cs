@@ -33,6 +33,20 @@ namespace BattleScribe.Classes.Items
             this.estimateValue = estimatedValue;
         }
 
+        public Armour(int id, string name, string description,
+            string type, bool proficient, bool attuneable, string weight,
+            bool stealthDisadvantage, int baseArmour, int bonusArmour, string modifier, int quantity, int strReq, string estimatedValue, int charInvId)
+            : base(id, name, description, type, proficient, attuneable, weight, quantity)
+        {
+            this.stealthDisadvantage = stealthDisadvantage;
+            this.baseArmour = baseArmour;
+            this.modifier = modifier;
+            this.bonusArmour = bonusArmour;
+            this.strReq = strReq;
+            this.estimateValue = estimatedValue;
+            this.charInvId = charInvId;
+        }
+
         public bool GetStealthDis()
         {
             return this.stealthDisadvantage;

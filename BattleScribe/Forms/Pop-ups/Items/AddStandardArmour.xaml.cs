@@ -26,6 +26,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
         private Armour armour;
         private List<Armour> armourList;
         private DbHandler db;
+        private InventoryManager inventory;
 
         public AddStandardArmour()
         {
@@ -46,6 +47,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
             armourList = db.GetAllArmour(); 
             InitializeComponent();
             this.screen = screen;
+            this.inventory = screen.inventory;
             foreach (Armour a in armourList)
             {
                 cbArmourName.Items.Add(a.GetName());
@@ -65,13 +67,14 @@ namespace BattleScribe.Forms.Pop_ups.Items
                     tbCost.Text = a.GetValue();
                     tbWeight.Text = a.GetWeight();
                     armour = a;
+                    break;
                 }
             }
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            //screen.AddItemToInventory(armour);
+            inventory.AddArmour(armour);
         }
     }
 }

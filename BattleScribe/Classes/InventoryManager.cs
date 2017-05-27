@@ -20,6 +20,7 @@ namespace BattleScribe.Classes
     public class InventoryManager
     {
         private Label lbCarry;
+        private DbHandler db;
 
         public Character c;
 
@@ -44,14 +45,22 @@ namespace BattleScribe.Classes
             items = new List<Item>();
 
             allItems = new List<Item>();
+            db = new DbHandler();
 
-            GetItems();
+            GetInventory();
             UpdateInventory();
         }
 
-        private void GetItems()
+        private void GetInventory()
         {
+            weapons = db.GetWeaponsByCharId(c.GetID());
+            armours = db.GetArmoursByCharId(c.GetID());
+            items = db.GetItemsByCharId(c.GetID());
+        }
 
+        public void SaveInventory()
+        {
+            db.InsertInventory(allItems, c.GetID());
         }
 
         private void UpdateInventory()
@@ -62,11 +71,24 @@ namespace BattleScribe.Classes
             ItemLegend leg = new ItemLegend();
             stack.Children.Add(leg);
 
-            ItemControl wep;
+            ItemControl wep, arm, item;
+
             foreach (Weapon w in weapons)
             {
                 wep = new ItemControl(w);
                 stack.Children.Add(wep);
+            }
+
+            foreach (Armour a in armours)
+            {
+                arm = new ItemControl(a);
+                stack.Children.Add(arm);
+            }
+
+            foreach (Item i in items)
+            {
+                item = new ItemControl(i);
+                stack.Children.Add(item);
             }
 
             UpdateCarryCapacity();
@@ -95,6 +117,66 @@ namespace BattleScribe.Classes
                     else
                     {
                         weapons.Remove(weapon);
+                    }
+                }
+            }
+
+            UpdateInventory();
+        }
+
+        public void RemoveArmour(Armour a)
+        {
+
+            // Assuring there's no reference passed
+            List<Armour> newList = new List<Armour>();
+
+            foreach (Armour arm in armours)
+            {
+                newList.Add(arm);
+            }
+
+            // Searching for the weapon, possibly decrement quantity.
+            foreach (Armour armour in newList)
+            {
+                if (armour == a)
+                {
+                    if (armour.GetQuantity() > 1)
+                    {
+                        armour.DecrementQuantity();
+                    }
+                    else
+                    {
+                        armours.Remove(armour);
+                    }
+                }
+            }
+
+            UpdateInventory();
+        }
+
+        public void RemoveItem(Item i)
+        {
+
+            // Assuring there's no reference passed
+            List<Item> newList = new List<Item>();
+
+            foreach (Item it in items)
+            {
+                newList.Add(it);
+            }
+
+            // Searching for the weapon, possibly decrement quantity.
+            foreach (Item item in newList)
+            {
+                if (item == i)
+                {
+                    if (item.GetQuantity() > 1)
+                    {
+                        item.DecrementQuantity();
+                    }
+                    else
+                    {
+                        items.Remove(item);
                     }
                 }
             }
@@ -134,6 +216,7 @@ namespace BattleScribe.Classes
                 if (armour == a)
                 {
                     armour.IncrementQuantity();
+                    duplicate = true;
                     break;
                 }
             }
@@ -166,11 +249,6 @@ namespace BattleScribe.Classes
             }
 
             UpdateInventory();
-        }
-
-        private void SaveInventory()
-        {
-
         }
 
         private void UpdateCarryCapacity()

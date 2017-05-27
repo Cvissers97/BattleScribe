@@ -20,11 +20,25 @@ namespace BattleScribe.Classes.Items
  
         }
 
+        public Weapon(int id, string name, string description,
+            string damage, string type,
+            bool proficient, bool attuneable, string weight,
+            string modifier, float bonusDamage, string baseDamageType,
+            string bonusDamageType, int quantity)
+            : base(id, name, description, type, proficient, attuneable, weight, quantity)
+        {
+            this.damage = damage;
+            this.modifier = modifier;
+            this.bonusDamage = bonusDamage;
+            this.baseDamageType = baseDamageType;
+            this.bonusDamageType = bonusDamageType;
+        }
+
         public Weapon(int id, string name, string description, 
             string damage,  string type, 
             bool proficient, bool attuneable, string weight,
             string modifier, float bonusDamage, string baseDamageType, 
-            string bonusDamageType, int quantity)
+            string bonusDamageType, int quantity, int charInvId)
             :base(id, name, description, type, proficient, attuneable, weight, quantity)
         {
             this.damage = damage;
@@ -32,6 +46,7 @@ namespace BattleScribe.Classes.Items
             this.bonusDamage = bonusDamage;
             this.baseDamageType = baseDamageType;
             this.bonusDamageType = bonusDamageType;
+            this.charInvId = charInvId;
         }
 
         public string GetDamage()

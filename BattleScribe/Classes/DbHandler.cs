@@ -337,6 +337,8 @@ namespace BattleScribe.Classes
             return items;
         }
 
+
+        //WIP
         public void AddWeapon(Weapon w)
         {
             string sql = "INSERT INTO Weapons (Name, Damage, Damage_Type, Weight, Properties, Attunable, Cost_In_Gold, Type, Description, Bonus_Type, Modifier, Bonus_Damage) VALUES (@Char_Id, @SpellId, 0)";
@@ -931,6 +933,7 @@ namespace BattleScribe.Classes
 
         public void InsertSpells(int[] spellId, int charId)
         {
+            DeleteSpells(charId);
             string sql = "INSERT INTO Character_SpellList (Char_Id, Spell_Id, Is_Prepared) VALUES (@Char_Id, @SpellId, 0)";
 
             for (int i = 0; i < spellId.Length; i++)
@@ -1009,7 +1012,7 @@ namespace BattleScribe.Classes
             List<Spell> spellList = new List<Spell>();
 
 
-            string sql = "SELECT * FROM spells";
+            string sql = "SELECT * FROM spells ORDER BY spell_name";
 
 
             try
@@ -1174,7 +1177,7 @@ namespace BattleScribe.Classes
                 {
                     com.Connection = con;
                     com.CommandText = sql;
-                    com.Parameters.Add(@"id", classId);
+                    com.Parameters.AddWithValue(@"id", classId);
                     con.Open();
                     com.ExecuteNonQuery();
                     dReader = com.ExecuteReader();
@@ -1194,51 +1197,6 @@ namespace BattleScribe.Classes
                 con.Close();
                 return null;
             }
-        }
-
-
-        public List<Item> GetAllItems()
-        {
-            List<Item> items = new List<Item>();
-
-            conString = Properties.Settings.Default.conString;
-            con = new SqlCeConnection();
-            con.ConnectionString = conString;
-            List<Spell> sList = new List<Spell>();
-            string sql;
-            int class_id = 0;
-
-            sql = "";
-
-            try
-            {
-                using (con)
-                {
-                    com.Connection = con;
-                    com.CommandText = sql;
-                    // com.Parameters.AddWithValue(@"name", );
-                    con.Open();
-                    com.ExecuteNonQuery();
-                    dReader = com.ExecuteReader();
-
-
-                    while (dReader.Read())
-                    {
-                        class_id = dReader.GetInt32(0);
-                    }
-
-                    //con.Close();
-                    com.Parameters.Clear();
-                }
-            }
-            catch (Exception e)
-            {
-                System.Windows.MessageBox.Show(e.Message.ToString());
-                con.Close();
-            }
-
-
-            return items;
         }
 
         public List<int> GetCharacterClassFeaturesIds(int charId)
@@ -1570,6 +1528,261 @@ namespace BattleScribe.Classes
             }
 
             return feats;
+        }
+
+        public void DeleteSpells(int charId)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "DELETE FROM Character_SpellList WHERE Char_Id = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                con.Close();
+            }
+
+            con.Close();
+        }
+
+        public void DeleteInventory(int charId)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "DELETE FROM Character_Inventory WHERE Char_Id = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                con.Close();
+            }
+
+            con.Close();
+        }
+
+        public void InsertInventory(List<Item> allItems, int charId)
+        {
+            DeleteInventory(charId);
+            string sql = "INSERT INTO Character_Inventory (Char_Id, Item_Id) VALUES (@Char_Id, @Item_Id)";
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    foreach (Item i in allItems)
+                    {
+                        for (int j = 0; j < i.GetQuantity(); j++)
+                        {
+                            com.Parameters.AddWithValue(@"Char_Id", charId);
+                            com.Parameters.AddWithValue(@"Item_Id", i.GetId());
+                            com.ExecuteNonQuery();
+                            com.Parameters.Clear();
+                        }
+
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            
+            con.Close();
+        }
+
+        public List<Weapon> GetWeaponsByCharId(int charId)
+        {
+            List<Weapon> weapons = new List<Weapon>();
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT  w.*, i.Id, charInv.Id FROM Character_Inventory charInv JOIN Items i ON charInv.Item_id = i.Id JOIN Weapons w ON i.Item_Id = w.Id AND i.Type_Id = 1 WHERE charInv.Char_Id = @CharId ";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"CharId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        bool duplicate = false;
+                        Weapon w = new Weapon(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(9), dReader.GetString(2), dReader.GetString(8), false, dReader.GetBoolean(6), Convert.ToSingle(dReader.GetDouble(4)).ToString(), dReader.GetString(11), Convert.ToSingle(dReader.GetDouble(12)), dReader.GetString(3), "geen idee", 0, dReader.GetInt32(14));
+                        foreach (Weapon wep in weapons)
+                        {
+                            if (wep.GetName() == w.GetName())
+                            {
+                                wep.IncrementQuantity();
+                                duplicate = true;
+                                break;
+                            }
+                        }
+
+                        if (!duplicate)
+                        {
+                            weapons.Add(w);
+                        }
+                    }
+
+                    com.Parameters.Clear();
+                    con.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+                com.Parameters.Clear();
+                con.Close();
+            }
+
+            return weapons;
+        }
+
+        public List<Armour> GetArmoursByCharId(int charId)
+        {
+            List<Armour> armours = new List<Armour>();
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT  a.*, i.Id, charInv.Id FROM Character_Inventory charInv JOIN Items i ON charInv.Item_id = i.Id JOIN Armour a ON i.Item_Id = a.Id AND i.Type_Id = 2 WHERE charInv.Char_Id = @CharId ";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"CharId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        bool duplicate = false;
+                        Armour a = new Armour(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(2), "Armour", false, dReader.GetBoolean(12), Convert.ToSingle(dReader.GetDouble(9)).ToString(), dReader.GetBoolean(8), dReader.GetInt32(5), dReader.GetInt32(4), dReader.GetString(6), 1, dReader.GetInt32(7), Convert.ToSingle(dReader.GetDouble(10)).ToString(), dReader.GetInt32(14));
+                        foreach (Armour arm in armours)
+                        {
+                            if (arm.GetName() == a.GetName())
+                            {
+                                arm.IncrementQuantity();
+                                duplicate = true;
+                                break;
+                            }
+                        }
+
+                        if (!duplicate)
+                        {
+                            armours.Add(a);
+                        }
+                    }
+
+                    com.Parameters.Clear();
+                    con.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+                com.Parameters.Clear();
+                con.Close();
+            }
+
+            return armours;
+        }
+
+
+        public List<Item> GetItemsByCharId(int charId)
+        {
+            List<Item> items = new List<Item>();
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "SELECT  a.*, i.Id, charInv.Id FROM Character_Inventory charInv JOIN Items i ON charInv.Item_id = i.Id JOIN Adventuring_Gear a ON i.Item_Id = a.Id AND i.Type_Id = 3 WHERE charInv.Char_Id = @CharId ";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"CharId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        bool duplicate = false;
+                        Item item = new Item(dReader.GetInt32(4), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), 3, 0);
+                        foreach (Item i in items)
+                        {
+                            if (i.GetName() == item.GetName())
+                            {
+                                i.IncrementQuantity();
+                                duplicate = true;
+                                break;
+                            }
+                        }
+
+                        if (!duplicate)
+                        {
+                            items.Add(item);
+                        }
+                    }
+
+                    com.Parameters.Clear();
+                    con.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+                com.Parameters.Clear();
+                con.Close();
+            }
+
+            return items;
         }
     }
 }

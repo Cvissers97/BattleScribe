@@ -131,7 +131,7 @@
             <TabItem Header="Inventory">
                 <Grid Background="#f9f9f9">
 
-                    <Button Name="btnEquip" Content="Equip / Unequip" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
+                    <Button Name="btnEquip" Content="Equip / Unequip" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="BtnEquip_Click"/>
                     <Button Name="btnAddItem" Content="Add Item" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="BtnAddItem_Click"/>
                     <Button Name="btnModifyItem" Content="Modify Item" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
                     <Button Name="btnDropItem" Content="Drop Item" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="btnDropItem_Click"/>
@@ -163,7 +163,7 @@
                     </ScrollViewer>
                     <Button Name="btnAddSpell" Content="Add Spell" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="163" Height="28" Click="btnAddSpell_Click"/>
                     <Button Name="btnPrepSpell" Content="Prepare / Unprepare" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
-                    <Button Name="btnRemSpell" Content="Remove Spell" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="163" Height="28"/>
+                    <Button Name="btnRemSpell" Content="Remove Spell" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="163" Height="28" Click="btnRemSpell_Click"/>
                     <Label Content="Known Spells" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top"/>
                     <Label Content="Preparable Spells" HorizontalAlignment="Left" Margin="10,183,0,0" VerticalAlignment="Top"/>
                     <TextBox Name="tbKnown" HorizontalAlignment="Left" Height="23" Margin="123,156,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="50"/>
@@ -226,7 +226,7 @@
         </TabControl>
 
         <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Left" Margin="593,632,0,0" VerticalAlignment="Top" Width="86" Height="39" Click="btnPlay_Click"/>
-        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="502,632,0,0" VerticalAlignment="Top" Width="86" Height="39" ToolTip="Saves all changes. Features and Feats are saved on change."/>
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="502,632,0,0" VerticalAlignment="Top" Width="86" Height="39" ToolTip="Saves all changes. Features and Feats are saved on change." Click="BtnSave_Click"/>
         <Button x:Name="btnMainMenu" Content="Main menu" HorizontalAlignment="Left" Margin="411,632,0,0" VerticalAlignment="Top" Width="86" Height="39" Click="BtnMainMenu_Click"/>
 
 

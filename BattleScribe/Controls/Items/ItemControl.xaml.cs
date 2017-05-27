@@ -86,15 +86,27 @@ namespace BattleScribe.Controls.Items
 
         private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (!isSelected)
+            if (!item.GetEquip() && !isSelected)
             {
                 this.Background = new SolidColorBrush(System.Windows.Media.Colors.Aquamarine);
                 isSelected = true;
             }
-            else
+            else if(!item.GetEquip())
             {
                 isSelected = false;
                 this.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255,243,117));
+            }
+        }
+
+        public void SetEquipedColor()
+        {
+            if (item.GetEquip())
+            {
+                this.Background = new SolidColorBrush(System.Windows.Media.Colors.Green);
+            }
+            else if(item.GetEquip() && isSelected)
+            {
+                this.Background = new SolidColorBrush(System.Windows.Media.Colors.GreenYellow);
             }
         }
 
