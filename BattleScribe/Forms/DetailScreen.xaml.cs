@@ -36,11 +36,11 @@ namespace BattleScribe.Forms
         private List<CharacterRace> charRaces;
         private List<Skill> skills;
         private List<Language> langs;
-        private List<Spell> spells;
+        public List<Spell> spells;
         private Character c;
         private CharacterClass cClass;
         private DbHandler db;
-        private List<Item> itemsInInv;
+        private List<Item> itemsInInv, equipedList;
         private List<Feature> acquiredClassFeatures;
         private List<Feat> acquiredFeats;
         public InventoryManager inventory;
@@ -87,6 +87,7 @@ namespace BattleScribe.Forms
             spells = new List<Spell>();
             itemsInInv = new List<Item>();
             cClass = new CharacterClass();
+            equipedList = new List<Item>();
             charId = character.GetID();
 
             
@@ -151,11 +152,8 @@ namespace BattleScribe.Forms
                 panelLanguages.Children.Add(cbox);
             }
 
-            foreach (Spell s in spells)
-            {
-                SpellPrepControl pSpells = new SpellPrepControl(s);
-                panelSpells.Children.Add(pSpells);
-            }
+            UpdateSpells();
+
 
             inventory = new InventoryManager(c, panelInv, lbCarryCapacity);
             money = new MoneyManager(c, this);
@@ -163,6 +161,16 @@ namespace BattleScribe.Forms
             UpdateStats();
             UpdateFeatureList();
             UpdateFeatList();
+        }
+
+        public void UpdateSpells()
+        {
+            panelSpells.Children.Clear();
+            foreach (Spell s in spells)
+            {
+                SpellPrepControl pSpells = new SpellPrepControl(s);
+                panelSpells.Children.Add(pSpells);
+            }
         }
 
         private void btnPlusHP_Click(object sender, RoutedEventArgs e)
@@ -457,11 +465,107 @@ namespace BattleScribe.Forms
                             break;
 
                         case "ARMOUR":
+                            Armour a = (Armour)i.GetItem();
+                            inventory.RemoveArmour(a);
                             break;
 
                         case "ITEM":
+                            Item it = (Item)i.GetItem();
+                            inventory.RemoveItem(it);
                             break;
                     }
+                }
+            }
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            inventory.SaveInventory();
+
+            int[] temp = new int[spells.Count];
+            int i = 0;
+
+            foreach (Spell s in spells)
+            {
+                temp[i] = Convert.ToInt32(s.GetId());
+                i++;
+            }
+
+            db.InsertSpells(temp, c.GetID());
+            
+        }
+
+        private void btnRemSpell_Click(object sender, RoutedEventArgs e)
+        {
+            List<SpellPrepControl> loopList = new List<SpellPrepControl>();
+
+            foreach(SpellPrepControl prep in panelSpells.Children)
+            {
+                if(prep.isSelected)
+                {
+                    spells.Remove(prep.GetSpell());
+                }
+            }
+            UpdateSpells();
+            
+        }
+
+        private void BtnEquip_Click(object sender, RoutedEventArgs e)
+        {
+            List<ItemControl> loopList = new List<ItemControl>();
+
+            foreach (ItemControl i in panelInv.Children.OfType<ItemControl>())
+            {
+                loopList.Add(i);
+            }
+
+            foreach (ItemControl i in loopList)
+            {
+                if (i.GetIsSelected())
+                {
+                    switch (i.typeItem)
+                    {
+                        default:
+                            MessageBox.Show("INVALID ITEM TYPE!");
+                            break;
+
+                        case "WEAPON":
+                            Weapon wep = (Weapon)i.GetItem();
+                            if(!wep.GetEquip())
+                            {
+                                wep.SetEquip(true);
+                            }
+                            else
+                            {
+                                wep.SetEquip(false);
+                            }
+                            break;
+
+                        case "ARMOUR":
+                            Armour a = (Armour)i.GetItem();
+                            if(!a.GetEquip())
+                            {
+                               a.SetEquip(true);
+                            }
+                            else
+                            {
+                                a.SetEquip(false);
+                            }
+                            break;
+
+                        case "ITEM":
+                            Item it = (Item)i.GetItem();
+                            if (!it.GetEquip())
+                            {
+                                it.SetEquip(true);
+                            }
+                            else
+                            {
+                                it.SetEquip(false);
+                            }
+                            break;
+                    }
+                    i.SetEquipedColor();
                 }
             }
         }

@@ -16,7 +16,7 @@ namespace BattleScribe.Classes.Items
         protected string weight;
         protected string estimateValue;
         protected bool isEquip;
-        protected int id, quantity;
+        protected int id, quantity, charInvId;
 
         public Item()
         {
@@ -47,7 +47,7 @@ namespace BattleScribe.Classes.Items
             this.attuneable = proficient;
             this.weight = weight;
             this.id = id;
-            isEquip = false;
+            this.isEquip = false;
             this.quantity = quantity;
 
             if (quantity == 0)
