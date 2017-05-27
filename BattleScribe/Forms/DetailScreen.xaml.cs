@@ -39,7 +39,7 @@ namespace BattleScribe.Forms
         private Character c;
         private CharacterClass cClass;
         private DbHandler db;
-        private List<Item> itemsInInv;
+        private List<Item> itemsInInv, equipedList;
         private List<Feature> acquiredClassFeatures;
         private List<Feat> acquiredFeats;
         public InventoryManager inventory;
@@ -85,6 +85,7 @@ namespace BattleScribe.Forms
             spells = new List<Spell>();
             itemsInInv = new List<Item>();
             cClass = new CharacterClass();
+            equipedList = new List<Item>();
             charId = character.GetID();
 
             

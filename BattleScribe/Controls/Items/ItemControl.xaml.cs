@@ -96,6 +96,10 @@ namespace BattleScribe.Controls.Items
                 isSelected = false;
                 this.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255,243,117));
             }
+            else if (item.GetEquip() && isSelected)
+            {
+                this.Background = new SolidColorBrush(System.Windows.Media.Colors.GreenYellow);
+            }
         }
 
         public void SetEquipedColor()
@@ -103,10 +107,6 @@ namespace BattleScribe.Controls.Items
             if (item.GetEquip())
             {
                 this.Background = new SolidColorBrush(System.Windows.Media.Colors.Green);
-            }
-            else if(item.GetEquip() && isSelected)
-            {
-                this.Background = new SolidColorBrush(System.Windows.Media.Colors.GreenYellow);
             }
         }
 
