@@ -132,7 +132,9 @@ namespace BattleScribe.Forms
             rtbFlaws.Document.Blocks.Add(new Paragraph(new Run(c.GetFlaws())));
 
             ItemLegend itemLegend = new ItemLegend();
+            ItemLegend equipedLegend = new ItemLegend();
             panelInv.Children.Add(itemLegend);
+            panelEquiped.Children.Add(equipedLegend);
 
             foreach (Skill s in skills)
             {
@@ -516,10 +518,17 @@ namespace BattleScribe.Forms
                 loopList.Add(i);
             }
 
+            foreach (ItemControl i in panelEquiped.Children.OfType<ItemControl>())
+            {
+                loopList.Add(i);
+            }
+
             foreach (ItemControl i in loopList)
             {
                 if (i.GetIsSelected())
                 {
+                    i.SetIsSelected(false);
+                    i.ResetColour();
                     switch (i.typeItem)
                     {
                         default:
@@ -531,10 +540,16 @@ namespace BattleScribe.Forms
                             if(!wep.GetEquip())
                             {
                                 wep.SetEquip(true);
+                                equipedList.Add(wep);
+                                panelInv.Children.Remove(i);
+                                panelEquiped.Children.Add(i);
                             }
                             else
                             {
                                 wep.SetEquip(false);
+                                equipedList.Remove(wep);
+                                panelEquiped.Children.Remove(i);
+                                panelInv.Children.Add(i);
                             }
                             break;
 
@@ -543,10 +558,16 @@ namespace BattleScribe.Forms
                             if(!a.GetEquip())
                             {
                                a.SetEquip(true);
+                               equipedList.Add(a);
+                               panelInv.Children.Remove(i);
+                               panelEquiped.Children.Add(i);
                             }
                             else
                             {
                                 a.SetEquip(false);
+                                equipedList.Remove(a);
+                                panelEquiped.Children.Remove(i);
+                                panelInv.Children.Add(i);
                             }
                             break;
 
@@ -555,14 +576,21 @@ namespace BattleScribe.Forms
                             if (!it.GetEquip())
                             {
                                 it.SetEquip(true);
+                                equipedList.Add(it);
+                                panelInv.Children.Remove(i);
+                                panelEquiped.Children.Add(i);
                             }
                             else
                             {
                                 it.SetEquip(false);
+                                equipedList.Remove(it);
+                                panelEquiped.Children.Remove(i);
+                                panelInv.Children.Add(i);
                             }
                             break;
                     }
-                    i.SetEquipedColor();
+                    
+                    inventory.SetEquipedItems(equipedList);
                 }
             }
         }

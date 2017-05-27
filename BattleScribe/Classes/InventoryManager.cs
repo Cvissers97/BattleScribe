@@ -30,8 +30,9 @@ namespace BattleScribe.Classes
 
         private List<Item> allItems;
         private StackPanel stack;
+        private List<Item> equipedItems;
 
-        int totalItemWeight;
+        double totalItemWeight;
 
 
         public InventoryManager(Character c, StackPanel stack, Label carry)
@@ -43,6 +44,7 @@ namespace BattleScribe.Classes
             weapons = new List<Weapon>();
             armours = new List<Armour>();
             items = new List<Item>();
+            equipedItems = new List<Item>();
 
             allItems = new List<Item>();
             db = new DbHandler();
@@ -152,6 +154,7 @@ namespace BattleScribe.Classes
             }
 
             UpdateInventory();
+            
         }
 
         public void RemoveItem(Item i)
@@ -277,13 +280,19 @@ namespace BattleScribe.Classes
             {
                 string weight = i.GetWeight();
                 string temp = string.Empty;
-                int result;
+                double result;
 
                 for (int j = 0; j < weight.Length; j++)
                 {
-                    if (int.TryParse(weight[j].ToString(), out result))
+                    if (double.TryParse(weight[j].ToString(), out result) || weight[j] == '.')
                     {
-                        temp += weight[j];
+                        if (weight[j] == '.')
+                            temp += ',';
+                        else
+                        {
+                            temp += weight[j];
+                        }
+
                     }
                     else
                     {
@@ -293,11 +302,16 @@ namespace BattleScribe.Classes
 
                 if (temp != "")
                 {
-                    result = (Convert.ToInt32(temp) * i.GetQuantity());
+                    result = (Convert.ToDouble(temp) * i.GetQuantity());
                     totalItemWeight += result;
                 }
             }
             lbCarry.Content = "Carry capacity: " + totalItemWeight.ToString() + " / " + c.CalcCarryWeight().ToString();
+        }
+
+        public void SetEquipedItems(List<Item> equipedItems)
+        {
+            this.equipedItems = equipedItems;
         }
     }
 }
