@@ -20,6 +20,7 @@ using BattleScribe.Forms.Pop_ups.Items;
 using BattleScribe.Classes.Items;
 using BattleScribe.Controls.Items;
 using BattleScribe.Forms.Pop_ups.Features;
+using BattleScribe.Forms.Pop_ups.Items.Money;
 
 namespace BattleScribe.Forms
 {
@@ -43,6 +44,7 @@ namespace BattleScribe.Forms
         private List<Feature> acquiredClassFeatures;
         private List<Feat> acquiredFeats;
         public InventoryManager inventory;
+        private MoneyManager money;
 
         public DetailScreen()
         {
@@ -156,6 +158,7 @@ namespace BattleScribe.Forms
 
 
             inventory = new InventoryManager(c, panelInv, lbCarryCapacity);
+            money = new MoneyManager(c, this);
 
             UpdateStats();
             UpdateFeatureList();
@@ -593,6 +596,23 @@ namespace BattleScribe.Forms
                     inventory.SetEquipedItems(equipedList);
                 }
             }
+        }
+
+        private void btnAddMoney_Click(object sender, RoutedEventArgs e)
+        {
+            AddMoney add = new AddMoney(money);
+            add.Show();
+        }
+
+        private void btnLoseMoney_Click(object sender, RoutedEventArgs e)
+        {
+            SpendMoney spend = new SpendMoney(money);
+            spend.Show();
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            money.SaveMoney();
         }
     }
 }

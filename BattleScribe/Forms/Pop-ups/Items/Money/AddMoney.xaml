@@ -11,7 +11,7 @@
         <TextBox Name="tbGold" HorizontalAlignment="Left" Height="23" Margin="82,43,0,0" TextWrapping="Wrap" Text="Gold" VerticalAlignment="Top" Width="189" TextChanged="tbGold_TextChanged"/>
         <TextBox Name="tbSilv" HorizontalAlignment="Left" Height="23" Margin="82,74,0,0" TextWrapping="Wrap" Text="Silver" VerticalAlignment="Top" Width="189" TextChanged="tbSilv_TextChanged"/>
         <TextBox Name="tbCop" HorizontalAlignment="Left" Height="23" Margin="82,106,0,0" TextWrapping="Wrap" Text="Copper" VerticalAlignment="Top" Width="189" TextChanged="tbCop_TextChanged"/>
-        <Button Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="187,141,0,0" VerticalAlignment="Top" Width="84" Height="30"/>
+        <Button Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="187,141,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnAdd_Click"/>
 
     </Grid>
 </Window>

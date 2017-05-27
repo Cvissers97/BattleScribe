@@ -1,4 +1,5 @@
 ﻿using BattleScribe.Classes;
+using BattleScribe.Forms.Pop_ups.Feats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,6 +68,12 @@ namespace BattleScribe.Controls.Feats
         public int GetID()
         {
             return id;
+        }
+
+        private void UserControl_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ViewFeat view = new ViewFeat(feat);
+            view.Show();
         }
     }
 }

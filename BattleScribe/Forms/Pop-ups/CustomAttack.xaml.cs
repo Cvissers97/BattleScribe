@@ -67,6 +67,11 @@ namespace BattleScribe.Forms.Pop_ups
             bool secondDice = false;
             bonus = 0;
 
+            if (chkProf.IsChecked.Value)
+            {
+                toHit += c.GetProfiencyBonus();
+            }
+
             try
             {
                 amount1 = Convert.ToInt32(tbDiceAmount.Text);
@@ -153,6 +158,16 @@ namespace BattleScribe.Forms.Pop_ups
             {
                 MessageBox.Show("Please only put in numbers.");
             }
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            tbDiceAmount.Text = string.Empty;
+            tbDiceAmount2.Text = string.Empty;
+            cbDiceSides.Text = string.Empty;
+            cbDiceSides2.Text = string.Empty;
+            tbToHit.Text = string.Empty;
+            tbBonus.Text = string.Empty;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BattleScribe.Classes;
+using BattleScribe.Forms.Pop_ups.Features;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +66,12 @@ namespace BattleScribe.Controls.Features
             {
                 this.Background = normalBackground;
             }
+        }
+
+        private void UserControl_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ViewFeature view = new ViewFeature(feature.GetName(), feature.GetDesc());
+            view.Show();
         }
     }
 }
