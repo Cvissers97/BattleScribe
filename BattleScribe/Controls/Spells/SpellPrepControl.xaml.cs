@@ -35,6 +35,12 @@ namespace BattleScribe.Controls.Spells
             lblName.Content = s.GetName();
             lblLvl.Content = s.GetSchool();
             isSelected = false;
+
+            if (s.GetPrepared())
+            {
+                isSelected = true;
+                this.chkPrep.IsChecked = true;
+            }
         }
 
         private void UserControl_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -51,6 +57,11 @@ namespace BattleScribe.Controls.Spells
         public Spell GetSpell()
         {
             return this.spell;
+        }
+
+        public void SetSpellPrepared(bool isPrepared)
+        {
+            spell.SetPrepared(isPrepared);
         }
 
         private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

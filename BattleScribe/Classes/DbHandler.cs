@@ -1035,10 +1035,10 @@ namespace BattleScribe.Classes
             con.Close();
         }
 
-        public void InsertSpells(int[] spellId, int charId)
+        public void InsertSpells(int[] spellId, int charId, bool[] prepared)
         {
             DeleteSpells(charId);
-            string sql = "INSERT INTO Character_SpellList (Char_Id, Spell_Id, Is_Prepared) VALUES (@Char_Id, @SpellId, 0)";
+            string sql = "INSERT INTO Character_SpellList (Char_Id, Spell_Id, Is_Prepared) VALUES (@Char_Id, @SpellId, @prepared)";
 
             for (int i = 0; i < spellId.Length; i++)
             {
@@ -1053,6 +1053,10 @@ namespace BattleScribe.Classes
                         com.CommandText = sql;
                         com.Parameters.AddWithValue(@"Char_Id", charId);
                         com.Parameters.AddWithValue(@"SpellId", spellId[i]);
+                        if (prepared != null)
+                            com.Parameters.AddWithValue(@"prepared", prepared[i]);
+                        else
+                            com.Parameters.AddWithValue(@"prepared", 0);
                         con.Open();
                         com.ExecuteNonQuery();
 

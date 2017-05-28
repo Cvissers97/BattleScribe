@@ -710,7 +710,7 @@ namespace BattleScribe.Forms
                 CreateCharacter();
                 db.InsertSkills(chosenSkills, charId);
                 db.InsertLangs(chosenLangs, charId);
-                db.InsertSpells(spellIds, charId);
+                db.InsertSpells(spellIds, charId, null);
                 MessageBox.Show("Character created. Have fun!");
                 MainMenu m = new MainMenu();
                 m.Show();

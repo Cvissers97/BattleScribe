@@ -486,15 +486,29 @@ namespace BattleScribe.Forms
             money.SaveMoney();
 
             int[] temp = new int[spells.Count];
+            bool[] prepared = new bool[spells.Count];
             int i = 0;
+
+            foreach(SpellPrepControl prep in panelSpells.Children)
+            {
+                if ((bool)prep.chkPrep.IsChecked)
+                {
+                    prep.SetSpellPrepared(true);
+                }
+                else
+                {
+                    prep.SetSpellPrepared(false);
+                }
+            }
 
             foreach (Spell s in spells)
             {
                 temp[i] = Convert.ToInt32(s.GetId());
+                prepared[i] = s.GetPrepared();
                 i++;
             }
 
-            db.InsertSpells(temp, c.GetID());
+            db.InsertSpells(temp, c.GetID(), prepared);
             
         }
 

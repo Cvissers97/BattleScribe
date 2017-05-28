@@ -36,6 +36,7 @@ namespace BattleScribe.Forms
         private List<CharacterClass> cClass;
         private Spell chosenSpell;
         private MoneyManager money;
+        private InventoryManager inventory;
         byte lifeThrow;
         byte deathThrow;
         int spellMod;
@@ -79,6 +80,7 @@ namespace BattleScribe.Forms
             UpdateButtons();
 
             money = new MoneyManager(c, this);
+            inventory = new InventoryManager(c, stackInventory, lbCarryCapacity, stackEquip, lbAttunements);
             log = new LogHandler(listAction);
         }
 

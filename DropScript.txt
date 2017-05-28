@@ -39,3 +39,7 @@ GO
 DROP TABLE [Spells];
 GO
 DROP TABLE [Feats];
+GO
+DROP TABLE [Character_Feats];
+GO
+DROP TABLE [Character_Money];
