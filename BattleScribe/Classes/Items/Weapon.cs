@@ -88,5 +88,10 @@ namespace BattleScribe.Classes.Items
         {
             this.bonusDamageType = type;
         }
+
+        public string GetDamageForCopy()
+        {
+            return this.damage;
+        }
     }
 }

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BattleScribe.Classes.Items;
 using BattleScribe.Forms.Pop_ups.Items;
+using BattleScribe.Forms;
 
 namespace BattleScribe.Controls.Items
 {
@@ -22,10 +23,15 @@ namespace BattleScribe.Controls.Items
     /// </summary>
     public partial class ItemControl : UserControl
     {
-        private int id, Quantity;
+        private int id;
         private Item item;
         private bool isSelected;
         public string typeItem;
+
+        private DetailScreen detail;
+        private PlayScreen play;
+
+        private string setting;
 
         public ItemControl()
         {
@@ -97,7 +103,6 @@ namespace BattleScribe.Controls.Items
                 isSelected = false;
                 this.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 243, 117));
             }
-
         }
 
         public Item GetItem()

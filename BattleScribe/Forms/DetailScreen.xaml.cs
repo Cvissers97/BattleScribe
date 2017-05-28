@@ -40,7 +40,7 @@ namespace BattleScribe.Forms
         private Character c;
         private CharacterClass cClass;
         private DbHandler db;
-        private List<Item> itemsInInv, equipedList;
+        private List<Item> itemsInInv, equipList;
         private List<Feature> acquiredClassFeatures;
         private List<Feat> acquiredFeats;
         public InventoryManager inventory;
@@ -87,7 +87,7 @@ namespace BattleScribe.Forms
             spells = new List<Spell>();
             itemsInInv = new List<Item>();
             cClass = new CharacterClass();
-            equipedList = new List<Item>();
+            equipList = new List<Item>();
             charId = character.GetID();
 
             
@@ -157,7 +157,7 @@ namespace BattleScribe.Forms
             UpdateSpells();
 
 
-            inventory = new InventoryManager(c, panelInv, lbCarryCapacity);
+            inventory = new InventoryManager(c, panelInv, lbCarryCapacity, panelEquiped, lbAttunements);
             money = new MoneyManager(c, this);
 
             UpdateStats();
@@ -514,6 +514,9 @@ namespace BattleScribe.Forms
 
         private void BtnEquip_Click(object sender, RoutedEventArgs e)
         {
+            // Make sure to get data from the database, to see which items are set
+            // to equip.
+
             List<ItemControl> loopList = new List<ItemControl>();
 
             foreach (ItemControl i in panelInv.Children.OfType<ItemControl>())
@@ -526,75 +529,29 @@ namespace BattleScribe.Forms
                 loopList.Add(i);
             }
 
-            foreach (ItemControl i in loopList)
+            foreach (ItemControl i  in loopList)
             {
                 if (i.GetIsSelected())
                 {
-                    i.SetIsSelected(false);
-                    i.ResetColour();
-                    switch (i.typeItem)
+                    if (i.GetItem().GetEquip())
                     {
-                        default:
-                            MessageBox.Show("INVALID ITEM TYPE!");
-                            break;
-
-                        case "WEAPON":
-                            Weapon wep = (Weapon)i.GetItem();
-                            if(!wep.GetEquip())
-                            {
-                                wep.SetEquip(true);
-                                equipedList.Add(wep);
-                                panelInv.Children.Remove(i);
-                                panelEquiped.Children.Add(i);
-                            }
-                            else
-                            {
-                                wep.SetEquip(false);
-                                equipedList.Remove(wep);
-                                panelEquiped.Children.Remove(i);
-                                panelInv.Children.Add(i);
-                            }
-                            break;
-
-                        case "ARMOUR":
-                            Armour a = (Armour)i.GetItem();
-                            if(!a.GetEquip())
-                            {
-                               a.SetEquip(true);
-                               equipedList.Add(a);
-                               panelInv.Children.Remove(i);
-                               panelEquiped.Children.Add(i);
-                            }
-                            else
-                            {
-                                a.SetEquip(false);
-                                equipedList.Remove(a);
-                                panelEquiped.Children.Remove(i);
-                                panelInv.Children.Add(i);
-                            }
-                            break;
-
-                        case "ITEM":
-                            Item it = (Item)i.GetItem();
-                            if (!it.GetEquip())
-                            {
-                                it.SetEquip(true);
-                                equipedList.Add(it);
-                                panelInv.Children.Remove(i);
-                                panelEquiped.Children.Add(i);
-                            }
-                            else
-                            {
-                                it.SetEquip(false);
-                                equipedList.Remove(it);
-                                panelEquiped.Children.Remove(i);
-                                panelInv.Children.Add(i);
-                            }
-                            break;
+                        inventory.UnEquip(i.GetItem());
                     }
-                    
-                    inventory.SetEquipedItems(equipedList);
+                    else
+                    {
+                        inventory.Equip(i.GetItem());
+                    }
                 }
+            }
+
+            foreach (ItemControl i  in panelInv.Children.OfType<ItemControl>())
+            {
+                i.SetIsSelected(false);
+            }
+
+            foreach (ItemControl i in panelEquiped.Children.OfType<ItemControl>())
+            {
+                i.SetIsSelected(false);
             }
         }
 

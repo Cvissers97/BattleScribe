@@ -147,6 +147,11 @@ namespace BattleScribe.Classes.Items
             return this.quantity;
         }
 
+        public void SetQuantity(int target)
+        {
+            this.quantity = target;
+        }
+
         public void IncrementQuantity()
         {
             this.quantity += 1;
