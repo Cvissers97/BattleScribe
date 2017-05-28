@@ -56,14 +56,47 @@ namespace BattleScribe.Classes
 
             GetInventory();
             UpdateInventory();
-
         }
 
         private void GetInventory()
         {
+            List<Item> loopList = new List<Item>();
+
             weapons = db.GetWeaponsByCharId(c.GetID());
             armours = db.GetArmoursByCharId(c.GetID());
             items = db.GetItemsByCharId(c.GetID());
+
+            foreach (Weapon wep in weapons)
+            {
+                loopList.Add(wep);
+            }
+            foreach (Armour a in armours)
+            {
+                loopList.Add(a);
+            }
+            foreach (Item i in items)
+            {
+                loopList.Add(i);
+            }
+
+            foreach (Item i in loopList)
+            {
+                if (i.GetType().Name == "Weapon" && i.GetEquip())
+                {
+                    equipedItems.Add(i);
+                    weapons.Remove((Weapon)i);
+                }
+                if (i.GetType().Name == "Armour" && i.GetEquip())
+                {
+                    equipedItems.Add(i);
+                    armours.Remove((Armour)i);
+                }
+                if (i.GetType().Name == "Item" && i.GetEquip())
+                {
+                    equipedItems.Add(i);
+                    items.Remove((Item)i);
+                }
+            }
 
             // Fill equipped items list with all equipped items amongst the lists
             // above ^^^^
@@ -321,7 +354,6 @@ namespace BattleScribe.Classes
                         {
                             temp += weight[j];
                         }
-
                     }
                     else
                     {

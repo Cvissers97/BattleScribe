@@ -483,6 +483,7 @@ namespace BattleScribe.Forms
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             inventory.SaveInventory();
+            money.SaveMoney();
 
             int[] temp = new int[spells.Count];
             int i = 0;
@@ -565,11 +566,6 @@ namespace BattleScribe.Forms
         {
             SpendMoney spend = new SpendMoney(money);
             spend.Show();
-        }
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            money.SaveMoney();
         }
     }
 }

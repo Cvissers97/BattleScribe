@@ -1725,7 +1725,7 @@ namespace BattleScribe.Classes
         public void InsertInventory(List<Item> allItems, int charId)
         {
             DeleteInventory(charId);
-            string sql = "INSERT INTO Character_Inventory (Char_Id, Item_Id) VALUES (@Char_Id, @Item_Id)";
+            string sql = "INSERT INTO Character_Inventory (Char_Id, Item_Id, Equipped) VALUES (@Char_Id, @Item_Id, @Equipped)";
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
@@ -1742,6 +1742,7 @@ namespace BattleScribe.Classes
                         {
                             com.Parameters.AddWithValue(@"Char_Id", charId);
                             com.Parameters.AddWithValue(@"Item_Id", i.GetId());
+                            com.Parameters.AddWithValue(@"Equipped", i.GetEquip());
                             com.ExecuteNonQuery();
                             com.Parameters.Clear();
                         }
@@ -1765,7 +1766,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "SELECT  w.*, i.Id, charInv.Id FROM Character_Inventory charInv JOIN Items i ON charInv.Item_id = i.Id JOIN Weapons w ON i.Item_Id = w.Id AND i.Type_Id = 1 WHERE charInv.Char_Id = @CharId ";
+            string sql = "SELECT  w.*, i.Id, charInv.Id, charInv.Equipped FROM Character_Inventory charInv JOIN Items i ON charInv.Item_id = i.Id JOIN Weapons w ON i.Item_Id = w.Id AND i.Type_Id = 1 WHERE charInv.Char_Id = @CharId ";
 
             try
             {
@@ -1781,10 +1782,11 @@ namespace BattleScribe.Classes
                     while (dReader.Read())
                     {
                         bool duplicate = false;
-                        Weapon w = new Weapon(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(9), dReader.GetString(2), dReader.GetString(8), false, dReader.GetBoolean(6), Convert.ToSingle(dReader.GetDouble(4)).ToString(), dReader.GetString(11), Convert.ToSingle(dReader.GetDouble(12)), dReader.GetString(3), "geen idee", 0, dReader.GetInt32(14));
+                        Weapon w = new Weapon(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(9), dReader.GetString(2), "Weapon", false, dReader.GetBoolean(6), Convert.ToSingle(dReader.GetDouble(4)).ToString(), dReader.GetString(11), Convert.ToSingle(dReader.GetDouble(12)), dReader.GetString(3), "geen idee", 0, dReader.GetInt32(14));
+                        w.SetEquip(dReader.GetBoolean(15));
                         foreach (Weapon wep in weapons)
                         {
-                            if (wep.GetName() == w.GetName())
+                            if (wep.GetName() == w.GetName() && wep.GetEquip() == w.GetEquip())
                             {
                                 wep.IncrementQuantity();
                                 duplicate = true;
@@ -1818,7 +1820,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "SELECT  a.*, i.Id, charInv.Id FROM Character_Inventory charInv JOIN Items i ON charInv.Item_id = i.Id JOIN Armour a ON i.Item_Id = a.Id AND i.Type_Id = 2 WHERE charInv.Char_Id = @CharId ";
+            string sql = "SELECT  a.*, i.Id, charInv.Id, charInv.Equipped FROM Character_Inventory charInv JOIN Items i ON charInv.Item_id = i.Id JOIN Armour a ON i.Item_Id = a.Id AND i.Type_Id = 2 WHERE charInv.Char_Id = @CharId ";
 
             try
             {
@@ -1835,9 +1837,10 @@ namespace BattleScribe.Classes
                     {
                         bool duplicate = false;
                         Armour a = new Armour(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(2), "Armour", false, dReader.GetBoolean(12), Convert.ToSingle(dReader.GetDouble(9)).ToString(), dReader.GetBoolean(8), dReader.GetInt32(5), dReader.GetInt32(4), dReader.GetString(6), 1, dReader.GetInt32(7), Convert.ToSingle(dReader.GetDouble(10)).ToString(), dReader.GetInt32(14));
+                        a.SetEquip(dReader.GetBoolean(15));
                         foreach (Armour arm in armours)
                         {
-                            if (arm.GetName() == a.GetName())
+                            if (arm.GetName() == a.GetName() && arm.GetEquip() == a.GetEquip())
                             {
                                 arm.IncrementQuantity();
                                 duplicate = true;
@@ -1872,7 +1875,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "SELECT  a.*, i.Id, charInv.Id FROM Character_Inventory charInv JOIN Items i ON charInv.Item_id = i.Id JOIN Adventuring_Gear a ON i.Item_Id = a.Id AND i.Type_Id = 3 WHERE charInv.Char_Id = @CharId ";
+            string sql = "SELECT  a.*, i.Id, charInv.Id, charInv.Equipped FROM Character_Inventory charInv JOIN Items i ON charInv.Item_id = i.Id JOIN Adventuring_Gear a ON i.Item_Id = a.Id AND i.Type_Id = 3 WHERE charInv.Char_Id = @CharId ";
 
             try
             {
@@ -1889,9 +1892,10 @@ namespace BattleScribe.Classes
                     {
                         bool duplicate = false;
                         Item item = new Item(dReader.GetInt32(4), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), 3, 0);
+                        item.SetEquip(dReader.GetBoolean(6));
                         foreach (Item i in items)
                         {
-                            if (i.GetName() == item.GetName())
+                            if (i.GetName() == item.GetName() && i.GetEquip() == item.GetEquip())
                             {
                                 i.IncrementQuantity();
                                 duplicate = true;
