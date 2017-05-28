@@ -143,16 +143,35 @@ namespace BattleScribe.Classes
 
             foreach (Item i in equipedItems)
             {
-                item = new ItemControl(i);
-                stackEquip.Children.Add(item);
+                switch (i.GetItemType())
+                {
+                    default:
+                        MessageBox.Show("NO ITEM TYPE - UPDATE INVENTORY");
+                        break;
+
+                    case "Weapon":
+                        wep = new ItemControl((Weapon)i);
+                        stackEquip.Children.Add(wep);
+                        break;
+
+                    case "Armour":
+                        arm = new ItemControl((Armour)i);
+                        stackEquip.Children.Add(arm);
+                        break;
+
+                    case "Item":
+                        item = new ItemControl(i);
+                        stackEquip.Children.Add(item);
+                        break;
+                }
             }
 
             UpdateCarryCapacity();
+            UpdateAttunements();
         }
 
         public void RemoveWeapon(Weapon w)
         {
-
             // Assuring there's no reference passed
             List<Weapon> newList = new List<Weapon>();
 
@@ -182,7 +201,6 @@ namespace BattleScribe.Classes
 
         public void RemoveArmour(Armour a)
         {
-
             // Assuring there's no reference passed
             List<Armour> newList = new List<Armour>();
 
@@ -213,7 +231,6 @@ namespace BattleScribe.Classes
 
         public void RemoveItem(Item i)
         {
-
             // Assuring there's no reference passed
             List<Item> newList = new List<Item>();
 
@@ -311,6 +328,21 @@ namespace BattleScribe.Classes
             UpdateInventory();
         }
 
+        private void UpdateAttunements()
+        {
+            int amount = 0;
+
+            foreach (Item i in equipedItems)
+            {
+                if (i.GetAttunement())
+                {
+                    amount++;
+                }
+            }
+
+            lbAttune.Content = "Attunements : " + amount + " / 3";
+        }
+
         private void UpdateCarryCapacity()
         {
             // Put all items together for carry weight calculation
@@ -395,7 +427,8 @@ namespace BattleScribe.Classes
                             wep.GetModifier(), (float)wep.GetBonusDamage(), 
                             wep.GetBaseDamageType(), wep.GetBonusDamageType(), 1);
 
-                            item.DecrementQuantity();
+                        toAdd.SetItemType("Weapon");
+                        item.DecrementQuantity();
 
                         break;
 
@@ -409,10 +442,12 @@ namespace BattleScribe.Classes
                             arm.GetBaseArmour(), arm.GetBonusArmour(), arm.GetModifier(), 1,
                             arm.GetStrReq(), arm.GetValue());
 
-                            item.DecrementQuantity();
+                        toAdd.SetItemType("Armour");
+                        item.DecrementQuantity();
                         break;
 
                     case "Item":
+                        toAdd.SetItemType("Item");
                         // Add all items. No logic here. :3
                         break;
                 }
