@@ -60,5 +60,11 @@ namespace BattleScribe.Controls.Spells
         {
             return spell;
         }
+
+        private void UserControl_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            BattleScribe.Forms.Pop_ups.Spells.ViewSpell screen = new Forms.Pop_ups.Spells.ViewSpell(spell.GetName(), spell.GetLevel().ToString(), spell.GetRange(), spell.GetComponents(), spell.GetDuration(), spell.GetCastTime(), spell.GetHigher(), spell.GetDesc());
+            screen.Show();
+        }
     }
 }

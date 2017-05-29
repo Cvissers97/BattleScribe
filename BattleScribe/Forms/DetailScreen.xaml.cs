@@ -484,6 +484,9 @@ namespace BattleScribe.Forms
         {
             inventory.SaveInventory();
             money.SaveMoney();
+            c.SetSlots(Convert.ToByte(tbSlot1.Text), Convert.ToByte(tbSlot2.Text), Convert.ToByte(tbSlot3.Text),
+                Convert.ToByte(tbSlot4.Text), Convert.ToByte(tbSlot5.Text), Convert.ToByte(tbSlot6.Text),
+                Convert.ToByte(tbSlot7.Text), Convert.ToByte(tbSlot8.Text), Convert.ToByte(tbSlot9.Text));
 
             int[] temp = new int[spells.Count];
             bool[] prepared = new bool[spells.Count];

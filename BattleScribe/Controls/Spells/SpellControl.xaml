@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="28" d:DesignWidth="359" PreviewMouseLeftButtonUp="UserControl_PreviewMouseLeftButtonUp" Background="White">
+             d:DesignHeight="28" d:DesignWidth="359" PreviewMouseLeftButtonUp="UserControl_PreviewMouseLeftButtonUp" Background="White"
+             MouseRightButtonUp="UserControl_MouseRightButtonUp">
     <Grid>
         <Label Name="lbName" Content="lbName" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="127"/>
         <Label Name="lbComp" Content="lbComp" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="127" Margin="127,0,0,0"/>

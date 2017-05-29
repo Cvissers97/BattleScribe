@@ -79,6 +79,5 @@ namespace BattleScribe.Forms.Pop_ups.Items
         {
             inventory.AddItem(item);
         }
-
     }
 }

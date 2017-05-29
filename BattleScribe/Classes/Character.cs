@@ -564,9 +564,19 @@ namespace BattleScribe.Classes
             this.skills = skills;
         }
 
+        public List<Skill> GetSkills()
+        {
+            return this.skills;
+        }
+
         public void SetLangList(List<Language> lang)
         {
             this.langs = lang;
+        }
+
+        public List<Language> GetLangs()
+        {
+            return this.langs;
         }
         public int GetLevel()
         {
@@ -935,6 +945,56 @@ namespace BattleScribe.Classes
         public void SetItemsInInventory(List<Item> itemsInInventory)
         {
             this.items = itemsInInventory;
+        }
+
+        public byte GetSlot1()
+        {
+            return this.slot1;
+        }
+
+        public byte GetSlot2()
+        {
+            return this.slot2;
+        }
+
+        public byte GetSlot3()
+        {
+            return this.slot3;
+        }
+
+        public byte GetSlot4()
+        {
+            return this.slot4;
+        }
+
+        public byte GetSlot5()
+        {
+            return this.slot5;
+        }
+
+        public byte GetSlot6()
+        {
+            return this.slot6;
+        }
+
+        public byte GetSlot7()
+        {
+            return this.slot7;
+        }
+
+        public byte GetSlot8()
+        {
+            return this.slot8;
+        }
+
+        public byte GetSlot9()
+        {
+            return this.slot9;
+        }
+
+        public int GetExp()
+        {
+            return this.experiencePoints;
         }
     }
 }
