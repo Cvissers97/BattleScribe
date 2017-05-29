@@ -45,6 +45,7 @@ namespace BattleScribe.Forms.Pop_ups
 
             // If healing use "HEAL"
             // If getting damage use "DAMAGE"
+            // If casting at higher level, use "SPELL"
             this.setting = setting;
         }
 
@@ -71,7 +72,12 @@ namespace BattleScribe.Forms.Pop_ups
 
         private void Execute()
         {
-            int amount = Convert.ToInt32(tbAmount.Text);
+            int amount = 0;
+
+            if (tbAmount.Text != "")
+            {
+                amount = Convert.ToInt32(tbAmount.Text);
+            }
 
             switch (setting)
             {
@@ -84,7 +90,7 @@ namespace BattleScribe.Forms.Pop_ups
                     break;
 
                 case "EXP":
-                    play.GetCharacter().ReceiveExperiencePoints(amount);
+                    play.expToAdd += amount;
                     break;
 
                 case "HEAL":
@@ -109,6 +115,21 @@ namespace BattleScribe.Forms.Pop_ups
                         play.GetCharacter().SetCurrentHealth(play.GetCharacter().GetCurrentHealth() - amount);
                     }
                     play.UpdateHealth();
+                    break;
+
+                case "SPELL":
+                    if (amount < 10 && amount > 0)
+                    {
+                        try
+                        {
+                            byte temp = Convert.ToByte(amount);
+                            play.CastAtHigherLevel(temp);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Invalid input.");
+                        }
+                    }
                     break;
             }
             this.Close();

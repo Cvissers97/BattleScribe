@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BattleScribe.Classes;
+using BattleScribe.Classes.Items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +23,10 @@ namespace BattleScribe.Forms.Pop_ups.Items
     {
         private int characterId;
         private DetailScreen screen;
+        private DbHandler db;
+        private List<Weapon> weaponList;
+        private Weapon weapon;
+        private InventoryManager inventory;
 
         public AddStandardWeapon()
         {
@@ -29,6 +35,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         public AddStandardWeapon(int id)
         {
+            db = new DbHandler();
             InitializeComponent();
 
             this.characterId = id;
@@ -36,8 +43,42 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         public AddStandardWeapon(DetailScreen screen)
         {
+            db = new DbHandler();
             InitializeComponent();
             this.screen = screen;
+            this.inventory = screen.inventory;
+            Init();
+        }
+
+        public void Init()
+        {
+            weaponList = db.GetAllWeapons();
+
+            foreach (Item i in weaponList)
+            {
+                cbName.Items.Add(i.GetName());
+            }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            inventory.AddWeapon(weapon);
+        }
+
+        private void CbName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (Weapon w in weaponList)
+            {
+                if (w.GetName() == (string)cbName.SelectedItem)
+                {
+                    tbDamage.Text = w.GetDamage();
+                    tbAttackType.Text = w.GetBaseDamageType();
+                    tbType.Text = w.GetItemType();
+                    tbWeight.Text = w.GetWeight();
+                    weapon = w;
+                    break;
+                }
+            }
         }
     }
 }

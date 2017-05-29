@@ -1,12 +1,14 @@
 ﻿using BattleScribe.Classes;
 using BattleScribe.Classes.Items;
 using BattleScribe.Controls;
+using BattleScribe.Controls.Feats;
 using BattleScribe.Controls.Features;
 using BattleScribe.Controls.Items;
 using BattleScribe.Controls.Spells;
 using BattleScribe.Forms;
 using BattleScribe.Forms.Pop_ups;
 using BattleScribe.Forms.Pop_ups.Items;
+using BattleScribe.Forms.Pop_ups.Items.Money;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,8 +32,17 @@ namespace BattleScribe.Forms
         private DbHandler db;
         private Image imgTempDat;
         private List<Feature> features;
+        private List<Feat> feats;
+        private List<CharacterClass> cClass;
+        private Spell chosenSpell;
+        private MoneyManager money;
+        private InventoryManager inventory;
         byte lifeThrow;
         byte deathThrow;
+        int spellMod;
+        int spellDc;
+
+        public int expToAdd;
 
         public PlayScreen()
         {
@@ -54,53 +65,149 @@ namespace BattleScribe.Forms
 
             lifeThrow = 0;
             deathThrow = 0;
+            expToAdd = 0;
 
-            UpdateInventory();
+            //UpdateInventory();
             UpdateInspiration();
             UpdateHealth();
             UpdateStats();
             UpdateFeatures();
+            UpdateFeats();
             UpdateDeath();
             UpdateSpells();
+            UpdateSavingThrows();
+            UpdateTitle();
+            UpdateButtons();
 
+            money = new MoneyManager(c, this);
+            inventory = new InventoryManager(c, stackInventory, lbCarryCapacity, stackEquip, lbAttunements);
             log = new LogHandler(listAction);
         }
 
-        private void UpdateSpells()
+        private void UpdateButtons()
         {
+
+        }
+
+        private void UpdateTitle()
+        {
+            cClass = db.GetClasses();
+            string _class = "CLASS";
+
+            foreach (CharacterClass cl in cClass)
+            {
+                if (cl.GetId() == c.GetClass())
+                {
+                    _class = cl.GetName();
+                    break;
+                }
+            }
+
+            this.Title = c.GetName() + ", " + "level " + c.GetLevel() + " " + _class;
+        }
+
+        private void UpdateSavingThrows()
+        {
+            string[] throws = db.GetSavingThrowByClass(c.GetClass());
+
+            c.SetSavingThrows(throws[0], throws[1]);
+        }
+
+        public void UpdateSpells()
+        {
+            spellMod = 0;
+            spellDc = 0;
+
             panelSpells.Children.Clear();
 
-            SpellLegend leg = new SpellLegend();
-            panelSpells.Children.Add(leg);
+            //SpellLegend leg = new SpellLegend();
+            //panelSpells.Children.Add(leg);
 
             List<Spell> spells = db.GetSpellsByCharId(c.GetID());
             SpellControl spell;
 
             foreach (Spell s in spells)
             {
-                spell = new SpellControl(s);
-                spell.lbName.Content = s.GetName();
-                spell.lbComp.Content = s.GetComponents();
-                spell.lbSlot.Content = s.GetLevel() + " Slot";
-                panelSpells.Children.Add(spell);
+                if (s.GetLevel() == 0)
+                {
+                    s.SetPrepared(true);
+                }
+                if (s.GetPrepared())
+                {
+                    spell = new SpellControl(s, this);
+                    spell.lbName.Content = s.GetName();
+                    spell.lbComp.Content = s.GetComponents();
+                    spell.lbSlot.Content = s.GetLevel() + " Slot";
+                    panelSpells.Children.Add(spell);  
+                }
             }
+
+            spellMod = c.GetModifier(c.GetSpellMod()) + c.GetProfiencyBonus();
+            lbSpellMod.Content = "Casting modifier: " + spellMod;
+            spellDc = c.GetModifier(c.GetSpellMod()) + c.GetProfiencyBonus() + 8;
+            lbSpellSaveDC.Content = "Save DC: " + spellDc;
+
+            //c.SetSlots(3, 3, 3, 3, 3, 3, 3, 3, 3);
         }
 
         private void UpdateFeatures()
         {
+            List<int> acquiredFeatureIds = db.GetCharacterClassFeaturesIds(c.GetID());
+            List<Feature> allClassFeatures = db.GetFeaturesByClass(Convert.ToString(c.GetClass()));
+            List<Feature> acquiredClassFeatures = new List<Feature>();
+
+            foreach (int i in acquiredFeatureIds)
+            {
+                foreach (Feature f in allClassFeatures)
+                {
+                    if (f.id == i)
+                    {
+                        acquiredClassFeatures.Add(f);
+                        break;
+                    }
+                }
+            }
+            c.SetClassFeatures(acquiredClassFeatures);
+
             panelFeatures.Children.Clear();
-
-            FeatureControl temp;
-            int idCount = 0;
-
             features = c.GetAllFeatures();
+            FeatureControl temp;
 
             foreach (Feature f in features)
             {
-                temp = new FeatureControl(idCount);
+                temp = new FeatureControl(f.id, true, f);
                 temp.lbName.Content = f.GetName();
                 panelFeatures.Children.Add(temp);
-                idCount++;
+            }
+        }
+
+        private void UpdateFeats()
+        {
+            List<int> acquiredFeatIds = db.GetCharacterClassFeatIds(c.GetID());
+            List<Feat> allFeats = db.GetAllFeats();
+            List<Feat> acquiredFeats = new List<Feat>();
+
+            foreach (int i in acquiredFeatIds)
+            {
+                foreach (Feat f in allFeats)
+                {
+                    if (f.id == i)
+                    {
+                        acquiredFeats.Add(f);
+                        break;
+                    }
+                }
+            }
+
+            c.SetCharFeats(acquiredFeats);
+            feats = c.GetFeats();
+
+            FeatControl temp;
+            foreach (Feat f in feats)
+            {
+                temp = new FeatControl(f, true);
+                temp.lbFeatName.Content = f.GetName();
+                stackFeats.Children.Add(temp);
             }
         }
 
@@ -142,6 +249,24 @@ namespace BattleScribe.Forms
             }
         }
 
+        public void ChooseSpell(Spell spell)
+        {
+            chosenSpell = spell;
+
+            // Highlighting
+            foreach (SpellControl spellCon in panelSpells.Children)
+            {
+                if (spellCon.GetSpell() == spell)
+                {
+                    spellCon.Highlight(true);
+                }
+                else
+                {
+                    spellCon.Highlight(false);
+                }
+            }
+        }
+
         public void UpdateHealth()
         {
             lbHealth.Content = "HP: " + c.GetCurrentHealth();
@@ -153,55 +278,11 @@ namespace BattleScribe.Forms
             lbDeathSave.Content = "Death: " + deathThrow;
         }
 
-        private void UpdateInventory()
-        {
-            stackInventory.Children.Clear();
-            ItemLegend leg = new ItemLegend();
-            stackInventory.Children.Add(leg);
-            //Read out all items in the character's inventory (Armour, Weapon, Item)
-            //Turn all of them into stackpanels
 
-            ItemControl temp;
-
-            foreach (Weapon w in c.GetAllWeapons())
-            {
-                temp = new ItemControl(w.GetID());
-                temp.lbName.Content = w.GetName();
-                temp.lbType.Content = w.GetType();
-                temp.lbProficiency.Content = w.GetProficient();
-                temp.lbValue.Content = w.GetValue();
-                temp.lbWeight.Content = w.GetWeight();
-                temp.lbAttune.Content = w.GetAttunement();
-                stackInventory.Children.Add(temp);
-            }
-
-            foreach (Item i in c.GetAllItems())
-            {
-                temp = new ItemControl(i.GetID());
-                temp.lbName.Content = i.GetName();
-                temp.lbType.Content = i.GetItemType();
-                temp.lbProficiency.Content = i.GetProficient();
-                temp.lbValue.Content = i.GetValue();
-                temp.lbWeight.Content = i.GetWeight();
-                temp.lbAttune.Content = i.GetAttunement();
-                stackInventory.Children.Add(temp);
-            }
-
-            foreach (Armour a in c.GetAllArmours())
-            {
-                temp = new ItemControl(a.GetID());
-                temp.lbName.Content = a.GetName();
-                temp.lbType.Content = a.GetItemType();
-                temp.lbProficiency.Content = a.GetProficient();
-                temp.lbValue.Content = a.GetValue();
-                temp.lbWeight.Content = a.GetWeight();
-                temp.lbAttune.Content = a.GetAttunement();
-                stackInventory.Children.Add(temp);
-            }
-        }
 
         private void btnAddItem_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("PLAYSCREEN");
             ItemChoice i = new ItemChoice(c.GetID());
             i.Show();
         }
@@ -237,7 +318,7 @@ namespace BattleScribe.Forms
         private void btnHitDie_Click(object sender, RoutedEventArgs e)
         {
             int hitDice;
-            hitDice = db.GetHitDiceByClass(c.GetClassName());
+            hitDice = db.GetHitDiceByClass(c.GetClass());
         }
 
         private void btnHeart_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -259,8 +340,9 @@ namespace BattleScribe.Forms
 
                 if (lifeThrow == 3)
                 {
-                    MessageBox.Show("Stable");
+                    MessageBox.Show("Stablised!");
                     lifeThrow = 0;
+                    deathThrow = 0;
                 }
             }
             else
@@ -270,11 +352,43 @@ namespace BattleScribe.Forms
 
                 if (deathThrow == 3)
                 {
-                    MessageBox.Show("ded");
+                    MessageBox.Show("Farewell.");
                     deathThrow = 0;
+                    lifeThrow = 0;
                 }
             }
             UpdateDeath();
+        }
+
+        private void PerformSavingThrow(string stat, bool advantage, bool disadvantage)
+        {
+            string[] throws = c.GetSavingThrows();
+            int mod = 0;
+            List<int> result = new List<int>();
+            mod += c.GetModifier(stat);
+
+            if (throws[0] == stat || throws[1] == stat)
+            {
+                mod += c.GetProfiencyBonus();
+            }
+
+            if (advantage || disadvantage)
+            {
+                if (advantage)
+                {
+                    result.Add(DiceThrower.ThrowSavingThrowAdvantage(mod, true));
+                }
+                else
+                {
+                    result.Add(DiceThrower.ThrowSavingThrowAdvantage(mod, false));
+                }
+            }
+            else
+            {
+                result.Add(DiceThrower.ThrowSavingThrow(mod));
+            }
+
+            log.DisplayResult(result);
         }
 
         private void menuHurt_Click(object sender, RoutedEventArgs e)
@@ -286,6 +400,194 @@ namespace BattleScribe.Forms
         public Character GetCharacter()
         {
             return c;
+        }
+
+        private void rectCha_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PerformSavingThrow("CHA", false, false);
+        }
+
+        private void rectWis_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PerformSavingThrow("WIS", false, false);
+        }
+
+        private void rectInt_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PerformSavingThrow("INT", false, false);
+        }
+
+        private void rectCon_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PerformSavingThrow("CON", false, false);
+        }
+
+        private void rectDex_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PerformSavingThrow("DEX", false, false);
+        }
+
+        private void rectStr_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PerformSavingThrow("STR", false, false);
+        }
+
+        private void menuStrAdv_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("STR", true, false);
+        }
+
+        private void menuStrDis_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("STR", false, true);
+        }
+
+        private void menuDexAdv_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("DEX", true, false);
+        }
+
+        private void menuDexDis_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("DEX", false, true);
+        }
+
+        private void menuConAdv_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("CON", true, false);
+        }
+
+        private void menuConDis_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("CON", false, true);
+        }
+
+        private void menuIntAdv_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("INT", true, false);
+        }
+
+        private void menuIntDis_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("INT", false, true);
+        }
+
+        private void menuWisAdv_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("WIS", true, false);
+        }
+
+        private void menuWisDis_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("WIS", false, true);
+        }
+
+        private void menuChaAdv_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("CHA", true, false);
+        }
+
+        private void menuChaDis_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSavingThrow("CHA", false, true);
+        }
+
+        private void btnPrepareSpells_Click(object sender, RoutedEventArgs e)
+        {
+            PrepareSpells prep = new PrepareSpells(this, c);
+            prep.Show();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            CustomAttack cust = new CustomAttack(c, this);
+            cust.Show();
+        }
+
+        private void btnCast_Click(object sender, RoutedEventArgs e)
+        {
+            if (chosenSpell == null)
+            {
+                MessageBox.Show("No spell selected.");
+            }
+            else
+            {
+                if (chosenSpell.GetLevel() == 0)
+                {
+                    log.Write("You cast " + chosenSpell.GetName());
+                }
+                else
+                {
+                    if (c.SpendSlot(chosenSpell.GetLevel()))
+                    {
+                        log.Write("You cast " + chosenSpell.GetName());
+                    }
+                    else
+                    {
+                        MessageBox.Show("No level " + chosenSpell.GetLevel() + " slot available");
+                    }
+                }
+            }
+        }
+
+        public void CastAtHigherLevel(byte slot)
+        {
+            if (chosenSpell.GetLevel() > slot)
+            {
+                MessageBox.Show("Spell slot " + slot + " is too weak to process this spell.");
+            }
+            else
+            {
+                if (chosenSpell.GetLevel() == 0)
+                {
+                    MessageBox.Show("Cantrips can not be cast with higher level slots.");
+                }
+                else
+                {
+                    if (c.SpendSlot(slot))
+                    {
+                        log.Write("You cast " + chosenSpell.GetName());
+                    }
+                    else
+                    {
+                        MessageBox.Show("No level " + slot + " slot available");
+                    }
+                }
+            }
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            AddNumber add = new AddNumber(this, "SPELL");
+            add.Show();
+        }
+
+        private void btnAddExp_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber add = new AddNumber(this, "EXP");
+            add.Show();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (expToAdd > 0)
+            {
+                db.AddExperience(c.GetID(), expToAdd);
+            }
+
+            money.SaveMoney();
+        }
+
+        private void btnAddMoney_Click(object sender, RoutedEventArgs e)
+        {
+            AddMoney add = new AddMoney(money);
+            add.Show();
+        }
+
+        private void btnLoseMoney_Click(object sender, RoutedEventArgs e)
+        {
+            SpendMoney spend = new SpendMoney(money);
+            spend.Show();
         }
     }
 }

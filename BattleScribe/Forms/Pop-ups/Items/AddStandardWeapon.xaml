@@ -8,14 +8,14 @@
         <TextBox Name="tbType" HorizontalAlignment="Left" Height="23" Margin="236,12,0,0" TextWrapping="Wrap" Text="Type" VerticalAlignment="Top" Width="95" IsEnabled="False"/>
         <CheckBox Name="chkProf" Content="Proficient" HorizontalAlignment="Left" Margin="183,73,0,0" VerticalAlignment="Top" IsEnabled="False"/>
         <Label Content="Weight" HorizontalAlignment="Left" Margin="183,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.623,-0.192"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="236,45,0,0" TextWrapping="Wrap" Text="Weight" VerticalAlignment="Top" Width="95" IsEnabled="False"/>
+        <TextBox Name="tbWeight" HorizontalAlignment="Left" Height="23" Margin="236,45,0,0" TextWrapping="Wrap" Text="Weight" VerticalAlignment="Top" Width="95" IsEnabled="False"/>
         <Label Content="lbs" HorizontalAlignment="Left" Margin="336,41,0,0" VerticalAlignment="Top"/>
-        <Button Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Margin="286,141,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Margin="286,141,0,0" VerticalAlignment="Top" Width="75" Click="btnAdd_Click"/>
         <Label Content="Damage" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top"/>
         <Label Content="Damage Type" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top"/>
         <Label Content="Attack" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top"/>
         <TextBox Name="tbAttackType" HorizontalAlignment="Left" Height="23" Margin="53,138,0,0" TextWrapping="Wrap" Text="Attack" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-        <ComboBox Name="cbName" HorizontalAlignment="Left" Margin="57,14,0,0" VerticalAlignment="Top" Width="111"/>
+        <ComboBox Name="cbName" HorizontalAlignment="Left" Margin="57,14,0,0" VerticalAlignment="Top" Width="111" SelectionChanged="CbName_SelectionChanged"/>
         <TextBox Name="tbDamage" HorizontalAlignment="Left" Height="22" Margin="14,77,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
 
     </Grid>

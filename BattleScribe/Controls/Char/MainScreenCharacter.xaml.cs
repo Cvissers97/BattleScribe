@@ -21,26 +21,31 @@ namespace BattleScribe.Controls.Char
     /// <summary>
     /// Interaction logic for MainScreenCharacter.xaml
     /// </summary>
-    public partial class SpellPrepare : UserControl
+    public partial class MainScreenCharacter : UserControl
     {
         public Classes.Character character;
         
-        public SpellPrepare()
+        public MainScreenCharacter()
         {
             InitializeComponent();
         }
 
-        public SpellPrepare(Classes.Character c, List<CharacterClass> cClass)
+        public MainScreenCharacter(Classes.Character c, List<CharacterClass> cClass)
         {
             character = c;
             InitializeComponent();
 
-            using(MemoryStream ms = new MemoryStream(c.GetImage()))
+            if (c.GetImage().Count() > 1)
             {
-                BitmapDecoder decoder = BitmapDecoder.Create(ms,
-                BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
-                image.Source = decoder.Frames[0];
+                using (MemoryStream ms = new MemoryStream(c.GetImage()))
+                {
+                    BitmapDecoder decoder = BitmapDecoder.Create(ms,
+                    BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                    image.Source = decoder.Frames[0];
+                }
             }
+
+
             lblName.Content = c.GetName();
 
             foreach(CharacterClass cl in cClass)

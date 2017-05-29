@@ -22,25 +22,31 @@ namespace BattleScribe.Forms.Pop_ups
     {
         private List<Feat> feats;
         private DetailScreen detail;
+        private DbHandler db;
+        private Character c;
 
         public AddFeat()
         {
             InitializeComponent();
         }
 
-        public AddFeat(DetailScreen detail)
+        public AddFeat(DetailScreen detail, Character c)
         {
             InitializeComponent();
 
+            this.c = c;
             this.detail = detail;
             feats = new List<Feat>();
+            db = new DbHandler();
 
             // Temporary feats for testing purposes
-            Feat temp;
-            temp = new Feat("Grappler", "Grapples people", "13 Strength", 1);
-            feats.Add(temp);
-            temp = new Feat("Magic Initiate", "Spells, pew pew.", "13 Intelligence", 2);
-            feats.Add(temp);
+            //Feat temp;
+            //temp = new Feat("Grappler", "Grapples people", "13 Strength", 1);
+            //feats.Add(temp);
+            //temp = new Feat("Magic Initiate", "Spells, pew pew.", "13 Intelligence", 2);
+            //feats.Add(temp);
+
+            feats = db.GetAllFeats();
 
             foreach (Feat f in feats)
             {
@@ -69,13 +75,18 @@ namespace BattleScribe.Forms.Pop_ups
             if (cbFeat.SelectedItem != null)
             {
                 Feat temp = (Feat)cbFeat.SelectedItem;
-                detail.AddNewFeat(temp);
-                this.Close();
+
+                if (!db.AddFeatToCharacter(c.GetID(), temp.id))
+                {
+                    MessageBox.Show("You already have this feature!");
+                }
             }
             else
             {
                 MessageBox.Show("Please select a Feat!");
             }
+
+            detail.UpdateFeatList();
         }
     }
 }

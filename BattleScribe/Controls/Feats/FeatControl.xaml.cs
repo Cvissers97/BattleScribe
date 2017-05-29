@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BattleScribe.Classes;
+using BattleScribe.Forms.Pop_ups.Feats;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,24 +23,41 @@ namespace BattleScribe.Controls.Feats
     public partial class FeatControl : UserControl
     {
         private bool isSelected;
+        private string name;
+        public Feat feat;
         private int id;
+        private Brush normalBackground;
+        private bool fromPlayScreen;
 
         public FeatControl()
         {
             InitializeComponent();
         }
 
-        public FeatControl(int id)
+        public FeatControl(Feat feat, bool fromPlayScreen)
         {
             InitializeComponent();
-
-            this.id = id;
+            this.feat = feat;
+            this.fromPlayScreen = fromPlayScreen;
+            this.normalBackground = this.Background;
+            isSelected = false;
         }
 
         private void lbFeatName_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Background = new SolidColorBrush(System.Windows.Media.Colors.Aquamarine);
-            isSelected = true;
+            if (!fromPlayScreen)
+            {
+                isSelected = !isSelected;
+            }
+
+            if (isSelected)
+            {
+                this.Background = new SolidColorBrush(System.Windows.Media.Colors.Aquamarine);
+            }
+            else
+            {
+                this.Background = normalBackground;
+            }
         }
 
         public bool GetSelect()
@@ -49,6 +68,12 @@ namespace BattleScribe.Controls.Feats
         public int GetID()
         {
             return id;
+        }
+
+        private void UserControl_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ViewFeat view = new ViewFeat(feat);
+            view.Show();
         }
     }
 }

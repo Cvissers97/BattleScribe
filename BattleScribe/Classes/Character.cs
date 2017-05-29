@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BattleScribe.Classes
 {
@@ -65,6 +66,20 @@ namespace BattleScribe.Classes
         private int experiencePoints;
         private bool inspiration;
 
+        // Custom Attack
+        public int lastToHit;
+        public int lastDiceAmount;
+        public int lastDiceSide;
+        public int lastDiceAmount2;
+        public int lastDiceSide2;
+        public int lastBonus;
+
+
+        // INT, WIS, CHA (etc.)
+        private string spellMod;
+        private string savingThrow1;
+        private string savingThrow2;
+
         private byte slot1;
         private byte slot2;
         private byte slot3;
@@ -80,11 +95,15 @@ namespace BattleScribe.Classes
         private List<Feature> raceFeatures;
         private List<Feature> classFeatures;
 
+        private List<Feat> feats;
+
         private List<Skill> skills;
         private List<Language> langs;
         private List<Item> items;
         private List<Weapon> weapons;
         private List<Armour> armours;
+
+        private List<Spell> knownSpells;
 
         public Character()
         {
@@ -103,6 +122,9 @@ namespace BattleScribe.Classes
         //Id constructor, used for testing the inventory system.
         public Character(int id)
         {
+            //Base proficiency
+            proficiency = 2;
+
             this.id = id;
 
             items = new List<Item>();
@@ -124,11 +146,7 @@ namespace BattleScribe.Classes
             proficiency = 0;
             maxHitPoints = 37;
             curHitPoints = maxHitPoints;
-        }
-
-        public void ReceiveExperiencePoints(int amount)
-        {
-            experiencePoints += amount;
+            SetSpellMod();
         }
 
         public Character(int id, byte[] image, string name, int charClass, int level)
@@ -145,6 +163,8 @@ namespace BattleScribe.Classes
             byte con, byte _int, byte wis, byte cha, int charClass, string personality, string background,
             string charRace, byte[] image, int level)
         {
+            //Base proficiency
+            proficiency = 2;
 
             db = new DbHandler();
             this.name = name;
@@ -191,8 +211,9 @@ namespace BattleScribe.Classes
                 skills.Add(new Skill(s, false));
             }
 
-            //For testing
-            proficiency = 0;
+            SetSpellMod();
+
+            // Constructor called for making a character.
         }
 
         public Character(int id ,string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
@@ -200,6 +221,9 @@ namespace BattleScribe.Classes
     byte con, byte _int, byte wis, byte cha, int charClass, string personality, string background,
     string charRace, int level)
         {
+            //Base proficiency
+            proficiency = 2;
+
             db = new DbHandler();
             this.id = id;
             this.name = name;
@@ -239,6 +263,67 @@ namespace BattleScribe.Classes
             weapons = new List<Weapon>();
             armours = new List<Armour>();
             skills = new List<Skill>();
+
+            SetSpellMod();
+
+            // Constructor called after making a character.
+        }
+
+        public void SetSpellMod()
+        {
+            switch (charClass)
+            {
+                default:
+                    spellMod = "INT";
+                    break;
+                case 2:
+                    //Bard
+                    spellMod = "CHA";
+                    break;
+                case 3:
+                    //Cleric
+                    spellMod = "WIS";
+                    break;
+                case 4:
+                    //Druid
+                    spellMod = "WIS";
+
+                    break;
+                case 5:
+                    //Fighter
+                    spellMod = "INT";
+                    break;
+                case 7:
+                    //Paladin
+                    spellMod = "CHA";
+
+                    break;
+                case 8:
+                    //Ranger
+                    spellMod = "WIS";
+                    break;
+                case 9:
+                    //Rogue
+                    spellMod = "INT";
+                    break;
+                case 10:
+                    //Sorcerer
+                    spellMod = "CHA";
+                    break;
+                case 11:
+                    //Warlock
+                    spellMod = "CHA";
+                    break;
+                case 12:
+                    //Wizard
+                    spellMod = "INT";
+                    break;
+            }
+        }
+
+        public string GetSpellMod()
+        {
+            return this.spellMod;
         }
 
         public int GetModifier(string skillName)
@@ -370,6 +455,13 @@ namespace BattleScribe.Classes
                 }
             }
             return mod;
+        }
+
+        public int CalcCarryWeight()
+        {
+            int temp = str;
+            temp *= 15;
+            return temp;
         }
 
         //Calc the modifier for skills
@@ -600,6 +692,16 @@ namespace BattleScribe.Classes
             this.str = str;
         }
 
+        public void SetKnownSpells(List<Spell> spells)
+        {
+            this.knownSpells = spells;
+        }
+
+        public List<Spell> GetKnownSpells()
+        {
+            return this.knownSpells;
+        }
+
         public void SetDex(byte dex)
         {
             this.dex = dex;
@@ -635,56 +737,7 @@ namespace BattleScribe.Classes
             this.race = race;
         }
 
-        public List<Weapon> GetAllWeapons()
-        {
-            if (weapons != null)
-            {
-                return weapons;
-            }
-            return new List<Weapon>();
-        }
 
-        public List<Item> GetAllItems()
-        {
-            if (items != null)
-            {
-                return items;
-            }
-            return new List<Item>();
-        }
-
-        public List<Armour> GetAllArmours()
-        {
-            if (armours != null)
-            {
-                return armours;
-            }
-            return new List<Armour>();
-        }
-
-        public void AddWeapon(Weapon w)
-        {
-            if (w != null)
-            {
-                weapons.Add(w);
-            }
-        }
-
-        public void AddItem(Item i)
-        {
-            if (i != null)
-            {
-                items.Add(i);
-            }
-        }
-
-        public void AddArmour(Armour a)
-        {
-            if (a != null)
-            {
-                armours.Add(a);
-            }
-        }
 
         public int GetID()
         {
@@ -745,6 +798,21 @@ namespace BattleScribe.Classes
             return features;
         }
 
+        public void SetClassFeatures(List<Feature> input)
+        {
+            this.classFeatures = input;
+        }
+
+        public void SetCharFeats(List<Feat> input)
+        {
+            this.feats = input;
+        }
+
+        public List<Feat> GetFeats()
+        {
+            return this.feats;
+        }
+
         public void SetSlots(byte slot1, byte slot2, byte slot3, byte slot4,
             byte slot5, byte slot6, byte slot7, byte slot8, byte slot9)
         {
@@ -757,6 +825,116 @@ namespace BattleScribe.Classes
             this.slot7 = slot7;
             this.slot8 = slot8;
             this.slot9 = slot9;
+        }
+
+        public bool SpendSlot(byte slotNumber)
+        {
+            switch (slotNumber)
+            {
+                default:
+                    MessageBox.Show("Invalid slot!");
+                    return false;
+
+                case 1:
+                    if (slot1 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot1 -= 1;
+                    return true;
+
+                case 2:
+                    if (slot2 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot2 -= 1;
+                    return true;
+
+                case 3:
+                    if (slot3 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot3 -= 1;
+                    return true;
+
+                case 4:
+                    if (slot4 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot4 -= 1;
+
+                    return true;
+
+                case 5:
+                    if (slot5 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot5 -= 1;
+
+                    return true;
+
+                case 6:
+                    if (slot6 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot6 -= 1;
+                    return true;
+
+                case 7:
+                    if (slot7 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot7 -= 1;
+                    return true;
+
+                case 8:
+                    if (slot8 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot8 -= 1;
+                    return true;
+
+                case 9:
+                    if (slot9 - 1 < 0)
+                    {
+                        return false;
+                    }
+                    slot9 -= 1;
+                    return true;
+            }
+        }
+
+        public void SetSavingThrows(string first, string second)
+        {
+            savingThrow1 = first;
+            savingThrow2 = second;
+        }
+
+        public string[] GetSavingThrows()
+        {
+            string[] throws = new string[2];
+
+            throws[0] = savingThrow1;
+            throws[1] = savingThrow2;
+
+            return throws;
+        }
+
+        public int GetProfiencyBonus()
+        {
+            return proficiency;
+        }
+
+        public void SetItemsInInventory(List<Item> itemsInInventory)
+        {
+            this.items = itemsInInventory;
         }
     }
 }

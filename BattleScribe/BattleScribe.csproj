@@ -112,12 +112,14 @@
     <Compile Include="Classes\DbHandler.cs" />
     <Compile Include="Classes\DiceThrower.cs" />
     <Compile Include="Classes\Feature.cs" />
+    <Compile Include="Classes\InventoryManager.cs" />
     <Compile Include="Classes\Items\Armour.cs" />
     <Compile Include="Classes\Feat.cs" />
     <Compile Include="Classes\Items\Item.cs" />
     <Compile Include="Classes\Items\Weapon.cs" />
     <Compile Include="Classes\CharacterRace.cs" />
     <Compile Include="Classes\LogHandler.cs" />
+    <Compile Include="Classes\MoneyManager.cs" />
     <Compile Include="Classes\Spell.cs" />
     <Compile Include="Controls\Char\MainScreenCharacter.xaml.cs">
       <DependentUpon>MainScreenCharacter.xaml</DependentUpon>

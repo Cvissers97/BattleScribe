@@ -1,4 +1,5 @@
 ﻿using BattleScribe.Classes;
+using BattleScribe.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,16 +23,42 @@ namespace BattleScribe.Controls.Spells
     public partial class SpellControl : UserControl
     {
         Spell spell;
+        PlayScreen play;
+        private Brush standardBrush;
 
         public SpellControl()
         {
             InitializeComponent();
         }
 
-        public SpellControl(Spell spell)
+        public SpellControl(Spell spell, PlayScreen play)
         {
             InitializeComponent();
+            standardBrush = this.Background;
             this.spell = spell;
+            this.play = play;
+        }
+
+        private void UserControl_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            play.ChooseSpell(spell);
+        }
+
+        public void Highlight(bool target)
+        {
+            if (target)
+            {
+                this.Background = new SolidColorBrush(System.Windows.Media.Colors.Aquamarine);
+            }
+            else
+            {
+                this.Background = standardBrush;
+            }
+        }
+
+        public Spell GetSpell()
+        {
+            return spell;
         }
     }
 }

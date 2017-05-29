@@ -32,7 +32,7 @@ namespace BattleScribe.Forms
         int totalPoints, cantripsKnown, spellsKnown, charId;
         List<CharacterRace> race;
         byte raceStr, raceDex, raceCon, raceInt, raceWis, raceCha;
-        List<string> allLangs, allSkills;
+        List<string> allLangs, allSkills, backgrounds;
         List<Spell> spellList, cantripList, pickedSpells;
         List<CheckBox> cbSpellList, cbLangList, cbSkillList, cbCantripList;
         string[] spellsKnownArray;
@@ -50,7 +50,8 @@ namespace BattleScribe.Forms
             totalPoints = 27; // max amount of points according to D&D rules
             lbPoints.Content = "Total Points: " + totalPoints;
             cbSpellList = new List<CheckBox>();
-            cbBackgrounds.Items.Add("Hermit");
+            backgrounds = new List<string>();
+            imageArray = new byte[0];
         }
         
         //Add all stats to a list
@@ -202,7 +203,7 @@ namespace BattleScribe.Forms
             lbKnownSpells.Visibility = Visibility.Hidden;
             panelKnownSpells.Visibility = Visibility.Hidden;
             panelPrepSpells.Visibility = Visibility.Hidden;
-            lbPrepSpells.Visibility = Visibility.Hidden;
+            //lbPrepSpells.Visibility = Visibility.Hidden;
             btnPrepare.Visibility = Visibility.Hidden;
             btnUnprepare.Visibility = Visibility.Hidden;
 
@@ -283,7 +284,7 @@ namespace BattleScribe.Forms
             lbKnownSpells.Visibility = Visibility.Visible;
             panelKnownSpells.Visibility = Visibility.Visible;
             panelPrepSpells.Visibility = Visibility.Visible;
-            lbPrepSpells.Visibility = Visibility.Visible;
+            //lbPrepSpells.Visibility = Visibility.Visible;
             btnPrepare.Visibility = Visibility.Visible;
             btnUnprepare.Visibility = Visibility.Visible;
                     break;
@@ -299,6 +300,17 @@ namespace BattleScribe.Forms
             allSkills = character.SkillsList();
             cbSkillList = new List<CheckBox>();
             cbLangList = new List<CheckBox>();
+            backgrounds = db.GetBackgrounds();
+            cbBackgrounds.SelectedIndex = 0;
+            cbClasses.SelectedIndex = 0;
+            cbRaces.SelectedIndex = 0;
+
+
+            foreach (string s in backgrounds)
+            {
+                cbBackgrounds.Items.Add(s);
+            }
+
 
             //fill dropdown with races
             foreach (CharacterRace r in race)
@@ -382,7 +394,7 @@ namespace BattleScribe.Forms
                             }
                             btnPrepare.IsEnabled = false;
                             btnUnprepare.IsEnabled = false;
-                            lbPrepSpells.Visibility = Visibility.Hidden;
+                            //lbPrepSpells.Visibility = Visibility.Hidden;
                         }
                         else
                         {
@@ -397,7 +409,7 @@ namespace BattleScribe.Forms
                             }
                             btnPrepare.IsEnabled = true;
                             btnUnprepare.IsEnabled = true;
-                            lbPrepSpells.Visibility = Visibility.Visible;
+                            //lbPrepSpells.Visibility = Visibility.Visible;
                         }
 
                         foreach (Spell s in cantripList)
@@ -599,7 +611,7 @@ namespace BattleScribe.Forms
                 panelPrepSpells.Children.Add(c);
                 c.IsChecked = false;
             }
-            lbPrepSpells.Content = "You can still pick " + spellsKnown + " spells";
+            //lbPrepSpells.Content = "You can still pick " + spellsKnown + " spells";
         }
 
         private void BtnUnprepareSpellClick(object sender, RoutedEventArgs e)
@@ -620,7 +632,7 @@ namespace BattleScribe.Forms
                 panelKnownSpells.Children.Add(c);
                 c.IsChecked = false;
             }
-            lbPrepSpells.Content = "You can still pick " + spellsKnown + " spells";
+            //lbPrepSpells.Content = "You can still pick " + spellsKnown + " spells";
         }
 
 
@@ -698,7 +710,7 @@ namespace BattleScribe.Forms
                 CreateCharacter();
                 db.InsertSkills(chosenSkills, charId);
                 db.InsertLangs(chosenLangs, charId);
-                db.InsertSpells(spellIds, charId);
+                db.InsertSpells(spellIds, charId, null);
                 MessageBox.Show("Character created. Have fun!");
                 MainMenu m = new MainMenu();
                 m.Show();
@@ -728,6 +740,7 @@ namespace BattleScribe.Forms
                 (cbRaces.SelectedIndex + 1).ToString(), imageArray, 1);
 
             charId = db.CreateCharacter(charac);
+            db.CreateMoney(charId);
         }
 
         string GetRichTbString(RichTextBox rtb)
@@ -779,7 +792,7 @@ namespace BattleScribe.Forms
         private void CbClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             spellsKnownArray = CalcKnownSpells();
-            lbPrepSpells.Content = "You can still pick " + spellsKnownArray[0] + " spells.";
+            //lbPrepSpells.Content = "You can still pick " + spellsKnownArray[0] + " spells.";
         }
 
         //Racecb selection change to calc race bonus, features and langs
@@ -874,7 +887,8 @@ namespace BattleScribe.Forms
                 imgChar.Source = temp;
             }
 
-            imageArray = System.IO.File.ReadAllBytes(dlg.FileName);
+            if(dlg.FileName != null)
+                imageArray = System.IO.File.ReadAllBytes(dlg.FileName);
         }
     }
 }

@@ -34,5 +34,10 @@ namespace BattleScribe.Classes
         {
             return description;
         }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

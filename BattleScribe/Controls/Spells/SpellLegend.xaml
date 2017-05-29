@@ -6,8 +6,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="28" d:DesignWidth="359" Background="White">
     <Grid>
-        <Label Content="lbName" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="127"/>
-        <Label Content="lbComp" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="127" Margin="127,0,0,0"/>
-        <Label Content="lbSlot" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="105" Margin="254,0,0,0"/>
+        <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="127"/>
+        <Label Content="Components" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="127" Margin="127,0,0,0"/>
+        <Label Content="Slot" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="105" Margin="254,0,0,0"/>
     </Grid>
 </UserControl>

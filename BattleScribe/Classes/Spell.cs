@@ -19,13 +19,14 @@ namespace BattleScribe.Classes
         // Added casting time
         private string castTime;
         private string range;
+        private bool isPrepared;
 
         public Spell()
         { 
 
         }
 
-        public Spell(string id ,string name, byte level, string school, string castTime, string range, string components, string duration, string desc, string atHigherLevels)
+        public Spell(string id ,string name, byte level, string school, string castTime, string range, string components, string duration, string desc, string atHigherLevels, bool isPrepared)
         {
             this.id = id;
             this.name = name;
@@ -37,6 +38,7 @@ namespace BattleScribe.Classes
             this.duration = duration;
             this.desc = desc;
             this.atHigherLevels = atHigherLevels;
+            this.isPrepared = isPrepared;
         }
 
         public override string ToString()
@@ -137,6 +139,16 @@ namespace BattleScribe.Classes
         public string GetRange()
         {
             return this.range;  
+        }
+
+        public bool GetPrepared()
+        {
+            return this.isPrepared;
+        }
+
+        public void SetPrepared(bool target)
+        {
+            this.isPrepared = target;
         }
     }
 }

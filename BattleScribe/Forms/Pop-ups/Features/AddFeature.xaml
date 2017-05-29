@@ -4,8 +4,8 @@
         Title="AddFeature" Height="300" Width="300">
     <Grid>
         <Label Content="Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Description" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tbName" HorizontalAlignment="Left" Height="23" Margin="53,14,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="207"/>
+        <Label  Content="Description" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="cbName" HorizontalAlignment="Left" Height="23" Margin="53,14,0,0" VerticalAlignment="Top" Width="207" SelectionChanged="cbName_SelectionChanged"/>
         <RichTextBox Name="rtbDesc" HorizontalAlignment="Left" Height="129" Margin="10,74,0,0" VerticalAlignment="Top" Width="250">
             <FlowDocument>
                 <Paragraph>
@@ -13,7 +13,6 @@
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <Button Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="185,226,0,0" VerticalAlignment="Top" Width="75"/>
-
+        <Button Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="185,226,0,0" VerticalAlignment="Top" Width="75" Click="btnAdd_Click"/>
     </Grid>
 </Window>

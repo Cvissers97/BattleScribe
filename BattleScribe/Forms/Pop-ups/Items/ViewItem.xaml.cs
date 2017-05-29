@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BattleScribe.Classes.Items;
 
 namespace BattleScribe.Forms.Pop_ups.Items
 {
@@ -22,6 +23,16 @@ namespace BattleScribe.Forms.Pop_ups.Items
         public ViewItem()
         {
             InitializeComponent();
+        }
+
+        public ViewItem(Item i)
+        {
+            InitializeComponent();
+            tbName.Text = i.GetName();
+            tbType.Text = i.GetItemType();
+            rtbDescription.Document.Blocks.Clear();
+            rtbDescription.Document.Blocks.Add(new Paragraph(new Run(i.GetDescription())));
+            tbWeight.Text = i.GetWeight();
         }
     }
 }

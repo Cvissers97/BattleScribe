@@ -26,12 +26,78 @@ namespace BattleScribe.Classes
                {
                    _throw = r.Next(0, sides);
                }
+               _throw++;
                result += _throw;
            }
 
            result += mod;
 
            return result;
+       }
+
+       public static int ThrowSavingThrow(int mod)
+       {
+           int result = 0;
+
+           r = new Random();
+           int temp = r.Next(1, 37);
+
+           for (int i = 0; i < temp; i++)
+           {
+               result = r.Next(0, 20);
+               result++;
+           }
+           result += mod;
+
+           return result;
+       }
+
+       public static int ThrowSavingThrowAdvantage(int mod, bool advantage)
+       {
+           int first = 0;
+           int second = 0;
+
+           r = new Random();
+
+           int temp = r.Next(0, 20);
+
+           r = new Random(temp);
+
+           for (int i = 0; i < temp; i++)
+           {
+               first = r.Next(1, 20);
+           }
+
+           r = new Random(first);
+
+           for (int i = 0; i < temp; i++)
+           {
+               second = r.Next(1, 20);
+           }
+
+           // Roll with advantage if true, disadvantage if false
+           if (advantage)
+           {
+               if (first > second)
+               {
+                   return first + mod;
+               }
+               else
+               {
+                   return second + mod;
+               }
+           }
+           else
+           {
+               if (first > second)
+               {
+                   return second + mod;
+               }
+               else
+               {
+                   return first + mod;
+               }
+           }
        }
 
        public static int ThrowDieAdvantage(int sides, int mod, bool advantage)

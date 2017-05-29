@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BattleScribe.Classes;
+using BattleScribe.Forms.Pop_ups.Features;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,18 +24,24 @@ namespace BattleScribe.Controls.Features
     {
         private int id;
         private bool isRacial;
+        public Feature feature;
+        public bool isSelected;
+        private Brush normalBackground;
 
         public FeatureControl()
         {
             InitializeComponent();
         }
 
-        public FeatureControl(int id, bool racial)
+        public FeatureControl(int id, bool racial, Feature feature)
         {
             InitializeComponent();
 
+            this.feature = feature;
             this.id = id;
             this.isRacial = racial;
+            normalBackground = this.Background;
+            isSelected = false;
         }
 
         public FeatureControl(int id)
@@ -41,6 +49,29 @@ namespace BattleScribe.Controls.Features
             InitializeComponent();
 
             this.id = id;
+        }
+
+        private void Grid_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!isRacial)
+            {
+                isSelected = !isSelected;
+            }
+
+            if (isSelected)
+            {
+                this.Background = new SolidColorBrush(System.Windows.Media.Colors.Aquamarine);
+            }
+            else
+            {
+                this.Background = normalBackground;
+            }
+        }
+
+        private void UserControl_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ViewFeature view = new ViewFeature(feature.GetName(), feature.GetDesc());
+            view.Show();
         }
     }
 }

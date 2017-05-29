@@ -3,41 +3,97 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="BattleScribe.Forms.PlayScreen"
         Title="Tharlas Myastan - Level 9 Wizard"
-        Height="716.712" Width="700" ResizeMode="NoResize">
+        Height="716.712" Width="700" ResizeMode="NoResize" Closing="Window_Closing">
     <Grid>
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,80">
             <TabItem Header="Combat">
                 <Grid Background="#f9f9f9" Margin="0,0,0,-11">
 
-                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,30,0,0" Stroke="Gray" VerticalAlignment="Top" Width="50"/>
                     <Label Content="STR" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lbSTRMod" Content="(+2)" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" FontSize="16"/>
                     <Label x:Name="lbSTRStat" Content="15" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Height="25" HorizontalContentAlignment="Center" Width="50"/>
+                    <Rectangle Name="rectStr" Opacity="0.3" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,30,0,0" Stroke="Gray" VerticalAlignment="Top" Width="50" PreviewMouseLeftButtonUp="rectStr_PreviewMouseLeftButtonUp">
+                        <Rectangle.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Name="menuStrAdv" Header="Roll with Advantage" Click="menuStrAdv_Click">
+                                </MenuItem>
+                                <MenuItem Name="menuStrDis" Header="Roll with Disadvantage" Click="menuStrDis_Click">
+                                </MenuItem>
+                            </ContextMenu>
+                        </Rectangle.ContextMenu>
+                    </Rectangle>
 
-                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,100,0,0" Stroke="Gray" VerticalAlignment="Top" Width="50"/>
                     <Label Content="DEX" HorizontalAlignment="Left" Margin="5,80,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lbDEXMod" Content="(+2)" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" FontSize="16"/>
                     <Label x:Name="lbDEXStat" Content="15" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" Height="25" HorizontalContentAlignment="Center" Width="50"/>
-
-                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,170,0,0" Stroke="Gray" VerticalAlignment="Top" Width="50"/>
+                    <Rectangle Name="rectDex" Opacity="0.3" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,100,0,0" Stroke="Gray" VerticalAlignment="Top" Width="50" PreviewMouseLeftButtonUp="rectDex_PreviewMouseLeftButtonUp">
+                        <Rectangle.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Name="menuDexAdv" Header="Roll with Advantage" Click="menuDexAdv_Click">
+                                </MenuItem>
+                                <MenuItem Name="menuDexDis" Header="Roll with Disadvantage" Click="menuDexDis_Click">
+                                </MenuItem>
+                            </ContextMenu>
+                        </Rectangle.ContextMenu>
+                    </Rectangle>
+                    
                     <Label Content="CON" HorizontalAlignment="Left" Margin="5,150,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lbCONMod" Content="(+2)" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" FontSize="16"/>
                     <Label x:Name="lbCONStat" Content="15" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Height="25" HorizontalContentAlignment="Center" Width="50"/>
-
-                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,240,0,0" Stroke="Gray" VerticalAlignment="Top" Width="50"/>
+                    <Rectangle Name="rectCon" Opacity="0.3" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,170,0,0" Stroke="Gray" VerticalAlignment="Top" Width="50" PreviewMouseLeftButtonUp="rectCon_PreviewMouseLeftButtonUp">
+                        <Rectangle.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Name="menuConAdv" Header="Roll with Advantage" Click="menuConAdv_Click">
+                                </MenuItem>
+                                <MenuItem Name="menuConDis" Header="Roll with Disadvantage" Click="menuConDis_Click">
+                                </MenuItem>
+                            </ContextMenu>
+                        </Rectangle.ContextMenu>
+                    </Rectangle>
+                        
                     <Label Content="INT" HorizontalAlignment="Left" Margin="5,220,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lbINTMod" Content="(-1)" HorizontalAlignment="Left" Margin="10,241,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" FontSize="16"/>
                     <Label x:Name="lbINTStat" Content="8" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top" Height="25" HorizontalContentAlignment="Center" Width="50"/>
+                    <Rectangle Name="rectInt" Opacity="0.3" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,240,0,0" Stroke="Gray" VerticalAlignment="Top" Width="50" PreviewMouseLeftButtonUp="rectInt_PreviewMouseLeftButtonUp">
+                        <Rectangle.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Name="menuIntAdv" Header="Roll with Advantage" Click="menuIntAdv_Click">
+                                </MenuItem>
+                                <MenuItem Name="menuIntDis" Header="Roll with Disadvantage" Click="menuIntDis_Click">
+                                </MenuItem>
+                            </ContextMenu>
+                        </Rectangle.ContextMenu>
+                    </Rectangle>
 
-                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,310,0,0" Stroke="Gray" VerticalAlignment="Top" Width="50"/>
+
                     <Label Content="WIS" HorizontalAlignment="Left" Margin="5,290,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lbWISMod" Content="(-1)" HorizontalAlignment="Left" Margin="10,311,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" FontSize="16"/>
                     <Label x:Name="lbWISStat" Content="8" HorizontalAlignment="Left" Margin="10,334,0,0" VerticalAlignment="Top" Height="25" HorizontalContentAlignment="Center" Width="50"/>
+                    <Rectangle Opacity="0.4" Name="rectWis" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,310,0,0" Stroke="Gray" VerticalAlignment="Top" Width="50" PreviewMouseLeftButtonUp="rectWis_PreviewMouseLeftButtonUp">
+                        <Rectangle.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Name="menuWisAdv" Header="Roll with Advantage" Click="menuWisAdv_Click">
+                                </MenuItem>
+                                <MenuItem Name="menuWisDis" Header="Roll with Disadvantage" Click="menuWisDis_Click">
+                                </MenuItem>
+                            </ContextMenu>
+                        </Rectangle.ContextMenu>
+                    </Rectangle>
 
-                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,380,0,0" Stroke="Gray" VerticalAlignment="Top" Width="50"/>
+
                     <Label Content="CHA" HorizontalAlignment="Left" Margin="5,360,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lbCHAMod" Content="(-1)" HorizontalAlignment="Left" Margin="10,381,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" FontSize="16"/>
                     <Label x:Name="lbCHAStat" Content="8" HorizontalAlignment="Left" Margin="10,404,0,0" VerticalAlignment="Top" Height="25" HorizontalContentAlignment="Center" Width="50"/>
+                    <Rectangle Opacity="0.4" Name="rectCha" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,380,0,0" Stroke="Gray" VerticalAlignment="Top" Width="50"  PreviewMouseLeftButtonUp="rectCha_PreviewMouseLeftButtonUp">
+                        <Rectangle.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Name="menuChaAdv" Header="Roll with Advantage" Click="menuChaAdv_Click">
+                                </MenuItem>
+                                <MenuItem Name="menuChaDis" Header="Roll with Disadvantage" Click="menuChaDis_Click">
+                                </MenuItem>
+                            </ContextMenu>
+                        </Rectangle.ContextMenu>
+                    </Rectangle>
 
                     <Button Padding="-4" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Name="btnHeart" HorizontalAlignment="Left" Height="60" Margin="94,31,0,0" VerticalAlignment="Top" Width="59" Click="btnHeart_Click">
                         <Button.ContextMenu>
@@ -81,7 +137,9 @@
                     </ScrollViewer>
 
                     <Label Content="Feats" HorizontalAlignment="Left" Margin="84,411,0,0" VerticalAlignment="Top"/>
-                    <ScrollViewer Name="scrollFeats" HorizontalAlignment="Left" Height="129" Margin="81,437,0,0" VerticalAlignment="Top" Width="137"/>
+                    <ScrollViewer Name="scrollFeats" HorizontalAlignment="Left" Height="129" Margin="81,437,0,0" VerticalAlignment="Top" Width="137">
+                        <StackPanel Name="stackFeats" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </ScrollViewer>
 
                     <Label Content="Features" HorizontalAlignment="Left" Margin="241,411,0,0" VerticalAlignment="Top"/>
                     <ScrollViewer Name="scrollFeatures" HorizontalAlignment="Left" Height="129" Margin="237,437,0,0" VerticalAlignment="Top" Width="203">
@@ -91,8 +149,22 @@
                     <Label Content="Death Save" HorizontalAlignment="Left" Margin="506,34,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="109"/>
                     <ListBox Name="listAction" HorizontalAlignment="Left" Height="210" Margin="455,359,0,0" VerticalAlignment="Top" Width="204"/>
                     <Label Name="lbActionLog" Content="Action Log" HorizontalAlignment="Left" Margin="459,335,0,0" VerticalAlignment="Top"/>
-                    <Button Name="btnAttack" Content="Attack" HorizontalAlignment="Left" Margin="459,151,0,0" VerticalAlignment="Top" Width="200" Height="22"/>
-                    <Button Name="btnCast" Content="Cast" HorizontalAlignment="Left" Margin="459,250,0,0" VerticalAlignment="Top" Width="200" Height="22"/>
+                    <Button Name="btnAttack" Content="Attack" HorizontalAlignment="Left" Margin="459,151,0,0" VerticalAlignment="Top" Width="200" Height="22">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Make custom attack..." Click="MenuItem_Click">
+                                </MenuItem>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button Name="btnCast" Content="Cast" HorizontalAlignment="Left" Margin="459,250,0,0" VerticalAlignment="Top" Width="200" Height="22" Click="btnCast_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Cast with higher slot..." Click="MenuItem_Click_1">
+                                </MenuItem>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
                     <Label Name="lbSpellMod" Content="Casting modifier: +7" HorizontalAlignment="Left" Margin="459,272,0,0" VerticalAlignment="Top" Height="27"/>
                     <Label Name="lbSpellSaveDC" Content="Spell Save DC: 12" HorizontalAlignment="Left" Margin="459,295,0,0" VerticalAlignment="Top" Height="27"/>
                     <Label Name="lbHealth" Content="HP: 10" HorizontalAlignment="Left" Margin="94,91,0,0" Width="59" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
@@ -177,8 +249,8 @@
                     <Button Name="btnAddItem" Content="Add Item" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="btnAddItem_Click"/>
                     <Button Name="btnModifyItem" Content="Modify Item" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
                     <Button Name="btnDropItem" Content="Drop Item" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
-                    <Button Name="btnAddMoney" Content="Add Money" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
-                    <Button Name="btnLoseMoney" Content="Lose Money" HorizontalAlignment="Left" Margin="10,225,0,0" VerticalAlignment="Top" Width="117" Height="35"/>
+                    <Button Name="btnAddMoney" Content="Add Money" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="btnAddMoney_Click"/>
+                    <Button Name="btnLoseMoney" Content="Lose Money" HorizontalAlignment="Left" Margin="10,225,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="btnLoseMoney_Click"/>
                     <Label Content="Inventory" HorizontalAlignment="Left" Margin="146,25,0,0" VerticalAlignment="Top"/>
                     <ScrollViewer Name="scrollInventory" HorizontalAlignment="Left" Height="278" Margin="146,56,0,0" VerticalAlignment="Top" Width="509">
                         <StackPanel Name="stackInventory" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -223,9 +295,9 @@
             </TabItem>
         </TabControl>
         <Button Name="btnRollCheck" Content="Roll Check" HorizontalAlignment="Left" Margin="10,621,0,0" VerticalAlignment="Top" Width="92" Height="42" Click="btnRollCheck_Click"/>
-        <Button Name="btnAddExp" Content="Add Exp" HorizontalAlignment="Left" Margin="170,621,0,0" VerticalAlignment="Top" Width="92" Height="42"/>
+        <Button Name="btnAddExp" Content="Add Exp" HorizontalAlignment="Left" Margin="170,621,0,0" VerticalAlignment="Top" Width="92" Height="42" Click="btnAddExp_Click"/>
         <Button Name="btnHitDie" Content="Roll Hit Die" HorizontalAlignment="Left" Margin="365,621,0,0" VerticalAlignment="Top" Width="92" Height="42" Click="btnHitDie_Click"/>
-        <Button Name="btnPrepareSpells" Content="Prepare Spells" HorizontalAlignment="Left" Margin="569,621,0,0" VerticalAlignment="Top" Width="92" Height="42"/>
+        <Button Name="btnPrepareSpells" Content="Prepare Spells" HorizontalAlignment="Left" Margin="569,621,0,0" VerticalAlignment="Top" Width="92" Height="42" Click="btnPrepareSpells_Click"/>
         <Image Name="imgTemp" HorizontalAlignment="Left" Height="0" Margin="267,621,0,-33" VerticalAlignment="Top" Width="0" Source="/BattleScribe;component/Resources/Icons/Buttons/Inspiration_Button_Off.png"/>
     </Grid>
 </Window>

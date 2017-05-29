@@ -4,13 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="29" d:DesignWidth="500" Background="#fff375">
+             d:DesignHeight="29" d:DesignWidth="500" Background="#fff375"
+             MouseRightButtonUp="UserControl_MouseRightButtonUp"
+             MouseLeftButtonUp="UserControl_MouseLeftButtonUp"
+             >
     <Grid>
         <Label Name="lbName" Content="Name" Width="169" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" BorderThickness="1" BorderBrush="#ffffff"/>
         <Label Name="lbType" Content="Type" Width="62" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" BorderThickness="1" BorderBrush="#ffffff" Margin="169,0,0,0"/>
         <Label Name="lbProficiency" Content="Proficiency" Width="72" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Margin="303,0,0,0" BorderThickness="1" BorderBrush="#ffffff"/>
         <Label Name="lbWeight" Content="Weight" Width="62" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Margin="438,0,0,0" BorderThickness="1" BorderBrush="#ffffff"/>
         <Label Name="lbAttune" Content="Attuneable" Width="72" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Margin="231,0,0,0" BorderThickness="1" BorderBrush="#ffffff"/>
-        <Label Name="lbValue" Content="Value" Width="63" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Margin="375,0,0,0" BorderThickness="1" BorderBrush="#ffffff"/>
+        <Label Name="lbQuantity" Content="Qty." Width="63" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Margin="375,0,0,0" BorderThickness="1" BorderBrush="#ffffff"/>
     </Grid>
 </UserControl>

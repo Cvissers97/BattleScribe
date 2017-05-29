@@ -25,12 +25,13 @@ namespace BattleScribe.Classes
                 message += "[" + i.ToString() +"]" + " ";
             }
 
-            list.Items.Add(message);
+            list.Items.Insert(0, message);
         }
 
         public void Write(string text)
         {
-            list.Items.Add(text);
+            string message = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + " - " + text;
+            list.Items.Insert(0, message);
         }
     }
 }

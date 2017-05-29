@@ -27,6 +27,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
         private DbHandler db;
         private List<Item> itemList;
         private Item item;
+        private InventoryManager inventory;
         
 
         public AddStandardItem()
@@ -46,6 +47,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
             InitializeComponent();
             this.screen = screen;
             db = new DbHandler();
+            inventory = screen.inventory;
             Init();
         }
 
@@ -75,9 +77,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            ItemControl temp = new ItemControl(item);
-            screen.panelInv.Children.Add(temp);
-            int charid = screen.charId;
+            inventory.AddItem(item);
         }
 
     }
