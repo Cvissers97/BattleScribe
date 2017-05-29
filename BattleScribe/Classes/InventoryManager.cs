@@ -36,6 +36,7 @@ namespace BattleScribe.Classes
         private List<Item> equipedItems;
 
         double totalItemWeight;
+        int AC;
 
 
         public InventoryManager(Character c, StackPanel stack, Label carry, StackPanel stackEquip, Label attune)
@@ -143,7 +144,7 @@ namespace BattleScribe.Classes
 
             foreach (Item i in equipedItems)
             {
-                switch (i.GetItemType())
+                switch (i.GetType().Name)
                 {
                     default:
                         MessageBox.Show("NO ITEM TYPE - UPDATE INVENTORY");
@@ -528,6 +529,51 @@ namespace BattleScribe.Classes
             }
 
             UpdateInventory();
+        }
+
+        public int CalcAC()
+        {
+            int dex = c.GetModifier("DEX");
+            int AC = 0;
+            int armoursEquipped = 0;
+            bool shield = false;
+
+            foreach (Armour a in equipedItems.OfType<Armour>())
+            {
+                switch (a.GetItemType())
+                {
+                    case "Light":
+                        AC = (a.GetBaseArmour() + a.GetBonusArmour() + dex);
+                        armoursEquipped += 1;
+                        break;
+                    case "Medium":
+                        if (dex > 2)
+                            dex = 2;
+                        AC = (a.GetBaseArmour() + a.GetBonusArmour() + dex);
+                        armoursEquipped += 1;
+                        break;
+                    case "Heavy":
+                        AC = (a.GetBaseArmour() + a.GetBonusArmour());
+                        armoursEquipped += 1;
+                        break;
+                    case "Shield":
+                        AC += 2;
+                        shield = true;
+                        break;
+                }
+            }
+
+            //Unarmored defence for barb works with shield
+            if (c.GetClass() == 1 && armoursEquipped == 0)
+                AC += (10 + dex + c.GetModifier("CON"));
+            //Unarmored defence for monk doesnt work with shield
+            else if (c.GetClass() == 6 && armoursEquipped == 0 && shield == false)
+                AC = (10 + dex + c.GetModifier("WIS"));
+            //Base armour if none is worn
+            else if (armoursEquipped == 0)
+                AC += (10 + dex);
+
+            return AC;
         }
     }
 }

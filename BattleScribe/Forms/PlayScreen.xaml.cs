@@ -67,7 +67,6 @@ namespace BattleScribe.Forms
             deathThrow = 0;
             expToAdd = 0;
 
-            //UpdateInventory();
             UpdateInspiration();
             UpdateHealth();
             UpdateStats();
@@ -82,6 +81,7 @@ namespace BattleScribe.Forms
             money = new MoneyManager(c, this);
             inventory = new InventoryManager(c, stackInventory, lbCarryCapacity, stackEquip, lbAttunements);
             log = new LogHandler(listAction);
+            lbArmor.Content = inventory.CalcAC().ToString();
         }
 
         private void UpdateButtons()

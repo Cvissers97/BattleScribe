@@ -441,6 +441,161 @@ namespace BattleScribe.Classes
             return items;
         }
 
+        public void UpdateCharacter(Character c)
+        {
+            string sql = "UPDATE Character SET Name=@Name, Level=@Level, Age=@Age, Size=@Size, Appearance=@Appearance, Image=@Image, Title=@Title, Personality=@Personality, Ideals=@Ideals, Bonds=@Bonds, Flaws=@Flaws, Backstory=@Backstory, Alignment = @Alignment, IsMale=@Ismale, IsFemale=@Isfemale, STR=@STR, DEX=@DEX, CON=@CON, WIS=@WIS, INT=@INT, CHA=@CHA,  MiscProfs=@MiscProfs, CUR_HP=@CUR_HP, MAX_HP=@MAX_HP, TEM_HP=@TEM_HP, Inspiration=@Inspiration, slot1=@slot1, slot2=@slot2, slot3=@slot3, slot4=@slot4, slot5=@slot5, slot6=@slot6, slot7=@slot7, slot8=@slot8, slot9=@slot9, Experience=@Experience WHERE Id = @ID";
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"Name", c.GetName());
+                    com.Parameters.AddWithValue(@"Level", c.GetLevel());
+                    com.Parameters.AddWithValue(@"Age",c.GetAge());
+                    com.Parameters.AddWithValue(@"Size",c.GetSize());
+                    com.Parameters.AddWithValue(@"Appearance",c.GetAppearance());
+                    com.Parameters.AddWithValue(@"Image",c.GetImage());
+                    com.Parameters.AddWithValue(@"Title",c.GetTitle());
+                    com.Parameters.AddWithValue(@"Personality",c.GetPersonality());
+                    com.Parameters.AddWithValue(@"Ideals",c.GetIdeals());
+                    com.Parameters.AddWithValue(@"Bonds",c.GetBonds());
+                    com.Parameters.AddWithValue(@"Flaws", c.GetFlaws());
+                    com.Parameters.AddWithValue(@"Backstory",c.GetBackstory());
+                    com.Parameters.AddWithValue(@"Alignment",c.GetAlignment());
+                    com.Parameters.AddWithValue(@"Ismale",c.GetIsMale());
+                    com.Parameters.AddWithValue(@"Isfemale",c.GetIsFemale());
+                    com.Parameters.AddWithValue(@"STR",c.GetStr());
+                    com.Parameters.AddWithValue(@"DEX",c.GetDex());
+                    com.Parameters.AddWithValue(@"CON",c.GetCon());
+                    com.Parameters.AddWithValue(@"WIS",c.GetWis());
+                    com.Parameters.AddWithValue(@"INT",c.GetInt());
+                    com.Parameters.AddWithValue(@"CHA",c.GetCha());
+                    com.Parameters.AddWithValue(@"CUR_HP", c.GetCurrentHealth());
+                    com.Parameters.AddWithValue(@"MAX_HP", c.GetMaxHealth());
+                    com.Parameters.AddWithValue(@"Inspiration", c.GetInspiration());
+                    com.Parameters.AddWithValue(@"slot1",c.GetSlot1());
+                    com.Parameters.AddWithValue(@"slot2",c.GetSlot2());
+                    com.Parameters.AddWithValue(@"slot3", c.GetSlot3());
+                    com.Parameters.AddWithValue(@"slot4", c.GetSlot4());
+                    com.Parameters.AddWithValue(@"slot5", c.GetSlot5());
+                    com.Parameters.AddWithValue(@"slot6", c.GetSlot6());
+                    com.Parameters.AddWithValue(@"slot7",c.GetSlot7());
+                    com.Parameters.AddWithValue(@"slot8", c.GetSlot8());
+                    com.Parameters.AddWithValue(@"slot9", c.GetSlot9());
+                    com.Parameters.AddWithValue(@"Experience", c.GetExp());
+                    com.Parameters.AddWithValue(@"ID", c.GetID());
+
+                    con.Open();
+                    com.ExecuteNonQuery();
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            con.Close();
+            UpdateSkills(c.GetID(), c.GetSkills());
+        }
+
+        public void UpdateLangs(int charId, List<Language> langs)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "UPDATE Character_Languages SET Common=@com, Dwarvish=@dwarf, Elvish=@elf, Giant=@giant, Gnomish=@gnome, Goblin=@goblin, Halfling=@halfling, Orc=@orc, Abyssal=@abyssal, Celestial=@celes, Draconic=@draconic, Deep_Speech=@deep, Infernal=@infernal, Primordial=@prim, Sylvan=@sylv, Undercommon=@under WHERE Char_Id=@id";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"com", langs.ElementAt(0));
+                    com.Parameters.AddWithValue(@"dwarf", langs.ElementAt(1));
+                    com.Parameters.AddWithValue(@"elf", langs.ElementAt(2));
+                    com.Parameters.AddWithValue(@"giant", langs.ElementAt(3));
+                    com.Parameters.AddWithValue(@"gnome", langs.ElementAt(4));
+                    com.Parameters.AddWithValue(@"goblin", langs.ElementAt(5));
+                    com.Parameters.AddWithValue(@"halfling", langs.ElementAt(6));
+                    com.Parameters.AddWithValue(@"orc", langs.ElementAt(7));
+                    com.Parameters.AddWithValue(@"abyssal", langs.ElementAt(8));
+                    com.Parameters.AddWithValue(@"celes", langs.ElementAt(9));
+                    com.Parameters.AddWithValue(@"draconic", langs.ElementAt(10));
+                    com.Parameters.AddWithValue(@"deep", langs.ElementAt(11));
+                    com.Parameters.AddWithValue(@"infernal", langs.ElementAt(12));
+                    com.Parameters.AddWithValue(@"prim", langs.ElementAt(13));
+                    com.Parameters.AddWithValue(@"sylv", langs.ElementAt(14));
+                    com.Parameters.AddWithValue(@"under", langs.ElementAt(15));
+                    com.Parameters.AddWithValue(@"Char_Id", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            con.Close();
+        }
+
+        public void UpdateSkills(int charId, List<Skill> skills)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "UPDATE Character_Skills SET Acrobatics=@acro, Animal_Handeling=@anim, Arcana=@Arcana, Athletics=@Athletics, Deception=@decep, History=@history, Insight=@insight, Intimidation=@inti, Investigation = @invest, Medicine=@med, Nature=@nat, Perception=@perc, Performance=@perf, Religion=@rel, Sleight_Of_Hand=@hand, Stealth=@stealth, Survival=@surv WHERE Char_Id=@id";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"acro", skills.ElementAt(0));
+                    com.Parameters.AddWithValue(@"anim", skills.ElementAt(1));
+                    com.Parameters.AddWithValue(@"Arcana",skills.ElementAt(2));
+                    com.Parameters.AddWithValue(@"Athletics", skills.ElementAt(3));
+                    com.Parameters.AddWithValue(@"decep",skills.ElementAt(4));
+                    com.Parameters.AddWithValue(@"history",skills.ElementAt(5));
+                    com.Parameters.AddWithValue(@"insight",skills.ElementAt(6));
+                    com.Parameters.AddWithValue(@"inti",skills.ElementAt(7));
+                    com.Parameters.AddWithValue(@"invest",skills.ElementAt(8));
+                    com.Parameters.AddWithValue(@"med",skills.ElementAt(9));
+                    com.Parameters.AddWithValue(@"nat",skills.ElementAt(10));
+                    com.Parameters.AddWithValue(@"perc",skills.ElementAt(11));
+                    com.Parameters.AddWithValue(@"perf",skills.ElementAt(12));
+                    com.Parameters.AddWithValue(@"rel",skills.ElementAt(13));
+                    com.Parameters.AddWithValue(@"hand",skills.ElementAt(14));
+                    com.Parameters.AddWithValue(@"stealth",skills.ElementAt(15));
+                    com.Parameters.AddWithValue(@"surv", skills.ElementAt(16));
+                    com.Parameters.AddWithValue(@"Char_Id", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            con.Close();
+        }
+
 
         //WIP
         public void AddWeapon(Weapon w)
@@ -527,7 +682,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        armour.Add(new Armour(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(2), "Armour", false, dReader.GetBoolean(12), Convert.ToSingle(dReader.GetDouble(9)).ToString(), dReader.GetBoolean(8), dReader.GetInt32(5), dReader.GetInt32(4), dReader.GetString(6), 1, dReader.GetInt32(7), Convert.ToSingle(dReader.GetDouble(10)).ToString()));
+                        armour.Add(new Armour(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(2), dReader.GetString(11), false, dReader.GetBoolean(12), Convert.ToSingle(dReader.GetDouble(9)).ToString(), dReader.GetBoolean(8), dReader.GetInt32(5), dReader.GetInt32(4), dReader.GetString(6), 1, dReader.GetInt32(7), Convert.ToSingle(dReader.GetDouble(10)).ToString()));
                     }
 
                     com.Parameters.Clear();
@@ -1840,7 +1995,7 @@ namespace BattleScribe.Classes
                     while (dReader.Read())
                     {
                         bool duplicate = false;
-                        Armour a = new Armour(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(2), "Armour", false, dReader.GetBoolean(12), Convert.ToSingle(dReader.GetDouble(9)).ToString(), dReader.GetBoolean(8), dReader.GetInt32(5), dReader.GetInt32(4), dReader.GetString(6), 1, dReader.GetInt32(7), Convert.ToSingle(dReader.GetDouble(10)).ToString(), dReader.GetInt32(14));
+                        Armour a = new Armour(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(2), dReader.GetString(11), false, dReader.GetBoolean(12), Convert.ToSingle(dReader.GetDouble(9)).ToString(), dReader.GetBoolean(8), dReader.GetInt32(5), dReader.GetInt32(4), dReader.GetString(6), 1, dReader.GetInt32(7), Convert.ToSingle(dReader.GetDouble(10)).ToString(), dReader.GetInt32(14));
                         a.SetEquip(dReader.GetBoolean(15));
                         foreach (Armour arm in armours)
                         {
