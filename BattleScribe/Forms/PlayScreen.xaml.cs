@@ -5,6 +5,7 @@ using BattleScribe.Controls.Feats;
 using BattleScribe.Controls.Features;
 using BattleScribe.Controls.Items;
 using BattleScribe.Controls.Spells;
+using BattleScribe.Controls.Weapons;
 using BattleScribe.Forms;
 using BattleScribe.Forms.Pop_ups;
 using BattleScribe.Forms.Pop_ups.Items;
@@ -35,6 +36,7 @@ namespace BattleScribe.Forms
         private List<Feat> feats;
         private List<CharacterClass> cClass;
         private Spell chosenSpell;
+        private Weapon chosenWeapon;
         private MoneyManager money;
         private InventoryManager inventory;
         byte lifeThrow;
@@ -82,6 +84,8 @@ namespace BattleScribe.Forms
             money = new MoneyManager(c, this);
             inventory = new InventoryManager(c, stackInventory, lbCarryCapacity, stackEquip, lbAttunements);
             log = new LogHandler(listAction);
+
+            UpdateAttacks();
         }
 
         private void UpdateButtons()
@@ -111,6 +115,37 @@ namespace BattleScribe.Forms
             string[] throws = db.GetSavingThrowByClass(c.GetClass());
 
             c.SetSavingThrows(throws[0], throws[1]);
+        }
+
+        public void ChooseWeapon(Weapon w)
+        {
+            chosenWeapon = w;
+
+            foreach (WeaponControl wepCon in stackAttacks.Children)
+            {
+                if (wepCon.GetWeapon() == w)
+                {
+                    wepCon.Highlight(true);
+                }
+                else
+                {
+                    wepCon.Highlight(false);
+                }
+            }
+        }
+
+        private void UpdateAttacks()
+        {
+            stackAttacks.Children.Clear();
+
+            List<Weapon> weps = inventory.GetAllWeapons();
+            WeaponControl wep;
+
+            foreach (Weapon w in weps)
+            {
+                wep = new WeaponControl(w, this, c);
+                stackAttacks.Children.Add(wep);
+            }
         }
 
         public void UpdateSpells()
@@ -588,6 +623,11 @@ namespace BattleScribe.Forms
         {
             SpendMoney spend = new SpendMoney(money);
             spend.Show();
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateAttacks();
         }
     }
 }

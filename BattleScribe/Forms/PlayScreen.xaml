@@ -5,7 +5,7 @@
         Title="Tharlas Myastan - Level 9 Wizard"
         Height="716.712" Width="700" ResizeMode="NoResize" Closing="Window_Closing">
     <Grid>
-        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,80">
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,80" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Combat">
                 <Grid Background="#f9f9f9" Margin="0,0,0,-11">
 
@@ -129,7 +129,9 @@
                     <Label Name="lbPassPerc" Content="11" HorizontalAlignment="Left" Margin="406,87,0,0" VerticalAlignment="Top" Height="24"/>
 
                     <Label Content="Attacks" HorizontalAlignment="Left" Margin="81,124,0,0" VerticalAlignment="Top"/>
-                    <ScrollViewer Name="scrollAttacks" HorizontalAlignment="Left" Height="70" Margin="81,150,0,0" VerticalAlignment="Top" Width="359"/>
+                    <ScrollViewer Name="scrollAttacks" HorizontalAlignment="Left" Height="70" Margin="81,150,0,0" VerticalAlignment="Top" Width="359">
+                        <StackPanel Name="stackAttacks" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </ScrollViewer>
 
                     <Label Content="Spells" HorizontalAlignment="Left" Margin="81,224,0,0" VerticalAlignment="Top"/>
                     <ScrollViewer Name="scrollSpells" HorizontalAlignment="Left" Height="111" Margin="81,250,0,0" VerticalAlignment="Top" Width="359">
