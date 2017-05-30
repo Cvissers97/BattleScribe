@@ -81,6 +81,11 @@ namespace BattleScribe.Classes.Items
 
         public string GetBonusDamageType()
         {
+            if (bonusDamageType == "geen idee")
+            {
+                return string.Empty;
+            }
+
             return this.bonusDamageType;
         }
 

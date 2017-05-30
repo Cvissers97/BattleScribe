@@ -65,12 +65,62 @@ namespace BattleScribe.Controls.Weapons
             }
 
             toHit = c.GetModifier(mod) + c.GetProfiencyBonus();
-            lbToHit.Content = toHit.ToString();
+            lbToHit.Content = "Hit: " + toHit.ToString();
         }
 
         private void UserControl_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            play.ChooseWeapon(w);
+            play.ChooseWeapon(this);
+        }
+
+        public void Attack()
+        {
+            string amount = string.Empty;
+            string sides = string.Empty;
+
+            int amountNumb = 0;
+            int sidesNumb = 0;
+
+            string damage = w.GetDamage();
+
+            bool pastDice = false;
+
+            for (int i = 0; i < damage.Length; i++)
+            {
+                if (!pastDice)
+                {
+                    if (damage[i] != 'd')
+                    {
+                        amount += damage[i];
+                    }
+                    else
+                    {
+                        pastDice = true;
+                    }
+                }
+                else
+                {
+                    sides += damage[i];
+                }
+            }
+
+            try
+            {
+                amountNumb = Convert.ToInt32(amount);
+                sidesNumb = Convert.ToInt32(sides);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid damage conversion.");
+            }
+
+            play.log.Write("To hit: " + DiceThrower.ThrowDice(0, 20, toHit));
+            play.log.Write("Damage: " + (DiceThrower.ThrowDice(amountNumb - 1, sidesNumb, c.GetModifier(mod)) + 1) + " " + w.GetBaseDamageType());
+
+            if (w.GetBonusDamage() != 0)
+            {
+                play.log.Write("Bonus: " + w.GetBonusDamage() + " " + w.GetBonusDamageType());
+            }
         }
 
         public void Highlight(bool target)

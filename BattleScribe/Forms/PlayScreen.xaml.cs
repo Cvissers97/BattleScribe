@@ -36,7 +36,7 @@ namespace BattleScribe.Forms
         private List<Feat> feats;
         private List<CharacterClass> cClass;
         private Spell chosenSpell;
-        private Weapon chosenWeapon;
+        private WeaponControl chosenWeaponControl;
         private MoneyManager money;
         private InventoryManager inventory;
         byte lifeThrow;
@@ -117,13 +117,13 @@ namespace BattleScribe.Forms
             c.SetSavingThrows(throws[0], throws[1]);
         }
 
-        public void ChooseWeapon(Weapon w)
+        public void ChooseWeapon(WeaponControl w)
         {
-            chosenWeapon = w;
+            chosenWeaponControl = w;
 
             foreach (WeaponControl wepCon in stackAttacks.Children)
             {
-                if (wepCon.GetWeapon() == w)
+                if (wepCon == w)
                 {
                     wepCon.Highlight(true);
                 }
@@ -628,6 +628,14 @@ namespace BattleScribe.Forms
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateAttacks();
+        }
+
+        private void btnAttack_Click(object sender, RoutedEventArgs e)
+        {
+            if (chosenWeaponControl != null)
+            {
+                chosenWeaponControl.Attack();
+            }
         }
     }
 }

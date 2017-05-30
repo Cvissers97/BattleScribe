@@ -15,23 +15,25 @@ using System.Windows.Shapes;
 using System.IO;
 using temp = System.Drawing;
 using BattleScribe.Classes;
+using BattleScribe.Forms;
 
 namespace BattleScribe.Controls.Char
 {
-    /// <summary>
-    /// Interaction logic for MainScreenCharacter.xaml
-    /// </summary>
     public partial class MainScreenCharacter : UserControl
     {
         public Classes.Character character;
+        public Classes.DbHandler db;
+
+        private MainMenu menu;
         
         public MainScreenCharacter()
         {
             InitializeComponent();
         }
 
-        public MainScreenCharacter(Classes.Character c, List<CharacterClass> cClass)
+        public MainScreenCharacter(MainMenu menu, Classes.Character c, List<CharacterClass> cClass, bool delete)
         {
+            this.menu = menu;
             character = c;
             InitializeComponent();
 
@@ -57,6 +59,10 @@ namespace BattleScribe.Controls.Char
             }
             lblLevel.Content += c.GetLevel().ToString();
 
+            if (!delete)
+            {
+                btnDelete.Visibility = Visibility.Hidden;
+            }
         }
 
         private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -66,7 +72,17 @@ namespace BattleScribe.Controls.Char
             newScreen.Show();
             Window parentWindow = Application.Current.MainWindow;
             parentWindow.Close();
-            
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Delete " + lblName.Content + " ?", "Deleting Character", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                db = new DbHandler();
+                db.DeleteCharacter(character.GetID());
+                menu.Init();
+            }
         }
     }
 }

@@ -151,7 +151,7 @@
                     <Label Content="Death Save" HorizontalAlignment="Left" Margin="506,34,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="109"/>
                     <ListBox Name="listAction" HorizontalAlignment="Left" Height="210" Margin="455,359,0,0" VerticalAlignment="Top" Width="204"/>
                     <Label Name="lbActionLog" Content="Action Log" HorizontalAlignment="Left" Margin="459,335,0,0" VerticalAlignment="Top"/>
-                    <Button Name="btnAttack" Content="Attack" HorizontalAlignment="Left" Margin="459,151,0,0" VerticalAlignment="Top" Width="200" Height="22">
+                    <Button Name="btnAttack" Content="Attack" HorizontalAlignment="Left" Margin="459,151,0,0" VerticalAlignment="Top" Width="200" Height="22" Click="btnAttack_Click">
                         <Button.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Make custom attack..." Click="MenuItem_Click">
