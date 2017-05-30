@@ -660,16 +660,21 @@ namespace BattleScribe.Forms
             dlg.Title = "Select a picture for your character";
             dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
 
-            if (dlg.ShowDialog() == true)
-            {
-                temp = new BitmapImage(new Uri(dlg.FileName));
-                imgChar.Source = temp;
-            }
 
-            if (dlg.FileName != null)
+            try
             {
-                imageArray = System.IO.File.ReadAllBytes(dlg.FileName);
-                c.SetImage(imageArray);
+                if (dlg.ShowDialog() == true)
+                {
+                    temp = new BitmapImage(new Uri(dlg.FileName));
+                    imgChar.Source = temp;
+                }
+
+                if (dlg.FileName != null)
+                    imageArray = System.IO.File.ReadAllBytes(dlg.FileName);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid selection while picking image.");
             }
         }
 

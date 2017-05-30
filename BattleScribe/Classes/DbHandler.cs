@@ -367,7 +367,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        byte temp = dReader.GetByte(0);
+                        int temp = dReader.GetByte(0);
 
                         if (temp == 0)
                         {
@@ -403,7 +403,7 @@ namespace BattleScribe.Classes
             con = new SqlCeConnection();
             con.ConnectionString = conString;
 
-            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background, MAX_HP, CUR_HP, Experience, slot1, slot2, slot3, slot4, slot5, slot6,slot7,slot8,slot9) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background, @MAX_HP, @MAX_HP, 0,0,0,0,0,0,0,0,0,0)";
+            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background, MAX_HP, CUR_HP, Experience, slot1, slot2, slot3, slot4, slot5, slot6,slot7,slot8,slot9, inspiration) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background, @MAX_HP, @MAX_HP, 0,0,0,0,0,0,0,0,0,0,0)";
 
 
             try
@@ -1347,7 +1347,6 @@ namespace BattleScribe.Classes
                 throw;
             }
 
-            MessageBox.Show(hit.ToString());
             return hit;
         }
 

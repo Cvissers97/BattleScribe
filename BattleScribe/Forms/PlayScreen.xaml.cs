@@ -281,11 +281,11 @@ namespace BattleScribe.Forms
 
             if (c.GetInspiration())
             {
-                imgInsp.Source = imgTemp.Source;
+                imgInsp.Source = imgTempDat.Source;
             }
             else
             {
-                imgInsp.Source = imgTempDat.Source;
+                imgInsp.Source = imgTemp.Source;
             }
         }
 
@@ -345,7 +345,15 @@ namespace BattleScribe.Forms
         private void btnInspiration_Click(object sender, RoutedEventArgs e)
         {
             c.ToggleInspiration();
-            UpdateInspiration();
+
+            if (c.GetInspiration())
+            {
+                imgInsp.Source = imgTempDat.Source;
+            }
+            else
+            {
+                imgInsp.Source = imgTemp.Source;
+            }
         }
 
         private void btnInitiative_Click(object sender, RoutedEventArgs e)
