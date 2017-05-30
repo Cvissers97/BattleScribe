@@ -21,7 +21,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
     public partial class ItemChoice : Window
     {
         private int characterId;
-        private DetailScreen screen;
+        private InventoryManager inventory;
 
         public ItemChoice()
         {
@@ -33,50 +33,51 @@ namespace BattleScribe.Forms.Pop_ups.Items
             InitializeComponent();
             this.characterId = characterId;
         }
-        public ItemChoice(DetailScreen screen)
+
+        public ItemChoice(InventoryManager inventory)
         {
             InitializeComponent();
-            this.screen = screen;
+            this.inventory = inventory;
         }
 
         private void btnItem_Click(object sender, RoutedEventArgs e)
         {
-            AddStandardItem a = new AddStandardItem(screen);
+            AddStandardItem a = new AddStandardItem(inventory);
             a.Show();
             this.Close();
         }
 
         private void btnWeapon_Click(object sender, RoutedEventArgs e)
         {
-            AddStandardWeapon a = new AddStandardWeapon(screen);
+            AddStandardWeapon a = new AddStandardWeapon(inventory);
             a.Show();
             this.Close();
         }
 
         private void btnArmour_Click(object sender, RoutedEventArgs e)
         {
-            AddStandardArmour a = new AddStandardArmour(screen);
+            AddStandardArmour a = new AddStandardArmour(inventory);
             a.Show();
             this.Close();
         }
 
         private void btnCustItem_Click(object sender, RoutedEventArgs e)
         {
-            AddItem a = new AddItem(screen);
+            AddItem a = new AddItem(inventory);
             a.Show();
             this.Close();
         }
 
         private void btnCustWeapon_Click(object sender, RoutedEventArgs e)
         {
-            AddWeapon a = new AddWeapon(screen);
+            AddWeapon a = new AddWeapon(inventory);
             a.Show();
             this.Close();
         }
 
         private void btnCustArmour_Click(object sender, RoutedEventArgs e)
         {
-            AddArmour a = new AddArmour(screen);
+            AddArmour a = new AddArmour(inventory);
             a.Show();
             this.Close();
         }

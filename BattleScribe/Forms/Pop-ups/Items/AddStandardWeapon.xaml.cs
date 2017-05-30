@@ -41,12 +41,11 @@ namespace BattleScribe.Forms.Pop_ups.Items
             this.characterId = id;
         }
 
-        public AddStandardWeapon(DetailScreen screen)
+        public AddStandardWeapon(InventoryManager inventory)
         {
             db = new DbHandler();
             InitializeComponent();
-            this.screen = screen;
-            this.inventory = screen.inventory;
+            this.inventory = inventory;
             Init();
         }
 

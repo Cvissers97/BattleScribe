@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BattleScribe.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,13 +15,10 @@ using System.Windows.Shapes;
 
 namespace BattleScribe.Forms.Pop_ups.Items
 {
-    /// <summary>
-    /// Interaction logic for AddItem.xaml
-    /// </summary>
     public partial class AddItem : Window
     {
         private int characterId;
-        private DetailScreen screen;
+        private InventoryManager inventory;
 
         public AddItem()
         {
@@ -34,10 +32,10 @@ namespace BattleScribe.Forms.Pop_ups.Items
             this.characterId = id;
         }
 
-        public AddItem(DetailScreen screen)
+        public AddItem(InventoryManager inventory)
         {
             InitializeComponent();
-            this.screen = screen;
+            this.inventory = inventory;
         }
     }
 }

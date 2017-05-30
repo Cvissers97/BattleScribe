@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BattleScribe.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
     public partial class AddArmour : Window
     {
         private int characterId;
-        private DetailScreen screen;
+        private InventoryManager inventory;
 
         public AddArmour()
         {
@@ -34,10 +35,10 @@ namespace BattleScribe.Forms.Pop_ups.Items
             this.characterId = id;
         }
 
-        public AddArmour(DetailScreen screen)
+        public AddArmour(InventoryManager inventory)
         {
             InitializeComponent();
-            this.screen = screen;
+            this.inventory = inventory;
         }
     }
 }
