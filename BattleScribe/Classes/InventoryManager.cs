@@ -130,7 +130,7 @@ namespace BattleScribe.Classes
 
             foreach (Armour a in armours)
             {
-                a.SetItemType("Armour");
+               // a.SetItemType("Armour");
                 arm = new ItemControl(a);
                 stack.Children.Add(arm);
             }

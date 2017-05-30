@@ -634,6 +634,7 @@ namespace BattleScribe.Forms
                 db.AddExperience(c.GetID(), expToAdd);
             }
 
+            inventory.SaveInventory();
             money.SaveMoney();
             db.SetInspiration(c.GetID(), c.GetInspiration());
         }
@@ -701,6 +702,8 @@ namespace BattleScribe.Forms
             {
                 i.SetIsSelected(false);
             }
+
+            lbArmor.Content = inventory.CalcAC().ToString();
         }
     }
 }

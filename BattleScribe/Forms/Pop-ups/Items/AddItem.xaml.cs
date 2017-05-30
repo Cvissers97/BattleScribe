@@ -1,4 +1,5 @@
 ﻿using BattleScribe.Classes;
+using BattleScribe.Classes.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace BattleScribe.Forms.Pop_ups.Items
     {
         private int characterId;
         private InventoryManager inventory;
+        private DbHandler db;
+        private Item item;
 
         public AddItem()
         {
@@ -36,6 +39,14 @@ namespace BattleScribe.Forms.Pop_ups.Items
         {
             InitializeComponent();
             this.inventory = inventory;
+            db = new DbHandler();
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            item = new Item(tbName.Text, (new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text), tbType.Text, tbWeight.Text, 1);
+            int itemId = db.InsertNewItem(item);
+            db.InsertInItemTable(itemId, 3);
         }
     }
 }

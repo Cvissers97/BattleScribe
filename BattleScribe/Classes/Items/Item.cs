@@ -35,7 +35,6 @@ namespace BattleScribe.Classes.Items
             {
                 this.quantity = 1;
             }
-            
         }
 
         public Item(int id, string name, string description, string type, bool proficient, bool attuneable, string weight, int quantity)
@@ -44,7 +43,7 @@ namespace BattleScribe.Classes.Items
             this.description = description;
             this.type = type;
             this.proficient = proficient;
-            this.attuneable = proficient;
+            this.attuneable = attuneable;
             this.weight = weight;
             this.id = id;
             this.isEquip = false;
@@ -54,7 +53,21 @@ namespace BattleScribe.Classes.Items
             {
                 this.quantity = 1;
             }
-            
+        }
+
+        public Item(string name, string description, string type, string weight, int quantity)
+        {
+            this.name = name;
+            this.description = description;
+            this.type = type;
+            this.weight = weight;
+            this.isEquip = false;
+            this.quantity = quantity;
+
+            if (quantity == 0)
+            {
+                this.quantity = 1;
+            }
         }
 
         public string GetName()

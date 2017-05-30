@@ -666,7 +666,8 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        items.Add(new Item(dReader.GetInt32(4), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), 3, 0));
+                        Item item = new Item(dReader.GetInt32(8), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), false, false, dReader.GetString(6), 0);
+                        items.Add(item);
                     }
 
                     com.Parameters.Clear();
@@ -2176,6 +2177,72 @@ namespace BattleScribe.Classes
             con.Close();
         }
 
+        public int InsertNewItem(Item item)
+        {
+            string sql = "INSERT INTO Adventuring_Gear (Name, Description, Type, ReqProficiency, Attunable, Weight) VALUES (@name, @desc, @type, 0,0, @weight)";
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            int result = 0;
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+
+                    com.Parameters.AddWithValue(@"name", item.GetName());
+                    com.Parameters.AddWithValue(@"desc", item.GetDescription());
+                    com.Parameters.AddWithValue(@"type", item.GetItemType());
+                    com.Parameters.AddWithValue(@"weight", item.GetWeight());
+                    com.ExecuteNonQuery();
+                    com.CommandText = "SELECT @@IDENTITY";
+                    result = Convert.ToInt32(com.ExecuteScalar());
+                    com.Parameters.Clear();
+
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            con.Close();
+            return result;
+        }
+
+        public void InsertInItemTable(int itemId, int typeId)
+        {
+            string sql = "INSERT INTO Items (Type_Id, Item_Id) VALUES (@typeId, @itemId)";
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+
+                    com.Parameters.AddWithValue(@"typeId", typeId);
+                    com.Parameters.AddWithValue(@"itemId", itemId);
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            con.Close();
+        }
+
         public void InsertInventory(List<Item> allItems, int charId)
         {
             DeleteInventory(charId);
@@ -2341,12 +2408,11 @@ namespace BattleScribe.Classes
                     con.Open();
                     com.ExecuteNonQuery();
                     dReader = com.ExecuteReader();
-
                     while (dReader.Read())
                     {
                         bool duplicate = false;
-                        Item item = new Item(dReader.GetInt32(4), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), 3, 0);
-                        item.SetEquip(dReader.GetBoolean(6));
+                        Item item = new Item(dReader.GetInt32(8), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), false, false, dReader.GetString(6), 0);
+                        item.SetEquip(dReader.GetBoolean(10));
                         foreach (Item i in items)
                         {
                             if (i.GetName() == item.GetName() && i.GetEquip() == item.GetEquip())

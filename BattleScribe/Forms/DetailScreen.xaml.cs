@@ -480,17 +480,17 @@ namespace BattleScribe.Forms
                             MessageBox.Show("INVALID ITEM TYPE!");
                             break;
 
-                        case "WEAPON":
+                        case "Weapon":
                             Weapon wep = (Weapon)i.GetItem();
                             inventory.RemoveWeapon(wep);
                             break;
 
-                        case "ARMOUR":
+                        case "Armour":
                             Armour a = (Armour)i.GetItem();
                             inventory.RemoveArmour(a);
                             break;
 
-                        case "ITEM":
+                        case "Item":
                             Item it = (Item)i.GetItem();
                             inventory.RemoveItem(it);
                             break;
