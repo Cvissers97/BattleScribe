@@ -469,7 +469,7 @@ namespace BattleScribe.Classes
                 dup = true;
             }
 
-            switch (item.GetItemType())
+            switch (item.GetType().Name)
             {
                 default:
                     MessageBox.Show("NO ITEM TYPE.");
@@ -518,7 +518,7 @@ namespace BattleScribe.Classes
             item.SetEquip(false);
             equipedItems.Remove(item);
 
-            switch (item.GetItemType())
+            switch (item.GetType().Name)
             {
                 default:
                     MessageBox.Show("NO ITEM TYPE.");
