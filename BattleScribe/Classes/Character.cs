@@ -62,6 +62,7 @@ namespace BattleScribe.Classes
         private byte[] image;
         private int maxHitPoints;
         private int curHitPoints;
+        private int tempHitPoints;
         private int level;
         private int experiencePoints;
         private bool inspiration;
@@ -747,6 +748,32 @@ namespace BattleScribe.Classes
             this.race = race;
         }
 
+        public int CalcProfBonus()
+        {
+            if (level < 5)
+            {
+                proficiency = 2;
+            }
+            else if (level < 9)
+            {
+                proficiency = 3;
+            }
+            else if (level < 13)
+            {
+                proficiency = 4;
+            }
+            else if (level < 16)
+            {
+                proficiency = 5;
+            }
+            else
+            {
+                proficiency = 6;
+            }
+
+            return proficiency;
+        }
+
 
 
         public int GetID()
@@ -995,6 +1022,11 @@ namespace BattleScribe.Classes
         public int GetExp()
         {
             return this.experiencePoints;
+        }
+
+        public int GetTempHp()
+        {
+            return this.tempHitPoints;
         }
 
         public void SetImage(byte[] image)
