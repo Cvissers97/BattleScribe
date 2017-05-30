@@ -512,7 +512,7 @@ namespace BattleScribe.Forms
             }
 
             db.InsertSpells(temp, c.GetID(), prepared);
-            
+            db.UpdateCharacter(c);
         }
 
         private void btnRemSpell_Click(object sender, RoutedEventArgs e)
