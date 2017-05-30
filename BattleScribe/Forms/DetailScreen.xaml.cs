@@ -672,5 +672,125 @@ namespace BattleScribe.Forms
                 c.SetImage(imageArray);
             }
         }
+
+        private void tbLevel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbLevel.Text, "^[0-9]*$"))
+            {
+                tbLevel.Text = string.Empty;
+            }
+        }
+
+        private void tbEXP_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbEXP.Text, "^[0-9]*$"))
+            {
+                tbEXP.Text = string.Empty;
+            }
+        }
+
+        private void tbMaxHP_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbMaxHP.Text, "^[0-9]*$"))
+            {
+                tbMaxHP.Text = string.Empty;
+            }
+        }
+
+        private void tbTempHP_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbTempHP.Text, "^[0-9]*$"))
+            {
+                tbTempHP.Text = string.Empty;
+            }
+        }
+
+        private void tbCurHP_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbCurHP.Text, "^[0-9]*$"))
+            {
+                tbCurHP.Text = string.Empty;
+            }
+        }
+
+        private void tbProficiency_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbProficiency.Text, "^[0-9]*$"))
+            {
+                tbProficiency.Text = string.Empty;
+            }
+        }
+
+        private void tbSlot1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbSlot1.Text, "^[0-9]*$"))
+            {
+                tbSlot1.Text = "0";
+            }
+        }
+
+        private void tbSlot2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbSlot2.Text, "^[0-9]*$"))
+            {
+                tbSlot2.Text = "0";
+            }
+        }
+
+        private void tbSlot3_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbSlot3.Text, "^[0-9]*$"))
+            {
+                tbSlot3.Text = "0";
+            }
+        }
+
+        private void tbSlot4_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbSlot4.Text, "^[0-9]*$"))
+            {
+                tbSlot4.Text = "0";
+            }
+        }
+
+        private void tbSlot5_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbSlot5.Text, "^[0-9]*$"))
+            {
+                tbSlot5.Text = "0";
+            }
+        }
+
+        private void tbSlot6_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbSlot6.Text, "^[0-9]*$"))
+            {
+                tbSlot6.Text = "0";
+            }
+        }
+
+        private void tbSlot7_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbSlot7.Text, "^[0-9]*$"))
+            {
+                tbSlot7.Text = "0";
+            }
+        }
+
+        private void tbSlot8_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbSlot8.Text, "^[0-9]*$"))
+            {
+                tbSlot8.Text = "0";
+            }
+        }
+
+        private void tbSlot9_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbSlot9.Text, "^[0-9]*$"))
+            {
+                tbSlot9.Text = "0";
+            }
+        }
     }
 }

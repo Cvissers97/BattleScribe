@@ -808,12 +808,12 @@ namespace BattleScribe.Classes
 
         public bool GetInspiration()
         {
-            if (inspiration == null)
-            {
-                inspiration = false;
-            }
-
             return inspiration;
+        }
+
+        public void SetInspiration(bool target)
+        {
+            this.inspiration = target;
         }
 
         public List<Feature> GetAllFeatures()
