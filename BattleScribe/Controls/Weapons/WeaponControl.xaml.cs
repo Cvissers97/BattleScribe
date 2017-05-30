@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BattleScribe.Classes;
+using BattleScribe.Forms.Pop_ups.Items;
 
 namespace BattleScribe.Controls.Weapons
 {
@@ -138,6 +139,12 @@ namespace BattleScribe.Controls.Weapons
         public BattleScribe.Classes.Items.Weapon GetWeapon()
         {
             return this.w;
+        }
+
+        private void Grid_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ViewWeapon view = new ViewWeapon(w);
+            view.Show();
         }
     }
 }
