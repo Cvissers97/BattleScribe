@@ -345,6 +345,54 @@ namespace BattleScribe.Classes
             con.Close();
         }
 
+        public bool GetInspiration(int charId)
+        {
+            bool result = false;
+
+            string sql = "select inspiration from character where Id = @charId";
+            con = new SqlCeConnection();
+            conString = Properties.Settings.Default.conString;
+            con.ConnectionString = conString;
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    dReader = com.ExecuteReader();
+
+                    while (dReader.Read())
+                    {
+                        byte temp = dReader.GetByte(0);
+
+                        if (temp == 0)
+                        {
+                            result = false;
+                        }
+                        else if (temp == 1)
+                        {
+                            result = true;
+                        }
+                    }
+
+                    con.Close();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception error)
+            {
+                con.Close();
+                MessageBox.Show(error.ToString());
+                throw;
+            }
+
+            return result;
+        }
+
         public int CreateCharacter(Character c)
         {
             List<Feature> features = new List<Feature>();
@@ -354,7 +402,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background, MAX_HP, CUR_HP, Experience) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background, @MAX_HP, @MAX_HP, 0)";
+            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background, MAX_HP, CUR_HP, Experience, inspiration) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background, @MAX_HP, @MAX_HP, 0, 0)";
 
             try
             {
@@ -1298,6 +1346,46 @@ namespace BattleScribe.Classes
             return hit;
         }
 
+        public void SetInspiration(int charId, bool inspiration)
+        {
+            int insp = 0;
+
+            if (inspiration)
+            {
+                insp = 1;
+            }
+            else
+            {
+                insp = 0;
+            }
+
+            string sql = "UPDATE CHARACTER SET INSPIRATION = @insp WHERE Id = @charId";
+            con = new SqlCeConnection();
+            conString = Properties.Settings.Default.conString;
+            con.ConnectionString = conString;
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    com.Parameters.AddWithValue(@"insp", insp);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    con.Close();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception error)
+            {
+                con.Close();
+                MessageBox.Show(error.ToString());
+                throw;
+            }
+        }
+
         public string[] GetSavingThrowByClass(int id)
         {
             string[] throws = new string[2];
@@ -1331,6 +1419,7 @@ namespace BattleScribe.Classes
             catch (Exception error)
             {
                 MessageBox.Show(error.ToString());
+                con.Close();
                 throw;
             }
 

@@ -99,11 +99,11 @@
                     <Label Content="Max HP" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top"/>
                     <Label Content="Temporary HP" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top"/>
                     <Label Content="Current HP" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top"/>
-                    <TextBox Name="tbLevel" HorizontalAlignment="Left" Height="23" Margin="114,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbEXP" HorizontalAlignment="Left" Height="23" Margin="114,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbMaxHP" HorizontalAlignment="Left" Height="23" Margin="114,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbTempHP" HorizontalAlignment="Left" Height="23" Margin="114,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbCurHP" HorizontalAlignment="Left" Height="23" Margin="114,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbLevel" HorizontalAlignment="Left" Height="23" Margin="114,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbLevel_TextChanged"/>
+                    <TextBox Name="tbEXP" HorizontalAlignment="Left" Height="23" Margin="114,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbEXP_TextChanged"/>
+                    <TextBox Name="tbMaxHP" HorizontalAlignment="Left" Height="23" Margin="114,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbMaxHP_TextChanged"/>
+                    <TextBox Name="tbTempHP" HorizontalAlignment="Left" Height="23" Margin="114,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbTempHP_TextChanged"/>
+                    <TextBox Name="tbCurHP" HorizontalAlignment="Left" Height="23" Margin="114,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbCurHP_TextChanged"/>
                     <Button x:Name="btnPlusHP" Content="+" HorizontalAlignment="Left" Margin="239,62,0,0" VerticalAlignment="Top" Width="21" Height="21" HorizontalContentAlignment="Center" FontSize="10" Click="btnPlusHP_Click"/>
                     <Label Content="Feats" HorizontalAlignment="Left" Margin="386,8,0,0" VerticalAlignment="Top"/>
                     <Label Content="Features" HorizontalAlignment="Left" Margin="386,185,0,0" VerticalAlignment="Top"/>
@@ -118,7 +118,7 @@
                     <Button Name="btnAddFeature" Content="Add Feature" HorizontalAlignment="Left" Margin="304,216,0,0" VerticalAlignment="Top" Width="75" Click="btnAddFeature_Click"/>
                     <Button Name="btnRemoveFeature" Content="Remove" HorizontalAlignment="Left" Margin="304,241,0,0" VerticalAlignment="Top" Width="75" Click="btnRemoveFeature_Click"/>
                     <Label Content="Proficiency" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
-                    <TextBox Name="tbProficiency" HorizontalAlignment="Left" Height="23" Margin="114,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbProficiency" HorizontalAlignment="Left" Height="23" Margin="114,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbProficiency_TextChanged"/>
 
                 </Grid>
             </TabItem>
@@ -176,15 +176,15 @@
                     <Label Content="7th" HorizontalAlignment="Left" Margin="13,381,0,0" VerticalAlignment="Top"/>
                     <Label Content="8th" HorizontalAlignment="Left" Margin="13,407,0,0" VerticalAlignment="Top"/>
                     <Label Content="9th" HorizontalAlignment="Left" Margin="13,433,0,0" VerticalAlignment="Top"/>
-                    <TextBox Name="tbSlot1" HorizontalAlignment="Left" Height="22" Margin="58,230,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
-                    <TextBox Name="tbSlot2" HorizontalAlignment="Left" Height="22" Margin="58,254,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
-                    <TextBox Name="tbSlot3" HorizontalAlignment="Left" Height="22" Margin="58,279,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
-                    <TextBox Name="tbSlot4" HorizontalAlignment="Left" Height="22" Margin="58,304,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
-                    <TextBox Name="tbSlot5" HorizontalAlignment="Left" Height="22" Margin="58,330,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
-                    <TextBox Name="tbSlot6" HorizontalAlignment="Left" Height="22" Margin="58,356,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
-                    <TextBox Name="tbSlot7" HorizontalAlignment="Left" Height="22" Margin="58,381,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
-                    <TextBox Name="tbSlot8" HorizontalAlignment="Left" Height="22" Margin="58,407,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
-                    <TextBox Name="tbSlot9" HorizontalAlignment="Left" Height="22" Margin="58,433,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32"/>
+                    <TextBox Name="tbSlot1" HorizontalAlignment="Left" Height="22" Margin="58,230,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32" TextChanged="tbSlot1_TextChanged"/>
+                    <TextBox Name="tbSlot2" HorizontalAlignment="Left" Height="22" Margin="58,254,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32" TextChanged="tbSlot2_TextChanged"/>
+                    <TextBox Name="tbSlot3" HorizontalAlignment="Left" Height="22" Margin="58,279,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32" TextChanged="tbSlot3_TextChanged"/>
+                    <TextBox Name="tbSlot4" HorizontalAlignment="Left" Height="22" Margin="58,304,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32" TextChanged="tbSlot4_TextChanged"/>
+                    <TextBox Name="tbSlot5" HorizontalAlignment="Left" Height="22" Margin="58,330,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32" TextChanged="tbSlot5_TextChanged"/>
+                    <TextBox Name="tbSlot6" HorizontalAlignment="Left" Height="22" Margin="58,356,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32" TextChanged="tbSlot6_TextChanged"/>
+                    <TextBox Name="tbSlot7" HorizontalAlignment="Left" Height="22" Margin="58,381,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32" TextChanged="tbSlot7_TextChanged"/>
+                    <TextBox Name="tbSlot8" HorizontalAlignment="Left" Height="22" Margin="58,407,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32" TextInput="tbSlot8_TextInput"/>
+                    <TextBox Name="tbSlot9" HorizontalAlignment="Left" Height="22" Margin="58,433,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="32" TextChanged="tbSlot9_TextChanged"/>
 
                 </Grid>
             </TabItem>

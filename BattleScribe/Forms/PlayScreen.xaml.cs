@@ -69,7 +69,6 @@ namespace BattleScribe.Forms
             deathThrow = 0;
             expToAdd = 0;
 
-            UpdateInspiration();
             UpdateHealth();
             UpdateStats();
             UpdateFeatures();
@@ -83,7 +82,8 @@ namespace BattleScribe.Forms
             money = new MoneyManager(c, this);
             inventory = new InventoryManager(c, stackInventory, lbCarryCapacity, stackEquip, lbAttunements);
             log = new LogHandler(listAction);
-			
+
+            UpdateInspiration();
             UpdateAttacks();
             lbArmor.Content = inventory.CalcAC().ToString();
         }
@@ -274,6 +274,11 @@ namespace BattleScribe.Forms
 
         public void UpdateInspiration()
         {
+            bool target;
+
+            target = db.GetInspiration(c.GetID());
+            c.SetInspiration(target);
+
             if (c.GetInspiration())
             {
                 imgInsp.Source = imgTemp.Source;
@@ -354,6 +359,18 @@ namespace BattleScribe.Forms
         {
             int hitDice;
             hitDice = db.GetHitDiceByClass(c.GetClass());
+            int result = DiceThrower.ThrowDice(0, hitDice, 0) + 1;
+            log.Write("Hit dice result: " + result);
+
+            if ((c.GetCurrentHealth() + result) > c.GetMaxHealth())
+            {
+                c.SetCurrentHealth(c.GetMaxHealth());
+            }
+            else
+            {
+                c.SetCurrentHealth(c.GetCurrentHealth() + result);
+            }
+            UpdateHealth();
         }
 
         private void btnHeart_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -611,6 +628,7 @@ namespace BattleScribe.Forms
             }
 
             money.SaveMoney();
+            db.SetInspiration(c.GetID(), c.GetInspiration());
         }
 
         private void btnAddMoney_Click(object sender, RoutedEventArgs e)
