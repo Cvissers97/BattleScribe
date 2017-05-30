@@ -81,7 +81,6 @@ namespace BattleScribe.Classes
         }
 
 
-
         public void InsertSkills(List<bool> skills, int charId)
         {
             conString = Properties.Settings.Default.conString;
@@ -443,7 +442,15 @@ namespace BattleScribe.Classes
 
         public void UpdateCharacter(Character c)
         {
-            string sql = "UPDATE Character SET Name=@Name, Level=@Level, Age=@Age, Size=@Size, Appearance=@Appearance, Image=@Image, Title=@Title, Personality=@Personality, Ideals=@Ideals, Bonds=@Bonds, Flaws=@Flaws, Backstory=@Backstory, Alignment = @Alignment, IsMale=@Ismale, IsFemale=@Isfemale, STR=@STR, DEX=@DEX, CON=@CON, WIS=@WIS, INT=@INT, CHA=@CHA, CUR_HP=@CUR_HP, MAX_HP=@MAX_HP, Inspiration=@Inspiration, slot1=@slot1, slot2=@slot2, slot3=@slot3, slot4=@slot4, slot5=@slot5, slot6=@slot6, slot7=@slot7, slot8=@slot8, slot9=@slot9, Experience=@Experience WHERE Id = @ID";
+            string sql;
+            if (c.GetImage() == null)
+            {
+                sql = "UPDATE Character SET Name=@Name, Level=@Level, Age=@Age, Size=@Size, Appearance=@Appearance, Title=@Title, Personality=@Personality, Ideals=@Ideals, Bonds=@Bonds, Flaws=@Flaws, Backstory=@Backstory, Alignment = @Alignment, IsMale=@Ismale, IsFemale=@Isfemale, STR=@STR, DEX=@DEX, CON=@CON, WIS=@WIS, INT=@INT, CHA=@CHA, CUR_HP=@CUR_HP, MAX_HP=@MAX_HP, Inspiration=@Inspiration, slot1=@slot1, slot2=@slot2, slot3=@slot3, slot4=@slot4, slot5=@slot5, slot6=@slot6, slot7=@slot7, slot8=@slot8, slot9=@slot9, Experience=@Experience WHERE Id = @ID";
+            }
+            else
+            {
+                sql = "UPDATE Character SET Name=@Name, Level=@Level, Age=@Age, Size=@Size, Appearance=@Appearance, Image=@Image, Title=@Title, Personality=@Personality, Ideals=@Ideals, Bonds=@Bonds, Flaws=@Flaws, Backstory=@Backstory, Alignment = @Alignment, IsMale=@Ismale, IsFemale=@Isfemale, STR=@STR, DEX=@DEX, CON=@CON, WIS=@WIS, INT=@INT, CHA=@CHA, CUR_HP=@CUR_HP, MAX_HP=@MAX_HP, Inspiration=@Inspiration, slot1=@slot1, slot2=@slot2, slot3=@slot3, slot4=@slot4, slot5=@slot5, slot6=@slot6, slot7=@slot7, slot8=@slot8, slot9=@slot9, Experience=@Experience WHERE Id = @ID";
+            }
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
@@ -458,7 +465,10 @@ namespace BattleScribe.Classes
                     com.Parameters.AddWithValue(@"Age",c.GetAge());
                     com.Parameters.AddWithValue(@"Size",c.GetSize());
                     com.Parameters.AddWithValue(@"Appearance",c.GetAppearance());
-                    com.Parameters.AddWithValue(@"Image", c.GetImage());
+                    if (c.GetImage() != null)
+                    {
+                        com.Parameters.AddWithValue(@"Image", c.GetImage());
+                    }
                     com.Parameters.AddWithValue(@"Title",c.GetTitle());
                     com.Parameters.AddWithValue(@"Personality",c.GetPersonality());
                     com.Parameters.AddWithValue(@"Ideals",c.GetIdeals());
@@ -851,6 +861,7 @@ namespace BattleScribe.Classes
                             dReader.GetByte(22), dReader.GetByte(21), 
                             dReader.GetByte(23), dReader.GetInt32(2), 
                             dReader.GetString(10), dReader.GetInt32(24).ToString(), dReader.GetInt32(3).ToString(), dReader.GetInt32(4));
+                        c.SetSlots(dReader.GetByte(31), dReader.GetByte(32), dReader.GetByte(33), dReader.GetByte(34), dReader.GetByte(35), dReader.GetByte(36), dReader.GetByte(37), dReader.GetByte(38), dReader.GetByte(39));
                     }
 
                     com.Parameters.Clear();

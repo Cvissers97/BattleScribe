@@ -21,6 +21,7 @@ using BattleScribe.Classes.Items;
 using BattleScribe.Controls.Items;
 using BattleScribe.Forms.Pop_ups.Features;
 using BattleScribe.Forms.Pop_ups.Items.Money;
+using Microsoft.Win32;
 
 namespace BattleScribe.Forms
 {
@@ -30,7 +31,7 @@ namespace BattleScribe.Forms
     public partial class DetailScreen : Window
     {
         public int charId;
-        private int curHPNum, totalItemWeight;
+        private int maxHPNum, totalItemWeight;
         private List<Feat> feats;
         private List<Feature> raceFeatures;
         private List<CharacterRace> charRaces;
@@ -45,6 +46,7 @@ namespace BattleScribe.Forms
         private List<Feat> acquiredFeats;
         public InventoryManager inventory;
         private MoneyManager money;
+        private byte[] imageArray;
 
         public DetailScreen()
         {
@@ -54,7 +56,7 @@ namespace BattleScribe.Forms
             raceFeatures = new List<Feature>();
             db = new DbHandler();
 
-            curHPNum = 0;
+            maxHPNum = 0;
             UpdateFeatList();
 
             //Temporary character
@@ -89,6 +91,7 @@ namespace BattleScribe.Forms
             cClass = new CharacterClass();
             equipList = new List<Item>();
             charId = character.GetID();
+            imageArray = new byte[0];
 
             
             c = db.GetCharacterById(charId);
@@ -105,6 +108,15 @@ namespace BattleScribe.Forms
 
         private void Init()
         {
+            tbSlot1.Text = c.GetSlot1().ToString();
+            tbSlot2.Text = c.GetSlot2().ToString();
+            tbSlot3.Text = c.GetSlot3().ToString();
+            tbSlot4.Text = c.GetSlot4().ToString();
+            tbSlot5.Text = c.GetSlot5().ToString();
+            tbSlot6.Text = c.GetSlot6().ToString();
+            tbSlot7.Text = c.GetSlot7().ToString();
+            tbSlot8.Text = c.GetSlot8().ToString();
+            tbSlot9.Text = c.GetSlot9().ToString();
             rtbAppearance.Document.Blocks.Clear();
             rtbBackstory.Document.Blocks.Clear();
             rtbBonds.Document.Blocks.Clear();
@@ -179,21 +191,20 @@ namespace BattleScribe.Forms
         {
             try
             {
-                curHPNum = Convert.ToInt16(tbCurHP.Text);
+                maxHPNum = Convert.ToInt16(tbMaxHP.Text);
             }
             catch (Exception error)
             {
                 MessageBox.Show(error.Message);
-                throw;
             }
 
-            AddHealth add = new AddHealth(curHPNum, c.GetModifier("CON"), c.GetClass(), this);
+            AddHealth add = new AddHealth(maxHPNum, c.GetModifier("CON"), c.GetClass(), this);
             add.Show();
         }
 
         public void SetNewHealth(int HP)
         {
-            tbCurHP.Text = HP.ToString();
+            tbMaxHP.Text = HP.ToString();
         }
 
         private void btnAddFeat_Click(object sender, RoutedEventArgs e)
@@ -480,8 +491,38 @@ namespace BattleScribe.Forms
             }
         }
 
+        private void UpdateChar()
+        {
+            c.SetName(tbName.Text);
+            c.SetAge(tbAge.Text);
+            c.SetSize(tbSize.Text);
+            c.SetIsMale((bool)chMale.IsChecked);
+            c.SetIsFemale((bool)chFemale.IsChecked);
+            c.SetTitle(tbTitle.Text);
+            c.SetAlignment(tbAlignment.Text);
+            c.SetBackstory(GetRichTbString(rtbBackstory));
+            c.SetPersonality(GetRichTbString(rtbPersonality));
+            c.SetIdeals(GetRichTbString(rtbIdeals));
+            c.SetBonds(GetRichTbString(rtbBonds));
+            c.SetFlaws(GetRichTbString(rtbFlaws));
+            c.SetStr(c.GetStr());
+            c.SetDex(c.GetDex());
+            c.SetCon(c.GetCon());
+            c.SetWis(c.GetWis());
+            c.SetInt(c.GetInt());
+            c.SetCha(c.GetCha());
+            
+        }
+
+        string GetRichTbString(RichTextBox rtb)
+        {
+            string text = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd).Text;
+            return text;
+        }
+
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            UpdateChar();
             inventory.SaveInventory();
             money.SaveMoney();
             c.SetSlots(Convert.ToByte(tbSlot1.Text), Convert.ToByte(tbSlot2.Text), Convert.ToByte(tbSlot3.Text),
@@ -509,6 +550,11 @@ namespace BattleScribe.Forms
                 temp[i] = Convert.ToInt32(s.GetId());
                 prepared[i] = s.GetPrepared();
                 i++;
+            }
+
+            foreach (CheckBox check in panelSkills.Children)
+            {
+                
             }
 
             db.InsertSpells(temp, c.GetID(), prepared);
@@ -583,6 +629,31 @@ namespace BattleScribe.Forms
         {
             SpendMoney spend = new SpendMoney(money);
             spend.Show();
+        }
+
+        private void btnUpload_Click(object sender, RoutedEventArgs e)
+        {
+            string path = string.Empty;
+            OpenFileDialog dlg = new OpenFileDialog();
+            BitmapImage temp = null;
+
+            dlg.Title = "Select a picture for your character";
+            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
+
+            if (dlg.ShowDialog() == true)
+            {
+                temp = new BitmapImage(new Uri(dlg.FileName));
+                imgChar.Source = temp;
+            }
+
+            if (dlg.FileName != null)
+            {
+                imageArray = System.IO.File.ReadAllBytes(dlg.FileName);
+                c.SetImage(imageArray);
+            }
+                
+
+            
         }
     }
 }

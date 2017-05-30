@@ -996,5 +996,80 @@ namespace BattleScribe.Classes
         {
             return this.experiencePoints;
         }
+
+        public void SetImage(byte[] image)
+        {
+            this.image = image;
+        }
+
+        public void SetName(string name)
+        {
+            this.name = name;
+        }
+
+        public void SetAge(string age)
+        {
+            this.age = age;
+        }
+
+        public void SetSize(string size)
+        {
+            this.size = size;
+        }
+
+        public void SetIsMale(bool isMale)
+        {
+            this.isMale = isMale;
+        }
+
+        public void SetIsFemale(bool isFemale)
+        {
+            this.isFemale = isFemale;
+        }
+
+        public void SetTitle(string title)
+        {
+            this.title = title;
+        }
+
+        public void SetAlignment(string alignment)
+        {
+            this.alignment = alignment;
+        }
+
+        public void SetBackstory(string backstory)
+        {
+            this.backstory = backstory;
+        }
+
+        public void SetPersonality(string personality)
+        {
+            this.personality = personality;
+        }
+
+        public void SetIdeals(string ideals)
+        {
+            this.ideals = ideals;
+        }
+
+        public void SetBonds(string bonds)
+        {
+            this.bonds = bonds;
+        }
+
+        public void SetFlaws(string flaws)
+        {
+            this.flaws = flaws;
+        }
+
+        public void SetLevel(int level)
+        {
+            this.level = level;
+        }
+
+        public void SetExp(int exp)
+        {
+            this.experiencePoints = exp;
+        }
     }
 }

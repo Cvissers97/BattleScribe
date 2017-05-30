@@ -15,7 +15,7 @@
                     <CheckBox x:Name="chMale" Content="♂" HorizontalAlignment="Left" Margin="64,131,0,0" VerticalAlignment="Top"/>
                     <CheckBox x:Name="chFemale" Content="♀" HorizontalAlignment="Left" Margin="97,131,0,0" VerticalAlignment="Top"/>
                     <Image x:Name="imgChar" HorizontalAlignment="Left" Height="100" Margin="10,151,0,0" VerticalAlignment="Top" Width="114" Source="/BattleScribe;component/Resources/Test/placeholder.jpg"/>
-                    <Button x:Name="btnUpload" Content="Upload" HorizontalAlignment="Left" Margin="79,256,0,0" VerticalAlignment="Top" Width="45" Height="20"/>
+                    <Button x:Name="btnUpload" Content="Upload" HorizontalAlignment="Left" Margin="79,256,0,0" VerticalAlignment="Top" Width="45" Height="20" Click="btnUpload_Click"/>
                     <Label x:Name="lbAppearance" Content="Appearance" HorizontalAlignment="Left" Margin="129,125,0,0" VerticalAlignment="Top"/>
                     <RichTextBox x:Name="rtbAppearance" HorizontalAlignment="Left" Height="100" Margin="129,151,0,0" VerticalAlignment="Top" Width="195">
                         <FlowDocument>
@@ -42,13 +42,7 @@
                         </FlowDocument>
                     </RichTextBox>
                     <Label x:Name="lbFlaws" Content="Flaws" HorizontalAlignment="Left" Margin="343,335,0,0" VerticalAlignment="Top"/>
-                    <RichTextBox x:Name="rtbFlaws" HorizontalAlignment="Left" Height="70" Margin="343,366,0,0" VerticalAlignment="Top" Width="332">
-                        <FlowDocument>
-                            <Paragraph>
-                                <Run Text="Flaws"/>
-                            </Paragraph>
-                        </FlowDocument>
-                    </RichTextBox>
+                    <RichTextBox x:Name="rtbFlaws" HorizontalAlignment="Left" Height="70" Margin="343,366,0,0" VerticalAlignment="Top" Width="332"/>
                     <Label x:Name="lbIdeals" Content="Ideals" HorizontalAlignment="Left" Margin="343,118,0,0" VerticalAlignment="Top"/>
                     <RichTextBox x:Name="rtbIdeals" HorizontalAlignment="Left" Height="70" Margin="343,149,0,0" VerticalAlignment="Top" Width="332">
                         <FlowDocument>
@@ -109,7 +103,7 @@
                     <TextBox Name="tbEXP" HorizontalAlignment="Left" Height="23" Margin="114,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <TextBox Name="tbMaxHP" HorizontalAlignment="Left" Height="23" Margin="114,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <TextBox Name="tbTempHP" HorizontalAlignment="Left" Height="23" Margin="114,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbCurHP" HorizontalAlignment="Left" Height="23" Margin="114,112,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbCurHP" HorizontalAlignment="Left" Height="23" Margin="114,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Button x:Name="btnPlusHP" Content="+" HorizontalAlignment="Left" Margin="239,62,0,0" VerticalAlignment="Top" Width="21" Height="21" HorizontalContentAlignment="Center" FontSize="10" Click="btnPlusHP_Click"/>
                     <Label Content="Feats" HorizontalAlignment="Left" Margin="386,8,0,0" VerticalAlignment="Top"/>
                     <Label Content="Features" HorizontalAlignment="Left" Margin="386,185,0,0" VerticalAlignment="Top"/>
@@ -124,7 +118,7 @@
                     <Button Name="btnAddFeature" Content="Add Feature" HorizontalAlignment="Left" Margin="304,216,0,0" VerticalAlignment="Top" Width="75" Click="btnAddFeature_Click"/>
                     <Button Name="btnRemoveFeature" Content="Remove" HorizontalAlignment="Left" Margin="304,241,0,0" VerticalAlignment="Top" Width="75" Click="btnRemoveFeature_Click"/>
                     <Label Content="Proficiency" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
-                    <TextBox Name="tbProficiency" HorizontalAlignment="Left" Height="23" Margin="114,137,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="tbProficiency" HorizontalAlignment="Left" Height="23" Margin="114,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
                 </Grid>
             </TabItem>
