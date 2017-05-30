@@ -529,8 +529,24 @@ namespace BattleScribe.Classes
                     AddWeapon((Weapon)item);
                     break;
 
-                case "Armour":
+                case "Light":
                     //armours.Add((Armour)item);
+                    AddArmour((Armour)item);
+                    break;
+
+                case "Medium":
+                    AddArmour((Armour)item);
+                    break;
+
+                case "Heavy":
+                    AddArmour((Armour)item);
+                    break;
+
+                case "Shield":
+                    AddArmour((Armour)item);
+                    break;
+
+                case "Armour":
                     AddArmour((Armour)item);
                     break;
 

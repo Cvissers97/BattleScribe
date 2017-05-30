@@ -338,7 +338,7 @@ namespace BattleScribe.Forms
 
         private void BtnAddItem_Click(object sender, RoutedEventArgs e)
         {
-            ItemChoice temp = new ItemChoice(this);
+            ItemChoice temp = new ItemChoice(inventory);
             temp.Show();
 		}
 

@@ -28,11 +28,21 @@ namespace BattleScribe.Forms.Pop_ups.Items
         private List<Item> itemList;
         private Item item;
         private InventoryManager inventory;
+        private PlayScreen play;
         
 
         public AddStandardItem()
         {
             InitializeComponent();
+        }
+
+        public AddStandardItem(InventoryManager inventory)
+        {
+            InitializeComponent();
+
+            db = new DbHandler();
+            this.inventory = inventory;
+            Init();
         }
 
         public AddStandardItem(int id)

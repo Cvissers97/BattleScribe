@@ -24,7 +24,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
         private int characterId;
         private List<int> diceSides;
         private List<string> modifiers;
-        private DetailScreen screen;
+        private InventoryManager inventory;
         private DbHandler dbhandler;
         private Weapon weapon;
 
@@ -100,9 +100,9 @@ namespace BattleScribe.Forms.Pop_ups.Items
             MessageBox.Show("Adding items for character ID: " + characterId);
         }
 
-        public AddWeapon(DetailScreen screen)
+        public AddWeapon(InventoryManager inventory)
         {
-            this.screen = screen;
+            this.inventory = inventory;
             InitializeComponent();
             diceSides = new List<int>();
             modifiers = new List<string>();

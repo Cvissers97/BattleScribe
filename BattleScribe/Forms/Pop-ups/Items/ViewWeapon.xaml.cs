@@ -24,14 +24,27 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         public ViewWeapon(Weapon w)
         {
+            InitializeComponent();
+
             tbName.Text = w.GetName();
             rtbDescription.Document.Blocks.Clear();
             rtbDescription.Document.Blocks.Add(new Paragraph(new Run(w.GetDescription())));
             tbWeight.Text = w.GetWeight();
             chkAttune.IsChecked = w.GetAttunement();
-            
-            tbDamage.Text = w.GetDamage() + " " + w.GetBaseDamageType() 
-                + " + " + w.GetBonusDamage() + " " + w.GetBonusDamageType();
+
+            string damage = string.Empty;
+
+            if (w.GetBonusDamage() != 0)
+            {
+                damage = w.GetDamage() + " " + w.GetBaseDamageType()
+                + " + " + w.GetBonusDamage() + " " + w.GetBonusDamageType(); 
+            }
+            else
+            {
+                damage = w.GetDamage() + " " + w.GetBaseDamageType();
+            }
+
+            tbDamage.Text = damage;
         }
     }
 }

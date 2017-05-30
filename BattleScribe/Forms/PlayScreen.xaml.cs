@@ -38,7 +38,7 @@ namespace BattleScribe.Forms
         private Spell chosenSpell;
         private WeaponControl chosenWeaponControl;
         private MoneyManager money;
-        private InventoryManager inventory;
+        public InventoryManager inventory;
         byte lifeThrow;
         byte deathThrow;
         int spellMod;
@@ -322,8 +322,7 @@ namespace BattleScribe.Forms
 
         private void btnAddItem_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("PLAYSCREEN");
-            ItemChoice i = new ItemChoice(c.GetID());
+            ItemChoice i = new ItemChoice(inventory);
             i.Show();
         }
         
@@ -661,6 +660,46 @@ namespace BattleScribe.Forms
             if (chosenWeaponControl != null)
             {
                 chosenWeaponControl.Attack();
+            }
+        }
+
+        private void btnEquip_Click(object sender, RoutedEventArgs e)
+        {
+            List<ItemControl> loopList = new List<ItemControl>();
+
+            foreach (ItemControl i in stackInventory.Children.OfType<ItemControl>())
+            {
+                loopList.Add(i);
+            }
+
+            foreach (ItemControl i in stackEquip.Children.OfType<ItemControl>())
+            {
+                loopList.Add(i);
+            }
+
+            foreach (ItemControl i in loopList)
+            {
+                if (i.GetIsSelected())
+                {
+                    if (i.GetItem().GetEquip())
+                    {
+                        inventory.UnEquip(i.GetItem());
+                    }
+                    else
+                    {
+                        inventory.Equip(i.GetItem());
+                    }
+                }
+            }
+
+            foreach (ItemControl i in stackInventory.Children.OfType<ItemControl>())
+            {
+                i.SetIsSelected(false);
+            }
+
+            foreach (ItemControl i in stackEquip.Children.OfType<ItemControl>())
+            {
+                i.SetIsSelected(false);
             }
         }
     }

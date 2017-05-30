@@ -22,7 +22,6 @@ namespace BattleScribe.Forms.Pop_ups.Items
     public partial class AddStandardArmour : Window
     {
         private int characterId;
-        private DetailScreen screen;
         private Armour armour;
         private List<Armour> armourList;
         private DbHandler db;
@@ -40,14 +39,13 @@ namespace BattleScribe.Forms.Pop_ups.Items
             this.characterId = id;
         }
 
-        public AddStandardArmour(DetailScreen screen)
+        public AddStandardArmour(InventoryManager inventory)
         {
             db = new DbHandler();
 
             armourList = db.GetAllArmour(); 
             InitializeComponent();
-            this.screen = screen;
-            this.inventory = screen.inventory;
+            this.inventory = inventory;
             foreach (Armour a in armourList)
             {
                 cbArmourName.Items.Add(a.GetName());
