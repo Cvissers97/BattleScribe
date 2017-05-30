@@ -106,6 +106,7 @@ namespace BattleScribe.Forms
 
         }
 
+
         private void Init()
         {
             tbSlot1.Text = c.GetSlot1().ToString();
@@ -117,6 +118,12 @@ namespace BattleScribe.Forms
             tbSlot7.Text = c.GetSlot7().ToString();
             tbSlot8.Text = c.GetSlot8().ToString();
             tbSlot9.Text = c.GetSlot9().ToString();
+            tbLevel.Text = c.GetLevel().ToString();
+            tbEXP.Text = c.GetExp().ToString();
+            tbMaxHP.Text = c.GetMaxHealth().ToString();
+            tbCurHP.Text = c.GetCurrentHealth().ToString();
+            tbTempHP.Text = c.GetTempHp().ToString();
+            tbProficiency.Text = c.CalcProfBonus().ToString();
             rtbAppearance.Document.Blocks.Clear();
             rtbBackstory.Document.Blocks.Clear();
             rtbBonds.Document.Blocks.Clear();
@@ -511,6 +518,10 @@ namespace BattleScribe.Forms
             c.SetWis(c.GetWis());
             c.SetInt(c.GetInt());
             c.SetCha(c.GetCha());
+            c.SetMaxHealth(Convert.ToInt32(tbMaxHP.Text));
+            c.SetCurrentHealth(Convert.ToInt32(tbCurHP.Text));
+            c.SetLevel(Convert.ToInt32(tbLevel.Text));
+            c.SetExp(Convert.ToInt32(tbEXP.Text));
             
         }
 
@@ -552,10 +563,19 @@ namespace BattleScribe.Forms
                 i++;
             }
 
+            langs = new List<Language>();
+            foreach (CheckBox check in panelLanguages.Children)
+            {
+                langs.Add(new Language((string)check.Content, (bool)check.IsChecked));
+            }
+
+            skills = new List<Skill>();
             foreach (CheckBox check in panelSkills.Children)
             {
-                
+                skills.Add(new Skill((string)check.Content, (bool)check.IsChecked));
             }
+            c.SetSkillList(skills);
+            c.SetLangList(langs);
 
             db.InsertSpells(temp, c.GetID(), prepared);
             db.UpdateCharacter(c);
@@ -651,9 +671,6 @@ namespace BattleScribe.Forms
                 imageArray = System.IO.File.ReadAllBytes(dlg.FileName);
                 c.SetImage(imageArray);
             }
-                
-
-            
         }
 
         private void tbLevel_TextChanged(object sender, TextChangedEventArgs e)

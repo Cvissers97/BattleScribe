@@ -402,7 +402,9 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background, MAX_HP, CUR_HP, Experience, inspiration) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background, @MAX_HP, @MAX_HP, 0, 0)";
+
+            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background, MAX_HP, CUR_HP, Experience, slot1, slot2, slot3, slot4, slot5, slot6,slot7,slot8,slot9) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background, @MAX_HP, @MAX_HP, 0,0,0,0,0,0,0,0,0,0)";
+
 
             try
             {
@@ -684,11 +686,11 @@ namespace BattleScribe.Classes
             string sql;
             if (c.GetImage() == null)
             {
-                sql = "UPDATE Character SET Name=@Name, Level=@Level, Age=@Age, Size=@Size, Appearance=@Appearance, Title=@Title, Personality=@Personality, Ideals=@Ideals, Bonds=@Bonds, Flaws=@Flaws, Backstory=@Backstory, Alignment = @Alignment, IsMale=@Ismale, IsFemale=@Isfemale, STR=@STR, DEX=@DEX, CON=@CON, WIS=@WIS, INT=@INT, CHA=@CHA, CUR_HP=@CUR_HP, MAX_HP=@MAX_HP, Inspiration=@Inspiration, slot1=@slot1, slot2=@slot2, slot3=@slot3, slot4=@slot4, slot5=@slot5, slot6=@slot6, slot7=@slot7, slot8=@slot8, slot9=@slot9, Experience=@Experience WHERE Id = @ID";
+                sql = "UPDATE Character SET Name=@Name, Level=@Level, Age=@Age, Size=@Size, Appearance=@Appearance, Title=@Title, Personality=@Personality, Ideals=@Ideals, Bonds=@Bonds, Flaws=@Flaws, Backstory=@Backstory, Alignment = @Alignment, IsMale=@Ismale, IsFemale=@Isfemale, STR=@STR, DEX=@DEX, CON=@CON, WIS=@WIS, INT=@INT, CHA=@CHA, CUR_HP=@CUR_HP, MAX_HP=@MAX_HP, Inspiration=@Inspiration, slot1=@slot1, slot2=@slot2, slot3=@slot3, slot4=@slot4, slot5=@slot5, slot6=@slot6, slot7=@slot7, slot8=@slot8, slot9=@slot9, Experience=@Experience, TEM_HP = @temHp WHERE Id = @ID";
             }
             else
             {
-                sql = "UPDATE Character SET Name=@Name, Level=@Level, Age=@Age, Size=@Size, Appearance=@Appearance, Image=@Image, Title=@Title, Personality=@Personality, Ideals=@Ideals, Bonds=@Bonds, Flaws=@Flaws, Backstory=@Backstory, Alignment = @Alignment, IsMale=@Ismale, IsFemale=@Isfemale, STR=@STR, DEX=@DEX, CON=@CON, WIS=@WIS, INT=@INT, CHA=@CHA, CUR_HP=@CUR_HP, MAX_HP=@MAX_HP, Inspiration=@Inspiration, slot1=@slot1, slot2=@slot2, slot3=@slot3, slot4=@slot4, slot5=@slot5, slot6=@slot6, slot7=@slot7, slot8=@slot8, slot9=@slot9, Experience=@Experience WHERE Id = @ID";
+                sql = "UPDATE Character SET Name=@Name, Level=@Level, Age=@Age, Size=@Size, Appearance=@Appearance, Image=@Image, Title=@Title, Personality=@Personality, Ideals=@Ideals, Bonds=@Bonds, Flaws=@Flaws, Backstory=@Backstory, Alignment = @Alignment, IsMale=@Ismale, IsFemale=@Isfemale, STR=@STR, DEX=@DEX, CON=@CON, WIS=@WIS, INT=@INT, CHA=@CHA, CUR_HP=@CUR_HP, MAX_HP=@MAX_HP, Inspiration=@Inspiration, slot1=@slot1, slot2=@slot2, slot3=@slot3, slot4=@slot4, slot5=@slot5, slot6=@slot6, slot7=@slot7, slot8=@slot8, slot9=@slot9, Experience=@Experience, TEM_HP = @temHp WHERE Id = @ID";
             }
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
@@ -737,6 +739,8 @@ namespace BattleScribe.Classes
                     com.Parameters.AddWithValue(@"slot9", c.GetSlot9());
                     com.Parameters.AddWithValue(@"Experience", c.GetExp());
                     com.Parameters.AddWithValue(@"ID", c.GetID());
+                    com.Parameters.AddWithValue(@"temHp", c.GetTempHp());
+
 
                     con.Open();
                     com.ExecuteNonQuery();
@@ -752,6 +756,7 @@ namespace BattleScribe.Classes
 
             con.Close();
             UpdateSkills(c.GetID(), c.GetSkills());
+            UpdateLangs(c.GetID(), c.GetLangs());
         }
 
         public void UpdateLangs(int charId, List<Language> langs)
