@@ -1346,8 +1346,6 @@ namespace BattleScribe.Classes
                 MessageBox.Show(error.ToString());
                 throw;
             }
-
-            MessageBox.Show(hit.ToString());
             return hit;
         }
 

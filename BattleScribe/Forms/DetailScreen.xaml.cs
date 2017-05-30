@@ -131,6 +131,7 @@ namespace BattleScribe.Forms
             rtbPersonality.Document.Blocks.Clear();
             rtbArmourProfs.Document.Blocks.Clear();
             rtbWepProfs.Document.Blocks.Clear();
+            rtbFlaws.Document.Blocks.Clear();
             tbTitle.Text = c.GetTitle();
             tbName.Text = c.GetName();
             tbAge.Text = c.GetAge();

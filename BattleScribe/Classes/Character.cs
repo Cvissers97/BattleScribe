@@ -81,15 +81,15 @@ namespace BattleScribe.Classes
         private string savingThrow1;
         private string savingThrow2;
 
-        private byte slot1;
-        private byte slot2;
-        private byte slot3;
-        private byte slot4;
-        private byte slot5;
-        private byte slot6;
-        private byte slot7;
-        private byte slot8;
-        private byte slot9;
+        private byte slot1, slot1Max;
+        private byte slot2, slot2Max;
+        private byte slot3, slot3Max;
+        private byte slot4, slot4Max;
+        private byte slot5, slot5Max;
+        private byte slot6, slot6Max;
+        private byte slot7, slot7Max;
+        private byte slot8, slot8Max;
+        private byte slot9, slot9Max;
 
         private CharacterClass cClass;
 
