@@ -26,21 +26,7 @@ namespace BattleScribe.Forms
         {
             InitializeComponent();
 
-
             BattleScribe.Classes.DbHandler db = new Classes.DbHandler();
-
-            WeaponLegend legend = new WeaponLegend();
-            slackPanel.Children.Add(legend);
-
-            List<Spell> s = db.GetSpells();
-
-            foreach (Spell sp in s)
-            {
-                WeaponControl wepCont = new WeaponControl();
-                wepCont.wepNameBox.Text = sp.GetName();
-                wepCont.wepToHitBox.Text = sp.GetDesc();
-                slackPanel.Children.Add(wepCont);
-            }
         }
     }
 }

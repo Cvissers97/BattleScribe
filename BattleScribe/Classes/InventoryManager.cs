@@ -259,6 +259,18 @@ namespace BattleScribe.Classes
             UpdateInventory();
         }
 
+        public List<Weapon> GetAllWeapons()
+        {
+            List<Weapon> weps = new List<Weapon>();
+
+            foreach (Weapon w in equipedItems.OfType<Weapon>())
+            {
+                weps.Add(w);
+            }
+
+            return weps;
+        }
+
         public void AddWeapon(Weapon w)
         {
             bool duplicate = false;

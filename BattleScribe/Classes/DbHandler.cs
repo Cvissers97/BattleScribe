@@ -36,6 +36,197 @@ namespace BattleScribe.Classes
             }
         }
 
+        public void DeleteCharacter(int charId)
+        {
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            string sql = "DELETE FROM CHARACTER WHERE Id = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            sql = "DELETE FROM CHARACTER_FEATS WHERE CharId = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            sql = "DELETE FROM CHARACTER_FEATURES WHERE CharId = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            sql = "DELETE FROM CHARACTER_INVENTORY WHERE CHAR_ID = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            sql = "DELETE FROM Character_Languages WHERE Char_Id = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            sql = "DELETE FROM Character_Money where CharId = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            sql = "Delete from character_skills where char_id = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            sql = "Delete from character_SpellList where char_id = @charId";
+
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    com.Parameters.AddWithValue(@"charId", charId);
+                    con.Open();
+                    com.ExecuteNonQuery();
+                    com.Parameters.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            con.Close();
+
+        }
+
         public void InsertLangs(List<bool> langs, int charId)
         {
             conString = Properties.Settings.Default.conString;

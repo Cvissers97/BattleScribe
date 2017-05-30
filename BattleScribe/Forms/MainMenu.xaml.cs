@@ -25,6 +25,8 @@ namespace BattleScribe.Forms
         public List<Character> c;
         public List<CharacterClass> cClass;
 
+        bool deleteMode;
+
         public MainMenu()
         {
             db = new DbHandler();
@@ -35,14 +37,19 @@ namespace BattleScribe.Forms
 
         public void Init()
         {
+            stack.Children.Clear();
+
             c = db.GetCharacterForMain();
             cClass = db.GetClasses();
 
+            deleteMode = false;
+
             foreach(Character cha in c)
             {
-                MainScreenCharacter temp = new MainScreenCharacter(cha, cClass);
+                MainScreenCharacter temp = new MainScreenCharacter(this, cha, cClass, deleteMode);
                 stack.Children.Add(temp);
             }
+
         }
 
         private void BtnCreate_Click(object sender, RoutedEventArgs e)
@@ -52,5 +59,17 @@ namespace BattleScribe.Forms
             this.Close();
         }
 
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            deleteMode = !deleteMode;
+
+            stack.Children.Clear();
+
+            foreach (Character cha in c)
+            {
+                MainScreenCharacter temp = new MainScreenCharacter(this, cha, cClass, deleteMode);
+                stack.Children.Add(temp);
+            }
+        }
     }
 }
