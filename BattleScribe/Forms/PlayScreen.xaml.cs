@@ -705,5 +705,13 @@ namespace BattleScribe.Forms
 
             lbArmor.Content = inventory.CalcAC().ToString();
         }
+
+        private void btnLongRest_Click(object sender, RoutedEventArgs e)
+        {
+            c.RecoverAllSpellSlots();
+            c.SetCurrentHealth(c.GetMaxHealth());
+            UpdateHealth();
+            log.Write("You take a long rest.");
+        }
     }
 }
