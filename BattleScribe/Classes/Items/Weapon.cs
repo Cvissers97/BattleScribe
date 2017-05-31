@@ -14,6 +14,8 @@ namespace BattleScribe.Classes.Items
         private float bonusDamage;
         private string baseDamageType;
         private string bonusDamageType;
+        private string damage2;
+        private string baseDamageType2;
 
         public Weapon()
         {
@@ -97,6 +99,26 @@ namespace BattleScribe.Classes.Items
         public string GetDamageForCopy()
         {
             return this.damage;
+        }
+
+        public string GetDamage2()
+        {
+            return damage2;
+        }
+
+        public string GetBaseDamage2()
+        {
+            return baseDamageType2;
+        }
+
+        public void SetDamage2(string target)
+        {
+            this.damage2 = target;
+        }
+
+        public void SetBaseDamage2(string target)
+        {
+            this.baseDamageType2 = target;
         }
     }
 }

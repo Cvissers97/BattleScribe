@@ -105,6 +105,7 @@ namespace BattleScribe.Classes
         private List<Armour> armours;
 
         private List<Spell> knownSpells;
+        private bool setMaxSlots;
 
         public Character()
         {
@@ -213,6 +214,7 @@ namespace BattleScribe.Classes
             }
 
             SetSpellMod();
+            setMaxSlots = false;
 
             // Constructor called for making a character.
         }
@@ -266,6 +268,8 @@ namespace BattleScribe.Classes
             skills = new List<Skill>();
 
             SetSpellMod();
+            setMaxSlots = false;
+
 
             // Constructor called after making a character.
         }
@@ -850,6 +854,19 @@ namespace BattleScribe.Classes
             return this.feats;
         }
 
+        public void RecoverAllSpellSlots()
+        {
+            slot1 = slot1Max;
+            slot2 = slot2Max;
+            slot3 = slot3Max;
+            slot4 = slot4Max;
+            slot5 = slot5Max;
+            slot6 = slot6Max;
+            slot7 = slot7Max;
+            slot8 = slot8Max;
+            slot9 = slot9Max;
+        }
+
         public void SetSlots(byte slot1, byte slot2, byte slot3, byte slot4,
             byte slot5, byte slot6, byte slot7, byte slot8, byte slot9)
         {
@@ -862,6 +879,21 @@ namespace BattleScribe.Classes
             this.slot7 = slot7;
             this.slot8 = slot8;
             this.slot9 = slot9;
+
+            if (!setMaxSlots)
+            {
+                slot1Max = slot1;
+                slot2Max = slot2;
+                slot3Max = slot3;
+                slot4Max = slot4;
+                slot5Max = slot5;
+                slot6Max = slot6;
+                slot7Max = slot7;
+                slot8Max = slot8;
+                slot9Max = slot9;
+            }
+
+            setMaxSlots = true;
         }
 
         public bool SpendSlot(byte slotNumber)

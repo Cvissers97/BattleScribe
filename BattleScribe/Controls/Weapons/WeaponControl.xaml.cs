@@ -79,12 +79,19 @@ namespace BattleScribe.Controls.Weapons
             string amount = string.Empty;
             string sides = string.Empty;
 
+            string amount2 = string.Empty;
+            string sides2 = string.Empty;
+
             int amountNumb = 0;
             int sidesNumb = 0;
+
+            int amountNumb2 = 0;
+            int sidesNumb2 = 0;
 
             string damage = w.GetDamage();
 
             bool pastDice = false;
+            bool secondDice = false;
 
             for (int i = 0; i < damage.Length; i++)
             {
@@ -105,10 +112,45 @@ namespace BattleScribe.Controls.Weapons
                 }
             }
 
+            pastDice = false;
+
+            damage = w.GetDamage2();
+
+            if (damage != "0" && damage != string.Empty && damage != null)
+            {
+                secondDice = true;
+
+                for (int i = 0; i < damage.Length; i++)
+                {
+                    if (!pastDice)
+                    {
+                        if (damage[i] != 'd')
+                        {
+                            amount2 += damage[i];
+                        }
+                        else
+                        {
+                            pastDice = true;
+                        }
+                    }
+                    else
+                    {
+                        sides2 += damage[i];
+                    }
+                }
+            }
+
+
             try
             {
                 amountNumb = Convert.ToInt32(amount);
                 sidesNumb = Convert.ToInt32(sides);
+
+                if (secondDice)
+                {
+                    amountNumb2 = Convert.ToInt32(amount2);
+                    sidesNumb2 = Convert.ToInt32(sides2);
+                }
             }
             catch (Exception)
             {
@@ -116,7 +158,14 @@ namespace BattleScribe.Controls.Weapons
             }
 
             play.log.Write("To hit: " + DiceThrower.ThrowDice(0, 20, toHit));
+
+            if (secondDice)
+            {
+                play.log.Write("+ " + (DiceThrower.ThrowDice(amountNumb2 - 1, sidesNumb2, 0 - amountNumb2 )) + " " + w.GetBaseDamage2());
+            }
+
             play.log.Write("Damage: " + (DiceThrower.ThrowDice(amountNumb - 1, sidesNumb, c.GetModifier(mod)) + 1) + " " + w.GetBaseDamageType());
+
 
             if (w.GetBonusDamage() != 0)
             {
