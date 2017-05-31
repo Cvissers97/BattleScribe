@@ -11,8 +11,7 @@
             <ColumnDefinition Width="236*"/>
         </Grid.ColumnDefinitions>
         <Label Name="lbName" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" HorizontalContentAlignment="Center" Height="27"/>
-        <Label Name="lbDamage" Content="Damage" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" HorizontalContentAlignment="Center" Height="27" Grid.Column="1"/>
-        <Label Name="lbDamageType" Content="DamageType" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" HorizontalContentAlignment="Center" Margin="76,0,0,0" Height="27" Grid.Column="1"/>
+        <Label Name="lbDamage" Content="Damage" HorizontalAlignment="Left" VerticalAlignment="Top" Width="172" HorizontalContentAlignment="Center" Height="27" Grid.Column="1"/>
         <Label Name="lbToHit" Content="ToHit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" HorizontalContentAlignment="Center" Margin="172,0,0,0" Height="27" Grid.Column="1"/>
 
     </Grid>

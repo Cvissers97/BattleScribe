@@ -45,8 +45,8 @@ namespace BattleScribe.Controls.Weapons
             this.standardBackground = this.Background;
 
             lbName.Content = w.GetName();
-            lbDamage.Content = w.GetDamage();
-            lbDamageType.Content = w.GetBaseDamageType();
+            lbDamage.Content = w.GetDamage() + " + " + w.GetDamage() + " + " + w.GetBonusDamage();
+            //lbDamageType.Content = w.GetBaseDamageType();
 
             mod = w.GetModifier();
 
@@ -156,19 +156,17 @@ namespace BattleScribe.Controls.Weapons
                 MessageBox.Show("Invalid damage conversion.");
             }
 
-            if (secondDice)
-            {
-                play.log.Write("+ " + (DiceThrower.ThrowDice(amountNumb2 - 1, sidesNumb2, 0)) + " " + w.GetBaseDamage2());
-            }
-
-            play.log.Write("Damage: " + (DiceThrower.ThrowDice(amountNumb - 1, sidesNumb, c.GetModifier(mod)) + 0) + " " + w.GetBaseDamageType());
-
-
             if (w.GetBonusDamage() != 0)
             {
                 play.log.Write("Bonus: " + w.GetBonusDamage() + " " + w.GetBonusDamageType());
             }
 
+            if (secondDice)
+            {
+                play.log.Write("+ " + (DiceThrower.ThrowDice(amountNumb2 - 1, sidesNumb2, 0)) + " " + w.GetBaseDamage2());
+            }
+
+            play.log.Write("Damage: " + (DiceThrower.ThrowDice(amountNumb - 1, sidesNumb, c.GetModifier(mod)) + 1) + " " + w.GetBaseDamageType());
             play.log.Write("To hit: " + DiceThrower.ThrowDice(0, 20, toHit));
         }
 

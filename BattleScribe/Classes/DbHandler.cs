@@ -2361,10 +2361,16 @@ namespace BattleScribe.Classes
                     while (dReader.Read())
                     {
                         bool duplicate = false;
-                        Weapon w = new Weapon(dReader.GetInt32(15), dReader.GetString(1), dReader.GetString(11), dReader.GetString(2), dReader.GetString(10), true, dReader.GetBoolean(8),  Convert.ToSingle(dReader.GetDouble(6)).ToString(), dReader.GetString(13), (float)dReader.GetInt32(14), dReader.GetString(4), dReader.GetString(5), 1);
+                        Weapon w = new Weapon(dReader.GetInt32(15), dReader.GetString(1),
+                            dReader.GetString(11), dReader.GetString(2),
+                            dReader.GetString(10), true, dReader.GetBoolean(8), 
+                            Convert.ToSingle(dReader.GetDouble(6)).ToString(),
+                            dReader.GetString(13), (float)dReader.GetInt32(14), 
+                            dReader.GetString(4), dReader.GetString(5), 1);
                         w.SetEquip(dReader.GetBoolean(17));
                         w.SetDamage2(dReader.GetString(3));
                         w.SetBaseDamage2(dReader.GetString(5));
+                        w.SetBonusDamageType(dReader.GetString(12));
                         foreach (Weapon wep in weapons)
                         {
                             if (wep.GetName() == w.GetName() && wep.GetEquip() == w.GetEquip())

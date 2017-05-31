@@ -48,6 +48,9 @@ namespace BattleScribe.Forms
         private MoneyManager money;
         private byte[] imageArray;
 
+        private int[] tempSpells;
+        private bool[] tempPrep;
+
         public DetailScreen()
         {
             InitializeComponent();
@@ -544,8 +547,8 @@ namespace BattleScribe.Forms
                     Convert.ToByte(tbSlot4.Text), Convert.ToByte(tbSlot5.Text), Convert.ToByte(tbSlot6.Text),
                     Convert.ToByte(tbSlot7.Text), Convert.ToByte(tbSlot8.Text), Convert.ToByte(tbSlot9.Text));
 
-                int[] temp = new int[spells.Count];
-                bool[] prepared = new bool[spells.Count];
+                tempSpells = new int[spells.Count];
+                tempPrep = new bool[spells.Count];
                 int i = 0;
 
                 foreach (SpellPrepControl prep in panelSpells.Children)
@@ -562,8 +565,8 @@ namespace BattleScribe.Forms
 
                 foreach (Spell s in spells)
                 {
-                    temp[i] = Convert.ToInt32(s.GetId());
-                    prepared[i] = s.GetPrepared();
+                    tempSpells[i] = Convert.ToInt32(s.GetId());
+                    tempPrep[i] = s.GetPrepared();
                     i++;
                 }
 
@@ -581,7 +584,7 @@ namespace BattleScribe.Forms
                 c.SetSkillList(skills);
                 c.SetLangList(langs);
 
-                db.InsertSpells(temp, c.GetID(), prepared);
+                db.InsertSpells(tempSpells, c.GetID(), tempPrep);
                 db.UpdateCharacter(c);
                 MessageBox.Show("Character saved with succes.");
             }
@@ -591,8 +594,7 @@ namespace BattleScribe.Forms
             }
             c.SetSkillList(skills);
             c.SetLangList(langs);
-
-            db.InsertSpells(temp, c.GetID(), prepared);
+            db.InsertSpells(tempSpells, c.GetID(), tempPrep);
             c.SetMiscProf(new TextRange(rtbOtherProf.Document.ContentStart, rtbOtherProf.Document.ContentEnd).Text);
             db.UpdateCharacter(c);
         }

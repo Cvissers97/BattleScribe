@@ -143,16 +143,25 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            string damage1 = tbDiceAmount.Text + 'd' + cbDiceSides.SelectedItem;
-            string damage2 = tbDiceAmount2.Text + 'd' + cbDiceSides2.SelectedItem;
-            Weapon w = new Weapon(tbName.Text, damage1, damage2, tbAttackType.Text, tbBonusType.Text, "-", (new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text), tbBonusType3.Text, cbModifier.SelectedItem.ToString(), Convert.ToInt32(tbBonusDamage.Text));
-            w.SetWeight(tbWeight.Text);
-            w.SetAttunement((bool)chkAttune.IsChecked);
-            w.SetProficient((bool)chkProf.IsChecked);
-            w.SetValue("1");
-            w.SetItemType(tbType.Text);
-            int itemId = dbhandler.InsertNewWeapon(w);
-            dbhandler.InsertInItemTable(itemId, 1);
+
+            try
+            {
+                string damage1 = tbDiceAmount.Text + 'd' + cbDiceSides.SelectedItem;
+                string damage2 = tbDiceAmount2.Text + 'd' + cbDiceSides2.SelectedItem;
+                Weapon w = new Weapon(tbName.Text, damage1, damage2, tbAttackType.Text, tbBonusType.Text, "-", (new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text), tbBonusType3.Text, cbModifier.SelectedItem.ToString(), Convert.ToInt32(tbBonusDamage.Text));
+                w.SetWeight(tbWeight.Text);
+                w.SetAttunement((bool)chkAttune.IsChecked);
+                w.SetProficient((bool)chkProf.IsChecked);
+                w.SetValue("1");
+                w.SetItemType(tbType.Text);
+                int itemId = dbhandler.InsertNewWeapon(w);
+                dbhandler.InsertInItemTable(itemId, 1);
+                MessageBox.Show("Weapon added to the weapon collection. Add from the item choice menu.");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
+            }
         }
     }
 }
