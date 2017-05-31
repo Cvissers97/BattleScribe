@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace BattleScribe.Classes
 {
@@ -60,6 +61,7 @@ namespace BattleScribe.Classes
         private string background;
         private int proficiency;
         private byte[] image;
+        private Image profilePic;
         private int maxHitPoints;
         private int curHitPoints;
         private int tempHitPoints;
@@ -90,6 +92,8 @@ namespace BattleScribe.Classes
         private byte slot7, slot7Max;
         private byte slot8, slot8Max;
         private byte slot9, slot9Max;
+
+        private string miscProfs;
 
         private CharacterClass cClass;
 
@@ -583,6 +587,17 @@ namespace BattleScribe.Classes
         {
             return this.langs;
         }
+
+        public void SetMiscProf(string target)
+        {
+            this.miscProfs = target;
+        }
+
+        public string GetMiscProf()
+        {
+            return this.miscProfs;
+        }
+
         public int GetLevel()
         {
             return level;
@@ -1134,6 +1149,16 @@ namespace BattleScribe.Classes
         public void SetExp(int exp)
         {
             this.experiencePoints = exp;
+        }
+
+        public void SetImage(Image target)
+        {
+            this.profilePic = target;
+        }
+
+        public Image GetProfilePic()
+        {
+            return this.profilePic;
         }
     }
 }

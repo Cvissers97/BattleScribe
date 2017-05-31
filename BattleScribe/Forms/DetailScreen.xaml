@@ -102,7 +102,7 @@
                     <TextBox Name="tbLevel" HorizontalAlignment="Left" Height="23" Margin="114,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbLevel_TextChanged"/>
                     <TextBox Name="tbEXP" HorizontalAlignment="Left" Height="23" Margin="114,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbEXP_TextChanged"/>
                     <TextBox Name="tbMaxHP" HorizontalAlignment="Left" Height="23" Margin="114,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbMaxHP_TextChanged"/>
-                    <TextBox Name="tbTempHP" HorizontalAlignment="Left" Height="23" Margin="114,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbTempHP_TextChanged"/>
+                    <TextBox IsEnabled="False" Name="tbTempHP" HorizontalAlignment="Left" Height="23" Margin="114,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbTempHP_TextChanged"/>
                     <TextBox Name="tbCurHP" HorizontalAlignment="Left" Height="23" Margin="114,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="tbCurHP_TextChanged"/>
                     <Button x:Name="btnPlusHP" Content="+" HorizontalAlignment="Left" Margin="239,62,0,0" VerticalAlignment="Top" Width="21" Height="21" HorizontalContentAlignment="Center" FontSize="10" Click="btnPlusHP_Click"/>
                     <Label Content="Feats" HorizontalAlignment="Left" Margin="386,8,0,0" VerticalAlignment="Top"/>

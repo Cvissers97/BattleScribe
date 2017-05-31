@@ -739,8 +739,15 @@ namespace BattleScribe.Forms
                 tempDex, tempCon, tempInt, tempWis, tempCha, (cbClasses.SelectedIndex + 1), GetRichTbString(rtbPersonality), (cbBackgrounds.SelectedIndex + 1).ToString(),
                 (cbRaces.SelectedIndex + 1).ToString(), imageArray, 1);
 
-            charId = db.CreateCharacter(charac);
+            string miscProfs = GetRichTbString(rtbMiscProf);
+
+            charId = db.CreateCharacter(charac, miscProfs);
             db.CreateMoney(charId);
+
+            if (cbRaces.SelectedItem.ToString() == "Half Elf")
+            {
+                MessageBox.Show("You have picked Half-Elf, you can add two stat points of your choice in the detail screen!");
+            }
         }
 
         string GetRichTbString(RichTextBox rtb)
@@ -864,7 +871,7 @@ namespace BattleScribe.Forms
                     raceStr = 2;
                     raceCon = 1;
                     break;
-                case "Thiefling":
+                case "Tiefling":
                     raceInt = 1;
                     raceCha = 2;
                     break;

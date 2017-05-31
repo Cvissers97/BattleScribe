@@ -181,29 +181,28 @@
                     <Label Name="lbAge" Content="Age" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
                     <Label Name="lbSize" Content="Size" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
                     <Label Name="lbGender" Content="Gender" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top"/>
-                    <CheckBox Name="chMale" Content="♂" HorizontalAlignment="Left" Margin="64,131,0,0" VerticalAlignment="Top"/>
-                    <CheckBox Name="chFemale" Content="♀" HorizontalAlignment="Left" Margin="97,131,0,0" VerticalAlignment="Top"/>
+                    <CheckBox IsHitTestVisible="False" Name="chMale" Content="♂" HorizontalAlignment="Left" Margin="64,131,0,0" VerticalAlignment="Top"/>
+                    <CheckBox IsHitTestVisible="False" Name="chFemale" Content="♀" HorizontalAlignment="Left" Margin="97,131,0,0" VerticalAlignment="Top"/>
                     <Image x:Name="imgChar" HorizontalAlignment="Left" Height="100" Margin="10,151,0,0" VerticalAlignment="Top" Width="114" Source="/BattleScribe;component/Resources/Test/placeholder.jpg"/>
-                    <Button Name="btnUpload" Content="Upload" HorizontalAlignment="Left" Margin="79,256,0,0" VerticalAlignment="Top" Width="45" Height="20"/>
                     <Label Name="lbAppearance" Content="Appearance" HorizontalAlignment="Left" Margin="129,125,0,0" VerticalAlignment="Top"/>
-                    <RichTextBox Name="rtbAppearance" HorizontalAlignment="Left" Height="100" Margin="129,151,0,0" VerticalAlignment="Top" Width="195">
+                    <RichTextBox IsReadOnly="True" Name="rtbAppearance" HorizontalAlignment="Left" Height="100" Margin="129,151,0,0" VerticalAlignment="Top" Width="195">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="Describe your character here."/>
                             </Paragraph>
                         </FlowDocument>
                     </RichTextBox>
-                    <TextBox Name="tbName" HorizontalAlignment="Left" Height="23" Margin="57,14,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="183"/>
-                    <TextBox Name="tbAge" HorizontalAlignment="Left" Height="23" Margin="57,45,0,0" TextWrapping="Wrap" Text="Age" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbSize" HorizontalAlignment="Left" Height="23" Margin="57,76,0,0" TextWrapping="Wrap" Text="Size" VerticalAlignment="Top" Width="120"/>
+                    <TextBox IsReadOnly="True" Name="tbName" HorizontalAlignment="Left" Height="23" Margin="57,14,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="183"/>
+                    <TextBox IsReadOnly="True" Name="tbAge" HorizontalAlignment="Left" Height="23" Margin="57,45,0,0" TextWrapping="Wrap" Text="Age" VerticalAlignment="Top" Width="120"/>
+                    <TextBox IsReadOnly="True" Name="tbSize" HorizontalAlignment="Left" Height="23" Margin="57,76,0,0" TextWrapping="Wrap" Text="Size" VerticalAlignment="Top" Width="120"/>
                     <Label Name="lbAgeExtra" Content="years old" HorizontalAlignment="Left" Margin="182,41,0,0" VerticalAlignment="Top"/>
                     <Label Name="lbSizeExtra" Content="ft" HorizontalAlignment="Left" Margin="182,72,0,0" VerticalAlignment="Top"/>
                     <Label Name="lbTitle" Content="Title" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top"/>
                     <Label Name="lbAlignment" Content="Alignment" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top"/>
-                    <TextBox Name="tbTitle" HorizontalAlignment="Left" Height="23" Margin="79,307,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="tbAlignment" HorizontalAlignment="Left" Height="23" Margin="80,338,0,0" TextWrapping="Wrap" Text="Alignment" VerticalAlignment="Top" Width="120"/>
+                    <TextBox IsReadOnly="True" Name="tbTitle" HorizontalAlignment="Left" Height="23" Margin="79,307,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" Width="120"/>
+                    <TextBox IsReadOnly="True" Name="tbAlignment" HorizontalAlignment="Left" Height="23" Margin="80,338,0,0" TextWrapping="Wrap" Text="Alignment" VerticalAlignment="Top" Width="120"/>
                     <Label Name="lbPersonality" Content="Personality" HorizontalAlignment="Left" Margin="343,10,0,0" VerticalAlignment="Top"/>
-                    <RichTextBox Name="rtbPersonality" HorizontalAlignment="Left" Height="70" Margin="343,41,0,0" VerticalAlignment="Top" Width="332">
+                    <RichTextBox IsReadOnly="True" Name="rtbPersonality" HorizontalAlignment="Left" Height="70" Margin="343,41,0,0" VerticalAlignment="Top" Width="332">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="Personality"/>
@@ -211,7 +210,7 @@
                         </FlowDocument>
                     </RichTextBox>
                     <Label x:Name="lbFlaws" Content="Flaws" HorizontalAlignment="Left" Margin="343,335,0,0" VerticalAlignment="Top"/>
-                    <RichTextBox x:Name="rtbFlaws" HorizontalAlignment="Left" Height="70" Margin="343,366,0,0" VerticalAlignment="Top" Width="332">
+                    <RichTextBox IsReadOnly="True" x:Name="rtbFlaws" HorizontalAlignment="Left" Height="70" Margin="343,366,0,0" VerticalAlignment="Top" Width="332">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="Flaws"/>
@@ -219,7 +218,7 @@
                         </FlowDocument>
                     </RichTextBox>
                     <Label x:Name="lbIdeals" Content="Ideals" HorizontalAlignment="Left" Margin="343,118,0,0" VerticalAlignment="Top"/>
-                    <RichTextBox x:Name="rtbIdeals" HorizontalAlignment="Left" Height="70" Margin="343,149,0,0" VerticalAlignment="Top" Width="332">
+                    <RichTextBox IsReadOnly="True"  x:Name="rtbIdeals" HorizontalAlignment="Left" Height="70" Margin="343,149,0,0" VerticalAlignment="Top" Width="332">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="Ideals"/>
@@ -227,7 +226,7 @@
                         </FlowDocument>
                     </RichTextBox>
                     <Label x:Name="lbBonds" Content="Bonds" HorizontalAlignment="Left" Margin="343,227,0,0" VerticalAlignment="Top"/>
-                    <RichTextBox x:Name="rtbBonds" HorizontalAlignment="Left" Height="70" Margin="343,258,0,0" VerticalAlignment="Top" Width="332">
+                    <RichTextBox IsReadOnly="True" x:Name="rtbBonds" HorizontalAlignment="Left" Height="70" Margin="343,258,0,0" VerticalAlignment="Top" Width="332">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="Bonds"/>
@@ -235,7 +234,7 @@
                         </FlowDocument>
                     </RichTextBox>
                     <Label Name="lbBackstory" Content="Backstory" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top"/>
-                    <RichTextBox Name="rtbBackstory" HorizontalAlignment="Left" Height="109" Margin="10,451,0,0" VerticalAlignment="Top" Width="665" IsEnabled="False">
+                    <RichTextBox Name="rtbBackstory" HorizontalAlignment="Left" Height="109" Margin="10,451,0,0" VerticalAlignment="Top" Width="665" IsReadOnly="True">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="Backstory"/>
@@ -278,9 +277,9 @@
 
             <TabItem Header="Skills and Languages">
                 <Grid Background="#f9f9f9">
-                    <WrapPanel Name="panelSkills" HorizontalAlignment="Left" Height="79" Margin="10,62,0,0" VerticalAlignment="Top" Width="642"/>
+                    <WrapPanel Orientation="Vertical" Name="panelSkills" HorizontalAlignment="Left" Height="79" Margin="10,62,0,0" VerticalAlignment="Top" Width="642"/>
                     <Label Content="Skills" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top"/>
-                    <WrapPanel Name="panelLanguages" HorizontalAlignment="Left" Height="79" Margin="10,191,0,0" VerticalAlignment="Top" Width="312"/>
+                    <WrapPanel Orientation="Vertical" Name="panelLanguages" HorizontalAlignment="Left" Height="79" Margin="10,191,0,0" VerticalAlignment="Top" Width="312"/>
                     <Label Content="Languages" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"/>
                     <RichTextBox Name="rtbOtherProf" HorizontalAlignment="Left" Height="79" Margin="344,191,0,0" VerticalAlignment="Top" Width="308">
                         <FlowDocument>

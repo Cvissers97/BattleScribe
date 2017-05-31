@@ -24,14 +24,12 @@ namespace BattleScribe.Classes
            {
                for (int j = 0; j < (rolls + amount); j++)
                {
-                   _throw = r.Next(0, sides);
+                   _throw = r.Next(0, sides + 1);
                }
-               _throw++;
                result += _throw;
            }
 
            result += mod;
-
            return result;
        }
 
