@@ -16,6 +16,7 @@ namespace BattleScribe.Classes.Items
         private string bonusDamageType;
         private string damage2;
         private string baseDamageType2;
+        private string properties;
 
         public Weapon()
         {
@@ -51,9 +52,34 @@ namespace BattleScribe.Classes.Items
             this.charInvId = charInvId;
         }
 
+        public Weapon(string name, string damage, string damage2, string damageType, string damageType2
+            , string properties, string desc, string bonusType, string mod, int bonusDamage)
+        {
+            this.name = name;
+            this.damage = damage;
+            this.damage2 = damage2;
+            this.baseDamageType = damageType;
+            this.baseDamageType2 = damageType2;
+            this.properties = properties;
+            this.description = desc;
+            this.bonusDamageType = bonusType;
+            this.modifier = mod;
+            this.bonusDamage = bonusDamage;
+        }
+
+
         public string GetDamage()
         {
             return this.damage;
+        }
+        public string GetProperties()
+        {
+            return this.properties;
+        }
+
+        public void SetProperties(string properties)
+        {
+            this.properties = properties;
         }
 
         public string GetModifier()

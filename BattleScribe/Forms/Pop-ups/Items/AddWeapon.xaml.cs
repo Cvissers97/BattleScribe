@@ -108,6 +108,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
             InitializeComponent();
             diceSides = new List<int>();
             modifiers = new List<string>();
+            dbhandler = new DbHandler();
 
             // Adding all the dicesides
             diceSides.Add(0);
@@ -142,7 +143,16 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            string damage1 = tbDiceAmount.Text + 'd' + cbDiceSides.SelectedItem;
+            string damage2 = tbDiceAmount2.Text + 'd' + cbDiceSides2.SelectedItem;
+            Weapon w = new Weapon(tbName.Text, damage1, damage2, tbAttackType.Text, tbBonusType.Text, "-", (new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text), tbBonusType3.Text, cbModifier.SelectedItem.ToString(), Convert.ToInt32(tbBonusDamage.Text));
+            w.SetWeight(tbWeight.Text);
+            w.SetAttunement((bool)chkAttune.IsChecked);
+            w.SetProficient((bool)chkProf.IsChecked);
+            w.SetValue("1");
+            w.SetItemType(tbType.Text);
+            int itemId = dbhandler.InsertNewWeapon(w);
+            dbhandler.InsertInItemTable(itemId, 1);
         }
     }
 }

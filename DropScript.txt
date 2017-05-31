@@ -30,8 +30,6 @@ DROP TABLE [Item_Type];
 GO
 DROP TABLE [Items];
 GO
-DROP TABLE [Items_Misc];
-GO
 DROP TABLE [Race];
 GO
 DROP TABLE [Race_Features];
