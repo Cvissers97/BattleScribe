@@ -325,7 +325,7 @@ namespace BattleScribe.Classes
 
             foreach (Item item in items)
             {
-                if (item == i)
+                if (item.GetId() == i.GetId() && item.GetName() == i.GetName())
                 {
                     item.IncrementQuantity();
                     duplicate = true;

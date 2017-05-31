@@ -666,7 +666,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        Item item = new Item(dReader.GetInt32(8), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), false, false, dReader.GetString(6), 0);
+                        Item item = new Item(dReader.GetInt32(8), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), dReader.GetBoolean(4), dReader.GetBoolean(5), dReader.GetString(6), 0);
                         items.Add(item);
                     }
 
@@ -902,7 +902,7 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
-                        weapons.Add(new Weapon(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(9), dReader.GetString(2), dReader.GetString(8), false, dReader.GetBoolean(6), Convert.ToSingle(dReader.GetDouble(4)).ToString(), dReader.GetString(11), Convert.ToSingle(dReader.GetDouble(12)), dReader.GetString(3), "geen idee", 0));
+                        weapons.Add(new Weapon(dReader.GetInt32(15), dReader.GetString(1), dReader.GetString(9), dReader.GetString(2), dReader.GetString(8), false, dReader.GetBoolean(6), Convert.ToSingle(dReader.GetDouble(4)).ToString(), dReader.GetString(11), Convert.ToSingle(dReader.GetDouble(12)), dReader.GetString(3), dReader.GetString(12), 0));
                     }
 
                     com.Parameters.Clear();
@@ -2179,7 +2179,7 @@ namespace BattleScribe.Classes
 
         public int InsertNewItem(Item item)
         {
-            string sql = "INSERT INTO Adventuring_Gear (Name, Description, Type, ReqProficiency, Attunable, Weight) VALUES (@name, @desc, @type, 0,0, @weight)";
+            string sql = "INSERT INTO Adventuring_Gear (Name, Description, Type, ReqProficiency, Attunable, Weight) VALUES (@name, @desc, @type, @reqProf,@attun, @weight)";
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
@@ -2196,6 +2196,46 @@ namespace BattleScribe.Classes
                     com.Parameters.AddWithValue(@"desc", item.GetDescription());
                     com.Parameters.AddWithValue(@"type", item.GetItemType());
                     com.Parameters.AddWithValue(@"weight", item.GetWeight());
+                    com.Parameters.AddWithValue(@"reqProf", item.GetProficient());
+                    com.Parameters.AddWithValue(@"attun", item.GetAttunement());
+                    com.ExecuteNonQuery();
+                    com.CommandText = "SELECT @@IDENTITY";
+                    result = Convert.ToInt32(com.ExecuteScalar());
+                    com.Parameters.Clear();
+
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+
+            con.Close();
+            return result;
+        }
+
+        public int InsertNewWeapon(Weapon wep)
+        {
+            string sql = "INSERT INTO Adventuring_Gear (Name, Description, Type, ReqProficiency, Attunable, Weight) VALUES (@name, @desc, @type, @reqProf,@attun, @weight)";
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            int result = 0;
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+
+                    com.Parameters.AddWithValue(@"name", item.GetName());
+                    com.Parameters.AddWithValue(@"desc", item.GetDescription());
+                    com.Parameters.AddWithValue(@"type", item.GetItemType());
+                    com.Parameters.AddWithValue(@"weight", item.GetWeight());
+                    com.Parameters.AddWithValue(@"reqProf", item.GetProficient());
+                    com.Parameters.AddWithValue(@"attun", item.GetAttunement());
                     com.ExecuteNonQuery();
                     com.CommandText = "SELECT @@IDENTITY";
                     result = Convert.ToInt32(com.ExecuteScalar());
@@ -2303,7 +2343,7 @@ namespace BattleScribe.Classes
                     while (dReader.Read())
                     {
                         bool duplicate = false;
-                        Weapon w = new Weapon(dReader.GetInt32(13), dReader.GetString(1), dReader.GetString(9), dReader.GetString(2), "Weapon", false, dReader.GetBoolean(6), Convert.ToSingle(dReader.GetDouble(4)).ToString(), dReader.GetString(11), Convert.ToSingle(dReader.GetDouble(12)), dReader.GetString(3), "geen idee", 0, dReader.GetInt32(14));
+                        Weapon w = new Weapon(dReader.GetInt32(15), dReader.GetString(1), dReader.GetString(9), dReader.GetString(2), "Weapon", false, dReader.GetBoolean(6), Convert.ToSingle(dReader.GetDouble(4)).ToString(), dReader.GetString(11), Convert.ToSingle(dReader.GetDouble(12)), dReader.GetString(3), "geen idee", 0, dReader.GetInt32(14));
                         w.SetEquip(dReader.GetBoolean(15));
                         foreach (Weapon wep in weapons)
                         {
@@ -2411,7 +2451,7 @@ namespace BattleScribe.Classes
                     while (dReader.Read())
                     {
                         bool duplicate = false;
-                        Item item = new Item(dReader.GetInt32(8), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), false, false, dReader.GetString(6), 0);
+                        Item item = new Item(dReader.GetInt32(8), dReader.GetString(1), dReader.GetString(2), dReader.GetString(3), dReader.GetBoolean(4), dReader.GetBoolean(5), dReader.GetString(6), 0);
                         item.SetEquip(dReader.GetBoolean(10));
                         foreach (Item i in items)
                         {

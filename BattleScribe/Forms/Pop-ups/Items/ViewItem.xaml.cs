@@ -33,6 +33,8 @@ namespace BattleScribe.Forms.Pop_ups.Items
             rtbDescription.Document.Blocks.Clear();
             rtbDescription.Document.Blocks.Add(new Paragraph(new Run(i.GetDescription())));
             tbWeight.Text = i.GetWeight();
+            chkAttune.IsChecked = i.GetAttunement();
+            chkProf.IsChecked = i.GetProficient();
         }
     }
 }

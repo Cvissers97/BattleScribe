@@ -35,6 +35,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
             modifiers = new List<string>();
 
             // Adding all the dicesides
+            diceSides.Add(0);
             diceSides.Add(2);
             diceSides.Add(4);
             diceSides.Add(6);
@@ -46,6 +47,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
             foreach (int i in diceSides)
             {
                 cbDiceSides.Items.Add(i);
+                cbDiceSides2.Items.Add(i);
             }
 
             // Adding all modifiers
@@ -108,6 +110,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
             modifiers = new List<string>();
 
             // Adding all the dicesides
+            diceSides.Add(0);
             diceSides.Add(2);
             diceSides.Add(4);
             diceSides.Add(6);
@@ -119,6 +122,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
             foreach (int i in diceSides)
             {
                 cbDiceSides.Items.Add(i);
+                cbDiceSides2.Items.Add(i);
             }
 
             // Adding all modifiers
@@ -128,7 +132,8 @@ namespace BattleScribe.Forms.Pop_ups.Items
             modifiers.Add("INT");
             modifiers.Add("WIS");
             modifiers.Add("CHA");
-
+            modifiers.Add("FIN");
+                
             foreach (string s in modifiers)
             {
                 cbModifier.Items.Add(s);

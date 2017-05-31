@@ -534,52 +534,61 @@ namespace BattleScribe.Forms
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            UpdateChar();
-            inventory.SaveInventory();
-            money.SaveMoney();
-            c.SetSlots(Convert.ToByte(tbSlot1.Text), Convert.ToByte(tbSlot2.Text), Convert.ToByte(tbSlot3.Text),
-                Convert.ToByte(tbSlot4.Text), Convert.ToByte(tbSlot5.Text), Convert.ToByte(tbSlot6.Text),
-                Convert.ToByte(tbSlot7.Text), Convert.ToByte(tbSlot8.Text), Convert.ToByte(tbSlot9.Text));
-
-            int[] temp = new int[spells.Count];
-            bool[] prepared = new bool[spells.Count];
-            int i = 0;
-
-            foreach(SpellPrepControl prep in panelSpells.Children)
+            try
             {
-                if ((bool)prep.chkPrep.IsChecked)
+                UpdateChar();
+                inventory.SaveInventory();
+                money.SaveMoney();
+                c.SetSlots(Convert.ToByte(tbSlot1.Text), Convert.ToByte(tbSlot2.Text), Convert.ToByte(tbSlot3.Text),
+                    Convert.ToByte(tbSlot4.Text), Convert.ToByte(tbSlot5.Text), Convert.ToByte(tbSlot6.Text),
+                    Convert.ToByte(tbSlot7.Text), Convert.ToByte(tbSlot8.Text), Convert.ToByte(tbSlot9.Text));
+
+                int[] temp = new int[spells.Count];
+                bool[] prepared = new bool[spells.Count];
+                int i = 0;
+
+                foreach (SpellPrepControl prep in panelSpells.Children)
                 {
-                    prep.SetSpellPrepared(true);
+                    if ((bool)prep.chkPrep.IsChecked)
+                    {
+                        prep.SetSpellPrepared(true);
+                    }
+                    else
+                    {
+                        prep.SetSpellPrepared(false);
+                    }
                 }
-                else
+
+                foreach (Spell s in spells)
                 {
-                    prep.SetSpellPrepared(false);
+                    temp[i] = Convert.ToInt32(s.GetId());
+                    prepared[i] = s.GetPrepared();
+                    i++;
                 }
-            }
 
-            foreach (Spell s in spells)
+                langs = new List<Language>();
+                foreach (CheckBox check in panelLanguages.Children)
+                {
+                    langs.Add(new Language((string)check.Content, (bool)check.IsChecked));
+                }
+
+                skills = new List<Skill>();
+                foreach (CheckBox check in panelSkills.Children)
+                {
+                    skills.Add(new Skill((string)check.Content, (bool)check.IsChecked));
+                }
+                c.SetSkillList(skills);
+                c.SetLangList(langs);
+
+                db.InsertSpells(temp, c.GetID(), prepared);
+                db.UpdateCharacter(c);
+                MessageBox.Show("Character saved with succes.");
+            }
+            catch
             {
-                temp[i] = Convert.ToInt32(s.GetId());
-                prepared[i] = s.GetPrepared();
-                i++;
+                MessageBox.Show("Something went wrong.");
             }
-
-            langs = new List<Language>();
-            foreach (CheckBox check in panelLanguages.Children)
-            {
-                langs.Add(new Language((string)check.Content, (bool)check.IsChecked));
-            }
-
-            skills = new List<Skill>();
-            foreach (CheckBox check in panelSkills.Children)
-            {
-                skills.Add(new Skill((string)check.Content, (bool)check.IsChecked));
-            }
-            c.SetSkillList(skills);
-            c.SetLangList(langs);
-
-            db.InsertSpells(temp, c.GetID(), prepared);
-            db.UpdateCharacter(c);
+            
         }
 
         private void btnRemSpell_Click(object sender, RoutedEventArgs e)

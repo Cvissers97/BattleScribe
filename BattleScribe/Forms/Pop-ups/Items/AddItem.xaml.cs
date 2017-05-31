@@ -45,8 +45,19 @@ namespace BattleScribe.Forms.Pop_ups.Items
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             item = new Item(tbName.Text, (new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text), tbType.Text, tbWeight.Text, 1);
+            item.SetAttunement((bool)chkAttune.IsChecked);
+            item.SetProficient((bool)chkProf.IsChecked);
             int itemId = db.InsertNewItem(item);
-            db.InsertInItemTable(itemId, 3);
+            try
+            {
+                db.InsertInItemTable(itemId, 3);
+                MessageBox.Show(item.GetName() + " added with succes.");
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong. Please try again.");
+            }
+
         }
     }
 }
