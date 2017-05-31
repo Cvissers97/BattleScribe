@@ -103,6 +103,7 @@ namespace BattleScribe.Forms
             c.SetSkillList(skills);
             c.SetLangList(langs);
             Init();
+            c.SetImage(i);
 
         }
 
@@ -136,6 +137,8 @@ namespace BattleScribe.Forms
             tbName.Text = c.GetName();
             tbAge.Text = c.GetAge();
             tbAlignment.Text = c.GetAlignment();
+            rtbOtherProf.Document.Blocks.Clear();
+            rtbOtherProf.Document.Blocks.Add(new Paragraph(new Run(c.GetMiscProf())));
             rtbAppearance.Document.Blocks.Add(new Paragraph(new Run(c.GetAppearance())));
             rtbBackstory.Document.Blocks.Add(new Paragraph(new Run(c.GetBackstory())));
             rtbBonds.Document.Blocks.Add(new Paragraph(new Run(c.GetBonds())));
@@ -175,7 +178,6 @@ namespace BattleScribe.Forms
             }
 
             UpdateSpells();
-
 
             inventory = new InventoryManager(c, panelInv, lbCarryCapacity, panelEquiped, lbAttunements);
             money = new MoneyManager(c, this);
@@ -523,7 +525,6 @@ namespace BattleScribe.Forms
             c.SetCurrentHealth(Convert.ToInt32(tbCurHP.Text));
             c.SetLevel(Convert.ToInt32(tbLevel.Text));
             c.SetExp(Convert.ToInt32(tbEXP.Text));
-            
         }
 
         string GetRichTbString(RichTextBox rtb)
@@ -579,6 +580,7 @@ namespace BattleScribe.Forms
             c.SetLangList(langs);
 
             db.InsertSpells(temp, c.GetID(), prepared);
+            c.SetMiscProf(new TextRange(rtbOtherProf.Document.ContentStart, rtbOtherProf.Document.ContentEnd).Text);
             db.UpdateCharacter(c);
         }
 

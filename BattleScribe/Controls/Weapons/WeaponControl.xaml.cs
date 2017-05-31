@@ -140,7 +140,6 @@ namespace BattleScribe.Controls.Weapons
                 }
             }
 
-
             try
             {
                 amountNumb = Convert.ToInt32(amount);
@@ -157,20 +156,20 @@ namespace BattleScribe.Controls.Weapons
                 MessageBox.Show("Invalid damage conversion.");
             }
 
-            play.log.Write("To hit: " + DiceThrower.ThrowDice(0, 20, toHit));
-
             if (secondDice)
             {
-                play.log.Write("+ " + (DiceThrower.ThrowDice(amountNumb2 - 1, sidesNumb2, 0 - amountNumb2 )) + " " + w.GetBaseDamage2());
+                play.log.Write("+ " + (DiceThrower.ThrowDice(amountNumb2 - 1, sidesNumb2, 0)) + " " + w.GetBaseDamage2());
             }
 
-            play.log.Write("Damage: " + (DiceThrower.ThrowDice(amountNumb - 1, sidesNumb, c.GetModifier(mod)) + 1) + " " + w.GetBaseDamageType());
+            play.log.Write("Damage: " + (DiceThrower.ThrowDice(amountNumb - 1, sidesNumb, c.GetModifier(mod)) + 0) + " " + w.GetBaseDamageType());
 
 
             if (w.GetBonusDamage() != 0)
             {
                 play.log.Write("Bonus: " + w.GetBonusDamage() + " " + w.GetBonusDamageType());
             }
+
+            play.log.Write("To hit: " + DiceThrower.ThrowDice(0, 20, toHit));
         }
 
         public void Highlight(bool target)

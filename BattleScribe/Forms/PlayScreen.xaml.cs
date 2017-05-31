@@ -78,6 +78,7 @@ namespace BattleScribe.Forms
             UpdateSavingThrows();
             UpdateTitle();
             UpdateButtons();
+            UpdateRoleplayInfo();
 
             money = new MoneyManager(c, this);
             inventory = new InventoryManager(c, stackInventory, lbCarryCapacity, stackEquip, lbAttunements);
@@ -86,6 +87,53 @@ namespace BattleScribe.Forms
             UpdateInspiration();
             UpdateAttacks();
             lbArmor.Content = inventory.CalcAC().ToString();
+        }
+
+        private void UpdateRoleplayInfo()
+        {
+            rtbAppearance.Document.Blocks.Clear();
+            rtbBackstory.Document.Blocks.Clear();
+            rtbPersonality.Document.Blocks.Clear();
+            rtbIdeals.Document.Blocks.Clear();
+            rtbFlaws.Document.Blocks.Clear();
+            rtbBonds.Document.Blocks.Clear();
+            rtbOtherProf.Document.Blocks.Clear();
+
+            tbName.Text = c.GetName();
+            tbSize.Text = c.GetSize();
+            tbAge.Text = c.GetAge();
+            tbTitle.Text = c.GetTitle();
+            tbAlignment.Text = c.GetAlignment();
+            chMale.IsChecked = c.GetIsMale();
+            chFemale.IsChecked = c.GetIsFemale();
+            imgChar.Source = c.GetProfilePic().Source;
+
+            rtbPersonality.Document.Blocks.Add(new Paragraph(new Run(c.GetPersonality())));
+            rtbIdeals.Document.Blocks.Add(new Paragraph(new Run(c.GetIdeals())));
+            rtbFlaws.Document.Blocks.Add(new Paragraph(new Run(c.GetFlaws())));
+            rtbBonds.Document.Blocks.Add(new Paragraph(new Run(c.GetBonds())));
+            rtbBackstory.Document.Blocks.Add(new Paragraph(new Run(c.GetBackstory())));
+            rtbAppearance.Document.Blocks.Add(new Paragraph(new Run(c.GetAppearance())));
+            rtbOtherProf.Document.Blocks.Add(new Paragraph(new Run(c.GetMiscProf())));
+
+            List<Language> langs = c.GetLangs();
+            List<Skill> skills = c.GetSkills();
+
+            foreach (Skill s in skills)
+            {
+                CheckBox cBox = new CheckBox();
+                cBox.IsChecked = s.acquired;
+                cBox.Content = s.name;
+                panelSkills.Children.Add(cBox);
+            }
+
+            foreach (Language l in langs)
+            {
+                CheckBox cbox = new CheckBox();
+                cbox.IsChecked = l.acquired;
+                cbox.Content = l.name;
+                panelLanguages.Children.Add(cbox);
+            }
         }
 
         private void UpdateButtons()

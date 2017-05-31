@@ -393,7 +393,7 @@ namespace BattleScribe.Classes
             return result;
         }
 
-        public int CreateCharacter(Character c)
+        public int CreateCharacter(Character c, string miscProfs)
         {
             List<Feature> features = new List<Feature>();
             int result = 0;
@@ -403,7 +403,7 @@ namespace BattleScribe.Classes
             con = new SqlCeConnection();
             con.ConnectionString = conString;
 
-            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background, MAX_HP, CUR_HP, Experience, slot1, slot2, slot3, slot4, slot5, slot6,slot7,slot8,slot9, inspiration) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background, @MAX_HP, @MAX_HP, 0,0,0,0,0,0,0,0,0,0,0)";
+            string sql = "INSERT INTO Character(Name, Class, Race, Level, Age, Size, Appearance, Image ,Title, Personality, Ideals, Bonds, Flaws, Backstory, Alignment, IsMale, IsFemale, [STR], [DEX], [CON], [WIS] ,[INT], [CHA], Background, MAX_HP, CUR_HP, Experience, slot1, slot2, slot3, slot4, slot5, slot6,slot7,slot8,slot9, inspiration, MiscProfs) VALUES (@Name, @Class, @Race, @Level, @Age, @Size, @Appearance, @Image ,@Title, @Personality, @Ideals, @Bonds, @Flaws, @Backstory, @alignment, @IsMale, @IsFemale, @Str, @Dex, @Con, @Wis, @Int, @Cha, @Background, @MAX_HP, @MAX_HP, 0,0,0,0,0,0,0,0,0,0,0, @miscProfs)";
 
 
             try
@@ -437,6 +437,7 @@ namespace BattleScribe.Classes
                     com.Parameters.AddWithValue(@"Cha", c.GetCha());
                     com.Parameters.AddWithValue(@"Background", c.GetBackGround());
                     com.Parameters.AddWithValue(@"MAX_HP", maxHP);
+                    com.Parameters.AddWithValue(@"miscProfs", miscProfs);
 
                     //com.Parameters.AddWithValue(@"MiscProfs", c.GetMiscProfs());
                     con.Open();
@@ -687,11 +688,11 @@ namespace BattleScribe.Classes
             string sql;
             if (c.GetImage() == null)
             {
-                sql = "UPDATE Character SET Name=@Name, Level=@Level, Age=@Age, Size=@Size, Appearance=@Appearance, Title=@Title, Personality=@Personality, Ideals=@Ideals, Bonds=@Bonds, Flaws=@Flaws, Backstory=@Backstory, Alignment = @Alignment, IsMale=@Ismale, IsFemale=@Isfemale, STR=@STR, DEX=@DEX, CON=@CON, WIS=@WIS, INT=@INT, CHA=@CHA, CUR_HP=@CUR_HP, MAX_HP=@MAX_HP, Inspiration=@Inspiration, slot1=@slot1, slot2=@slot2, slot3=@slot3, slot4=@slot4, slot5=@slot5, slot6=@slot6, slot7=@slot7, slot8=@slot8, slot9=@slot9, Experience=@Experience, TEM_HP = @temHp WHERE Id = @ID";
+                sql = "UPDATE Character SET Name=@Name, Level=@Level, Age=@Age, Size=@Size, Appearance=@Appearance, Title=@Title, Personality=@Personality, Ideals=@Ideals, Bonds=@Bonds, Flaws=@Flaws, Backstory=@Backstory, Alignment = @Alignment, IsMale=@Ismale, IsFemale=@Isfemale, STR=@STR, DEX=@DEX, CON=@CON, WIS=@WIS, INT=@INT, CHA=@CHA, CUR_HP=@CUR_HP, MAX_HP=@MAX_HP, Inspiration=@Inspiration, slot1=@slot1, slot2=@slot2, slot3=@slot3, slot4=@slot4, slot5=@slot5, slot6=@slot6, slot7=@slot7, slot8=@slot8, slot9=@slot9, Experience=@Experience, TEM_HP = @temHp, MiscProfs = @miscProfs WHERE Id = @ID";
             }
             else
             {
-                sql = "UPDATE Character SET Name=@Name, Level=@Level, Age=@Age, Size=@Size, Appearance=@Appearance, Image=@Image, Title=@Title, Personality=@Personality, Ideals=@Ideals, Bonds=@Bonds, Flaws=@Flaws, Backstory=@Backstory, Alignment = @Alignment, IsMale=@Ismale, IsFemale=@Isfemale, STR=@STR, DEX=@DEX, CON=@CON, WIS=@WIS, INT=@INT, CHA=@CHA, CUR_HP=@CUR_HP, MAX_HP=@MAX_HP, Inspiration=@Inspiration, slot1=@slot1, slot2=@slot2, slot3=@slot3, slot4=@slot4, slot5=@slot5, slot6=@slot6, slot7=@slot7, slot8=@slot8, slot9=@slot9, Experience=@Experience, TEM_HP = @temHp WHERE Id = @ID";
+                sql = "UPDATE Character SET Name=@Name, Level=@Level, Age=@Age, Size=@Size, Appearance=@Appearance, Image=@Image, Title=@Title, Personality=@Personality, Ideals=@Ideals, Bonds=@Bonds, Flaws=@Flaws, Backstory=@Backstory, Alignment = @Alignment, IsMale=@Ismale, IsFemale=@Isfemale, STR=@STR, DEX=@DEX, CON=@CON, WIS=@WIS, INT=@INT, CHA=@CHA, CUR_HP=@CUR_HP, MAX_HP=@MAX_HP, Inspiration=@Inspiration, slot1=@slot1, slot2=@slot2, slot3=@slot3, slot4=@slot4, slot5=@slot5, slot6=@slot6, slot7=@slot7, slot8=@slot8, slot9=@slot9, Experience=@Experience, TEM_HP = @temHp, MiscProfs = @miscProfs WHERE Id = @ID";
             }
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
@@ -741,6 +742,7 @@ namespace BattleScribe.Classes
                     com.Parameters.AddWithValue(@"Experience", c.GetExp());
                     com.Parameters.AddWithValue(@"ID", c.GetID());
                     com.Parameters.AddWithValue(@"temHp", c.GetTempHp());
+                    com.Parameters.AddWithValue(@"miscProfs", c.GetMiscProf());
 
 
                     con.Open();
@@ -1095,6 +1097,8 @@ namespace BattleScribe.Classes
 
                     while (dReader.Read())
                     {
+                        string misc = dReader.GetString(25);
+
                         c = new Character(dReader.GetInt32(0), dReader.GetString(1),
                             dReader.GetString(9), dReader.GetString(5),
                             dReader.GetString(6), dReader.GetString(15),
@@ -1107,6 +1111,11 @@ namespace BattleScribe.Classes
                             dReader.GetByte(23), dReader.GetInt32(2), 
                             dReader.GetString(10), dReader.GetInt32(24).ToString(), dReader.GetInt32(3).ToString(), dReader.GetInt32(4));
                         c.SetSlots(dReader.GetByte(31), dReader.GetByte(32), dReader.GetByte(33), dReader.GetByte(34), dReader.GetByte(35), dReader.GetByte(36), dReader.GetByte(37), dReader.GetByte(38), dReader.GetByte(39));
+
+                        c.SetMiscProf(misc);
+                        c.SetCurrentHealth(dReader.GetInt32(26));
+                        c.SetMaxHealth(dReader.GetInt32(27));
+                        c.SetExp(dReader.GetInt32(40));
                     }
 
                     com.Parameters.Clear();
