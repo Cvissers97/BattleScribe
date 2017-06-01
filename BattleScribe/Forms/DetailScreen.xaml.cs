@@ -190,6 +190,11 @@ namespace BattleScribe.Forms
             UpdateFeatList();
         }
 
+        private void UpdatePreparableSpells()
+        {
+            tbPrep.Text = Convert.ToString((c.GetLevel() + c.GetModifier(c.GetSpellMod())));
+        }
+
         public void UpdateSpells()
         {
             panelSpells.Children.Clear();
