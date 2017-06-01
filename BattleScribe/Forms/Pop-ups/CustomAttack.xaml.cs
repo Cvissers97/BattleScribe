@@ -67,11 +67,6 @@ namespace BattleScribe.Forms.Pop_ups
             bool secondDice = false;
             bonus = 0;
 
-            if (chkProf.IsChecked.Value)
-            {
-                toHit += c.GetProfiencyBonus();
-            }
-
             try
             {
                 amount1 = Convert.ToInt32(tbDiceAmount.Text);
@@ -96,20 +91,16 @@ namespace BattleScribe.Forms.Pop_ups
                     bonus = Convert.ToInt32(tbBonus.Text);
                 }
 
-                int result = DiceThrower.ThrowDice(0, 20, toHit);
-                log.Write("To Hit: " + result);
+                log.Write("Bonus: " + bonus);
 
-                result = DiceThrower.ThrowDice(amount1 - 1, sides1, 0);
-                
                 if (secondDice)
                 {
                     if ((int)cbDiceSides2.SelectedItem != 0)
                     {
-                        result += DiceThrower.ThrowDice(amount2, sides2, 0);
+                        log.Write("2nd Damage: " + DiceThrower.RollDamage(amount2, sides2, 0));
                     }
                 }
 
-                result += bonus;
 
                 if (amount1 == 0)
                 {
@@ -117,13 +108,17 @@ namespace BattleScribe.Forms.Pop_ups
                 }
                 else
                 {
-                    log.Write("Damage: " + result);
+                    log.Write("1st Damage: " + DiceThrower.RollDamage(amount1, sides1, 0));
                 }
+
+                log.Write("To Hit: " + DiceThrower.RollToHit(toHit));
             }
             catch (Exception error)
             {
                 MessageBox.Show("Invalid Input: " + error.ToString());
             }
+
+            log.InputSpace();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

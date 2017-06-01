@@ -33,5 +33,15 @@ namespace BattleScribe.Classes
             string message = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + " - " + text;
             list.Items.Insert(0, message);
         }
+
+        public void InputSpace()
+        {
+            list.Items.Insert(0, "");
+        }
+
+        public void ClearAll()
+        {
+            list.Items.Clear();
+        }
     }
 }

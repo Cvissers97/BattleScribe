@@ -182,8 +182,8 @@ namespace BattleScribe.Forms
 
             UpdateSpells();
 
-            inventory = new InventoryManager(c, panelInv, lbCarryCapacity, panelEquiped, lbAttunements);
             money = new MoneyManager(c, this);
+            inventory = new InventoryManager(c, panelInv, lbCarryCapacity, panelEquiped, lbAttunements, money);
 
             UpdateStats();
             UpdateFeatureList();
@@ -659,13 +659,13 @@ namespace BattleScribe.Forms
 
         private void btnAddMoney_Click(object sender, RoutedEventArgs e)
         {
-            AddMoney add = new AddMoney(money);
+            AddMoney add = new AddMoney(money,inventory);
             add.Show();
         }
 
         private void btnLoseMoney_Click(object sender, RoutedEventArgs e)
         {
-            SpendMoney spend = new SpendMoney(money);
+            SpendMoney spend = new SpendMoney(money,inventory);
             spend.Show();
         }
 

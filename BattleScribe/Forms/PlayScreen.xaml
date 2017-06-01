@@ -36,7 +36,7 @@
                             </ContextMenu>
                         </Rectangle.ContextMenu>
                     </Rectangle>
-                    
+
                     <Label Content="CON" HorizontalAlignment="Left" Margin="5,150,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lbCONMod" Content="(+2)" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" FontSize="16"/>
                     <Label x:Name="lbCONStat" Content="15" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Height="25" HorizontalContentAlignment="Center" Width="50"/>
@@ -50,7 +50,7 @@
                             </ContextMenu>
                         </Rectangle.ContextMenu>
                     </Rectangle>
-                        
+
                     <Label Content="INT" HorizontalAlignment="Left" Margin="5,220,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lbINTMod" Content="(-1)" HorizontalAlignment="Left" Margin="10,241,0,0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" FontSize="16"/>
                     <Label x:Name="lbINTStat" Content="8" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top" Height="25" HorizontalContentAlignment="Center" Width="50"/>
@@ -172,6 +172,7 @@
                     <Label Name="lbHealth" Content="HP: 10" HorizontalAlignment="Left" Margin="94,91,0,0" Width="59" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
                     <Label Name="lbDeathSave" Content="Death: 0" HorizontalAlignment="Left" Margin="519,60,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="80"/>
                     <Label Name="lbLifeSave" Content="Life: 0" HorizontalAlignment="Left" Margin="519,80,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="80"/>
+                    <Button Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="585,340,0,0" VerticalAlignment="Top" Width="74" Height="19" Click="btnClear_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Roleplay">

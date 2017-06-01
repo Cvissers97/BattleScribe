@@ -45,7 +45,25 @@ namespace BattleScribe.Controls.Weapons
             this.standardBackground = this.Background;
 
             lbName.Content = w.GetName();
-            lbDamage.Content = w.GetDamage() + " + " + w.GetDamage() + " + " + w.GetBonusDamage();
+
+            string damageDisplay = string.Empty;
+
+            if (w.GetDamage() != "0")
+            {
+                damageDisplay += w.GetDamage();
+            }
+
+            if (w.GetDamage2() != "0")
+            {
+                damageDisplay += " + " + w.GetDamage2();
+            }
+
+            if (w.GetBonusDamage() != 0)
+            {
+                damageDisplay += " + " + w.GetBonusDamage();
+            }
+
+            lbDamage.Content = damageDisplay;
             //lbDamageType.Content = w.GetBaseDamageType();
 
             mod = w.GetModifier();
@@ -163,11 +181,12 @@ namespace BattleScribe.Controls.Weapons
 
             if (secondDice)
             {
-                play.log.Write("+ " + (DiceThrower.ThrowDice(amountNumb2 - 1, sidesNumb2, 0)) + " " + w.GetBaseDamage2());
+                play.log.Write("+ " + (DiceThrower.RollDamage(amountNumb2, sidesNumb2, 0)) + " " + w.GetBaseDamage2());
             }
 
-            play.log.Write("Damage: " + (DiceThrower.ThrowDice(amountNumb - 1, sidesNumb, c.GetModifier(mod)) + 1) + " " + w.GetBaseDamageType());
-            play.log.Write("To hit: " + DiceThrower.ThrowDice(0, 20, toHit));
+            play.log.Write("Damage: " + (DiceThrower.RollDamage(amountNumb, sidesNumb, c.GetModifier(mod))) + " " + w.GetBaseDamageType());
+            play.log.Write("To hit: " + DiceThrower.RollToHit(toHit));
+            play.log.InputSpace();
         }
 
         public void Highlight(bool target)

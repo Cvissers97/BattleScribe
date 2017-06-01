@@ -15,10 +15,10 @@ namespace BattleScribe.Classes
         private PlayScreen play;
         private DbHandler db;
 
-        private int copper;
-        private int silver;
-        private int gold;
-        private int platinum;
+        public int copper;
+        public int silver;
+        public int gold;
+        public int platinum;
 
         private string setting;
 

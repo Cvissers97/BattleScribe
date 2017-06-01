@@ -398,6 +398,7 @@ namespace BattleScribe.Classes
             List<Feature> features = new List<Feature>();
             int result = 0;
             int maxHP = GetMaxHPByClass(c.GetClass());
+            maxHP += c.GetModifier("CON");
 
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
