@@ -58,6 +58,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
             {
                 if (a.GetName() == (string)cbArmourName.SelectedItem)
                 {
+                    tbArmour.Text = a.GetBaseArmour().ToString();
                     tbMod.Text = a.GetModifier();
                     tbStrength.Text = a.GetStrReq().ToString();
                     tbType.Text = a.GetItemType();

@@ -277,7 +277,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "INSERT INTO Character_Skills (Char_Id, Acrobatics, Animal_Handeling, Arcana, Athletics, Deception, History, Insight, Intimidation, Investigation, Medicine, Nature, Perception, Performance, Religion, Sleight_Of_Hand, Stealth, Survival) VALUES (@char_Id, @acro, @aniHand, @arc, @athlet, @decep, @hist, @insight, @intim,@invest, @med, @nat, @percep, @perf, @rel, @slhnd, @stealth, @surv)";
+            string sql = "INSERT INTO Character_Skills (Char_Id, Acrobatics, Animal_Handeling, Arcana, Athletics, Deception, History, Insight, Intimidation, Investigation, Medicine, Nature, Perception, Performance, Persuasion ,Religion, Sleight_Of_Hand, Stealth, Survival) VALUES (@char_Id, @acro, @aniHand, @arc, @athlet, @decep, @hist, @insight, @intim,@invest, @med, @nat, @percep, @perf, @pers ,@rel, @slhnd, @stealth, @surv)";
 
             try
             {
@@ -299,10 +299,11 @@ namespace BattleScribe.Classes
                     com.Parameters.AddWithValue(@"nat", skills.ElementAt(10));
                     com.Parameters.AddWithValue(@"percep", skills.ElementAt(11));
                     com.Parameters.AddWithValue(@"perf", skills.ElementAt(12));
-                    com.Parameters.AddWithValue(@"rel", skills.ElementAt(13));
-                    com.Parameters.AddWithValue(@"slhnd", skills.ElementAt(14));
-                    com.Parameters.AddWithValue(@"stealth", skills.ElementAt(15));
-                    com.Parameters.AddWithValue(@"surv", skills.ElementAt(16));
+                    com.Parameters.AddWithValue(@"pers", skills.ElementAt(13));
+                    com.Parameters.AddWithValue(@"rel", skills.ElementAt(14));
+                    com.Parameters.AddWithValue(@"slhnd", skills.ElementAt(15));
+                    com.Parameters.AddWithValue(@"stealth", skills.ElementAt(16));
+                    com.Parameters.AddWithValue(@"surv", skills.ElementAt(17));
                     con.Open();
                     com.ExecuteNonQuery();
                     com.Parameters.Clear();
@@ -813,7 +814,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "UPDATE Character_Skills SET Acrobatics=@acro, Animal_Handeling=@anim, Arcana=@Arcana, Athletics=@Athletics, Deception=@decep, History=@history, Insight=@insight, Intimidation=@inti, Investigation = @invest, Medicine=@med, Nature=@nat, Perception=@perc, Performance=@perf, Religion=@rel, Sleight_Of_Hand=@hand, Stealth=@stealth, Survival=@surv WHERE Char_Id=@id";
+            string sql = "UPDATE Character_Skills SET Acrobatics=@acro, Animal_Handeling=@anim, Arcana=@Arcana, Athletics=@Athletics, Deception=@decep, History=@history, Insight=@insight, Intimidation=@inti, Investigation = @invest, Medicine=@med, Nature=@nat, Perception=@perc, Performance=@perf, Persuasion = @pers ,Religion=@rel, Sleight_Of_Hand=@hand, Stealth=@stealth, Survival=@surv WHERE Char_Id=@id";
 
             try
             {
@@ -834,10 +835,11 @@ namespace BattleScribe.Classes
                     com.Parameters.AddWithValue(@"nat",skills.ElementAt(10).acquired);
                     com.Parameters.AddWithValue(@"perc",skills.ElementAt(11).acquired);
                     com.Parameters.AddWithValue(@"perf",skills.ElementAt(12).acquired);
-                    com.Parameters.AddWithValue(@"rel",skills.ElementAt(13).acquired);
-                    com.Parameters.AddWithValue(@"hand",skills.ElementAt(14).acquired);
-                    com.Parameters.AddWithValue(@"stealth",skills.ElementAt(15).acquired);
-                    com.Parameters.AddWithValue(@"surv", skills.ElementAt(16).acquired);
+                    com.Parameters.AddWithValue(@"pers", skills.ElementAt(13).acquired);
+                    com.Parameters.AddWithValue(@"rel",skills.ElementAt(14).acquired);
+                    com.Parameters.AddWithValue(@"hand",skills.ElementAt(15).acquired);
+                    com.Parameters.AddWithValue(@"stealth",skills.ElementAt(16).acquired);
+                    com.Parameters.AddWithValue(@"surv", skills.ElementAt(17).acquired);
                     com.Parameters.AddWithValue(@"id", charId);
                     con.Open();
                     com.ExecuteNonQuery();
@@ -999,7 +1001,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "SELECT Acrobatics, Animal_Handeling, Arcana, Athletics, Deception, History, Insight, Intimidation, Investigation, Medicine, Nature, Perception, Performance, Religion, Sleight_Of_Hand, Stealth, Survival FROM Character_Skills WHERE Char_Id = @Id";
+            string sql = "SELECT Acrobatics, Animal_Handeling, Arcana, Athletics, Deception, History, Insight, Intimidation, Investigation, Medicine, Nature, Perception, Performance, Persuasion ,Religion, Sleight_Of_Hand, Stealth, Survival FROM Character_Skills WHERE Char_Id = @Id";
             Character c = new Character();
             List<string> skillNames = c.SkillsList();
 
