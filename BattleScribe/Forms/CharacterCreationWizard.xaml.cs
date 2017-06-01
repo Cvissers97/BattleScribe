@@ -853,7 +853,7 @@ namespace BattleScribe.Forms
                     break;
                 case "Dragonborn":
                     raceStr = 2;
-                    raceCon = 1;
+                    raceCha = 1;
                     break;
                 case "Forest Gnome":
                     raceDex = 1;

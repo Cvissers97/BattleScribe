@@ -67,11 +67,6 @@ namespace BattleScribe.Forms.Pop_ups
             bool secondDice = false;
             bonus = 0;
 
-            if (chkProf.IsChecked.Value)
-            {
-                toHit += c.GetProfiencyBonus();
-            }
-
             try
             {
                 amount1 = Convert.ToInt32(tbDiceAmount.Text);

@@ -357,7 +357,7 @@ namespace BattleScribe.Forms
 
         public void UpdateHealth()
         {
-            lbHealth.Content = "HP: " + c.GetCurrentHealth();
+            lbHealth.Content = "HP: " + c.GetCurrentHealth() + " / " + c.GetMaxHealth();
         }
 
         private void UpdateDeath()
@@ -682,9 +682,12 @@ namespace BattleScribe.Forms
                 db.AddExperience(c.GetID(), expToAdd);
             }
 
+            
             inventory.SaveInventory();
             money.SaveMoney();
             db.SetInspiration(c.GetID(), c.GetInspiration());
+            DetailScreen screen = new DetailScreen(c, imgChar);
+            screen.Show();
         }
 
         private void btnAddMoney_Click(object sender, RoutedEventArgs e)
@@ -760,6 +763,44 @@ namespace BattleScribe.Forms
             c.SetCurrentHealth(c.GetMaxHealth());
             UpdateHealth();
             log.Write("You take a long rest.");
+        }
+
+        private void BtnDropItem_Click(object sender, RoutedEventArgs e)
+        {
+            List<ItemControl> loopList = new List<ItemControl>();
+
+            foreach (ItemControl i in stackInventory.Children.OfType<ItemControl>())
+            {
+                loopList.Add(i);
+            }
+
+            foreach (ItemControl i in loopList)
+            {
+                if (i.GetIsSelected())
+                {
+                    switch (i.typeItem)
+                    {
+                        default:
+                            MessageBox.Show("INVALID ITEM TYPE!");
+                            break;
+
+                        case "Weapon":
+                            Weapon wep = (Weapon)i.GetItem();
+                            inventory.RemoveWeapon(wep);
+                            break;
+
+                        case "Armour":
+                            Armour a = (Armour)i.GetItem();
+                            inventory.RemoveArmour(a);
+                            break;
+
+                        case "Item":
+                            Item it = (Item)i.GetItem();
+                            inventory.RemoveItem(it);
+                            break;
+                    }
+                }
+            }
         }
     }
 }

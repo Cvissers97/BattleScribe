@@ -535,6 +535,7 @@ namespace BattleScribe.Classes
             temp.Add("Nature");
             temp.Add("Perception");
             temp.Add("Performance");
+            temp.Add("Persuasion");
             temp.Add("Religion");
             temp.Add("Sleight of Hand");
             temp.Add("Stealth");
