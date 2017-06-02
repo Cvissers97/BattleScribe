@@ -803,5 +803,19 @@ namespace BattleScribe.Forms
                 }
             }
         }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            log.Write("9 Level Slot: " + c.GetSlot9());
+            log.Write("8 Level Slot: " + c.GetSlot8());
+            log.Write("7 Level Slot: " + c.GetSlot7());
+            log.Write("6 Level Slot: " + c.GetSlot6());
+            log.Write("5 Level Slot: " + c.GetSlot5());
+            log.Write("4 Level Slot: " + c.GetSlot4());
+            log.Write("3 Level Slot: " + c.GetSlot3());
+            log.Write("2 Level Slot: " + c.GetSlot2());
+            log.Write("1 Level Slot: " + c.GetSlot1());
+            log.InputSpace();
+        }
     }
 }

@@ -164,6 +164,8 @@
                             <ContextMenu>
                                 <MenuItem Header="Cast with higher slot..." Click="MenuItem_Click_1">
                                 </MenuItem>
+                                <MenuItem Header="Show spell slots" Click="MenuItem_Click_2">
+                                </MenuItem>
                             </ContextMenu>
                         </Button.ContextMenu>
                     </Button>
