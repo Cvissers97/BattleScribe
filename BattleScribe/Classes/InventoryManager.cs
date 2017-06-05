@@ -561,27 +561,28 @@ namespace BattleScribe.Classes
 
         public int CalcAC()
         {
-            int dex = c.GetModifier("DEX");
+            int mod = 0;
             int AC = 0;
             int armoursEquipped = 0;
             bool shield = false;
 
             foreach (Armour a in equipedItems.OfType<Armour>())
             {
+                mod = c.GetModifier(a.GetModifier());
                 switch (a.GetItemType())
                 {
                     case "Light":
-                        AC = (a.GetBaseArmour() + a.GetBonusArmour() + dex);
+                        AC = (a.GetBaseArmour() + a.GetBonusArmour() + mod);
                         armoursEquipped += 1;
                         break;
                     case "Medium":
-                        if (dex > 2)
-                            dex = 2;
-                        AC = (a.GetBaseArmour() + a.GetBonusArmour() + dex);
+                        if (mod > 2)
+                            mod = 2;
+                        AC = (a.GetBaseArmour() + a.GetBonusArmour() + mod);
                         armoursEquipped += 1;
                         break;
                     case "Heavy":
-                        AC = (a.GetBaseArmour() + a.GetBonusArmour());
+                        AC = (a.GetBaseArmour() + a.GetBonusArmour() + mod);
                         armoursEquipped += 1;
                         break;
                     case "Shield":
@@ -593,13 +594,13 @@ namespace BattleScribe.Classes
 
             //Unarmored defence for barb works with shield
             if (c.GetClass() == 1 && armoursEquipped == 0)
-                AC += (10 + dex + c.GetModifier("CON"));
+                AC += (10 + c.GetModifier("DEX") + c.GetModifier("CON"));
             //Unarmored defence for monk doesnt work with shield
             else if (c.GetClass() == 6 && armoursEquipped == 0 && shield == false)
-                AC = (10 + dex + c.GetModifier("WIS"));
+                AC = (10 + c.GetModifier("DEX") + c.GetModifier("WIS"));
             //Base armour if none is worn
             else if (armoursEquipped == 0)
-                AC += (10 + dex);
+                AC += (10 + c.GetModifier("DEX"));
 
             return AC;
         }

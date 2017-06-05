@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BattleScribe.Classes.Items;
 
 namespace BattleScribe.Forms.Pop_ups.Items
 {
@@ -22,6 +23,8 @@ namespace BattleScribe.Forms.Pop_ups.Items
     {
         private int characterId;
         private InventoryManager inventory;
+        private Armour armour;
+        private DbHandler db;
 
         public AddArmour()
         {
@@ -39,6 +42,28 @@ namespace BattleScribe.Forms.Pop_ups.Items
         {
             InitializeComponent();
             this.inventory = inventory;
+
+            cbMod.Items.Add("STR");
+            cbMod.Items.Add("DEX");
+            cbMod.Items.Add("CON");
+            cbMod.Items.Add("INT");
+            cbMod.Items.Add("WIS");
+            cbMod.Items.Add("CHA");
+            cbMod.Items.Add("NA");
+
+            cbType.Items.Add("Light");
+            cbType.Items.Add("Medium");
+            cbType.Items.Add("Heavy");
+            cbType.Items.Add("Shield");
+
+            db = new DbHandler();
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            armour = new Armour(tbName.Text, (new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text), false, Convert.ToInt32(tbArmourBonus.Text), Convert.ToInt32(tbBaseArmour.Text), (string)cbMod.SelectedItem, Convert.ToInt32(tbStrReq.Text), (bool)chkStealth.IsChecked, tbWeight.Text, "0", (string)cbType.SelectedItem, (bool)chkAttune.IsChecked);
+            int newItemId = db.InsertNewArmour(armour);
+            db.InsertInItemTable(newItemId, 2);
         }
     }
 }

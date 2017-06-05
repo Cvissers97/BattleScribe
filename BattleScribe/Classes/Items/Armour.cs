@@ -47,6 +47,22 @@ namespace BattleScribe.Classes.Items
             this.charInvId = charInvId;
         }
 
+        public Armour(string name, string desc, bool reqProf, int acBonus, int ac, string mod, int strReq, bool stealthDis, string weight, string cost, string type, bool attunable)
+        {
+            this.name = name;
+            this.description = desc;
+            this.proficient = reqProf;
+            this.bonusArmour = acBonus;
+            this.baseArmour = ac;
+            this.modifier = mod;
+            this.strReq = strReq;
+            this.stealthDisadvantage = stealthDis;
+            this.weight = weight;
+            this.estimateValue = cost;
+            this.type = type;
+            this.attuneable = attuneable;
+        }
+
         public bool GetStealthDis()
         {
             return this.stealthDisadvantage;

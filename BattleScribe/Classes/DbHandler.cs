@@ -271,7 +271,6 @@ namespace BattleScribe.Classes
             con.Close();
         }
 
-
         public void InsertSkills(List<bool> skills, int charId)
         {
             conString = Properties.Settings.Default.conString;
@@ -852,37 +851,6 @@ namespace BattleScribe.Classes
                 System.Windows.MessageBox.Show(e.Message.ToString());
                 con.Close();
             }
-            con.Close();
-        }
-
-
-        //WIP
-        public void AddWeapon(Weapon w)
-        {
-            string sql = "INSERT INTO Weapons (Name, Damage, Damage_Type, Weight, Properties, Attunable, Cost_In_Gold, Type, Description, Bonus_Type, Modifier, Bonus_Damage) VALUES (@Char_Id, @SpellId, 0)";
-
-            conString = Properties.Settings.Default.conString;
-            con = new SqlCeConnection();
-            con.ConnectionString = conString;
-            try
-            {
-                using (con)
-                {
-                    com.Connection = con;
-                    com.CommandText = sql;
-                    
-                    con.Open();
-                    com.ExecuteNonQuery();
-
-                    com.Parameters.Clear();
-                }
-            }
-            catch (Exception e)
-            {
-                System.Windows.MessageBox.Show(e.Message.ToString());
-                con.Close();
-            }
-            
             con.Close();
         }
 
@@ -1979,7 +1947,6 @@ namespace BattleScribe.Classes
             con.Close();
         }
 
-
         public bool AddFeatToCharacter(int characterId, int classFeatId)
         {
             conString = Properties.Settings.Default.conString;
@@ -2273,6 +2240,48 @@ namespace BattleScribe.Classes
             return result;
         }
 
+        public int InsertNewArmour(Armour arm)
+        {
+            string sql = "INSERT INTO Armour (Name, Description, ReqProfiency, AC_Bonus, AC, Modifier, Str_Req, Stealth_Dis, Weight, Cost_In_gold, Type, Attunable) VALUES (@Name, @Description, @ReqProfiency, @AC_Bonus, @AC, @Modifier, @Str_Req, @Stealth_Dis, @Weight, @Cost_In_gold, @Type, @Attunable)";
+            conString = Properties.Settings.Default.conString;
+            con = new SqlCeConnection();
+            con.ConnectionString = conString;
+            int result = 0;
+            try
+            {
+                using (con)
+                {
+                    com.Connection = con;
+                    com.CommandText = sql;
+                    con.Open();
+                    com.Parameters.AddWithValue(@"Name", arm.GetName());
+                    com.Parameters.AddWithValue(@"Description", arm.GetDescription());
+                    com.Parameters.AddWithValue(@"ReqProfiency", arm.GetProficient());
+                    com.Parameters.AddWithValue(@"AC_Bonus", arm.GetBonusArmour());
+                    com.Parameters.AddWithValue(@"AC", arm.GetBaseArmour());
+                    com.Parameters.AddWithValue(@"Modifier", arm.GetModifier());
+                    com.Parameters.AddWithValue(@"Str_Req", arm.GetStrReq());
+                    com.Parameters.AddWithValue(@"Stealth_Dis", arm.GetStealthDis());
+                    com.Parameters.AddWithValue(@"Weight", arm.GetWeight());
+                    com.Parameters.AddWithValue(@"Cost_In_Gold", arm.GetValue());
+                    com.Parameters.AddWithValue(@"Type", arm.GetItemType());
+                    com.Parameters.AddWithValue(@"Attunable", arm.GetAttunement());
+                    com.ExecuteNonQuery();
+                    com.CommandText = "SELECT @@IDENTITY";
+                    result = Convert.ToInt32(com.ExecuteScalar());
+                    com.Parameters.Clear();
+
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message.ToString());
+                con.Close();
+            }
+            return result;
+                
+        }
+
         public void InsertInItemTable(int itemId, int typeId)
         {
             string sql = "INSERT INTO Items (Type_Id, Item_Id) VALUES (@typeId, @itemId)";
@@ -2456,7 +2465,6 @@ namespace BattleScribe.Classes
 
             return armours;
         }
-
 
         public List<Item> GetItemsByCharId(int charId)
         {

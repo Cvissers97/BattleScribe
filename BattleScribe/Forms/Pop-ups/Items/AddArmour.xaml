@@ -14,20 +14,21 @@
             </FlowDocument>
         </RichTextBox>
         <Label Content="Type" HorizontalAlignment="Left" Margin="183,10,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tbType" HorizontalAlignment="Left" Height="23" Margin="236,12,0,0" TextWrapping="Wrap" Text="Type" VerticalAlignment="Top" Width="95"/>
-        <CheckBox Name="chkAttune" Content="Attunable" HorizontalAlignment="Left" Margin="188,79,0,0" VerticalAlignment="Top"/>
-        <CheckBox Name="chkProf" Content="Proficient" HorizontalAlignment="Left" Margin="188,99,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="cbType" HorizontalAlignment="Left" Height="23" Margin="236,12,0,0" Text="Type" VerticalAlignment="Top" Width="95"/>
+        <CheckBox Name="chkAttune" Content="Attunable" HorizontalAlignment="Left" Margin="183,132,0,0" VerticalAlignment="Top"/>
         <Label Content="Weight" HorizontalAlignment="Left" Margin="183,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.623,-0.192"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="236,45,0,0" TextWrapping="Wrap" Text="Weight" VerticalAlignment="Top" Width="95"/>
+        <TextBox Name="tbWeight" HorizontalAlignment="Left" Height="23" Margin="236,45,0,0" TextWrapping="Wrap" Text="Weight" VerticalAlignment="Top" Width="95"/>
         <Label Content="lbs" HorizontalAlignment="Left" Margin="336,41,0,0" VerticalAlignment="Top"/>
-        <Button Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Margin="298,201,0,0" VerticalAlignment="Top" Width="75"/>
-        <CheckBox Name="chkStealth" Content="Stealth Disadvantage" HorizontalAlignment="Left" Margin="188,119,0,0" VerticalAlignment="Top"/>
+        <Button Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Margin="298,201,0,0" VerticalAlignment="Top" Width="75" Click="BtnAdd_Click"/>
+        <CheckBox Name="chkStealth" Content="Stealth Disadvantage" HorizontalAlignment="Left" Margin="183,152,0,0" VerticalAlignment="Top"/>
         <Label Content="Armour" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top"/>
         <TextBox Name="tbBaseArmour" HorizontalAlignment="Left" Height="23" Margin="10,198,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="33"/>
         <Label Content="+" HorizontalAlignment="Left" Margin="43,196,0,0" VerticalAlignment="Top" Height="23"/>
-        <ComboBox HorizontalAlignment="Left" Margin="61,199,0,0" VerticalAlignment="Top" Width="33"/>
-        <Label Content="+" HorizontalAlignment="Left" Margin="95,196,0,0" VerticalAlignment="Top" Height="23"/>
-        <TextBox Name="tbArmourBonus" HorizontalAlignment="Left" Height="23" Margin="113,199,0,0" TextWrapping="Wrap" Text="-2" VerticalAlignment="Top" Width="29"/>
+        <ComboBox Name="cbMod" HorizontalAlignment="Left" Margin="61,199,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="+" HorizontalAlignment="Left" Margin="111,196,0,0" VerticalAlignment="Top" Height="23"/>
+        <TextBox Name="tbArmourBonus" HorizontalAlignment="Left" Height="23" Margin="129,198,0,0" TextWrapping="Wrap" Text="-2" VerticalAlignment="Top" Width="29"/>
+        <Label Content="Str. Req" HorizontalAlignment="Left" Margin="180,73,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="tbStrReq" HorizontalAlignment="Left" Height="23" Margin="236,73,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="95"/>
 
     </Grid>
 </Window>
