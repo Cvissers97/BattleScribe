@@ -25,8 +25,6 @@ namespace BattleScribe.Forms
         public MainScreen()
         {
             InitializeComponent();
-
-            BattleScribe.Classes.DbHandler db = new Classes.DbHandler();
         }
     }
 }

@@ -164,10 +164,10 @@
                     </ScrollViewer>
                     <Button Name="btnAddSpell" Content="Add Spell" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="163" Height="28" Click="btnAddSpell_Click"/>
                     <Button Name="btnRemSpell" Content="Remove Spell" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Width="163" Height="28" Click="btnRemSpell_Click"/>
-                    <Label Content="Known Spells" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top"/>
+                    <Label Visibility="Hidden" Content="Known Spells" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top"/>
                     <Label Content="Preparable Spells" HorizontalAlignment="Left" Margin="10,183,0,0" VerticalAlignment="Top"/>
-                    <TextBox Name="tbKnown" HorizontalAlignment="Left" Height="23" Margin="123,156,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="50"/>
-                    <TextBox Name="tbPrep" HorizontalAlignment="Left" Height="23" Margin="123,187,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="50"/>
+                    <TextBox Visibility="Hidden" Name="tbKnown" HorizontalAlignment="Left" Height="23" Margin="123,156,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50"/>
+                    <TextBox Name="tbPrep" HorizontalAlignment="Left" Height="23" Margin="123,187,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50"/>
                     <Label Content="1st" HorizontalAlignment="Left" Margin="10,226,0,0" VerticalAlignment="Top"/>
                     <Label Content="2nd" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top"/>
                     <Label Content="3rd" HorizontalAlignment="Left" Margin="12,278,0,0" VerticalAlignment="Top"/>

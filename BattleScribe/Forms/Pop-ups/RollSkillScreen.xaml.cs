@@ -58,33 +58,38 @@ namespace BattleScribe.Forms.Pop_ups
 
         public void Roll(int mod)
         {
-            int result;
-
+            int bonus = 0;
             bool adv = rbAdvantage.IsChecked.Value;
             bool dis = rbDisadvantage.IsChecked.Value;
 
+            if (tbBonus.Text != "")
+	        {
+                try 
+	            {	        
+	            	bonus = Convert.ToInt32(tbBonus.Text);
+	            }
+	            catch (Exception)
+	            {
+                    MessageBox.Show("Invalid bonus.");
+	            }
+        	}
+
+            mod += bonus;
+
             if (adv)
             {
-                result = DiceThrower.ThrowDieAdvantage(20, mod, true);
+                p.log.Write(DiceThrower.ThrowDieAdvantage(20, mod, true));
             }
             else if (dis)
             {
-                result = DiceThrower.ThrowDieAdvantage(20, mod, false);
+                p.log.Write(DiceThrower.ThrowDieAdvantage(20, mod, false));
             }
             else
             {
-                result = DiceThrower.ThrowDice(0, 20, mod);
+                p.log.Write(DiceThrower.ThrowDie(20, mod));
             }
 
-            if (tbBonus.Text != "")
-            {
-                result += Convert.ToInt32(tbBonus.Text);
-            }
-
-            List<int> temp = new List<int>();
-            temp.Add(result);
-            p.log.DisplayResult(temp);
-            this.Close();
+            //this.Close();
         }
     }
 }

@@ -164,6 +164,8 @@
                             <ContextMenu>
                                 <MenuItem Header="Cast with higher slot..." Click="MenuItem_Click_1">
                                 </MenuItem>
+                                <MenuItem Header="Show spell slots" Click="MenuItem_Click_2">
+                                </MenuItem>
                             </ContextMenu>
                         </Button.ContextMenu>
                     </Button>
@@ -172,6 +174,7 @@
                     <Label Name="lbHealth" Content="HP: 10" HorizontalAlignment="Left" Margin="65,91,0,0" Width="109" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
                     <Label Name="lbDeathSave" Content="Death: 0" HorizontalAlignment="Left" Margin="519,60,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="80"/>
                     <Label Name="lbLifeSave" Content="Life: 0" HorizontalAlignment="Left" Margin="519,80,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="80"/>
+                    <Button Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="585,340,0,0" VerticalAlignment="Top" Width="74" Height="19" Click="btnClear_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Roleplay">

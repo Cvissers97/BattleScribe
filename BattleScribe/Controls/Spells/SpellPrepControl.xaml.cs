@@ -41,6 +41,11 @@ namespace BattleScribe.Controls.Spells
                 isSelected = true;
                 this.chkPrep.IsChecked = true;
             }
+
+            if (s.GetLevel() == 0)
+            {
+                chkPrep.Visibility = Visibility.Hidden;
+            }
         }
 
         private void UserControl_MouseRightButtonUp(object sender, MouseButtonEventArgs e)

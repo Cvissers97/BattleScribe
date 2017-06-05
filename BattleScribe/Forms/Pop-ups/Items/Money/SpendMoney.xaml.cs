@@ -18,17 +18,19 @@ namespace BattleScribe.Forms.Pop_ups.Items.Money
     public partial class SpendMoney : Window
     {
         private MoneyManager money;
+        private InventoryManager inventory;
 
         public SpendMoney()
         {
             InitializeComponent();
         }
 
-        public SpendMoney(MoneyManager money)
+        public SpendMoney(MoneyManager money, InventoryManager inventory)
         {
             InitializeComponent();
 
             this.money = money;
+            this.inventory = inventory;
         }
 
 
@@ -99,6 +101,7 @@ namespace BattleScribe.Forms.Pop_ups.Items.Money
             }
 
             money.SpendMoney(copper, silver, gold, platinum);
+            inventory.UpdateCarryCapacity();
         }
     }
 }

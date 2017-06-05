@@ -18,17 +18,19 @@ namespace BattleScribe.Forms.Pop_ups.Items.Money
     public partial class AddMoney : Window
     {
         MoneyManager money;
+        InventoryManager inventory;
 
         public AddMoney()
         {
             InitializeComponent();
         }
 
-        public AddMoney(MoneyManager money)
+        public AddMoney(MoneyManager money, InventoryManager inventory)
         {
             InitializeComponent();
 
             this.money = money;
+            this.inventory = inventory;
         }
 
         private void tbPlat_TextChanged(object sender, TextChangedEventArgs e)
@@ -95,6 +97,7 @@ namespace BattleScribe.Forms.Pop_ups.Items.Money
             }
 
             money.ReceiveMoney(copper, silver, gold, platinum);
+            inventory.UpdateCarryCapacity();
         }
     }
 }

@@ -9,141 +9,120 @@ namespace BattleScribe.Classes
 {
    static class DiceThrower
     {
-       static Random r;
+       static Random rand = new Random();
 
-       public static int ThrowDice(int amount, int sides, int mod)
+       public static string RollToHit(int modifier)
        {
-           int result = 0;
-           int _throw = 0;
-           r = new Random();
+           // For to hit rolls, you add the modifier to every attack. The modifier also
+           // contains the proficiency bonus
 
-           int rolls = r.Next(0, 20);
+           string message = string.Empty;
+           int roll = 0;
+
+           roll = rand.Next(1, 21);
+
+           if (roll == 20 || roll == 1)
+           {
+               message += "Critical ";
+           }
+
+           roll += modifier;
+
+           message += Convert.ToString(roll);
+
+           return message;
+       }
+
+       public static int RollDamage(int amount, int sides, int modifier)
+       {
+           // Only add the modifier once to the result.
            
+           int result = 0;
 
-           for (int i = 0; i <= amount; i++)
+           for (int i = 0; i < amount; i++)
            {
-               for (int j = 0; j < (rolls + amount); j++)
-               {
-                   _throw = r.Next(0, sides + 1);
-               }
-               result += _throw;
+               result += rand.Next(1, sides + 1);
            }
 
-           result += mod;
+           result += modifier;
+
            return result;
        }
 
-       public static int ThrowSavingThrow(int mod)
+       public static string ThrowDie(int sides, int mod)
+       {
+           string message = string.Empty;
+
+           int result = rand.Next(1, sides + 1);
+
+           if (result == 20 || result == 1)
+	       {
+               message += "Critical ";
+	       }
+
+           result += mod;
+           message += result;
+
+           return message;
+       }
+
+       public static int ThrowDieNumb(int sides, int mod)
        {
            int result = 0;
 
-           r = new Random();
-           int temp = r.Next(1, 37);
+           result = rand.Next(1, sides + 1);
 
-           for (int i = 0; i < temp; i++)
-           {
-               result = r.Next(0, 20);
-               result++;
-           }
            result += mod;
 
            return result;
        }
 
-       public static int ThrowSavingThrowAdvantage(int mod, bool advantage)
+
+       public static string ThrowDieAdvantage(int sides, int mod, bool advantage)
        {
+           string message = string.Empty;
+
            int first = 0;
            int second = 0;
 
-           r = new Random();
+           first = rand.Next(1, sides + 1);
+           second = rand.Next(1, sides + 1);
 
-           int temp = r.Next(0, 20);
-
-           r = new Random(temp);
-
-           for (int i = 0; i < temp; i++)
-           {
-               first = r.Next(1, 20);
-           }
-
-           r = new Random(first);
-
-           for (int i = 0; i < temp; i++)
-           {
-               second = r.Next(1, 20);
-           }
 
            // Roll with advantage if true, disadvantage if false
            if (advantage)
            {
                if (first > second)
                {
-                   return first + mod;
+                   if (first == 20 || first == 1)
+                       message += "Critical ";
+
+                   return message += (first + mod);
                }
                else
                {
-                   return second + mod;
+                   if (second == 20 || second == 1)
+                       message += "Critical ";
+
+                   return message += (second + mod);
                }
            }
            else
            {
                if (first > second)
                {
-                   return second + mod;
+                   if (second == 20 || second == 1)
+                       message += "Critical ";
+
+                   return message += (second + mod);
                }
                else
-               {
-                   return first + mod;
-               }
-           }
-       }
 
-       public static int ThrowDieAdvantage(int sides, int mod, bool advantage)
-       {
-           int first = 0;
-           int second = 0;
+                   if (first == 20 || first == 1)
+                       message += "Critical ";
 
-           r = new Random();
-
-           int temp = r.Next(0, 20);
-
-           r = new Random();
-
-           for (int i = 0; i < temp; i++)
-           {
-               first = r.Next(1, sides);
-           }
-
-           r = new Random();
-
-           for (int i = 0; i < (temp * 2); i++)
-           {
-               second = r.Next(1, sides);
-           }
-
-           // Roll with advantage if true, disadvantage if false
-           if (advantage)
-           {
-               if (first > second)
-               {
-                   return first + mod;
-               }
-               else
-               {
-                   return second + mod;
-               }
-           }
-           else
-           {
-               if (first > second)
-               {
-                   return second + mod;
-               }
-               else
-               {
-                   return first + mod;
+                   return message += (first + mod);
                }
            }
        }
     }
-}

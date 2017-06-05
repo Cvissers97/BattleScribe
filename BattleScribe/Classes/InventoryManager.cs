@@ -23,6 +23,7 @@ namespace BattleScribe.Classes
         private Label lbCarry;
         private Label lbAttune;
         private DbHandler db;
+        private MoneyManager money;
 
         public Character c;
 
@@ -39,13 +40,16 @@ namespace BattleScribe.Classes
         int AC;
 
 
-        public InventoryManager(Character c, StackPanel stack, Label carry, StackPanel stackEquip, Label attune)
+        public InventoryManager(Character c, StackPanel stack, 
+            Label carry, StackPanel stackEquip, Label attune, 
+            MoneyManager money)
         {
             this.c = c;
             this.stack = stack;
             this.lbCarry = carry;
             this.stackEquip = stackEquip;
             this.lbAttune = attune;
+            this.money = money;
 
             weapons = new List<Weapon>();
             armours = new List<Armour>();
@@ -356,7 +360,7 @@ namespace BattleScribe.Classes
             lbAttune.Content = "Attunements : " + amount + " / 3";
         }
 
-        private void UpdateCarryCapacity()
+        public void UpdateCarryCapacity()
         {
             // Put all items together for carry weight calculation
             allItems.Clear();
@@ -412,7 +416,23 @@ namespace BattleScribe.Classes
                     totalItemWeight += result;
                 }
             }
+
+            totalItemWeight += CalcMoneyWeight();
+
             lbCarry.Content = "Carry capacity: " + totalItemWeight.ToString() + " / " + c.CalcCarryWeight().ToString();
+        }
+
+        private double CalcMoneyWeight()
+        {
+            // 50 coins in a pound
+
+            double totalweight = 0;
+            int totalCoins = 0;
+
+            totalCoins = money.platinum + money.gold + money.silver + money.copper;
+            totalweight = totalCoins / 50;
+
+            return totalweight;
         }
 
         public void Equip(Item item)

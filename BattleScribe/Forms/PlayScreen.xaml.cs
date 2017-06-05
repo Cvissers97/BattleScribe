@@ -81,7 +81,7 @@ namespace BattleScribe.Forms
             UpdateRoleplayInfo();
 
             money = new MoneyManager(c, this);
-            inventory = new InventoryManager(c, stackInventory, lbCarryCapacity, stackEquip, lbAttunements);
+            inventory = new InventoryManager(c, stackInventory, lbCarryCapacity, stackEquip, lbAttunements, money);
             log = new LogHandler(listAction);
 
             UpdateInspiration();
@@ -406,16 +406,15 @@ namespace BattleScribe.Forms
         private void btnInitiative_Click(object sender, RoutedEventArgs e)
         {
             List<int> results = new List<int>();
-            results.Add(DiceThrower.ThrowDice(0, 20, c.GetModifier("DEX")));
-            log.DisplayResult(results);
+            log.Write("Initiative Result: " + DiceThrower.ThrowDie(20, c.GetModifier("DEX")));
         }
 
         private void btnHitDie_Click(object sender, RoutedEventArgs e)
         {
             int hitDice;
             hitDice = db.GetHitDiceByClass(c.GetClass());
-            int result = DiceThrower.ThrowDice(0, hitDice, 0) + 1;
-            log.Write("Hit dice result: " + result);
+            int result = DiceThrower.ThrowDieNumb(hitDice, c.GetModifier("CON"));
+            log.Write("Hit Die: " + result);
 
             if ((c.GetCurrentHealth() + result) > c.GetMaxHealth())
             {
@@ -440,7 +439,7 @@ namespace BattleScribe.Forms
 
         private void menuDeath_Click(object sender, RoutedEventArgs e)
         {
-            if (DiceThrower.ThrowDice(0, 20, 0) >= 10)
+            if (DiceThrower.ThrowDieNumb(20, 0) >= 10)
             {
                 log.Write("Death saving throw: Life");
                 lifeThrow++;
@@ -471,7 +470,6 @@ namespace BattleScribe.Forms
         {
             string[] throws = c.GetSavingThrows();
             int mod = 0;
-            List<int> result = new List<int>();
             mod += c.GetModifier(stat);
 
             if (throws[0] == stat || throws[1] == stat)
@@ -483,19 +481,17 @@ namespace BattleScribe.Forms
             {
                 if (advantage)
                 {
-                    result.Add(DiceThrower.ThrowSavingThrowAdvantage(mod, true));
+                    log.Write(stat + " SAVE: " + DiceThrower.ThrowDieAdvantage(20, mod, true));
                 }
                 else
                 {
-                    result.Add(DiceThrower.ThrowSavingThrowAdvantage(mod, false));
+                    log.Write(stat + " SAVE: " + DiceThrower.ThrowDieAdvantage(20, mod, false));
                 }
             }
             else
             {
-                result.Add(DiceThrower.ThrowSavingThrow(mod));
+                log.Write(stat + " SAVE: " + DiceThrower.ThrowDie(20, mod));
             }
-
-            log.DisplayResult(result);
         }
 
         private void menuHurt_Click(object sender, RoutedEventArgs e)
@@ -692,13 +688,13 @@ namespace BattleScribe.Forms
 
         private void btnAddMoney_Click(object sender, RoutedEventArgs e)
         {
-            AddMoney add = new AddMoney(money);
+            AddMoney add = new AddMoney(money, inventory);
             add.Show();
         }
 
         private void btnLoseMoney_Click(object sender, RoutedEventArgs e)
         {
-            SpendMoney spend = new SpendMoney(money);
+            SpendMoney spend = new SpendMoney(money, inventory);
             spend.Show();
         }
 
@@ -765,6 +761,11 @@ namespace BattleScribe.Forms
             log.Write("You take a long rest.");
         }
 
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            log.ClearAll();
+		}
+		
         private void BtnDropItem_Click(object sender, RoutedEventArgs e)
         {
             List<ItemControl> loopList = new List<ItemControl>();
@@ -801,6 +802,20 @@ namespace BattleScribe.Forms
                     }
                 }
             }
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            log.Write("9 Level Slot: " + c.GetSlot9());
+            log.Write("8 Level Slot: " + c.GetSlot8());
+            log.Write("7 Level Slot: " + c.GetSlot7());
+            log.Write("6 Level Slot: " + c.GetSlot6());
+            log.Write("5 Level Slot: " + c.GetSlot5());
+            log.Write("4 Level Slot: " + c.GetSlot4());
+            log.Write("3 Level Slot: " + c.GetSlot3());
+            log.Write("2 Level Slot: " + c.GetSlot2());
+            log.Write("1 Level Slot: " + c.GetSlot1());
+            log.InputSpace();
         }
     }
 }
