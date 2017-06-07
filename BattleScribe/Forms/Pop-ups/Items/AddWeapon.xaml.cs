@@ -26,7 +26,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
         private List<string> modifiers;
         private InventoryManager inventory;
         private DbHandler dbhandler;
-        private Weapon weapon;
+       //private Weapon weapon;
 
         public AddWeapon()
         {

@@ -34,24 +34,6 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
             string damage = string.Empty;
 
-            //if (w.GetBonusDamage() != 0)
-            //{
-            //    damage = w.GetDamage() + " " + w.GetBaseDamageType()
-            //    + " + " + w.GetBonusDamage() + " " + w.GetBonusDamageType(); 
-            //}
-            //else if(w.GetDamage2() != "0")
-            //{
-            //    damage = (w.GetDamage() + " " + w.GetBaseDamageType() + " + " + w.GetDamage2() + " " + w.GetBaseDamage2());
-            //}
-            //else if(w.GetDamage2() != "0" && w.GetBonusDamage() != 0)
-            //{
-            //    damage = (w.GetDamage() + " " + w.GetBaseDamageType() + " + " + w.GetDamage2() + " " + w.GetBaseDamage2()) + " + " + w.GetBonusDamage() + " " + w.GetBonusDamageType();
-            //}
-            //else
-            //{
-            //    damage = w.GetDamage() + " " + w.GetBaseDamageType();
-            //}
-
             if (w.GetDamage() != "0")
             {
                 damage += w.GetDamage() + " " + w.GetBaseDamageType();

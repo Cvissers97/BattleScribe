@@ -28,7 +28,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
         private List<Item> itemList;
         private Item item;
         private InventoryManager inventory;
-        private PlayScreen play;
+        //private PlayScreen play;
         
 
         public AddStandardItem()

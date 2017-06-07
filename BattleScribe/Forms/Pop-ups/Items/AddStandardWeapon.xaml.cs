@@ -22,7 +22,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
     public partial class AddStandardWeapon : Window
     {
         private int characterId;
-        private DetailScreen screen;
+        //private DetailScreen screen;
         private DbHandler db;
         private List<Weapon> weaponList;
         private Weapon weapon;

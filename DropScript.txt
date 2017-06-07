@@ -2,8 +2,6 @@ DROP TABLE [Adventuring_Gear];
 GO
 DROP TABLE [Weapons];
 GO
-DROP TABLE [Tools];
-GO
 DROP TABLE [Armour];
 GO
 DROP TABLE [Backgrounds];

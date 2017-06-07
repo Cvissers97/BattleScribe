@@ -33,7 +33,7 @@ namespace BattleScribe.Forms
         List<CharacterRace> race;
         byte raceStr, raceDex, raceCon, raceInt, raceWis, raceCha;
         List<string> allLangs, allSkills, backgrounds;
-        List<Spell> spellList, cantripList, pickedSpells;
+        List<Spell> spellList, cantripList;
         List<CheckBox> cbSpellList, cbLangList, cbSkillList, cbCantripList;
         string[] spellsKnownArray;
         Image image;

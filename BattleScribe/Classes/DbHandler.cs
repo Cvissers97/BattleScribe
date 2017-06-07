@@ -654,7 +654,7 @@ namespace BattleScribe.Classes
             conString = Properties.Settings.Default.conString;
             con = new SqlCeConnection();
             con.ConnectionString = conString;
-            string sql = "SELECT adv.*, i.Id FROM Items i JOIN Adventuring_Gear adv ON i.Item_Id = adv.Id AND i.Type_Id = 3";
+            string sql = "SELECT adv.*, i.Id FROM Items i JOIN Adventuring_Gear adv ON i.Item_Id = adv.Id AND i.Type_Id = 3 ORDER BY adv.Name";
 
             try
             {
