@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BattleScribe.App" Collapsed="true">
+    <Position X="26.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.Character" Collapsed="true">
+    <Position X="29.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>Z42JFtkERDx0wm6oyYgc9Rk7HQ2NJ2n0zMYk1DD2ZtY=</HashCode>
+      <FileName>Classes\Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.CharacterClass" Collapsed="true">
+    <Position X="29.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAIAAAAAEIAAAAEAAAAAQAAAAAAABQAAQAAIAhAA=</HashCode>
+      <FileName>Classes\CharacterClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.CharacterRace" Collapsed="true">
+    <Position X="33.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAEAAAAAAAAAAEAAAAAAAAAAIABgA=</HashCode>
+      <FileName>Classes\CharacterRace.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.DbHandler" Collapsed="true">
+    <Position X="36.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ALgRMgABoAQI0BAAgLEAAQAASAAiBAIxRAcoQnNAEAI=</HashCode>
+      <FileName>Classes\DbHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.DiceThrower" Collapsed="true">
+    <Position X="40.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAIAABAAAAAAAAAAAAAAAAAAAAAAEEAAAAAQAAAA=</HashCode>
+      <FileName>Classes\DiceThrower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.Feat" Collapsed="true">
+    <Position X="42" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAhEIAAAAAAAAAAEAAAAAAAAAAAABgA=</HashCode>
+      <FileName>Classes\Feat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.Feature" Collapsed="true">
+    <Position X="45.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABEIAAAAAAAAAAEAAAAAAAAAAACBgA=</HashCode>
+      <FileName>Classes\Feature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.InventoryManager" Collapsed="true">
+    <Position X="49.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAgAhEAAAAAwAABAAAgAQUAJgAABCIDkAAgCEIAAEAQ=</HashCode>
+      <FileName>Classes\InventoryManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.LogHandler" Collapsed="true">
+    <Position X="56.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgQAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAFAAAA=</HashCode>
+      <FileName>Classes\LogHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.MoneyManager" Collapsed="true">
+    <Position X="26.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAQAIAAAQAAAAAAIAAAABAACEAACAAgALAAAACAA=</HashCode>
+      <FileName>Classes\MoneyManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.Spell" Collapsed="true">
+    <Position X="10.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAIoAABBAABEAASQAUAhAEcEABBAAAgAQEMABgQ=</HashCode>
+      <FileName>Classes\Spell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.Items.Armour" Collapsed="true">
+    <Position X="3" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAYCAAAAAAAAAQAAAAAIAAAAAEAAAACACAAAAQAAIAY=</HashCode>
+      <FileName>Classes\Items\Armour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.Items.Item" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoAAAIAAKBACJkAAIAAKCAgAAAAVAACgQAAgQAIgBgE=</HashCode>
+      <FileName>Classes\Items\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Classes.Items.Weapon" Collapsed="true">
+    <Position X="0.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEYACoAABAoggAAAAAIAAAIASEAAQiAAAAAAAEAAAIQ=</HashCode>
+      <FileName>Classes\Items\Weapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Controls.Char.MainScreenCharacter" Collapsed="true">
+    <Position X="19.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAABAAAAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Controls\Char\MainScreenCharacter.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Controls.Feats.FeatControl" Collapsed="true">
+    <Position X="43.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAQABBAAAAAAAAAgAAAAAAEAAAAAAAAAAACCgA=</HashCode>
+      <FileName>Controls\Feats\FeatControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Controls.Features.FeatureControl" Collapsed="true">
+    <Position X="47.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQABAAAAAAAAAAAAAAAAAEAAAIAAAgAAACAgA=</HashCode>
+      <FileName>Controls\Features\FeatureControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Controls.Items.ItemControl" Collapsed="true">
+    <Position X="52.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEBQAAAAAEAAAAQAAAAAAAAAAgAAAQAQAAAAAgA=</HashCode>
+      <FileName>Controls\Items\ItemControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Controls.Items.ItemLegend" Collapsed="true">
+    <Position X="54.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\Items\ItemLegend.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Controls.Skills.SkillControl" Collapsed="true">
+    <Position X="8.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Controls\Skills\SkillControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Controls.Spells.SpellControl" Collapsed="true">
+    <Position X="12.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAABCAAkAAAAKAAAAAAAA=</HashCode>
+      <FileName>Controls\Spells\SpellControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Controls.Spells.SpellLegend" Collapsed="true">
+    <Position X="14" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controls\Spells\SpellLegend.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Controls.Spells.SpellPrepControl" Collapsed="true">
+    <Position X="15.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABQAAAAAAAIAAgAAAAAAAAAAgAAAAKAAAAAAAA=</HashCode>
+      <FileName>Controls\Spells\SpellPrepControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Controls.Weapons.WeaponControl" Collapsed="true">
+    <Position X="43.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAIAAAAACAAAAARAAAAICAAESAAAgAAAAAAAA=</HashCode>
+      <FileName>Controls\Weapons\WeaponControl.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.CharacterCreationWizard" Collapsed="true">
+    <Position X="33.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CwpIAEAOUIASAgAAAQJgGJQgWEBCgkCQZAACAQMABAA=</HashCode>
+      <FileName>Forms\CharacterCreationWizard.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.DetailScreen" Collapsed="true">
+    <Position X="38.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYwVIF0IlDITAABAAAQoTAYQJgETEAGOIIOiGSQCXBE=</HashCode>
+      <FileName>Forms\DetailScreen.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.MainMenu" Collapsed="true">
+    <Position X="58" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACABAAAAAAAQAAAAAAAAAAAAAAAAAACAQAACAAAAAQA=</HashCode>
+      <FileName>Forms\MainMenu.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.MainScreen" Collapsed="true">
+    <Position X="59.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\MainScreen.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.PlayScreen" Collapsed="true">
+    <Position X="28" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IABFKAAEeBwSIEHQCBCVCoWAAgMZZiDzA0RGBGEAUSY=</HashCode>
+      <FileName>Forms\PlayScreen.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.AddHealth" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIQAAAAQAAAAABAAAACAAAAAAAAQACAIAAAADAA=</HashCode>
+      <FileName>Forms\Pop-ups\AddHealth.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.AddNumber" Collapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAACAAQAQAAAAAAAAACAAAAAAAAIAAAAAAI=</HashCode>
+      <FileName>Forms\Pop-ups\AddNumber.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.CustomAttack" Collapsed="true">
+    <Position X="35" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAABACCAAAAgAAIASAAAAAQAIAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\CustomAttack.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.AddFeat" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAQAAAAAAAAAAAAAAAAAACAAAAIAAAAQAI=</HashCode>
+      <FileName>Forms\Pop-ups\Feats\AddFeat.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.PrepareSpells" Collapsed="true">
+    <Position X="29.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAQCAAAgAAAAAAAAACAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\PrepareSpells.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.RollSkillScreen" Collapsed="true">
+    <Position X="5.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAACAAAAAAAAAAAACAAEAAAAAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\RollSkillScreen.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.AddSpell" Collapsed="true">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAgAAAAAQAAAAAAACAAAKAAAAAAAI=</HashCode>
+      <FileName>Forms\Pop-ups\Spells\AddSpell.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Feats.ViewFeat" Collapsed="true">
+    <Position X="35" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Forms\Pop-ups\Feats\ViewFeat.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Features.AddFeature" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQAQAAEAAAAAAAAAAAAAAAAABIAQgAAAI=</HashCode>
+      <FileName>Forms\Pop-ups\Features\AddFeature.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Features.ViewFeature" Collapsed="true">
+    <Position X="36.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\Features\ViewFeature.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.AddArmour" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQCAAAAAAAAAAAAAAAAEACAAAAAgAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\Items\AddArmour.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.AddItem" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAQAAAAAAAAAAEACAAAAAgAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\Items\AddItem.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.AddStandardArmour" Collapsed="true">
+    <Position X="19.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAQCAAAAAAAAAAAAAAAAEACAAAAAgAAQAA=</HashCode>
+      <FileName>Forms\Pop-ups\Items\AddStandardArmour.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.AddStandardItem" Collapsed="true">
+    <Position X="21" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAACAAAQAAAQAAACAAkACAAACAAAAAAI=</HashCode>
+      <FileName>Forms\Pop-ups\Items\AddStandardItem.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.AddStandardWeapon" Collapsed="true">
+    <Position X="22.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAQECAEAAEACAAACAAAAAAI=</HashCode>
+      <FileName>Forms\Pop-ups\Items\AddStandardWeapon.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.AddWeapon" Collapsed="true">
+    <Position X="24.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQBAAAAAAAAAAAAAAAACAAAAEACAAAAAgAAAAQ=</HashCode>
+      <FileName>Forms\Pop-ups\Items\AddWeapon.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.ItemChoice" Collapsed="true">
+    <Position X="51" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAACAAAAAAAIIAAAAAAAAEACAAEAIAAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\Items\ItemChoice.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.ModifyArmour" Collapsed="true">
+    <Position X="21" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\Items\ModifyArmour.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.ModifyItem" Collapsed="true">
+    <Position X="22.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\Items\ModifyItem.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.ModifyWeapon" Collapsed="true">
+    <Position X="24.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\Items\ModifyWeapon.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.ViewArmour" Collapsed="true">
+    <Position X="33.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\Items\ViewArmour.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.ViewItem" Collapsed="true">
+    <Position X="38.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\Items\ViewItem.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.ViewWeapon" Collapsed="true">
+    <Position X="42" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\Items\ViewWeapon.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.Money.AddMoney" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAACCAAAAgAAAEAo=</HashCode>
+      <FileName>Forms\Pop-ups\Items\Money\AddMoney.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Items.Money.SpendMoney" Collapsed="true">
+    <Position X="17.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAIAAAAAAACCAAAAgAAAEAg=</HashCode>
+      <FileName>Forms\Pop-ups\Items\Money\SpendMoney.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Forms.Pop_ups.Spells.ViewSpell" Collapsed="true">
+    <Position X="40.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\Pop-ups\Spells\ViewSpell.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Properties.Resources" Collapsed="true">
+    <Position X="31.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleScribe.Properties.Settings" Collapsed="true">
+    <Position X="7" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="BattleScribe.Classes.Language" Collapsed="true">
+    <Position X="45.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Character.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="BattleScribe.Classes.Skill" Collapsed="true">
+    <Position X="47.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Character.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -35,6 +35,7 @@ namespace BattleScribe.Forms.Pop_ups.Spells
             this.tbCast.Text = castTime;
             this.tbHigher.Text = higherLevels;
             this.rtbDesc.AppendText(desc);
+            this.Title = name;
         }
     }
 }

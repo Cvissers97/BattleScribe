@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="83f23989-bdd2-4e79-a1b0-0f90271e75c5"
+  name="SqlServerCe"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="232a239e-d4fe-40d4-aa9f-3b38c76d75e7"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DSystem.Data.SqlServerCe"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="2590d63d-3959-4b1d-a149-d2e6041d017f"
+        name="SqlCeConnection"
+        isAbstract="false"
+        isLeaf="true"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="b2646405-5600-47e9-9967-31c4c89fbbf2"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FCasper%2FDocuments%2FGitHub%2FBattleScribe%2Fpackages%2FMicrosoft.SqlServer.Compact.4.0.8876.1%2Flib%2Fnet40%2FSystem.Data.SqlServerCe.dll Namespace%3DSystem.Data.SqlServerCe Type%3DSqlCeConnection"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="e30bbbbf-555f-46cc-9a75-2e70f8098ffd"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5568872b-eae9-420d-ba75-5fd420486484">
+                <propertyInstance
+                  Id="28a0b10b-4d88-4608-885d-d80b188e0258"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="16f22142-c721-485a-a9fd-f68ee9f4be03">
+                <propertyInstance
+                  Id="e48dbe29-8aea-42bb-81f4-62f096269818"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a10e970c-b590-4d30-beaa-4c501795f181">
+                <propertyInstance
+                  Id="3c450d6d-f14a-4fda-afc8-1921d2444e73"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0e9afec2-6bbf-43fc-a418-b92ec868b62e">
+                <propertyInstance
+                  Id="983f5f61-6168-4af5-a2ed-a4a06cb49f72"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="9872c35c-eb3f-4546-a1ba-c95b424f965d">
+                <propertyInstance
+                  Id="6dd6424c-61d6-4e4f-9d86-75a720ad750c"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="16691a79-74b3-4ddd-be5e-0cd336773bfc"
+        name="SqlCeCommand"
+        isAbstract="false"
+        isLeaf="true"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="1aa7e5a3-54d8-4580-ab35-5cea55b82c3b"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FCasper%2FDocuments%2FGitHub%2FBattleScribe%2Fpackages%2FMicrosoft.SqlServer.Compact.4.0.8876.1%2Flib%2Fnet40%2FSystem.Data.SqlServerCe.dll Namespace%3DSystem.Data.SqlServerCe Type%3DSqlCeCommand"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="d960efce-0f5a-4d1a-869e-59efe9707a71"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="fb762912-c2ed-4843-b68a-d869dd3a48c7">
+                <propertyInstance
+                  Id="66f75f42-8fd6-477a-98d9-d71cd9b3f9ed"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="bef27857-175e-4dbd-b12f-3c2916c97fad">
+                <propertyInstance
+                  Id="87069c5d-ae95-4628-9a98-453404791fb0"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b29fbc40-7881-4081-86d4-cb38e1700543">
+                <propertyInstance
+                  Id="ccefe45f-3266-44ce-87fb-9d51ca2cc3cf"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="9e79045f-d945-460d-a592-ea75e6f872ca">
+                <propertyInstance
+                  Id="1f75b394-5ad1-4d12-83bc-0ef39c5d6c5a"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="92b08d22-b014-4336-bf88-1fa32fb3be6e">
+                <propertyInstance
+                  Id="763cc18c-a69d-4520-a85c-e3eabaf02b9a"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="fb9ceb3c-0d67-484b-850b-4c4d10915957"
+        name="SqlCeDataReader"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="04db0ad2-e2b7-484c-bfc6-69dea8cea36f"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FCasper%2FDocuments%2FGitHub%2FBattleScribe%2Fpackages%2FMicrosoft.SqlServer.Compact.4.0.8876.1%2Flib%2Fnet40%2FSystem.Data.SqlServerCe.dll Namespace%3DSystem.Data.SqlServerCe Type%3DSqlCeDataReader"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="1d8bb080-4cb8-4bb5-91a4-017389734463"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="04c6a717-1e98-48d5-8ecc-7a4cd00abe25">
+                <propertyInstance
+                  Id="a6e91cda-c26c-49f9-94cf-b8207864b4b8"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="433f64e7-73ea-4bfe-b6d4-4a8ef8dd0624">
+                <propertyInstance
+                  Id="10c78151-32fe-4be4-8ec2-e2fd34172bb4"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="cf0040c3-4279-4d45-bb52-736918b88aae">
+                <propertyInstance
+                  Id="8616feaf-d31f-4e43-bddb-2aeaa008ddc0"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2aaf7d9a-853e-4db5-8786-049dff508c37">
+                <propertyInstance
+                  Id="53b590f3-84fe-4dfd-873e-dc5bb49582a3"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3444994f-e405-41fe-b4f5-9834be937faf">
+                <propertyInstance
+                  Id="8810b82e-e966-401e-8674-44a0bbca9b8d"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

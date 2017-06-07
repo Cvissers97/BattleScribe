@@ -174,6 +174,15 @@ namespace BattleScribe.Controls.Weapons
                 MessageBox.Show("Invalid damage conversion.");
             }
 
+            string toHitMessage = DiceThrower.RollToHit(toHit);
+            int criticalDice = 20 + toHit;
+
+            // Critical hits
+            if (toHitMessage == ("Critical " + criticalDice))
+            {
+                amountNumb++;
+            }
+
             if (w.GetBonusDamage() != 0)
             {
                 play.log.Write("Bonus: " + w.GetBonusDamage() + " " + w.GetBonusDamageType());
@@ -185,7 +194,7 @@ namespace BattleScribe.Controls.Weapons
             }
 
             play.log.Write("Damage: " + (DiceThrower.RollDamage(amountNumb, sidesNumb, c.GetModifier(mod))) + " " + w.GetBaseDamageType());
-            play.log.Write("To hit: " + DiceThrower.RollToHit(toHit));
+            play.log.Write("To hit: " + toHitMessage);
             play.log.InputSpace();
         }
 

@@ -27,22 +27,24 @@ namespace BattleScribe.Forms.Pop_ups
 
         Character c;
         PlayScreen p;
+        private bool stealthDis;
 
         public RollSkillScreen()
         {
             InitializeComponent();
         }
 
-        public RollSkillScreen(Character c, PlayScreen play)
+        public RollSkillScreen(Character c, PlayScreen play, bool stealthDis)
         {
             InitializeComponent();
             this.c = c;
             SkillControl skill;
             this.p = play;
+            this.stealthDis = stealthDis;
 
             foreach (string s in c.SkillsList())
             {
-                skill = new SkillControl(c.GetModifier(s), this);
+                skill = new SkillControl(s, c.GetModifier(s), this);
                 skill.lbSkill.Content = s;
                 stackSkills.Children.Add(skill);
             }
@@ -56,7 +58,7 @@ namespace BattleScribe.Forms.Pop_ups
             }
         }
 
-        public void Roll(int mod)
+        public void Roll(string skillName, int mod)
         {
             int bonus = 0;
             bool adv = rbAdvantage.IsChecked.Value;
@@ -76,20 +78,32 @@ namespace BattleScribe.Forms.Pop_ups
 
             mod += bonus;
 
+            if (skillName == "Stealth")
+            {
+                if (stealthDis)
+                {
+                    if (!adv)
+                    {
+                        dis = true;
+                    }
+                    adv = false;
+                }
+            }
+
             if (adv)
             {
-                p.log.Write(DiceThrower.ThrowDieAdvantage(20, mod, true));
+                p.log.Write(skillName + ": " + DiceThrower.ThrowDieAdvantage(20, mod, true));
             }
             else if (dis)
             {
-                p.log.Write(DiceThrower.ThrowDieAdvantage(20, mod, false));
+                p.log.Write(skillName + ": " + DiceThrower.ThrowDieAdvantage(20, mod, false));
             }
             else
             {
-                p.log.Write(DiceThrower.ThrowDie(20, mod));
+                p.log.Write(skillName + ": " + DiceThrower.ThrowDie(20, mod));
             }
 
-            //this.Close();
+            this.Close();
         }
     }
 }

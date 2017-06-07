@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BattleScribe.Forms.Pop_ups.AddSpell"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddSpell" Height="524" Width="500" ResizeMode="NoResize">
+        Title="Add Spell" Height="524" Width="500" ResizeMode="NoResize">
     <Grid>
         <Label Content="Spell" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Level" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
