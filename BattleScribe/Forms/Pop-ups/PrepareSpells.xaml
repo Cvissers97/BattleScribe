@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BattleScribe.Forms.Pop_ups.PrepareSpells"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="PrepareSpells" Height="303.023" Width="612.293" ResizeMode="NoResize">
+        Title="Prepare Spells" Height="303.023" Width="612.293" ResizeMode="NoResize">
     <Grid>
         <ScrollViewer Name="scrollSpells" HorizontalAlignment="Left" Height="234" Margin="10,10,0,0" VerticalAlignment="Top" Width="450">
             <StackPanel Name="stackSpells" HorizontalAlignment="Left" VerticalAlignment="Top"/>

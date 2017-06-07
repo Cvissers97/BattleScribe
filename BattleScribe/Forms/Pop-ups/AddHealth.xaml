@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BattleScribe.Forms.Pop_ups.AddHealth"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddHealth" Height="145.677" Width="182.331" ResizeMode="NoResize" Closing="Window_Closing">
+        Title="Add Health" Height="145.677" Width="182.331" ResizeMode="NoResize" Closing="Window_Closing">
     <Grid>
         <Label Name="lbCurHP" Content="Current HP: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Button Name="btnUpHealth" Content="Static Upgrade" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Width="148" Click="btnUpHealth_Click"/>

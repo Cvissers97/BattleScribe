@@ -376,7 +376,9 @@ namespace BattleScribe.Forms
         
         private void btnRollCheck_Click(object sender, RoutedEventArgs e)
         {
-            RollSkillScreen r = new RollSkillScreen(c, this);
+            bool stealthDis = inventory.GetStealthDis();
+
+            RollSkillScreen r = new RollSkillScreen(c, this, stealthDis);
             r.Show();
         }
 

@@ -18,6 +18,6 @@
         <TextBox Name="tbCost" HorizontalAlignment="Left" Height="23" Margin="106,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161"/>
         <TextBox Name="tbType" HorizontalAlignment="Left" Height="23" Margin="106,169,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="161"/>
         <ComboBox Name="cbArmourName" HorizontalAlignment="Left" Margin="106,14,0,0" VerticalAlignment="Top" Width="161" SelectionChanged="CbArmourName_SelectionChanged"/>
-        <Button Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="193,229,0,0" VerticalAlignment="Top" Width="74" Click="BtnAdd_Click"/>
+        <Button Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Margin="193,229,0,0" VerticalAlignment="Top" Width="74" Click="BtnAdd_Click"/>
     </Grid>
 </Window>

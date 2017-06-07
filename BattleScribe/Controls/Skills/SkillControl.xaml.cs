@@ -22,6 +22,7 @@ namespace BattleScribe.Controls.Skills
     public partial class SkillControl : UserControl
     {
         int mod;
+        private string skillName;
         private RollSkillScreen screen;
 
         public SkillControl()
@@ -29,17 +30,18 @@ namespace BattleScribe.Controls.Skills
             InitializeComponent();
         }
 
-        public SkillControl(int mod, RollSkillScreen screen)
+        public SkillControl(string skillName, int mod, RollSkillScreen screen)
         {
             InitializeComponent();
             this.mod = mod;
+            this.skillName = skillName;
             this.screen = screen;
             lbMod.Content = mod;
         }
 
         private void Grid_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            screen.Roll(mod);
+            screen.Roll(skillName, mod);
         }
     }
 }

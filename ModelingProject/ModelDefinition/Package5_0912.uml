@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="15169ce6-9eed-4645-b078-cc4de20f6d6a"
+  name="Items"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="0db8b71d-d987-4153-855c-6b5df6809d87"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DBattleScribe.Classes.Items"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="ecdf999a-5a77-404b-b2ef-bd641e958412"
+        name="Weapon"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="90db5a15-ef17-4de9-ac4d-c7c79c540aea"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FCasper%2FDocuments%2FGitHub%2FBattleScribe%2FBattleScribe%2Fbin%2FRelease%2FBattleScribe.exe Namespace%3DBattleScribe.Classes.Items Type%3DWeapon"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="f0692cf5-435f-4f93-b5de-6d4f18fc9958"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="10f80300-37e7-48f2-a3bb-0545ce0cd5d2">
+                <propertyInstance
+                  Id="d5949ba3-a703-43b0-9987-cd2a79eaffb7"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3b56da23-4671-400d-a508-96744530e83a">
+                <propertyInstance
+                  Id="971195a4-6605-4d27-896d-a1a3747d61c0"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a686c8e9-5ce8-4599-abf7-8613f18505bc">
+                <propertyInstance
+                  Id="0cc0d464-2ea1-43c0-951b-3fb04f8a63f6"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8e161268-43f1-4141-8fec-f2f080aab380">
+                <propertyInstance
+                  Id="fc12c72d-08df-4d36-b995-8f52ead475f5"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c5c260ac-57a1-44e2-8aaf-fbb496fd8f21">
+                <propertyInstance
+                  Id="07acae01-9cb5-4c69-a132-6c6b161b633c"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="299818a7-bee7-43b9-bd26-fbc8e2008586"
+            isSubstitutable="false">
+            <classMoniker
+              Id="e8aec016-5888-4fb0-be60-c131285330ce"
+              LastKnownName="Item"
+              LastKnownLocation="Package5_0912.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="95200d63-6ec1-4298-9896-ebaadac03774"
+        name="Armour"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="902d4985-032f-4272-8d70-c35a49dd4970"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FCasper%2FDocuments%2FGitHub%2FBattleScribe%2FBattleScribe%2Fbin%2FRelease%2FBattleScribe.exe Namespace%3DBattleScribe.Classes.Items Type%3DArmour"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="8d838645-7e4d-45d0-afd6-c5ec0c05af09"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="6a5693ff-53bb-4bae-a3d6-90c1b36e2ba3">
+                <propertyInstance
+                  Id="c11d2ff0-4f9f-498b-b94e-5c0df206d5f3"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3151df8c-0f7a-40bd-988c-24f251033581">
+                <propertyInstance
+                  Id="a8a47ee5-0813-4e4a-942f-f2b70b54b2c6"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="eb9699c8-af52-43d1-8424-64a8fb3cbd87">
+                <propertyInstance
+                  Id="0b1dd4cc-907c-4443-bfb1-028654072b67"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b5e3a6b1-57c6-406e-98a9-d895a88f3207">
+                <propertyInstance
+                  Id="7ac97bcd-d388-4d11-999e-3564ecbc02df"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="750ec165-49d7-4d8a-802f-4f3a226a7d01">
+                <propertyInstance
+                  Id="89050b4b-bc66-43ad-8f88-3be2c449d064"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="ac2ef8c5-4f0d-46ee-95d6-055f0cd81472"
+            isSubstitutable="false">
+            <classMoniker
+              Id="e8aec016-5888-4fb0-be60-c131285330ce"
+              LastKnownName="Item"
+              LastKnownLocation="Package5_0912.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="e8aec016-5888-4fb0-be60-c131285330ce"
+        name="Item"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="22f549b6-18d2-446d-afd2-545715ae43c9"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FCasper%2FDocuments%2FGitHub%2FBattleScribe%2FBattleScribe%2Fbin%2FRelease%2FBattleScribe.exe Namespace%3DBattleScribe.Classes.Items Type%3DItem"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="8ac998aa-7739-4113-886b-262c8a142f64"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2abf6d4b-317d-4afd-804f-60b4190bf30e">
+                <propertyInstance
+                  Id="677bb1db-e7c5-4575-a47e-efde2ed54835"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c1cbfec6-090f-4570-9e88-69821b8f0bb7">
+                <propertyInstance
+                  Id="46bf2da5-ead0-4552-bd25-df64a00e88d4"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d6bdbb7e-6031-4b14-8c9b-f5dc629d9e6e">
+                <propertyInstance
+                  Id="3640f36b-d065-44e8-a320-29c156f93001"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="bd0c83b9-f89e-48de-aeb9-be62b82d0cd6">
+                <propertyInstance
+                  Id="a4b75e6c-2d69-4009-9eda-7418c98ab577"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1892b12f-be26-426a-80ae-2aa66c6844e4">
+                <propertyInstance
+                  Id="0f3f980b-bafc-4e7b-a362-7d512487f91a"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

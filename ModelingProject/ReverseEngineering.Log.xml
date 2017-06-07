@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///C:/PROGRAM FILES (X86)/MICROSOFT VISUAL STUDIO 12.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/ReverseEngineeringLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Code Generation/Text Transformation Log">
+  <MessageClass Name="Message" Label="Message" Option="Show informational messages" />
+  <MessageClass Name="Warning" Label="Warning" Option="Show warnings" />
+  <MessageClass Name="Error" Label="Error" Option="Show errors" />
+  <MessageClass Name="Property" Label="Property" Option="Show metadata" />
+  <MessageClass Name="Diagnostic" Label="Message" Option="Show diagnostic messages" />
+  <Message Timestamp="2017-06-06T09:15:23" Importance="High" Text="Reverse Engineering Started." />
+  <Message Timestamp="2017-06-06T09:15:24" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'Boolean' -  (PrimitiveType)" />
+  <Message Timestamp="2017-06-06T09:15:24" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject::BattleScribe' -  (Package)" />
+  <Message Timestamp="2017-06-06T09:15:24" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject::BattleScribe::Classes' -  (Package)" />
+  <Message Timestamp="2017-06-06T09:15:24" Importance="Medium" Text="Element reverse engineered into the UML model: 'ModelingProject::BattleScribe::Classes::Skill' -  (Class)" />
+  <Message Timestamp="2017-06-06T09:15:24" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject::BattleScribe::Classes::Skill::acquired' -  (Property)" />
+  <Message Timestamp="2017-06-06T09:15:24" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject::BattleScribe::Classes::Skill::name' -  (Property)" />
+  <Message Timestamp="2017-06-06T09:15:24" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject::BattleScribe::Classes::Skill::Skill' -  (Operation)" />
+  <Message Timestamp="2017-06-06T09:15:24" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject::BattleScribe::Classes::Skill::Skill::acquired' -  (Parameter)" />
+  <Message Timestamp="2017-06-06T09:15:24" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject::BattleScribe::Classes::Skill::Skill::name' -  (Parameter)" />
+  <Message Timestamp="2017-06-06T09:15:24" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'String' -  (PrimitiveType)" />
+  <Message Timestamp="2017-06-06T09:15:24" Importance="High" Text="(1) type(s) fully reverse engineered." />
+  <Message Timestamp="2017-06-06T09:15:24" Importance="High" Text="The reverse engineering operation completed with (0) error(s), and (0) warning(s)." />
+</Log>

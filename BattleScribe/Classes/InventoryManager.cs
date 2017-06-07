@@ -275,6 +275,23 @@ namespace BattleScribe.Classes
             return weps;
         }
 
+        public bool GetStealthDis()
+        {
+            List<Armour> arm = new List<Armour>();
+            bool stealth = false;
+
+            foreach (Armour a in equipedItems.OfType<Armour>())
+            {
+                if (a.GetStealthDis())
+                {
+                    stealth = true;
+                    break;
+                }
+            }
+
+            return stealth;
+        }
+
         public void AddWeapon(Weapon w)
         {
             bool duplicate = false;
