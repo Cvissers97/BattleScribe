@@ -25,6 +25,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
         private InventoryManager inventory;
         private Armour armour;
         private DbHandler db;
+        string minusRegex = @"^[-+]?[0-9]*\.?[0-9]+$";
 
         public AddArmour()
         {
@@ -61,9 +62,44 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            armour = new Armour(tbName.Text, (new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text), false, Convert.ToInt32(tbArmourBonus.Text), Convert.ToInt32(tbBaseArmour.Text), (string)cbMod.SelectedItem, Convert.ToInt32(tbStrReq.Text), (bool)chkStealth.IsChecked, tbWeight.Text, "0", (string)cbType.SelectedItem, (bool)chkAttune.IsChecked);
-            int newItemId = db.InsertNewArmour(armour);
-            db.InsertInItemTable(newItemId, 2);
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbArmourBonus.Text, minusRegex))
+            {
+                armour = new Armour(tbName.Text, (new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text), false, Convert.ToInt32(tbArmourBonus.Text), Convert.ToInt32(tbBaseArmour.Text), (string)cbMod.SelectedItem, Convert.ToInt32(tbStrReq.Text), (bool)chkStealth.IsChecked, tbWeight.Text, "0", (string)cbType.SelectedItem, (bool)chkAttune.IsChecked);
+                int newItemId = db.InsertNewArmour(armour);
+                db.InsertInItemTable(newItemId, 2);
+            }
+            else
+            {
+                MessageBox.Show("Incorrect armour bonus. (Can be negative.)");
+            }
+        }
+
+        private void tbWeight_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbWeight.Text, "^[0-9]*$"))
+            {
+                tbWeight.Text = string.Empty;
+            }
+        }
+
+        private void tbStrReq_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbStrReq.Text, "^[0-9]*$"))
+            {
+                tbStrReq.Text = string.Empty;
+            }
+        }
+
+        private void tbArmourBonus_TextChanged(object sender, TextChangedEventArgs e)
+        {
+        }
+
+        private void tbBaseArmour_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbBaseArmour.Text, "^[0-9]*$"))
+            {
+                tbBaseArmour.Text = string.Empty;
+            }
         }
     }
 }
