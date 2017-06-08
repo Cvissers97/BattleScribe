@@ -199,6 +199,8 @@ namespace BattleScribe.Forms
         public void UpdateSpells()
         {
             panelSpells.Children.Clear();
+            spells.Sort((x, y) => x.GetLevel().CompareTo(y.GetLevel()));
+
             foreach (Spell s in spells)
             {
                 SpellPrepControl pSpells = new SpellPrepControl(s);
@@ -589,6 +591,7 @@ namespace BattleScribe.Forms
                 }
                 c.SetSkillList(skills);
                 c.SetLangList(langs);
+                c.SetMiscProf(new TextRange(rtbOtherProf.Document.ContentStart, rtbOtherProf.Document.ContentEnd).Text);
 
                 db.InsertSpells(tempSpells, c.GetID(), tempPrep);
                 db.UpdateCharacter(c);
@@ -598,11 +601,6 @@ namespace BattleScribe.Forms
             {
                 MessageBox.Show("Something went wrong.");
             }
-            c.SetSkillList(skills);
-            c.SetLangList(langs);
-            db.InsertSpells(tempSpells, c.GetID(), tempPrep);
-            c.SetMiscProf(new TextRange(rtbOtherProf.Document.ContentStart, rtbOtherProf.Document.ContentEnd).Text);
-            db.UpdateCharacter(c);
         }
 
         private void btnRemSpell_Click(object sender, RoutedEventArgs e)
@@ -820,6 +818,45 @@ namespace BattleScribe.Forms
             {
                 tbSlot9.Text = "0";
             }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            List<ItemControl> loopList = new List<ItemControl>();
+
+            foreach (ItemControl i in panelInv.Children.OfType<ItemControl>())
+            {
+                loopList.Add(i);
+            }
+
+            foreach (ItemControl i in loopList)
+            {
+                if (i.GetIsSelected())
+                {
+                    switch (i.typeItem)
+                    {
+                        default:
+                            MessageBox.Show("INVALID ITEM TYPE!");
+                            break;
+
+                        case "Weapon":
+                            Weapon wep = (Weapon)i.GetItem();
+                            inventory.RemoveAllOfWeapon(wep);
+                            break;
+
+                        case "Armour":
+                            Armour a = (Armour)i.GetItem();
+                            inventory.RemoveAllOfArmour(a);
+                            break;
+
+                        case "Item":
+                            Item it = (Item)i.GetItem();
+                            inventory.RemoveAllOfItem(it);
+                            break;
+                    }
+                }
+            }
+
         }
     }
 }

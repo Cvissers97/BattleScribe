@@ -79,6 +79,7 @@ namespace BattleScribe.Forms.Pop_ups
             BattleScribe.Controls.Spells.SpellPrepControl temp = new Controls.Spells.SpellPrepControl(spell);
             screen.panelSpells.Children.Add(temp);
             screen.spells.Add(spell);
+            screen.UpdateSpells();
 
             this.Close();
 

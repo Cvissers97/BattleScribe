@@ -128,7 +128,13 @@
 
                     <Button Name="btnEquip" Content="Equip / Unequip" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="BtnEquip_Click"/>
                     <Button Name="btnAddItem" Content="Add Item" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="BtnAddItem_Click"/>
-                    <Button Name="btnDropItem" Content="Drop Item" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="btnDropItem_Click"/>
+                    <Button Name="btnDropItem" Content="Drop Item" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="btnDropItem_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Drop all of selected item." Click="MenuItem_Click"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
                     <Button Name="btnAddMoney" Content="Add Money" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="btnAddMoney_Click"/>
                     <Button Name="btnLoseMoney" Content="Lose Money" HorizontalAlignment="Left" Margin="10,187,0,0" VerticalAlignment="Top" Width="117" Height="35" Click="btnLoseMoney_Click"/>
                     <Label Content="Inventory" HorizontalAlignment="Left" Margin="146,25,0,0" VerticalAlignment="Top"/>

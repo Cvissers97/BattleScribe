@@ -124,6 +124,7 @@ namespace BattleScribe.Forms
                 CheckBox cBox = new CheckBox();
                 cBox.IsChecked = s.acquired;
                 cBox.Content = s.name;
+                cBox.IsEnabled = false;
                 panelSkills.Children.Add(cBox);
             }
 
@@ -132,6 +133,7 @@ namespace BattleScribe.Forms
                 CheckBox cbox = new CheckBox();
                 cbox.IsChecked = l.acquired;
                 cbox.Content = l.name;
+                cbox.IsEnabled = false;
                 panelLanguages.Children.Add(cbox);
             }
         }
@@ -619,12 +621,14 @@ namespace BattleScribe.Forms
             {
                 if (chosenSpell.GetLevel() == 0)
                 {
+                    log.Write("To hit: " + DiceThrower.RollToHit(c.GetModifier(c.GetSpellMod()) + c.GetProfiencyBonus()));
                     log.Write("You cast " + chosenSpell.GetName());
                 }
                 else
                 {
                     if (c.SpendSlot(chosenSpell.GetLevel()))
                     {
+                        log.Write("To hit: " + DiceThrower.RollToHit(c.GetModifier(c.GetSpellMod()) + c.GetProfiencyBonus()));
                         log.Write("You cast " + chosenSpell.GetName());
                     }
                     else
@@ -818,6 +822,18 @@ namespace BattleScribe.Forms
             log.Write("2 Level Slot: " + c.GetSlot2());
             log.Write("1 Level Slot: " + c.GetSlot1());
             log.InputSpace();
+        }
+
+        private void btnResetDeath_Click(object sender, RoutedEventArgs e)
+        {
+            deathThrow = 0;
+            lifeThrow = 0;
+            UpdateDeath();
+        }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

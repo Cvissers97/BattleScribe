@@ -197,6 +197,7 @@ namespace BattleScribe.Classes
                     {
                         weapons.Remove(weapon);
                     }
+                    break;
                 }
             }
 
@@ -226,11 +227,32 @@ namespace BattleScribe.Classes
                     {
                         armours.Remove(armour);
                     }
+                    break;
                 }
             }
 
             UpdateInventory();
-            
+        }
+
+        public void RemoveAllOfItem(Item i)
+        {
+            items.Remove(i);
+            UpdateInventory();
+
+        }
+
+        public void RemoveAllOfWeapon(Weapon w)
+        {
+            weapons.Remove(w);
+            UpdateInventory();
+
+        }
+
+        public void RemoveAllOfArmour(Armour a)
+        {
+            armours.Remove(a);
+            UpdateInventory();
+
         }
 
         public void RemoveItem(Item i)
@@ -256,6 +278,7 @@ namespace BattleScribe.Classes
                     {
                         items.Remove(item);
                     }
+                    break;
                 }
             }
 

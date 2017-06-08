@@ -43,6 +43,7 @@ namespace BattleScribe.Forms.Pop_ups
 
             foreach (Spell s in knownSpells)
             {
+                s.SetPrepared(false);
                 // Not adding cantrips, for they are always prepared.
                 if (s.GetLevel() > 0)
                 {

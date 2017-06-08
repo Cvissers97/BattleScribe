@@ -111,40 +111,21 @@ namespace BattleScribe.Controls.Weapons
             bool pastDice = false;
             bool secondDice = false;
 
-            for (int i = 0; i < damage.Length; i++)
+            if (damage == "1")
             {
-                if (!pastDice)
-                {
-                    if (damage[i] != 'd')
-                    {
-                        amount += damage[i];
-                    }
-                    else
-                    {
-                        pastDice = true;
-                    }
-                }
-                else
-                {
-                    sides += damage[i];
-                }
+                play.log.Write("Damage: " + damage + " " + w.GetBaseDamageType());
+                play.log.Write("To hit: " + DiceThrower.RollToHit(toHit));
+                play.log.InputSpace();
             }
-
-            pastDice = false;
-
-            damage = w.GetDamage2();
-
-            if (damage != "0" && damage != string.Empty && damage != null)
+            else
             {
-                secondDice = true;
-
                 for (int i = 0; i < damage.Length; i++)
                 {
                     if (!pastDice)
                     {
                         if (damage[i] != 'd')
                         {
-                            amount2 += damage[i];
+                            amount += damage[i];
                         }
                         else
                         {
@@ -153,49 +134,77 @@ namespace BattleScribe.Controls.Weapons
                     }
                     else
                     {
-                        sides2 += damage[i];
+                        sides += damage[i];
                     }
                 }
-            }
 
-            try
-            {
-                amountNumb = Convert.ToInt32(amount);
-                sidesNumb = Convert.ToInt32(sides);
+                pastDice = false;
+
+                damage = w.GetDamage2();
+
+                if (damage != "0" && damage != string.Empty && damage != null)
+                {
+                    secondDice = true;
+
+                    for (int i = 0; i < damage.Length; i++)
+                    {
+                        if (!pastDice)
+                        {
+                            if (damage[i] != 'd')
+                            {
+                                amount2 += damage[i];
+                            }
+                            else
+                            {
+                                pastDice = true;
+                            }
+                        }
+                        else
+                        {
+                            sides2 += damage[i];
+                        }
+                    }
+                }
+
+                try
+                {
+                    amountNumb = Convert.ToInt32(amount);
+                    sidesNumb = Convert.ToInt32(sides);
+
+                    if (secondDice)
+                    {
+                        amountNumb2 = Convert.ToInt32(amount2);
+                        sidesNumb2 = Convert.ToInt32(sides2);
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Invalid damage conversion.");
+                }
+
+                string toHitMessage = DiceThrower.RollToHit(toHit);
+                int criticalDice = 20 + toHit;
+
+                // Critical hits
+                if (toHitMessage == ("Critical " + criticalDice))
+                {
+                    amountNumb++;
+                }
+
+                if (w.GetBonusDamage() != 0)
+                {
+                    play.log.Write("Bonus: " + w.GetBonusDamage() + " " + w.GetBonusDamageType());
+                }
 
                 if (secondDice)
                 {
-                    amountNumb2 = Convert.ToInt32(amount2);
-                    sidesNumb2 = Convert.ToInt32(sides2);
+                    play.log.Write("+ " + (DiceThrower.RollDamage(amountNumb2, sidesNumb2, 0)) + " " + w.GetBaseDamage2());
                 }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Invalid damage conversion.");
-            }
 
-            string toHitMessage = DiceThrower.RollToHit(toHit);
-            int criticalDice = 20 + toHit;
-
-            // Critical hits
-            if (toHitMessage == ("Critical " + criticalDice))
-            {
-                amountNumb++;
+                play.log.Write("Damage: " + (DiceThrower.RollDamage(amountNumb, sidesNumb, c.GetModifier(mod))) + " " + w.GetBaseDamageType());
+                play.log.Write("To hit: " + toHitMessage);
+                play.log.InputSpace();
             }
-
-            if (w.GetBonusDamage() != 0)
-            {
-                play.log.Write("Bonus: " + w.GetBonusDamage() + " " + w.GetBonusDamageType());
-            }
-
-            if (secondDice)
-            {
-                play.log.Write("+ " + (DiceThrower.RollDamage(amountNumb2, sidesNumb2, 0)) + " " + w.GetBaseDamage2());
-            }
-
-            play.log.Write("Damage: " + (DiceThrower.RollDamage(amountNumb, sidesNumb, c.GetModifier(mod))) + " " + w.GetBaseDamageType());
-            play.log.Write("To hit: " + toHitMessage);
-            play.log.InputSpace();
         }
 
         public void Highlight(bool target)
