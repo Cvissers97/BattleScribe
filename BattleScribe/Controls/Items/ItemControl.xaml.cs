@@ -89,7 +89,7 @@ namespace BattleScribe.Controls.Items
         {
             if (!isSelected)
             {
-                this.Background = new SolidColorBrush(System.Windows.Media.Colors.Aquamarine);
+                this.Background = new SolidColorBrush(System.Windows.Media.Colors.Indigo);
                 isSelected = true;
             }
 

@@ -156,7 +156,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
                 w.SetItemType(tbType.Text);
                 int itemId = dbhandler.InsertNewWeapon(w);
                 dbhandler.InsertInItemTable(itemId, 1);
-                MessageBox.Show("Weapon added to the weapon collection. Add from the item choice menu.");
+                MessageBox.Show(w.GetName() + " added to the collection.");
             }
             catch (Exception error)
             {

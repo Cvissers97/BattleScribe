@@ -6,6 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="27" d:DesignWidth="281" Background="#FFC9B280" PreviewMouseRightButtonUp="UserControl_PreviewMouseRightButtonUp">
     <Grid PreviewMouseLeftButtonUp="Grid_PreviewMouseLeftButtonUp">
-        <Label Name="lbName" Content="Feature Name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="281"/>
+        <Label Name="lbName" Content="Feature Name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="281" Background="#FFFFEA8B"/>
     </Grid>
 </UserControl>

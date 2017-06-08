@@ -51,13 +51,12 @@ namespace BattleScribe.Forms.Pop_ups.Items
             try
             {
                 db.InsertInItemTable(itemId, 3);
-                MessageBox.Show(item.GetName() + " added with succes.");
+                MessageBox.Show(item.GetName() + " added to the collection.");
             }
             catch
             {
                 MessageBox.Show("Something went wrong. Please try again.");
             }
-
         }
     }
 }

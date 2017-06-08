@@ -67,6 +67,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
                 armour = new Armour(tbName.Text, (new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text), false, Convert.ToInt32(tbArmourBonus.Text), Convert.ToInt32(tbBaseArmour.Text), (string)cbMod.SelectedItem, Convert.ToInt32(tbStrReq.Text), (bool)chkStealth.IsChecked, tbWeight.Text, "0", (string)cbType.SelectedItem, (bool)chkAttune.IsChecked);
                 int newItemId = db.InsertNewArmour(armour);
                 db.InsertInItemTable(newItemId, 2);
+                MessageBox.Show(armour.GetName() + " added to the collection.");
             }
             else
             {

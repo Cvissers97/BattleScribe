@@ -290,7 +290,7 @@
                     <Label Content="Skills" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top"/>
                     <WrapPanel Orientation="Vertical" Name="panelLanguages" HorizontalAlignment="Left" Height="79" Margin="10,191,0,0" VerticalAlignment="Top" Width="312"/>
                     <Label Content="Languages" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"/>
-                    <RichTextBox Name="rtbOtherProf" HorizontalAlignment="Left" Height="79" Margin="344,191,0,0" VerticalAlignment="Top" Width="308">
+                    <RichTextBox IsReadOnly="True" Name="rtbOtherProf" HorizontalAlignment="Left" Height="79" Margin="344,191,0,0" VerticalAlignment="Top" Width="308">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="Other Proficiencies"/>
