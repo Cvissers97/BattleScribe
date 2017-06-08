@@ -48,7 +48,7 @@ namespace BattleScribe.Controls.Spells
         {
             if (target)
             {
-                this.Background = new SolidColorBrush(System.Windows.Media.Colors.Indigo);
+                this.Background = new SolidColorBrush(System.Windows.Media.Colors.Aquamarine);
             }
             else
             {
