@@ -37,7 +37,6 @@ namespace BattleScribe.Classes
         private List<Item> equipedItems;
 
         double totalItemWeight;
-        int AC;
 
 
         public InventoryManager(Character c, StackPanel stack, 

@@ -36,6 +36,10 @@ namespace BattleScribe.Classes
             }
         }
 
+        /// <summary>
+        /// Delete the character in every table
+        /// </summary>
+        /// <param name="charId">id of the character</param>
         public void DeleteCharacter(int charId)
         {
             conString = Properties.Settings.Default.conString;
@@ -227,6 +231,11 @@ namespace BattleScribe.Classes
 
         }
 
+        /// <summary>
+        /// Insert new languages for the character
+        /// </summary>
+        /// <param name="langs">List of langs</param>
+        /// <param name="charId">id of the character</param>
         public void InsertLangs(List<bool> langs, int charId)
         {
             conString = Properties.Settings.Default.conString;

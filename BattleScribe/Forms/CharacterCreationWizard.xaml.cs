@@ -36,7 +36,6 @@ namespace BattleScribe.Forms
         List<Spell> spellList, cantripList;
         List<CheckBox> cbSpellList, cbLangList, cbSkillList, cbCantripList;
         string[] spellsKnownArray;
-        Image image;
         byte[] imageArray;
 
         public CharacterCreationWizard()

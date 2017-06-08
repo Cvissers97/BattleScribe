@@ -67,6 +67,7 @@ namespace BattleScribe.Forms
             c.SetRace("Drow Elf");
 
             UpdateFeatureList();
+            totalItemWeight = 0;
         }
 
         private void UpdateStats()

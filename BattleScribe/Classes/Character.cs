@@ -119,6 +119,8 @@ namespace BattleScribe.Classes
             _int = 8;
             wis = 8;
             cha = 8;
+            tempHitPoints = 0;
+            cClass = new CharacterClass();
 
             items = new List<Item>();
             weapons = new List<Weapon>();

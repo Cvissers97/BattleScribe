@@ -23,7 +23,6 @@ namespace BattleScribe.Controls.Feats
     public partial class FeatControl : UserControl
     {
         private bool isSelected;
-        private string name;
         public Feat feat;
         private int id;
         private Brush normalBackground;
@@ -32,6 +31,7 @@ namespace BattleScribe.Controls.Feats
         public FeatControl()
         {
             InitializeComponent();
+            id = 0;
         }
 
         public FeatControl(Feat feat, bool fromPlayScreen)
