@@ -623,6 +623,7 @@ namespace BattleScribe.Forms
                 {
                     log.Write("To hit: " + DiceThrower.RollToHit(c.GetModifier(c.GetSpellMod()) + c.GetProfiencyBonus()));
                     log.Write("You cast " + chosenSpell.GetName());
+                    log.InputSpace();
                 }
                 else
                 {
@@ -630,6 +631,7 @@ namespace BattleScribe.Forms
                     {
                         log.Write("To hit: " + DiceThrower.RollToHit(c.GetModifier(c.GetSpellMod()) + c.GetProfiencyBonus()));
                         log.Write("You cast " + chosenSpell.GetName());
+                        log.InputSpace();
                     }
                     else
                     {
@@ -655,7 +657,9 @@ namespace BattleScribe.Forms
                 {
                     if (c.SpendSlot(slot))
                     {
+                        log.Write("To Hit: " + DiceThrower.RollToHit(c.GetModifier(c.GetSpellMod()) + c.GetProfiencyBonus()));
                         log.Write("You cast " + chosenSpell.GetName());
+                        log.InputSpace();
                     }
                     else
                     {

@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="27" d:DesignWidth="281" Background="#FFC9B280" PreviewMouseRightButtonUp="UserControl_PreviewMouseRightButtonUp">
+             d:DesignHeight="27" d:DesignWidth="281"  Background="#FFFFEA8B" PreviewMouseRightButtonUp="UserControl_PreviewMouseRightButtonUp">
     <Grid>
-        <Label Name="lbFeatName" Content="Feat Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="281" PreviewMouseLeftButtonUp="lbFeatName_PreviewMouseLeftButtonUp" Background="#FFFFF6A0"/>
+        <Label Name="lbFeatName" Content="Feat Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="281" PreviewMouseLeftButtonUp="lbFeatName_PreviewMouseLeftButtonUp"/>
     </Grid>
 </UserControl>
