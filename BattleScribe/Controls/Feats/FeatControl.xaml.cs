@@ -52,7 +52,8 @@ namespace BattleScribe.Controls.Feats
 
             if (isSelected)
             {
-                this.Background = new SolidColorBrush(System.Windows.Media.Colors.Indigo);
+                //this.Background = new SolidColorBrush(System.Windows.Media.Colors.Black);
+                this.Background = new SolidColorBrush(System.Windows.Media.Colors.Green);
             }
             else
             {

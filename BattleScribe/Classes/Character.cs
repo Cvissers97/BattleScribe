@@ -1,30 +1,26 @@
-﻿using BattleScribe.Classes.Items;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using BattleScribe.Classes.Items;
 
 namespace BattleScribe.Classes
 {
     public struct Language
     {
-        public string name;
         public bool acquired;
-
+        public string name;
         public Language(string name, bool acquired)
         {
             this.name = name;
             this.acquired = acquired;
         }
     }
+
     public struct Skill
     {
-        public string name;
         public bool acquired;
-
+        public string name;
         public Skill(string name, bool acquired)
         {
             this.acquired = acquired;
@@ -34,55 +30,57 @@ namespace BattleScribe.Classes
 
     public class Character
     {
-        private DbHandler db;
-
-        private int id;
-        private string name;
-        private string title;
-        private string age;
-        private string size;
-        private string alignment;
-        private string race;
-        private bool isFemale;
-        private bool isMale;
-        private string bonds;
-        private string ideals;
-        private string appearance;
-        private string flaws;
-        private string backstory;
-        private byte str;
-        private byte dex;
-        private byte con;
-        private byte _int;
-        private byte wis;
-        private byte cha;
-        private int charClass;
-        private string personality;
-        private string background;
-        private int proficiency;
-        private byte[] image;
-        private Image profilePic;
-        private int maxHitPoints;
-        private int curHitPoints;
-        private int tempHitPoints;
-        private int level;
-        private int experiencePoints;
-        private bool inspiration;
-
+        public int lastBonus;
+        public int lastDiceAmount;
+        public int lastDiceAmount2;
+        public int lastDiceSide;
+        public int lastDiceSide2;
         // Custom Attack
         public int lastToHit;
-        public int lastDiceAmount;
-        public int lastDiceSide;
-        public int lastDiceAmount2;
-        public int lastDiceSide2;
-        public int lastBonus;
 
+        private byte _int;
+        private string age;
+        private string alignment;
+        private string appearance;
+        private List<Armour> armours;
+        private string background;
+        private string backstory;
+        private string bonds;
+        private CharacterClass cClass;
+        private byte cha;
+        private int charClass;
+        private List<Feature> classFeatures;
+        private byte con;
+        private int curHitPoints;
+        private DbHandler db;
 
-        // INT, WIS, CHA (etc.)
-        private string spellMod;
+        private byte dex;
+        private int experiencePoints;
+        private List<Feat> feats;
+        private string flaws;
+        private int id;
+        private string ideals;
+        private byte[] image;
+        private bool inspiration;
+        private bool isFemale;
+        private bool isMale;
+        private List<Item> items;
+        private List<Spell> knownSpells;
+        private List<Language> langs;
+        private int level;
+        private int maxHitPoints;
+        private string miscProfs;
+        private string name;
+        private string personality;
+        private int proficiency;
+        private Image profilePic;
+        private string race;
+        private List<Feature> raceFeatures;
         private string savingThrow1;
         private string savingThrow2;
-
+        private bool setMaxSlots;
+        private string size;
+        private List<Skill> skills;
         private byte slot1, slot1Max;
         private byte slot2, slot2Max;
         private byte slot3, slot3Max;
@@ -92,25 +90,14 @@ namespace BattleScribe.Classes
         private byte slot7, slot7Max;
         private byte slot8, slot8Max;
         private byte slot9, slot9Max;
+        // INT, WIS, CHA (etc.)
+        private string spellMod;
 
-        private string miscProfs;
-
-        private CharacterClass cClass;
-
-        private List<Feature> raceFeatures;
-        private List<Feature> classFeatures;
-
-        private List<Feat> feats;
-
-        private List<Skill> skills;
-        private List<Language> langs;
-        private List<Item> items;
+        private byte str;
+        private int tempHitPoints;
+        private string title;
         private List<Weapon> weapons;
-        private List<Armour> armours;
-
-        private List<Spell> knownSpells;
-        private bool setMaxSlots;
-
+        private byte wis;
         public Character()
         {
             str = 8;
@@ -225,7 +212,7 @@ namespace BattleScribe.Classes
             // Constructor called for making a character.
         }
 
-        public Character(int id ,string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
+        public Character(int id, string name, string title, string age, string size, string alignment, bool isFemale, bool isMale
     , string bonds, string ideals, string appearance, string flaws, string backstory, byte str, byte dex,
     byte con, byte _int, byte wis, byte cha, int charClass, string personality, string background,
     string charRace, int level)
@@ -276,65 +263,248 @@ namespace BattleScribe.Classes
             SetSpellMod();
             setMaxSlots = false;
 
-
             // Constructor called after making a character.
         }
 
-        public void SetSpellMod()
+        public int CalcCarryWeight()
         {
-            switch (charClass)
-            {
-                default:
-                    spellMod = "INT";
-                    break;
-                case 2:
-                    //Bard
-                    spellMod = "CHA";
-                    break;
-                case 3:
-                    //Cleric
-                    spellMod = "WIS";
-                    break;
-                case 4:
-                    //Druid
-                    spellMod = "WIS";
-
-                    break;
-                case 5:
-                    //Fighter
-                    spellMod = "INT";
-                    break;
-                case 7:
-                    //Paladin
-                    spellMod = "CHA";
-
-                    break;
-                case 8:
-                    //Ranger
-                    spellMod = "WIS";
-                    break;
-                case 9:
-                    //Rogue
-                    spellMod = "INT";
-                    break;
-                case 10:
-                    //Sorcerer
-                    spellMod = "CHA";
-                    break;
-                case 11:
-                    //Warlock
-                    spellMod = "CHA";
-                    break;
-                case 12:
-                    //Wizard
-                    spellMod = "INT";
-                    break;
-            }
+            int temp = str;
+            temp *= 15;
+            return temp;
         }
 
-        public string GetSpellMod()
+        public void ToggleInspiration()
         {
-            return this.spellMod;
+            inspiration = !inspiration;
+        }
+
+        //Calc the modifier for skills
+        public string CalcMod(string stat, double raceMod)
+        {
+            double temp;
+            switch (stat)
+            {
+                case "STR":
+                    temp = str;
+                    break;
+
+                case "DEX":
+                    temp = dex;
+                    break;
+
+                case "CON":
+                    temp = con;
+                    break;
+
+                case "INT":
+                    temp = _int;
+                    break;
+
+                case "WIS":
+                    temp = wis;
+                    break;
+
+                case "CHA":
+                    temp = cha;
+                    break;
+
+                default:
+                    temp = 200;
+                    break;
+            }
+
+            temp = Math.Floor((((temp + raceMod) - 10) / 2));
+
+            if (temp >= 0)
+            {
+                return "+" + temp.ToString();
+            }
+            else if (temp < 0)
+            {
+                return temp.ToString();
+            }
+
+            return null;
+        }
+
+        public int CalcProfBonus()
+        {
+            if (level < 5)
+            {
+                proficiency = 2;
+            }
+            else if (level < 9)
+            {
+                proficiency = 3;
+            }
+            else if (level < 13)
+            {
+                proficiency = 4;
+            }
+            else if (level < 16)
+            {
+                proficiency = 5;
+            }
+            else
+            {
+                proficiency = 6;
+            }
+
+            return proficiency;
+        }
+
+        public string GetAge()
+        {
+            return age;
+        }
+
+        public string GetAlignment()
+        {
+            return alignment;
+        }
+
+        public List<Feature> GetAllFeatures()
+        {
+            List<Feature> features = new List<Feature>();
+            raceFeatures = db.GetFeaturesByRaceId(Convert.ToInt32(race));
+
+            foreach (Feature f in raceFeatures)
+            {
+                f.isRacial = true;
+                features.Add(f);
+            }
+
+            foreach (Feature f in classFeatures)
+            {
+                features.Add(f);
+            }
+
+            return features;
+        }
+
+        public string GetAppearance()
+        {
+            return appearance;
+        }
+
+        public string GetBackGround()
+        {
+            return background;
+        }
+
+        public string GetBackstory()
+        {
+            return backstory;
+        }
+
+        public string GetBonds()
+        {
+            return bonds;
+        }
+
+        public byte GetCha()
+        {
+            return cha;
+        }
+
+        public int GetClass()
+        {
+            return charClass;
+        }
+
+        public string GetClassName()
+        {
+            return cClass.GetName();
+        }
+
+        public byte GetCon()
+        {
+            return con;
+        }
+
+        public int GetCurrentHealth()
+        {
+            return curHitPoints;
+        }
+
+        public byte GetDex()
+        {
+            return dex;
+        }
+
+        public int GetExp()
+        {
+            return this.experiencePoints;
+        }
+
+        public List<Feat> GetFeats()
+        {
+            return this.feats;
+        }
+
+        public string GetFlaws()
+        {
+            return flaws;
+        }
+
+        public int GetID()
+        {
+            return this.id;
+        }
+
+        public string GetIdeals()
+        {
+            return ideals;
+        }
+
+        public byte[] GetImage()
+        {
+            return image;
+        }
+
+        public bool GetInspiration()
+        {
+            return inspiration;
+        }
+
+        public byte GetInt()
+        {
+            return _int;
+        }
+
+        public bool GetIsFemale()
+        {
+            return isFemale;
+        }
+
+        public bool GetIsMale()
+        {
+            return isMale;
+        }
+
+        public List<Spell> GetKnownSpells()
+        {
+            return this.knownSpells;
+        }
+
+        public List<Language> GetLangs()
+        {
+            return this.langs;
+        }
+
+        public int GetLevel()
+        {
+            return level;
+        }
+
+        public int GetMaxHealth()
+        {
+            return maxHitPoints;
+        }
+
+        public string GetMiscProf()
+        {
+            return this.miscProfs;
         }
 
         public int GetModifier(string skillName)
@@ -468,82 +638,119 @@ namespace BattleScribe.Classes
             return mod;
         }
 
-        public int CalcCarryWeight()
+        public string GetName()
         {
-            int temp = str;
-            temp *= 15;
-            return temp;
+            return name;
         }
 
-        //Calc the modifier for skills
-        public string CalcMod(string stat, double raceMod)
+        public string GetPersonality()
         {
-            double temp;
-            switch (stat)
-            {
-                case "STR":
-                    temp = str;
-                    break;
-                case "DEX":
-                    temp = dex;
-                    break;
-                case "CON":
-                    temp = con;
-                    break;
-                case "INT":
-                    temp = _int;
-                    break;
-                case "WIS":
-                    temp = wis;
-                    break;
-                case "CHA":
-                    temp = cha;
-                    break;
-                default:
-                    temp = 200;
-                    break;
-            }
-
-            temp = Math.Floor((((temp + raceMod) - 10) / 2));
-
-            if (temp >= 0)
-            {
-                return "+" + temp.ToString();
-            }
-            else if (temp < 0)
-            {
-                return temp.ToString();
-            }
-
-            return null;
+            return personality;
         }
-        
 
-        //create a list of all skills in the game
-        public List<string> SkillsList()
+        public int GetProfiencyBonus()
         {
-            List<string> temp = new List<string>();
+            return proficiency;
+        }
 
-            temp.Add("Acrobatics");
-            temp.Add("Animal Handeling");
-            temp.Add("Arcana");
-            temp.Add("Athletics");
-            temp.Add("Deception");
-            temp.Add("History");
-            temp.Add("Insight");
-            temp.Add("Intimidation");
-            temp.Add("Investigation");
-            temp.Add("Medicine");
-            temp.Add("Nature");
-            temp.Add("Perception");
-            temp.Add("Performance");
-            temp.Add("Persuasion");
-            temp.Add("Religion");
-            temp.Add("Sleight of Hand");
-            temp.Add("Stealth");
-            temp.Add("Survival");
+        public Image GetProfilePic()
+        {
+            return this.profilePic;
+        }
 
-            return temp;
+        public string GetRace()
+        {
+            return this.race;
+        }
+
+        public string[] GetSavingThrows()
+        {
+            string[] throws = new string[2];
+
+            throws[0] = savingThrow1;
+            throws[1] = savingThrow2;
+
+            return throws;
+        }
+
+        public string GetSize()
+        {
+            return size;
+        }
+
+        public List<Skill> GetSkills()
+        {
+            return this.skills;
+        }
+
+        public byte GetSlot1()
+        {
+            return this.slot1;
+        }
+
+        public byte GetSlot2()
+        {
+            return this.slot2;
+        }
+
+        public byte GetSlot3()
+        {
+            return this.slot3;
+        }
+
+        public byte GetSlot4()
+        {
+            return this.slot4;
+        }
+
+        public byte GetSlot5()
+        {
+            return this.slot5;
+        }
+
+        public byte GetSlot6()
+        {
+            return this.slot6;
+        }
+
+        public byte GetSlot7()
+        {
+            return this.slot7;
+        }
+
+        public byte GetSlot8()
+        {
+            return this.slot8;
+        }
+
+        public byte GetSlot9()
+        {
+            return this.slot9;
+        }
+
+        public string GetSpellMod()
+        {
+            return this.spellMod;
+        }
+
+        public byte GetStr()
+        {
+            return str;
+        }
+
+        public int GetTempHp()
+        {
+            return this.tempHitPoints;
+        }
+
+        public string GetTitle()
+        {
+            return title;
+        }
+
+        public byte GetWis()
+        {
+            return wis;
         }
 
         //Creates a list of all langs in the game
@@ -571,307 +778,6 @@ namespace BattleScribe.Classes
             return temp;
         }
 
-        public void SetSkillList(List<Skill> skills)
-        {
-            this.skills = skills;
-        }
-
-        public List<Skill> GetSkills()
-        {
-            return this.skills;
-        }
-
-        public void SetLangList(List<Language> lang)
-        {
-            this.langs = lang;
-        }
-
-        public List<Language> GetLangs()
-        {
-            return this.langs;
-        }
-
-        public void SetMiscProf(string target)
-        {
-            this.miscProfs = target;
-        }
-
-        public string GetMiscProf()
-        {
-            return this.miscProfs;
-        }
-
-        public int GetLevel()
-        {
-            return level;
-        }
-
-        public byte[] GetImage()
-        {
-            return image;
-        }
-
-        public string GetBackGround()
-        {
-            return background;
-        }
-        public string GetPersonality()
-        {
-            return personality;
-        }
-
-        public int GetClass()
-        {
-            return charClass;
-        }
-
-        public string GetClassName()
-        {
-            return cClass.GetName();
-        }
-
-        public string GetName()
-        {
-            return name;
-        }
-
-        public string GetTitle()
-        {
-            return title;
-        }
-
-        public string GetAge()
-        {
-            return age;
-        }
-
-        public string GetSize()
-        {
-            return size;
-        }
-
-        public string GetAlignment()
-        {
-            return alignment;
-        }
-
-        public bool GetIsFemale()
-        {
-            return isFemale;
-        }
-
-        public bool GetIsMale()
-        {
-            return isMale;
-        }
-
-        public string GetBonds()
-        {
-            return bonds;
-        }
-
-        public string GetIdeals()
-        {
-            return ideals;
-        }
-
-        public string GetAppearance()
-        {
-            return appearance;
-        }
-
-        public string GetFlaws()
-        {
-            return flaws;
-        }
-
-        public string GetBackstory()
-        {
-            return backstory;
-        }
-
-        public byte GetStr()
-        {
-            return str;
-        }
-
-        public byte GetDex()
-        {
-            return dex;
-        }
-
-        public byte GetCon()
-        {
-            return con;
-        }
-
-        public byte GetInt()
-        {
-            return _int;
-        }
-
-        public byte GetWis()
-        {
-            return wis;
-        }
-
-        public byte GetCha()
-        {
-            return cha;
-        }
-
-        public void SetStr(byte str)
-        {
-            this.str = str;
-        }
-
-        public void SetKnownSpells(List<Spell> spells)
-        {
-            this.knownSpells = spells;
-        }
-
-        public List<Spell> GetKnownSpells()
-        {
-            return this.knownSpells;
-        }
-
-        public void SetDex(byte dex)
-        {
-            this.dex = dex;
-        }
-
-        public void SetCon(byte con)
-        {
-            this.con = con;
-        }
-
-        public void SetInt(byte _int)
-        {
-            this._int = _int;
-        }
-
-        public void SetWis(byte wis)
-        {
-            this.wis = wis;
-        }
-
-        public void SetCha(byte cha)
-        {
-            this.cha = cha;
-        }
-
-        public string GetRace()
-        {
-            return this.race;
-        }
-
-        public void SetRace(string race)
-        {
-            this.race = race;
-        }
-
-        public int CalcProfBonus()
-        {
-            if (level < 5)
-            {
-                proficiency = 2;
-            }
-            else if (level < 9)
-            {
-                proficiency = 3;
-            }
-            else if (level < 13)
-            {
-                proficiency = 4;
-            }
-            else if (level < 16)
-            {
-                proficiency = 5;
-            }
-            else
-            {
-                proficiency = 6;
-            }
-
-            return proficiency;
-        }
-
-
-
-        public int GetID()
-        {
-            return this.id;
-        }
-
-        public int GetMaxHealth()
-        {
-            return maxHitPoints;
-        }
-
-        public void SetMaxHealth(int targetHealth)
-        {
-            maxHitPoints = targetHealth;
-        }
-
-        public int GetCurrentHealth()
-        {
-            return curHitPoints;
-        }
-
-        public void SetCurrentHealth(int targetHealth)
-        {
-            curHitPoints = targetHealth;
-        }
-
-        public void ToggleInspiration()
-        {
-            inspiration = !inspiration;
-        }
-
-        public bool GetInspiration()
-        {
-            return inspiration;
-        }
-
-        public void SetInspiration(bool target)
-        {
-            this.inspiration = target;
-        }
-
-        public List<Feature> GetAllFeatures()
-        {
-            List<Feature> features = new List<Feature>();
-            raceFeatures = db.GetFeaturesByRaceId(Convert.ToInt32(race));
-
-            foreach (Feature f in raceFeatures)
-            {
-                f.isRacial = true;
-                features.Add(f);
-            }
-
-            foreach (Feature f in classFeatures)
-            {
-                features.Add(f);
-            }
-
-            return features;
-        }
-
-        public void SetClassFeatures(List<Feature> input)
-        {
-            this.classFeatures = input;
-        }
-
-        public void SetCharFeats(List<Feat> input)
-        {
-            this.feats = input;
-        }
-
-        public List<Feat> GetFeats()
-        {
-            return this.feats;
-        }
-
         public void RecoverAllSpellSlots()
         {
             slot1 = slot1Max;
@@ -883,6 +789,162 @@ namespace BattleScribe.Classes
             slot7 = slot7Max;
             slot8 = slot8Max;
             slot9 = slot9Max;
+        }
+
+        public void SetAge(string age)
+        {
+            this.age = age;
+        }
+
+        public void SetAlignment(string alignment)
+        {
+            this.alignment = alignment;
+        }
+
+        public void SetBackstory(string backstory)
+        {
+            this.backstory = backstory;
+        }
+
+        public void SetBonds(string bonds)
+        {
+            this.bonds = bonds;
+        }
+
+        public void SetCha(byte cha)
+        {
+            this.cha = cha;
+        }
+
+        public void SetCharFeats(List<Feat> input)
+        {
+            this.feats = input;
+        }
+
+        public void SetClassFeatures(List<Feature> input)
+        {
+            this.classFeatures = input;
+        }
+
+        public void SetCon(byte con)
+        {
+            this.con = con;
+        }
+
+        public void SetCurrentHealth(int targetHealth)
+        {
+            curHitPoints = targetHealth;
+        }
+
+        public void SetDex(byte dex)
+        {
+            this.dex = dex;
+        }
+
+        public void SetExp(int exp)
+        {
+            this.experiencePoints = exp;
+        }
+
+        public void SetFlaws(string flaws)
+        {
+            this.flaws = flaws;
+        }
+
+        public void SetIdeals(string ideals)
+        {
+            this.ideals = ideals;
+        }
+
+        public void SetImage(byte[] image)
+        {
+            this.image = image;
+        }
+
+        public void SetImage(Image target)
+        {
+            this.profilePic = target;
+        }
+
+        public void SetInspiration(bool target)
+        {
+            this.inspiration = target;
+        }
+
+        public void SetInt(byte _int)
+        {
+            this._int = _int;
+        }
+
+        public void SetIsFemale(bool isFemale)
+        {
+            this.isFemale = isFemale;
+        }
+
+        public void SetIsMale(bool isMale)
+        {
+            this.isMale = isMale;
+        }
+
+        public void SetItemsInInventory(List<Item> itemsInInventory)
+        {
+            this.items = itemsInInventory;
+        }
+
+        public void SetKnownSpells(List<Spell> spells)
+        {
+            this.knownSpells = spells;
+        }
+
+        public void SetLangList(List<Language> lang)
+        {
+            this.langs = lang;
+        }
+
+        public void SetLevel(int level)
+        {
+            this.level = level;
+        }
+
+        public void SetMaxHealth(int targetHealth)
+        {
+            maxHitPoints = targetHealth;
+        }
+
+        public void SetMiscProf(string target)
+        {
+            this.miscProfs = target;
+        }
+
+        public void SetName(string name)
+        {
+            this.name = name;
+        }
+
+        public void SetPersonality(string personality)
+        {
+            this.personality = personality;
+        }
+
+        public void SetRace(string race)
+        {
+            this.race = race;
+        }
+
+        public void SetSavingThrows(string first, string second)
+        {
+            savingThrow1 = first;
+            savingThrow2 = second;
+        }
+
+        public void SetSize(string size)
+        {
+            this.size = size;
+        }
+
+        public void SetSkillList(List<Skill> skills)
+        {
+            this.skills = skills;
         }
 
         public void SetSlots(byte slot1, byte slot2, byte slot3, byte slot4,
@@ -914,6 +976,108 @@ namespace BattleScribe.Classes
             setMaxSlots = true;
         }
 
+        public void SetSpellMod()
+        {
+            switch (charClass)
+            {
+                default:
+                    spellMod = "INT";
+                    break;
+
+                case 2:
+                    //Bard
+                    spellMod = "CHA";
+                    break;
+
+                case 3:
+                    //Cleric
+                    spellMod = "WIS";
+                    break;
+
+                case 4:
+                    //Druid
+                    spellMod = "WIS";
+
+                    break;
+
+                case 5:
+                    //Fighter
+                    spellMod = "INT";
+                    break;
+
+                case 7:
+                    //Paladin
+                    spellMod = "CHA";
+
+                    break;
+
+                case 8:
+                    //Ranger
+                    spellMod = "WIS";
+                    break;
+
+                case 9:
+                    //Rogue
+                    spellMod = "INT";
+                    break;
+
+                case 10:
+                    //Sorcerer
+                    spellMod = "CHA";
+                    break;
+
+                case 11:
+                    //Warlock
+                    spellMod = "CHA";
+                    break;
+
+                case 12:
+                    //Wizard
+                    spellMod = "INT";
+                    break;
+            }
+        }
+        public void SetStr(byte str)
+        {
+            this.str = str;
+        }
+
+        public void SetTitle(string title)
+        {
+            this.title = title;
+        }
+
+        public void SetWis(byte wis)
+        {
+            this.wis = wis;
+        }
+
+        //create a list of all skills in the game
+        public List<string> SkillsList()
+        {
+            List<string> temp = new List<string>();
+
+            temp.Add("Acrobatics");
+            temp.Add("Animal Handeling");
+            temp.Add("Arcana");
+            temp.Add("Athletics");
+            temp.Add("Deception");
+            temp.Add("History");
+            temp.Add("Insight");
+            temp.Add("Intimidation");
+            temp.Add("Investigation");
+            temp.Add("Medicine");
+            temp.Add("Nature");
+            temp.Add("Perception");
+            temp.Add("Performance");
+            temp.Add("Persuasion");
+            temp.Add("Religion");
+            temp.Add("Sleight of Hand");
+            temp.Add("Stealth");
+            temp.Add("Survival");
+
+            return temp;
+        }
         public bool SpendSlot(byte slotNumber)
         {
             switch (slotNumber)
@@ -996,172 +1160,6 @@ namespace BattleScribe.Classes
                     slot9 -= 1;
                     return true;
             }
-        }
-
-        public void SetSavingThrows(string first, string second)
-        {
-            savingThrow1 = first;
-            savingThrow2 = second;
-        }
-
-        public string[] GetSavingThrows()
-        {
-            string[] throws = new string[2];
-
-            throws[0] = savingThrow1;
-            throws[1] = savingThrow2;
-
-            return throws;
-        }
-
-        public int GetProfiencyBonus()
-        {
-            return proficiency;
-        }
-
-        public void SetItemsInInventory(List<Item> itemsInInventory)
-        {
-            this.items = itemsInInventory;
-        }
-
-        public byte GetSlot1()
-        {
-            return this.slot1;
-        }
-
-        public byte GetSlot2()
-        {
-            return this.slot2;
-        }
-
-        public byte GetSlot3()
-        {
-            return this.slot3;
-        }
-
-        public byte GetSlot4()
-        {
-            return this.slot4;
-        }
-
-        public byte GetSlot5()
-        {
-            return this.slot5;
-        }
-
-        public byte GetSlot6()
-        {
-            return this.slot6;
-        }
-
-        public byte GetSlot7()
-        {
-            return this.slot7;
-        }
-
-        public byte GetSlot8()
-        {
-            return this.slot8;
-        }
-
-        public byte GetSlot9()
-        {
-            return this.slot9;
-        }
-
-        public int GetExp()
-        {
-            return this.experiencePoints;
-        }
-
-        public int GetTempHp()
-        {
-            return this.tempHitPoints;
-        }
-
-        public void SetImage(byte[] image)
-        {
-            this.image = image;
-        }
-
-        public void SetName(string name)
-        {
-            this.name = name;
-        }
-
-        public void SetAge(string age)
-        {
-            this.age = age;
-        }
-
-        public void SetSize(string size)
-        {
-            this.size = size;
-        }
-
-        public void SetIsMale(bool isMale)
-        {
-            this.isMale = isMale;
-        }
-
-        public void SetIsFemale(bool isFemale)
-        {
-            this.isFemale = isFemale;
-        }
-
-        public void SetTitle(string title)
-        {
-            this.title = title;
-        }
-
-        public void SetAlignment(string alignment)
-        {
-            this.alignment = alignment;
-        }
-
-        public void SetBackstory(string backstory)
-        {
-            this.backstory = backstory;
-        }
-
-        public void SetPersonality(string personality)
-        {
-            this.personality = personality;
-        }
-
-        public void SetIdeals(string ideals)
-        {
-            this.ideals = ideals;
-        }
-
-        public void SetBonds(string bonds)
-        {
-            this.bonds = bonds;
-        }
-
-        public void SetFlaws(string flaws)
-        {
-            this.flaws = flaws;
-        }
-
-        public void SetLevel(int level)
-        {
-            this.level = level;
-        }
-
-        public void SetExp(int exp)
-        {
-            this.experiencePoints = exp;
-        }
-
-        public void SetImage(Image target)
-        {
-            this.profilePic = target;
-        }
-
-        public Image GetProfilePic()
-        {
-            return this.profilePic;
         }
     }
 }
