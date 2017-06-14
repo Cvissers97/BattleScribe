@@ -76,7 +76,7 @@ namespace BattleScribe.Forms.Pop_ups.Items
 
         private void tbWeight_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(tbWeight.Text, "^[0-9]*$"))
+            if (!System.Text.RegularExpressions.Regex.IsMatch(tbWeight.Text, @"(?:\d*\.)?\d+"))
             {
                 tbWeight.Text = string.Empty;
             }
